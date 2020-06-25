@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="785.0" prefWidth="1285.0" stylesheets="@stylesheets/styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="785.0" prefWidth="1285.0">
+         <children>
+            <VBox prefHeight="785.0" prefWidth="310.0" styleClass="sidebar">
+               <children>
+                  <VBox prefHeight="79.0" prefWidth="278.0">
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="72.0" prefWidth="278.0" text="ImageLab" textAlignment="CENTER" textFill="#282828">
+                           <font>
+                              <Font name="Roboto" size="47.0" />
+                           </font>
+                        </Label>
+                        <Separator opacity="0.9" prefWidth="200.0" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="701.0" prefWidth="278.0">
+                     <children>
+                        <Accordion prefHeight="678.0" prefWidth="278.0">
+                          <panes>
+                            <TitledPane animated="false" text="Operations">
+                              <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                              </content>
+                            </TitledPane>
+                            <TitledPane animated="false" text="Controllers">
+                              <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                              </content>
+                            </TitledPane>
+                            <TitledPane animated="false" prefHeight="604.0" prefWidth="278.0" text="Other">
+                              <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="591.0" prefWidth="276.0" />
+                              </content>
+                            </TitledPane>
+                          </panes>
+                        </Accordion>
+                        <Label alignment="CENTER" prefHeight="24.0" prefWidth="278.0" text="Project by ScoreLab">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="780.0" prefWidth="1035.0">
+               <children>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="44.0" prefWidth="1005.0" spacing="20.0" styleClass="topNavBar">
+                     <children>
+                        <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="117.0" text="Refresh">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </Button>
+                        <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="113.0" text="Export" />
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets left="50.0" right="20.0" />
+                     </padding>
+                  </HBox>
+                  <ScrollPane prefHeight="382.0" prefWidth="1005.0">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="536.0" prefWidth="1124.0" />
+                    </content>
+                  </ScrollPane>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="359.0" prefWidth="1003.0">
+                     <children>
+                        <VBox prefHeight="359.0" prefWidth="240.0" styleClass="infoPane">
+                           <children>
+                              <VBox prefHeight="47.0" prefWidth="238.0">
+                                 <children>
+                                    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="33.0" prefWidth="238.0" text="Information Pane" />
+                                    <Separator prefHeight="0.0" prefWidth="238.0" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
+                        <ScrollPane prefHeight="359.0" prefWidth="765.0">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="548.0" prefWidth="932.0" />
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
