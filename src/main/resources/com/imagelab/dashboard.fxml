@@ -10,10 +10,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="785.0" prefWidth="1285.0" stylesheets="@stylesheets/styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="785.0" prefWidth="1285.0" stylesheets="@stylesheets/styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.imagelab.DashboardController">
    <children>
       <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="785.0" prefWidth="1285.0">
          <children>
@@ -35,7 +35,10 @@
                           <panes>
                             <TitledPane animated="false" text="Operations">
                               <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <Circle fx:id="circleoperation" fill="DODGERBLUE" layoutX="28.0" layoutY="36.0" onDragDetected="#handleDragDetection" radius="14.0" stroke="BLACK" strokeType="INSIDE" />
+                                       </children></AnchorPane>
                               </content>
                             </TitledPane>
                             <TitledPane animated="false" text="Controllers">
@@ -79,7 +82,7 @@
                   </HBox>
                   <ScrollPane prefHeight="382.0" prefWidth="1005.0">
                     <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="536.0" prefWidth="1124.0" />
+                      <AnchorPane fx:id="buidlanchorpane" minHeight="0.0" minWidth="0.0" onDragDropped="#handleDrop" onDragOver="#handleDragOver" prefHeight="536.0" prefWidth="1124.0" />
                     </content>
                   </ScrollPane>
                   <HBox alignment="CENTER_RIGHT" prefHeight="359.0" prefWidth="1003.0">
