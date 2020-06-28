@@ -9,7 +9,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /**
- * JavaFX App
+ * JavaFX App main class which creates the scene
+ * for the UI and set the stage.
  */
 public class App extends Application {
 
@@ -23,10 +24,18 @@ public class App extends Application {
         stage.show();
     }
 
+    /**
+     * To set the root for the created scene.
+     * @param fxml  The fxml related to the root.
+     */
     static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
     }
 
+    /**
+     * To load parent view from the fxml
+     * @param fxml  The fxml related to the parent.
+     */
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();
