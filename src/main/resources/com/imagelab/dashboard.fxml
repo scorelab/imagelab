@@ -37,7 +37,7 @@
                               <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <Circle fx:id="circleoperation" fill="DODGERBLUE" layoutX="28.0" layoutY="36.0" onDragDetected="#handleDragDetection" radius="14.0" stroke="BLACK" strokeType="INSIDE" />
+                                          <Circle fx:id="circleOperation" fill="DODGERBLUE" layoutX="28.0" layoutY="36.0" onDragDetected="#handleDragDetection" radius="14.0" stroke="BLACK" strokeType="INSIDE" />
                                        </children></AnchorPane>
                               </content>
                             </TitledPane>
@@ -82,7 +82,7 @@
                   </HBox>
                   <ScrollPane prefHeight="382.0" prefWidth="1005.0">
                     <content>
-                      <AnchorPane fx:id="buidlanchorpane" minHeight="0.0" minWidth="0.0" onDragDropped="#handleDrop" onDragOver="#handleDragOver" prefHeight="536.0" prefWidth="1124.0" />
+                      <AnchorPane fx:id="buildAnchorPane" minHeight="0.0" minWidth="0.0" onDragDropped="#handleDrop" onDragOver="#handleDragOver" prefHeight="536.0" prefWidth="1124.0" />
                     </content>
                   </ScrollPane>
                   <HBox alignment="CENTER_RIGHT" prefHeight="359.0" prefWidth="1003.0">
