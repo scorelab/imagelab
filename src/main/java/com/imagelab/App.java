@@ -8,6 +8,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+import org.opencv.core.*;
+
 /**
  * JavaFX App main class which creates the scene
  * for the UI and set the stage.
@@ -15,6 +17,13 @@ import java.io.IOException;
 public class App extends Application {
 
     private static Scene scene;
+
+    /**
+     * To load openCV libraries
+     */
+    static {
+        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+    }
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -42,7 +51,25 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
+        testOpenCVConfig();
         launch();
+    }
+
+    /**
+     * This method is to make sure the loaded openCV libraries are working
+     * within the project
+     *
+     * Note: this can be removed once the openCV related operations are developed
+     */
+    static void testOpenCVConfig() {
+        System.out.println("Welcome to OpenCV " + Core.VERSION);
+        Mat m = new Mat(5, 10, CvType.CV_8UC1, new Scalar(0));
+        System.out.println("OpenCV Mat: " + m);
+        Mat mr1 = m.row(1);
+        mr1.setTo(new Scalar(1));
+        Mat mc5 = m.col(5);
+        mc5.setTo(new Scalar(5));
+        System.out.println("OpenCV Mat data:\n" + m.dump());
     }
 
 }
