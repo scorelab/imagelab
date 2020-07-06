@@ -9,7 +9,24 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
     </properties>
+    <repositories>
+        <repository>
+            <id>javaopencvbook</id>
+            <url>https://raw.github.com/JavaOpenCVBook/code/maven2/</url>
+        </repository>
+    </repositories>
     <dependencies>
+        <dependency>
+            <groupId>org.javaopencvbook</groupId>
+            <artifactId>opencvjar</artifactId>
+            <version>2.4.8</version>
+        </dependency>
+        <dependency>
+            <groupId>org.javaopencvbook</groupId>
+            <artifactId>opencvjar-runtime</artifactId>
+            <version>2.4.8</version>
+            <classifier>natives-mac-x86_64</classifier>
+        </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
