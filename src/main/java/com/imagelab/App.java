@@ -10,6 +10,9 @@ import java.io.IOException;
 
 import org.opencv.core.*;
 
+import static com.imagelab.utils.Constants.DASHBOARD_HEIGHT;
+import static com.imagelab.utils.Constants.DASHBOARD_WIDTH;
+
 /**
  * JavaFX App main class which creates the scene
  * for the UI and set the stage.
@@ -27,7 +30,8 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("dashboard"), 1285, 785);
+        scene = new Scene(loadFXML("dashboard"), DASHBOARD_WIDTH, DASHBOARD_HEIGHT);
+        scene.getStylesheets().add(getClass().getResource("/com/imagelab/style.css").toExternalForm());
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();

@@ -1,58 +1,79 @@
 package com.imagelab;
 
+import com.imagelab.components.OperatorUIElement;
+import com.imagelab.components.RGBChangeOpUIElement;
+import com.imagelab.components.ReadImageOpUIElement;
+import com.imagelab.components.ToGrayScaleOpUIElement;
+import com.imagelab.components.events.OnUIElementCloneCreated;
+import com.imagelab.components.events.OnUIElementDragDone;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.input.*;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.shape.Circle;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 
-import static utils.Constants.CIRCLE_FORMAT;
+import java.net.URL;
+import java.util.ResourceBundle;
+import java.util.Stack;
+
+import static com.imagelab.utils.Constants.ANY_NODE;
 
 /**
  * The controller class of the dashboard
  */
-public class DashboardController {
+public class DashboardController implements Initializable {
 
     @FXML
-    private AnchorPane buildAnchorPane;
+    private Pane buildPane;
 
     @FXML
-    private Circle circleOperation;
+    private VBox operationsVBox;
 
-    /**
-     * To handle when users initial drag event.
-     * @param event Triggered mouse event.
-     *              When user tried to drag something that event
-     *              passed as a parameter.
-     */
     @FXML
-    private void handleDragDetection (MouseEvent event) {
-        Dragboard dragboard = circleOperation.startDragAndDrop(TransferMode.COPY);
-        dragboard.setDragView(circleOperation.snapshot(null,null));
-        ClipboardContent content = new ClipboardContent();
-        content.put(CIRCLE_FORMAT, "circle");
-        dragboard.setContent(content);
-        System.out.println("Drag detected");
-        event.consume();
+    private AnchorPane operationsPane;
+
+    private OperatorUIElement<Node> currentlyApplyingOperator;
+
+    private Stack<OperatorUIElement<Node>> appliedOperators;
+
+    public DashboardController() {
+        this.appliedOperators = new Stack<>();
+    }
+
+    //To capture mouse position of the user
+    private double dropX, dropY;
+
+    @FXML
+    public void onExecuteClicked(ActionEvent event) {
+        appliedOperators.forEach((op) -> System.out.println(op.getUiOperatorID()));
     }
 
     /**
      * To handle when users initial drag event.
+     *
      * @param event Triggered Drag event.
      *              When user tried to drag something and
      *              move over to another area
      *              this function will be invoked.
      */
     @FXML
-    private void handleDragOver (DragEvent event) {
+    private void handleDragOver(DragEvent event) {
         Dragboard dragboard = event.getDragboard();
-        if (dragboard.hasContent(CIRCLE_FORMAT)) {
-            event.acceptTransferModes(TransferMode.COPY);
+        if (dragboard.hasContent(ANY_NODE)) {
+            event.acceptTransferModes(TransferMode.MOVE);
         }
-        System.out.println("Drag over detected");
+        dropX = event.getX();
+        dropY = event.getY();
     }
 
     /**
      * To handle when users initial drag event.
+     *
      * @param event Triggered Drop event.
      *              When user dropped the dragged
      *              element this function will
@@ -60,12 +81,88 @@ public class DashboardController {
      */
     @FXML
     private void handleDrop(DragEvent event) {
+
+        assert currentlyApplyingOperator != null : "currentlyApplyingOperator cannot be null here...";
+
+        double relocateX = currentlyApplyingOperator.getWidth() / 2;
+        double relocateY = currentlyApplyingOperator.getHeight() / 4;
+
+        System.out.println("drop x :"+dropX + " | " +"drop Y :"+dropY);
+        relocateX = dropX - relocateX;
+        relocateY = dropY- relocateY;
+        System.out.println("relocate x :"+relocateX + " | " +"relocate Y :"+relocateY);
+
         Dragboard dragboard = event.getDragboard();
-        if (dragboard.hasContent(CIRCLE_FORMAT)) {
-            buildAnchorPane.getChildren().add(circleOperation);
+        if (dragboard.hasContent(ANY_NODE)) {
+            if (buildPane.getChildren().contains(currentlyApplyingOperator.getNode())) {
+                currentlyApplyingOperator.getNode().relocate(relocateX, relocateY);
+            } else {
+                currentlyApplyingOperator.getNode().setLayoutX(relocateX);
+                currentlyApplyingOperator.getNode().setLayoutY(relocateY);
+                buildPane.getChildren().add(currentlyApplyingOperator.getNode());
+            }
+            this.appliedOperators.push(currentlyApplyingOperator);
             event.setDropCompleted(true);
+            event.consume();
         }
-        System.out.println("Drop detected");
+        System.out.println("Drop detected: " + currentlyApplyingOperator.getUiOperatorID()+"\n");
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        final OnUIElementCloneCreated anyCloneCreated = (uiElement) -> {
+            this.currentlyApplyingOperator = ((OperatorUIElement<Node>) uiElement);
+        };
+
+        final OnUIElementDragDone anyElementDragDone = (ignored) -> {
+            this.currentlyApplyingOperator = null;
+        };
+
+        //Initiating read image operation related UI element
+        ReadImageOpUIElement readImageOpUIElement = new ReadImageOpUIElement(
+                anyCloneCreated,
+                anyElementDragDone,
+                "readImage",
+                true,
+                "imagelab.operator.readImageOpUIElement",
+                "Read Image",
+                100d,
+                60d,
+                true);
+
+        //Initiating RGB conversions operation related UI element
+        RGBChangeOpUIElement rgbChangeOpUIElement = new RGBChangeOpUIElement(
+                anyCloneCreated,
+                anyElementDragDone,
+                "rgbConvert",
+                true,
+                "imagelab.operator.rgbChangeOpUIElement",
+                "RGB Convert",
+                100d,
+                60d,
+                true);
+
+        //Initiating gray scale operation related UI element
+        ToGrayScaleOpUIElement toGrayScaleOpUIElement = new ToGrayScaleOpUIElement(
+                anyCloneCreated,
+                anyElementDragDone,
+                "toGrayScale",
+                true,
+                "imagelab.operator.toGrayScaleOpUIElement",
+                "Grey Scale",
+                100d,
+                60d,
+                true);
+
+        operationsVBox.setSpacing(15);
+
+        //Populating or adding created UI elements to left operators panel
+        operationsVBox.getChildren().addAll(
+                readImageOpUIElement.getNode(),
+                rgbChangeOpUIElement.getNode(),
+                toGrayScaleOpUIElement.getNode()
+        );
+
     }
 }
-
