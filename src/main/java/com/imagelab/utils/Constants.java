@@ -1,4 +1,5 @@
-package utils;
+package com.imagelab.utils;
+import javafx.scene.Node;
 import javafx.scene.input.DataFormat;
 
 /**
@@ -11,6 +12,8 @@ public final class Constants {
         // restrict instantiation
     }
 
-    // Circle DataFormat
+    // DataFormats
     public static final DataFormat CIRCLE_FORMAT = new DataFormat("javafx.scene.shape.Circle");
+    public static final DataFormat BUTTON = new DataFormat("javafx.scene.control.Button");
+    public static final DataFormat ANY_NODE = new DataFormat("javafx.scene.Node");
 }

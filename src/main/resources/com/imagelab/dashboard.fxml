@@ -35,9 +35,10 @@
                           <panes>
                             <TitledPane animated="false" text="Operations">
                               <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                <AnchorPane fx:id="operationsPane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <Circle fx:id="circleOperation" fill="DODGERBLUE" layoutX="28.0" layoutY="36.0" onDragDetected="#handleDragDetection" radius="14.0" stroke="BLACK" strokeType="INSIDE" />
+<!--                                          <Circle fx:id="circleOperation" fill="DODGERBLUE" layoutX="28.0" layoutY="36.0" onDragDetected="#handleDragDetection" radius="14.0" stroke="BLACK" strokeType="INSIDE" />-->
+<!--                                          <Button id="readImage" fx:id="readImage" layoutX="15.0" layoutY="71.0" mnemonicParsing="false" onDragDetected="#handleDragDetection" prefHeight="32.0" prefWidth="42.0" styleClass="readImage" />-->
                                        </children></AnchorPane>
                               </content>
                             </TitledPane>
