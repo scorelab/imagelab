@@ -5,7 +5,7 @@ import com.imagelab.components.events.OnUIElementDragDone;
 import javafx.scene.Node;
 
 /**
- *Abstract class related to the operator UI elements
+ * Abstract class related to the operator UI elements
  *
  * @param <T> any node
  */
@@ -13,6 +13,7 @@ public abstract class OperatorUIElement<T extends Node> {
 
     private final String uiOperatorID;
     private final String uiOperatorName;
+    private boolean isAddedToOperationQueue;
 
     /*Events*/
     private final OnUIElementCloneCreated onCloneCreated;
@@ -28,9 +29,10 @@ public abstract class OperatorUIElement<T extends Node> {
 
     private final T node;
 
-    public OperatorUIElement(String uiOperatorID, String uiOperatorName, OnUIElementCloneCreated onCloneCreated, OnUIElementDragDone onDragDone, String stylingID, boolean cloneable, boolean previewOnly, double width, double height) {
+    public OperatorUIElement(String uiOperatorID, String uiOperatorName, boolean isAddedToOperationQueue, OnUIElementCloneCreated onCloneCreated, OnUIElementDragDone onDragDone, String stylingID, boolean cloneable, boolean previewOnly, double width, double height) {
         this.uiOperatorID = uiOperatorID;
         this.uiOperatorName = uiOperatorName;
+        this.isAddedToOperationQueue = isAddedToOperationQueue;
         this.onCloneCreated = onCloneCreated;
         this.onDragDone = onDragDone;
         this.stylingID = stylingID;
@@ -49,6 +51,12 @@ public abstract class OperatorUIElement<T extends Node> {
 
     public String getUiOperatorName() {
         return uiOperatorName;
+    }
+
+    public boolean isAddedToOperationQueue() { return isAddedToOperationQueue; }
+
+    public void setIsAddedToOperationQueue(boolean isAddedToOperationQueue){
+        this.isAddedToOperationQueue = isAddedToOperationQueue;
     }
 
     public OnUIElementCloneCreated getOnCloneCreated() {
