@@ -27,10 +27,11 @@ public class ReadImageOpUIElement extends OperatorUIElement<Button> implements D
             boolean cloneable,
             String uiOperatorID,
             String uiOperatorName,
+            boolean isAddedToOperationQueue,
             double width,
             double height,
             boolean previewOnly) {
-        super(uiOperatorID, uiOperatorName, onCloneCreated, onDragDone, stylingID, cloneable, previewOnly, width, height);
+        super(uiOperatorID, uiOperatorName, isAddedToOperationQueue, onCloneCreated, onDragDone, stylingID, cloneable, previewOnly, width, height);
     }
 
     /**
@@ -42,7 +43,6 @@ public class ReadImageOpUIElement extends OperatorUIElement<Button> implements D
     @Override
     public void dragDetected(MouseEvent event) {
         System.out.println("Drag detected: ReadImageOpUIElement");
-
         // create new clone
         assert getOnCloneCreated() != null;
         try {
@@ -79,6 +79,7 @@ public class ReadImageOpUIElement extends OperatorUIElement<Button> implements D
                 false,
                 this.getUiOperatorID(),
                 this.getUiOperatorName(),
+                false,
                 this.getWidth(),
                 this.getHeight(),
                 false);

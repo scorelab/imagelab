@@ -39,7 +39,7 @@ public class DashboardController implements Initializable {
 
     private OperatorUIElement<Node> currentlyApplyingOperator;
 
-    private Stack<OperatorUIElement<Node>> appliedOperators;
+    private final Stack<OperatorUIElement<Node>> appliedOperators;
 
     public DashboardController() {
         this.appliedOperators = new Stack<>();
@@ -101,7 +101,14 @@ public class DashboardController implements Initializable {
                 currentlyApplyingOperator.getNode().setLayoutY(relocateY);
                 buildPane.getChildren().add(currentlyApplyingOperator.getNode());
             }
-            this.appliedOperators.push(currentlyApplyingOperator);
+            if (!this.currentlyApplyingOperator.isAddedToOperationQueue()){
+                this.appliedOperators.push(currentlyApplyingOperator);
+                this.currentlyApplyingOperator.setIsAddedToOperationQueue(true);
+                System.out.println(currentlyApplyingOperator.getUiOperatorName()+" has been added to the operation queue");
+            }else{
+                System.out.println("This operator is already in the queue");
+            }
+
             event.setDropCompleted(true);
             event.consume();
         }
@@ -127,6 +134,7 @@ public class DashboardController implements Initializable {
                 true,
                 "imagelab.operator.readImageOpUIElement",
                 "Read Image",
+                false,
                 100d,
                 60d,
                 true);
@@ -139,6 +147,7 @@ public class DashboardController implements Initializable {
                 true,
                 "imagelab.operator.rgbChangeOpUIElement",
                 "RGB Convert",
+                false,
                 100d,
                 60d,
                 true);
@@ -151,6 +160,7 @@ public class DashboardController implements Initializable {
                 true,
                 "imagelab.operator.toGrayScaleOpUIElement",
                 "Grey Scale",
+                false,
                 100d,
                 60d,
                 true);

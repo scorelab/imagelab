@@ -21,10 +21,11 @@ public class ToGrayScaleOpUIElement extends OperatorUIElement<Button> implements
                                   boolean cloneable,
                                   String uiOperatorID,
                                   String uiOperatorName,
+                                  boolean isAddedToOperationQueue,
                                   double width,
                                   double height,
                                   boolean previewOnly) {
-        super(uiOperatorID, uiOperatorName, onCloneCreated, onDragDone, stylingID, cloneable, previewOnly, width, height);
+        super(uiOperatorID, uiOperatorName, isAddedToOperationQueue, onCloneCreated, onDragDone, stylingID, cloneable, previewOnly, width, height);
     }
 
     /**
@@ -72,6 +73,7 @@ public class ToGrayScaleOpUIElement extends OperatorUIElement<Button> implements
                 false,
                 this.getUiOperatorID(),
                 this.getUiOperatorName(),
+                false,
                 this.getWidth(),
                 this.getHeight(),
                 false);
