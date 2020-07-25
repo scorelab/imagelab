@@ -2,13 +2,12 @@ package com.imagelab.components;
 
 import com.imagelab.components.events.OnUIElementCloneCreated;
 import com.imagelab.components.events.OnUIElementDragDone;
-import com.imagelab.operators.ReadImage;
+import com.imagelab.operators.RotateImage;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -21,26 +20,21 @@ import static javafx.scene.input.TransferMode.MOVE;
  * Class which builds the Read image operation
  * related UI element
  */
-public class ReadImageOpUIElement extends OperatorUIElement<Button, AnchorPane> implements Draggable, Cloneable {
+public class RotateImageOpUIElement extends OperatorUIElement<Button, AnchorPane> implements Draggable, Cloneable {
 
-    // Associate an control panel for each of the operator UI elements.
-    // that way we can set / hide the control panel content directly inside
-    // the operator element.
-    //
-    private ScrollPane uiElementPropertiesPane;
+    private final ScrollPane uiElementPropertiesPane;
 
-    public ReadImageOpUIElement(
-            OnUIElementCloneCreated onCloneCreated,
-            OnUIElementDragDone onDragDone,
-            ScrollPane uiElementPropertiesPane
+    public RotateImageOpUIElement(OnUIElementCloneCreated onCloneCreated,
+                                  OnUIElementDragDone onDragDone,
+                                  ScrollPane uiElementPropertiesPane
     ) {
         super(
-                new ReadImage(), // To invoke openCV related logic
-                ReadImage.class.getCanonicalName(),
-                ReadImage.class.getSimpleName(),
+                new RotateImage(), // To invoke openCV related logic
+                RotateImage.class.getCanonicalName(),
+                RotateImage.class.getSimpleName(),
                 onCloneCreated,
                 onDragDone,
-                "readImage",
+                "rotateImage",
                 100d,
                 60d,
                 true,
@@ -92,7 +86,7 @@ public class ReadImageOpUIElement extends OperatorUIElement<Button, AnchorPane> 
 
         super.clone();
 
-        final OperatorUIElement<Button, AnchorPane> copy = new ReadImageOpUIElement(
+        final OperatorUIElement<Button, AnchorPane> copy = new RotateImageOpUIElement(
                 this.getOnCloneCreated(),
                 this.getOnDragDone(),
                 this.uiElementPropertiesPane
@@ -133,7 +127,8 @@ public class ReadImageOpUIElement extends OperatorUIElement<Button, AnchorPane> 
         button.setOnDragDetected(this::dragDetected);
 
         // source
-        button.setOnDragDone((DragEvent event) -> {
+
+        button.setOnDragDone((event) -> {
             if (event.isAccepted()) {
                 getOnDragDone().accept(this);
             } else {
@@ -142,6 +137,7 @@ public class ReadImageOpUIElement extends OperatorUIElement<Button, AnchorPane> 
         });
         button.setOnMouseClicked((event) -> {
             if (!isPreviewOnly()) {
+                System.out.println("Clicked");
                 this.onClicked();
             }
         });
@@ -155,7 +151,6 @@ public class ReadImageOpUIElement extends OperatorUIElement<Button, AnchorPane> 
         setForm(new OperatorPropertiesForm());
     }
 
-
     /**
      * Operator's Property form. It can be in the form of a pane, vbox, anything
      */
@@ -165,18 +160,26 @@ public class ReadImageOpUIElement extends OperatorUIElement<Button, AnchorPane> 
 
             // When initially creating the form you can populate the form with
             // default values from the this operator's model.
-
-            ReadImage operator = (ReadImage) ReadImageOpUIElement.this.getOperator();
+            RotateImage operator = (RotateImage) RotateImageOpUIElement.this.getOperator();
 
             setPrefSize(523.0, 197.0);
 
-            Label label = new Label("Image Url");
+            Label lblAngle = new Label("Angle");
 
-            TextField field = new TextField(operator.getUrl());
-            field.setPrefSize(169, 27);
-            field.textProperty().addListener((observable, oldValue, newValue) -> {
-                newValue = "imageFile/main/resources/com/imagelab/images/scorelabLogo.jpg";
-                operator.setUrl(newValue);
+            TextField angleField = new TextField(String.valueOf(operator.getAngle()));
+            angleField.setPrefSize(169, 27);
+            angleField.textProperty().addListener((observable, oldValue, newValue) -> {
+                newValue = "90";
+                operator.setAngle(Double.parseDouble(newValue));
+            });
+
+            Label lblScale = new Label("Scale");
+
+            TextField scaleField = new TextField(String.valueOf(operator.getScale()));
+            scaleField.setPrefSize(169, 27);
+            scaleField.textProperty().addListener((observable, oldValue, newValue) -> {
+                newValue = "1";
+                operator.setScale(Double.parseDouble(newValue));
             });
 
             VBox box = new VBox();
@@ -184,7 +187,7 @@ public class ReadImageOpUIElement extends OperatorUIElement<Button, AnchorPane> 
             box.setLayoutX(14);
             box.setLayoutY(14);
             box.setPrefSize(170, 47);
-            box.getChildren().addAll(label, field);
+            box.getChildren().addAll(lblAngle, angleField, lblScale, scaleField);
 
             getChildren().addAll(box);
 

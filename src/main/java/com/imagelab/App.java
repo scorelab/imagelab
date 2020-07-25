@@ -1,5 +1,6 @@
 package com.imagelab;
 
+import com.imagelab.operators.ReadImage;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -55,6 +56,9 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
+        // stack empty
+        ReadImage readImage = new ReadImage();
+
         testOpenCVConfig();
         launch();
     }
@@ -67,13 +71,6 @@ public class App extends Application {
      */
     static void testOpenCVConfig() {
         System.out.println("Welcome to OpenCV " + Core.VERSION);
-        Mat m = new Mat(5, 10, CvType.CV_8UC1, new Scalar(0));
-        System.out.println("OpenCV Mat: " + m);
-        Mat mr1 = m.row(1);
-        mr1.setTo(new Scalar(1));
-        Mat mc5 = m.col(5);
-        mc5.setTo(new Scalar(5));
-        System.out.println("OpenCV Mat data:\n" + m.dump());
     }
 
 }

@@ -1,13 +1,15 @@
 package com.imagelab.operators;
 
-import java.util.List;
+import org.opencv.core.Mat;
+
+import java.util.Set;
 
 public abstract class OpenCVOperator {
 
-    protected abstract void validate();
+    public abstract boolean validate(OpenCVOperator previous);
 
-    protected abstract void build();
+    public abstract Mat compute(Mat image);
 
-    protected abstract List<Class<?>> allowedOperators();
+    public abstract Set<Class<?>> allowedOperators();
 
 }

@@ -2,92 +2,56 @@ package com.imagelab.components;
 
 import com.imagelab.components.events.OnUIElementCloneCreated;
 import com.imagelab.components.events.OnUIElementDragDone;
+import com.imagelab.operators.OpenCVOperator;
 import javafx.scene.Node;
+import lombok.Data;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 /**
- * Abstract class related to the operator UI elements
+ * Abstract class related to the operator UI elements.
  *
  * @param <T> any node
  */
-public abstract class OperatorUIElement<T extends Node> {
+@Data
+@RequiredArgsConstructor
+public abstract class OperatorUIElement<T extends Node, E extends Node> {
 
-    private final String uiOperatorID;
-    private final String uiOperatorName;
-    private boolean isAddedToOperationQueue;
+    /*Operator logic related*/
+    @NonNull
+    private final OpenCVOperator operator;
+    @NonNull
+    private final String operatorId;
+    @NonNull
+    private final String operatorName;
 
     /*Events*/
+    @NonNull
     private final OnUIElementCloneCreated onCloneCreated;
+    @NonNull
     private final OnUIElementDragDone onDragDone;
 
-    private final String stylingID;
-
-    private final boolean cloneable;
-    private final boolean previewOnly;
-
+    @NonNull
+    private final String stylingId;
+    @NonNull
     private final double width;
+    @NonNull
     private final double height;
 
-    private final T node;
+    @NonNull
+    private boolean addedToOperatorsStack;
+    @NonNull
+    private boolean cloneable;
+    @NonNull
+    private boolean previewOnly;
 
-    public OperatorUIElement(String uiOperatorID, String uiOperatorName, boolean isAddedToOperationQueue, OnUIElementCloneCreated onCloneCreated, OnUIElementDragDone onDragDone, String stylingID, boolean cloneable, boolean previewOnly, double width, double height) {
-        this.uiOperatorID = uiOperatorID;
-        this.uiOperatorName = uiOperatorName;
-        this.isAddedToOperationQueue = isAddedToOperationQueue;
-        this.onCloneCreated = onCloneCreated;
-        this.onDragDone = onDragDone;
-        this.stylingID = stylingID;
-        this.cloneable = cloneable;
-        this.previewOnly = previewOnly;
-        this.width = width;
-        this.height = height;
-        this.node = this.build();
-    }
+    // is null initially. have to set this instance once called
+    // the build() method.
+    private T node = null;
+    private E form = null;
 
-    protected abstract T build();
+    public abstract void buildNode();
 
-    public String getUiOperatorID() {
-        return uiOperatorID;
-    }
+    public abstract void buildForm();
 
-    public String getUiOperatorName() {
-        return uiOperatorName;
-    }
-
-    public boolean isAddedToOperationQueue() { return isAddedToOperationQueue; }
-
-    public void setIsAddedToOperationQueue(boolean isAddedToOperationQueue){
-        this.isAddedToOperationQueue = isAddedToOperationQueue;
-    }
-
-    public OnUIElementCloneCreated getOnCloneCreated() {
-        return onCloneCreated;
-    }
-
-    public OnUIElementDragDone getOnDragDone() {
-        return onDragDone;
-    }
-
-    public String getStylingID() {
-        return stylingID;
-    }
-
-    public boolean isCloneable() {
-        return cloneable;
-    }
-
-    public boolean isPreviewOnly() {
-        return previewOnly;
-    }
-
-    public double getWidth() {
-        return width;
-    }
-
-    public double getHeight() {
-        return height;
-    }
-
-    public T getNode() {
-        return node;
-    }
 }

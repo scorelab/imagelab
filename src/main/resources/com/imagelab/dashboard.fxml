@@ -87,7 +87,7 @@
                               <Pane fx:id="buildPane" onDragDropped="#handleDrop" onDragOver="#handleDragOver" prefHeight="488.0" prefWidth="1138.0" />
                            </content>
                         </ScrollPane>
-                        <ScrollPane prefHeight="381.0" prefWidth="217.0">
+                        <ScrollPane fx:id="uiElementPropertiesPane" prefHeight="381.0" prefWidth="217.0">
                           <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="523.0" prefWidth="197.0" />
                           </content>

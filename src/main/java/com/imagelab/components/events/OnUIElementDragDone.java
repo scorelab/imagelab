@@ -9,5 +9,7 @@ import javafx.scene.Node;
  */
 @FunctionalInterface
 public interface OnUIElementDragDone {
-    void accept(OperatorUIElement<? extends Node> node);
+
+    void accept(OperatorUIElement<? extends Node, ? extends Node> node);
+
 }
