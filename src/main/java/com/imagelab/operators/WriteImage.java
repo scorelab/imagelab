@@ -8,11 +8,11 @@ import org.opencv.highgui.Highgui;
 import java.util.HashSet;
 import java.util.Set;
 
-public class ReadImage extends OpenCVOperator {
+public class WriteImage extends OpenCVOperator {
 
     @Getter
     @Setter
-    private String url = "imageFile/main/resources/com/imagelab/images/scorelabLogo.jpg";
+    private String url;
 
     @Override
     public boolean validate(OpenCVOperator previous) {
@@ -22,21 +22,18 @@ public class ReadImage extends OpenCVOperator {
 
     @Override
     public Mat compute(Mat image) {
-        // image: null
-        System.out.println("reading image");
-        return readImage();
+        System.out.println("Writing image");
+        String filePath = url;
+        Highgui.imwrite(filePath, image);
+        return image;
     }
 
     @Override
     public Set<Class<?>> allowedOperators() {
         Set<Class<?>> allowed = new HashSet<>();
-        allowed.add(ReadImage.class);
+        allowed.add(WriteImage.class);
         return allowed;
     }
 
-    public Mat readImage() {
-        String filePath = url;
-        return Highgui.imread(filePath);
-    }
 
 }
