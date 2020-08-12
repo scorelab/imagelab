@@ -31,6 +31,8 @@ public class WriteImage extends OpenCVOperator {
     @Override
     public Set<Class<?>> allowedOperators() {
         Set<Class<?>> allowed = new HashSet<>();
+        allowed.add(ReadImage.class);
+        allowed.add(RotateImage.class);
         allowed.add(WriteImage.class);
         return allowed;
     }
