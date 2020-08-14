@@ -11,36 +11,13 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
-
-    <repositories>
-        <repository>
-            <id>javaopencvbook</id>
-            <url>https://raw.github.com/JavaOpenCVBook/code/maven2/</url>
-        </repository>
-    </repositories>
     <dependencies>
         <dependency>
-            <groupId>org.javaopencvbook</groupId>
-            <artifactId>opencvjar</artifactId>
-            <version>2.4.8</version>
+            <groupId>org.openpnp</groupId>
+            <artifactId>opencv</artifactId>
+            <version>3.2.0-0</version>
         </dependency>
-        <dependency>
-            <groupId>org.javaopencvbook</groupId>
-            <artifactId>opencvjar-runtime</artifactId>
-            <version>2.4.8</version>
-            <classifier>natives-mac-x86_64</classifier>
-        </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.openjfx</groupId>-->
-<!--            <artifactId>javafx-controls</artifactId>-->
-<!--            <version>13</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.openjfx</groupId>-->
-<!--            <artifactId>javafx-fxml</artifactId>-->
-<!--            <version>13</version>-->
-<!--        </dependency>-->
-        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -58,14 +35,6 @@
                     <release>8</release>
                 </configuration>
             </plugin>
-<!--            <plugin>-->
-<!--                <groupId>org.openjfx</groupId>-->
-<!--                <artifactId>javafx-maven-plugin</artifactId>-->
-<!--                <version>0.0.3</version>-->
-<!--                <configuration>-->
-<!--                    <mainClass>com.imagelab.App</mainClass>-->
-<!--                </configuration>-->
-<!--            </plugin>-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
