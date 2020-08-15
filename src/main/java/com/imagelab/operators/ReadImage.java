@@ -1,18 +1,14 @@
 package com.imagelab.operators;
 
-import lombok.Getter;
-import lombok.Setter;
 import org.opencv.core.Mat;
-import org.opencv.highgui.Highgui;
-
 import java.util.HashSet;
 import java.util.Set;
 
+import static org.opencv.imgcodecs.Imgcodecs.imread;
+
 public class ReadImage extends OpenCVOperator {
 
-    @Getter
-    @Setter
-    private String url = "imageFile/main/resources/com/imagelab/images/scorelabLogo.jpg";
+    private String ImageURL = "imageFile/main/resources/com/imagelab/images/scorelabLogo.jpg";
 
     @Override
     public boolean validate(OpenCVOperator previous) {
@@ -22,8 +18,7 @@ public class ReadImage extends OpenCVOperator {
 
     @Override
     public Mat compute(Mat image) {
-        // image: null
-        System.out.println("reading image");
+        System.out.println("Image URL: " + getImageURL());
         return readImage();
     }
 
@@ -35,8 +30,15 @@ public class ReadImage extends OpenCVOperator {
     }
 
     public Mat readImage() {
-        String filePath = url;
-        return Highgui.imread(filePath);
+        return imread(getImageURL());
+    }
+
+    public String getImageURL() {
+        return ImageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.ImageURL = imageURL;
     }
 
 }

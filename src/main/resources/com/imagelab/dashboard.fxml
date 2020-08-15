@@ -15,31 +15,36 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="785.0" prefWidth="1285.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.imagelab.DashboardController">
    <children>
-      <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="785.0" prefWidth="1285.0">
-         <children>
-            <VBox prefHeight="785.0" prefWidth="310.0" styleClass="sidebar">
-               <children>
-                  <VBox prefHeight="79.0" prefWidth="278.0">
-                     <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="72.0" prefWidth="278.0" text="ImageLab" textAlignment="CENTER" textFill="#282828">
-                           <font>
-                              <Font name="Roboto" size="47.0" />
-                           </font>
-                        </Label>
-                        <Separator opacity="0.9" prefWidth="200.0" />
-                     </children>
-                  </VBox>
-                  <VBox prefHeight="701.0" prefWidth="278.0">
-                     <children>
-                        <Accordion prefHeight="678.0" prefWidth="278.0">
-                          <panes>
-                            <TitledPane animated="false" text="Operations">
-                              <content>
-                                <AnchorPane fx:id="operationsPane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                       <children>
-                                          <VBox fx:id="operationsVBox" layoutX="12.0" layoutY="14.0" prefHeight="571.0" prefWidth="251.0" />
-                                       </children></AnchorPane>
-                              </content>
+      <HBox fx:id="dashbaordContainer" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity"
+            minHeight="-Infinity" minWidth="-Infinity" prefHeight="785.0" prefWidth="1285.0">
+          <children>
+              <VBox fx:id="sidebarContainer" prefHeight="785.0" prefWidth="249.0" styleClass="sidebar">
+                  <children>
+                      <VBox fx:id="logoContainer" prefHeight="79.0" prefWidth="278.0">
+                          <children>
+                              <Label fx:id="imageLabTitle" alignment="CENTER" contentDisplay="CENTER" prefHeight="72.0"
+                                     prefWidth="278.0" text="ImageLab" textAlignment="CENTER" textFill="#282828">
+                                  <font>
+                                      <Font name="Roboto" size="47.0"/>
+                                  </font>
+                              </Label>
+                              <Separator opacity="0.9" prefWidth="200.0"/>
+                          </children>
+                      </VBox>
+                      <VBox fx:id="operatorsPaneContainer" prefHeight="701.0" prefWidth="278.0">
+                          <children>
+                              <Accordion prefHeight="678.0" prefWidth="278.0">
+                                  <panes>
+                                      <TitledPane animated="false" text="Operations">
+                                          <content>
+                                              <AnchorPane fx:id="operationsPane" minHeight="0.0" minWidth="0.0"
+                                                          prefHeight="180.0" prefWidth="200.0">
+                                                  <children>
+                                                      <VBox fx:id="operatorsContainer" layoutX="12.0" layoutY="14.0"
+                                                            prefHeight="571.0" prefWidth="222.0"/>
+                                                  </children>
+                                              </AnchorPane>
+                                          </content>
                             </TitledPane>
                             <TitledPane animated="false" text="Controllers">
                               <content>
@@ -62,55 +67,66 @@
                   </VBox>
                </children>
             </VBox>
-            <VBox alignment="BOTTOM_CENTER" prefHeight="780.0" prefWidth="1035.0">
-               <children>
-                  <HBox alignment="CENTER_RIGHT" prefHeight="44.0" prefWidth="1005.0" spacing="20.0" styleClass="topNavBar">
-                     <children>
-                        <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="117.0" text="Refresh">
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                        </Button>
-                        <Button fx:id="btnExecute" mnemonicParsing="false" onAction="#onExecuteClicked" prefHeight="32.0" prefWidth="113.0" text="Run" />
-                     </children>
-                     <opaqueInsets>
-                        <Insets />
+              <VBox fx:id="buildPaneContainer" alignment="BOTTOM_CENTER" prefHeight="780.0" prefWidth="1035.0">
+                  <children>
+                      <HBox fx:id="topToolbarContainer" alignment="CENTER_RIGHT" prefHeight="44.0" prefWidth="1005.0"
+                            spacing="20.0" styleClass="topNavBar">
+                          <children>
+                              <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="117.0" text="Refresh">
+                                  <opaqueInsets>
+                                      <Insets/>
+                                  </opaqueInsets>
+                              </Button>
+                              <Button fx:id="btnExecute" mnemonicParsing="false" onAction="#onExecuteClicked"
+                                      prefHeight="32.0" prefWidth="113.0" text="Run"/>
+                          </children>
+                          <opaqueInsets>
+                              <Insets/>
                      </opaqueInsets>
                      <padding>
                         <Insets left="50.0" right="20.0" />
                      </padding>
                   </HBox>
-                  <HBox prefHeight="381.0" prefWidth="1005.0">
-                     <children>
-                        <ScrollPane prefHeight="381.0" prefWidth="789.0">
-                           <content>
-                              <Pane fx:id="buildPane" onDragDropped="#handleDrop" onDragOver="#handleDragOver" prefHeight="488.0" prefWidth="1138.0" />
-                           </content>
-                        </ScrollPane>
-                        <ScrollPane fx:id="uiElementPropertiesPane" prefHeight="381.0" prefWidth="217.0">
-                          <content>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="523.0" prefWidth="197.0" />
-                          </content>
-                        </ScrollPane>
+                      <HBox fx:id="playgroundContainer" prefHeight="381.0" prefWidth="1005.0">
+                          <children>
+                              <ScrollPane fx:id="playgroundPane" prefHeight="381.0" prefWidth="789.0">
+                                  <content>
+                                      <Pane fx:id="playground" onDragDropped="#handleDrop" onDragOver="#handleDragOver"
+                                            prefHeight="488.0" prefWidth="1138.0"/>
+                                  </content>
+                              </ScrollPane>
+                              <ScrollPane fx:id="uiElementPropertiesPane" prefHeight="381.0" prefWidth="246.0">
+                                  <content>
+                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="523.0" prefWidth="224.0"/>
+                                  </content>
+                              </ScrollPane>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER_RIGHT" prefHeight="359.0" prefWidth="1003.0">
-                     <children>
-                        <VBox prefHeight="359.0" prefWidth="240.0" styleClass="infoPane">
-                           <children>
-                              <VBox prefHeight="47.0" prefWidth="238.0">
-                                 <children>
-                                    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="33.0" prefWidth="238.0" text="Information Pane" />
-                                    <Separator prefHeight="0.0" prefWidth="238.0" />
-                                 </children>
-                              </VBox>
-                           </children>
+                      <HBox fx:id="previewPaneContainer" alignment="CENTER_RIGHT" prefHeight="359.0" prefWidth="1003.0">
+                          <children>
+                              <VBox fx:id="infomatioPaneContainer" prefHeight="359.0" prefWidth="269.0"
+                                    styleClass="infoPane">
+                                  <children>
+                                      <VBox fx:id="infoPaneTitleContainer" prefHeight="35.0" prefWidth="238.0">
+                                          <children>
+                                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="33.0"
+                                                     prefWidth="238.0" text="Information Pane"/>
+                                              <Separator prefHeight="0.0" prefWidth="238.0"/>
+                                          </children>
+                                      </VBox>
+                                      <ScrollPane prefHeight="321.0" prefWidth="238.0">
+                                          <content>
+                                              <AnchorPane fx:id="informationPane" minHeight="0.0" minWidth="0.0"
+                                                          prefHeight="403.0" prefWidth="239.0"/>
+                                          </content>
+                                      </ScrollPane>
+                                  </children>
                         </VBox>
-                        <ScrollPane prefHeight="359.0" prefWidth="765.0">
-                           <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="548.0" prefWidth="932.0" />
-                           </content>
-                        </ScrollPane>
+                              <ScrollPane fx:id="previewPane" prefHeight="359.0" prefWidth="765.0">
+                                  <content>
+                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="548.0" prefWidth="932.0"/>
+                                  </content>
+                              </ScrollPane>
                      </children>
                   </HBox>
                </children>

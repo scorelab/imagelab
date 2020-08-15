@@ -2,17 +2,15 @@ package com.imagelab.components;
 
 import com.imagelab.components.events.OnUIElementCloneCreated;
 import com.imagelab.components.events.OnUIElementDragDone;
-import com.imagelab.operators.RotateImage;
+
 import com.imagelab.operators.WriteImage;
+import com.imagelab.views.forms.WriteImgPropertiesForm;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 
 import static com.imagelab.utils.Constants.ANY_NODE;
 import static javafx.scene.input.TransferMode.MOVE;
@@ -138,7 +136,6 @@ public class WriteImageOpUIElement extends OperatorUIElement<Button, AnchorPane>
         });
         button.setOnMouseClicked((event) -> {
             if (!isPreviewOnly()) {
-                System.out.println("Clicked");
                 this.onClicked();
             }
         });
@@ -149,42 +146,8 @@ public class WriteImageOpUIElement extends OperatorUIElement<Button, AnchorPane>
 
     @Override
     public void buildForm() {
-        setForm(new OperatorPropertiesForm());
+        WriteImage operator = (WriteImage) WriteImageOpUIElement.this.getOperator();
+        setForm(new WriteImgPropertiesForm(operator));
     }
 
-    /**
-     * Operator's Property form. It can be in the form of a pane, vbox, anything
-     */
-    private class OperatorPropertiesForm extends AnchorPane {
-
-        private OperatorPropertiesForm() {
-
-            // When initially creating the form you can populate the form with
-            // default values from the this operator's model.
-
-            WriteImage operator = (WriteImage) WriteImageOpUIElement.this.getOperator();
-
-            setPrefSize(523.0, 197.0);
-
-            Label label = new Label("URL to save");
-
-            TextField field = new TextField(operator.getUrl());
-            field.setPrefSize(169, 27);
-            field.textProperty().addListener((observable, oldValue, newValue) -> {
-                newValue = "imageFile/main/resources/com/imagelab/images/scorelabLogo1.jpg";
-                operator.setUrl(newValue);
-            });
-
-            VBox box = new VBox();
-            box.setSpacing(10);
-            box.setLayoutX(14);
-            box.setLayoutY(14);
-            box.setPrefSize(170, 47);
-            box.getChildren().addAll(label, field);
-
-            getChildren().addAll(box);
-
-        }
-
-    }
 }

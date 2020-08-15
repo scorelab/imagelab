@@ -5,19 +5,17 @@ import lombok.Setter;
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
 import org.opencv.core.Size;
-import org.opencv.highgui.Highgui;
 import org.opencv.imgproc.Imgproc;
 
 import java.util.HashSet;
 import java.util.Set;
 
+import static org.opencv.imgcodecs.Imgcodecs.imread;
+import static org.opencv.imgcodecs.Imgcodecs.imwrite;
+
 public class RotateImage extends OpenCVOperator {
 
-    @Getter
-    @Setter
     private double angle;
-    @Getter
-    @Setter
     private double scale;
 
     @Override
@@ -30,8 +28,8 @@ public class RotateImage extends OpenCVOperator {
 
     @Override
     public Mat compute(Mat mat) {
-        System.out.println("rotating image");
-        return rotateImage(mat, this.angle, scale);
+        System.out.println("Image Rotated");
+        return rotateImage(mat, getAngle(), getScale());
     }
 
     @Override
@@ -43,9 +41,9 @@ public class RotateImage extends OpenCVOperator {
         return allowed;
     }
 
-    public Mat rotateImage(Mat imageFile, double rotationAngle, double scale) {
+    private Mat rotateImage(Mat imageFile, double rotationAngle, double scale) {
         // Creating an empty matrix to store the result
-        Mat dst = new Mat();
+        Mat image = new Mat();
 
         // Creating a Point object
         Point point = new Point(300, 200);
@@ -58,10 +56,25 @@ public class RotateImage extends OpenCVOperator {
         Size size = new Size(imageFile.cols(), imageFile.cols());
 
         // Rotating the given image
-        Imgproc.warpAffine(imageFile, dst, rotationMatrix, size);
+        Imgproc.warpAffine(imageFile, image, rotationMatrix, size);
 
-        System.out.println("Image Processed");
+        //Rotated Image
+        return image;
+    }
 
-        return dst;
+    public double getAngle() {
+        return angle;
+    }
+
+    public void setAngle(double angle) {
+        this.angle = angle;
+    }
+
+    public double getScale() {
+        return scale;
+    }
+
+    public void setScale(double scale) {
+        this.scale = scale;
     }
 }

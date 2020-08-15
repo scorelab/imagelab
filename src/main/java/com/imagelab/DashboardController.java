@@ -8,7 +8,6 @@ import com.imagelab.components.events.OnUIElementCloneCreated;
 import com.imagelab.components.events.OnUIElementDragDone;
 import com.imagelab.operators.OpenCVOperator;
 import com.imagelab.operators.ReadImage;
-import com.imagelab.operators.WriteImage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -36,15 +35,14 @@ public class DashboardController implements Initializable {
 
     private final Stack<OperatorUIElement<Node, Node>> appliedOperators;
     @FXML
-    private Pane buildPane;
+    private Pane playground;
     @FXML
-    private VBox operationsVBox;
+    private VBox operatorsContainer;
     @FXML
     private AnchorPane operationsPane;
 
     @FXML
     private ScrollPane uiElementPropertiesPane;
-
 
     private OperatorUIElement<Node, Node> curApplyingOpUIElement;
 
@@ -132,12 +130,12 @@ public class DashboardController implements Initializable {
         Dragboard dragboard = event.getDragboard();
 
         if (dragboard.hasContent(ANY_NODE)) {
-            if (buildPane.getChildren().contains(curApplyingOpUIElement.getNode())) {
+            if (playground.getChildren().contains(curApplyingOpUIElement.getNode())) {
                 curApplyingOpUIElement.getNode().relocate(relocateX, relocateY);
             } else {
                 curApplyingOpUIElement.getNode().setLayoutX(relocateX);
                 curApplyingOpUIElement.getNode().setLayoutY(relocateY);
-                buildPane.getChildren().add(curApplyingOpUIElement.getNode());
+                playground.getChildren().add(curApplyingOpUIElement.getNode());
             }
             if (!this.curApplyingOpUIElement.isAddedToOperatorsStack()) {
                 this.appliedOperators.push(curApplyingOpUIElement);
@@ -150,7 +148,7 @@ public class DashboardController implements Initializable {
             event.setDropCompleted(true);
             event.consume();
         }
-        System.out.println("Drop detected: " + curApplyingOpUIElement.getOperatorId() + "\n");
+        System.out.println("Drop detected: " + curApplyingOpUIElement.getOperatorName() + "\n");
 
     }
 
@@ -172,7 +170,7 @@ public class DashboardController implements Initializable {
         };
 
 
-        operationsVBox.setSpacing(15);
+        operatorsContainer.setSpacing(15);
 
         // Create the Operator UI Elements
 
@@ -198,10 +196,8 @@ public class DashboardController implements Initializable {
         rotateImageOpUIElement.buildNode();
         writeImageOpUIElement.buildNode();
 
-
-
         // Populating or adding created UI elements to left operators panel
-        operationsVBox.getChildren().addAll(
+        operatorsContainer.getChildren().addAll(
                 readImageOpUIElement.getNode(),
                 rotateImageOpUIElement.getNode(),
                 writeImageOpUIElement.getNode()
