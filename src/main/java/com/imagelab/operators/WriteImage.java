@@ -3,16 +3,15 @@ package com.imagelab.operators;
 import lombok.Getter;
 import lombok.Setter;
 import org.opencv.core.Mat;
-import org.opencv.highgui.Highgui;
 
 import java.util.HashSet;
 import java.util.Set;
 
+import static org.opencv.imgcodecs.Imgcodecs.imwrite;
+
 public class WriteImage extends OpenCVOperator {
 
-    @Getter
-    @Setter
-    private String url;
+    private String destinationURL = "src/main/resources/com/imagelab/images/ProcessedImage.jpg";
 
     @Override
     public boolean validate(OpenCVOperator previous) {
@@ -22,10 +21,8 @@ public class WriteImage extends OpenCVOperator {
 
     @Override
     public Mat compute(Mat image) {
-        System.out.println("Writing image");
-        String filePath = url;
-        Highgui.imwrite(filePath, image);
-        return image;
+        System.out.println("Processed image file has saved to: " + getDestinationURL());
+        return writeImage(getDestinationURL(), image);
     }
 
     @Override
@@ -35,6 +32,19 @@ public class WriteImage extends OpenCVOperator {
         allowed.add(RotateImage.class);
         allowed.add(WriteImage.class);
         return allowed;
+    }
+
+    private Mat writeImage(String dstURL, Mat processedImage) {
+        imwrite(dstURL, processedImage);
+        return processedImage;
+    }
+
+    public String getDestinationURL() {
+        return destinationURL;
+    }
+
+    public void setDestinationURL(String destinationURL) {
+        this.destinationURL = destinationURL;
     }
 
 

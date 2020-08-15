@@ -3,15 +3,12 @@ package com.imagelab.components;
 import com.imagelab.components.events.OnUIElementCloneCreated;
 import com.imagelab.components.events.OnUIElementDragDone;
 import com.imagelab.operators.RotateImage;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import com.imagelab.views.forms.RotateImgPropertiesForm;
+import javafx.scene.control.*;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 
 import static com.imagelab.utils.Constants.ANY_NODE;
 import static javafx.scene.input.TransferMode.MOVE;
@@ -137,7 +134,6 @@ public class RotateImageOpUIElement extends OperatorUIElement<Button, AnchorPane
         });
         button.setOnMouseClicked((event) -> {
             if (!isPreviewOnly()) {
-                System.out.println("Clicked");
                 this.onClicked();
             }
         });
@@ -148,51 +144,7 @@ public class RotateImageOpUIElement extends OperatorUIElement<Button, AnchorPane
 
     @Override
     public void buildForm() {
-        setForm(new OperatorPropertiesForm());
+        RotateImage operator = (RotateImage) RotateImageOpUIElement.this.getOperator();
+        setForm(new RotateImgPropertiesForm(operator));
     }
-
-    /**
-     * Operator's Property form. It can be in the form of a pane, vbox, anything
-     */
-    private class OperatorPropertiesForm extends AnchorPane {
-
-        private OperatorPropertiesForm() {
-
-            // When initially creating the form you can populate the form with
-            // default values from the this operator's model.
-            RotateImage operator = (RotateImage) RotateImageOpUIElement.this.getOperator();
-
-            setPrefSize(523.0, 197.0);
-
-            Label lblAngle = new Label("Angle");
-
-            TextField angleField = new TextField(String.valueOf(operator.getAngle()));
-            angleField.setPrefSize(169, 27);
-            angleField.textProperty().addListener((observable, oldValue, newValue) -> {
-                newValue = "90";
-                operator.setAngle(Double.parseDouble(newValue));
-            });
-
-            Label lblScale = new Label("Scale");
-
-            TextField scaleField = new TextField(String.valueOf(operator.getScale()));
-            scaleField.setPrefSize(169, 27);
-            scaleField.textProperty().addListener((observable, oldValue, newValue) -> {
-                newValue = "1";
-                operator.setScale(Double.parseDouble(newValue));
-            });
-
-            VBox box = new VBox();
-            box.setSpacing(10);
-            box.setLayoutX(14);
-            box.setLayoutY(14);
-            box.setPrefSize(170, 47);
-            box.getChildren().addAll(lblAngle, angleField, lblScale, scaleField);
-
-            getChildren().addAll(box);
-
-        }
-
-    }
-
 }
