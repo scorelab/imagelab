@@ -8,12 +8,15 @@ import com.imagelab.components.events.OnUIElementCloneCreated;
 import com.imagelab.components.events.OnUIElementDragDone;
 import com.imagelab.operators.OpenCVOperator;
 import com.imagelab.operators.ReadImage;
+import com.imagelab.utils.Utilities;
+import com.imagelab.views.ProcessedImageView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
@@ -22,6 +25,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import org.opencv.core.Mat;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Stack;
@@ -39,7 +43,8 @@ public class DashboardController implements Initializable {
     @FXML
     private VBox operatorsContainer;
     @FXML
-    private AnchorPane operationsPane;
+    private AnchorPane previewPane;
+
 
     @FXML
     private ScrollPane uiElementPropertiesPane;
@@ -54,13 +59,18 @@ public class DashboardController implements Initializable {
     }
 
     @FXML
-    public void onExecuteClicked(ActionEvent event) {
+    public void onExecuteClicked(ActionEvent event) throws IOException {
 
         Mat image = null;
 
         for (OperatorUIElement<Node, Node> op : appliedOperators) {
             image = op.getOperator().compute(image);
         }
+
+        //Displaying the processed image in the preview pane
+        WritableImage writableImage = Utilities.loadImage(image);
+        ProcessedImageView processedImage = new ProcessedImageView(writableImage);
+        previewPane.getChildren().addAll(processedImage);
     }
 
     /**
