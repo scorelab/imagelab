@@ -1,7 +1,5 @@
 package com.imagelab.operators;
 
-import lombok.Getter;
-import lombok.Setter;
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
 import org.opencv.core.Size;

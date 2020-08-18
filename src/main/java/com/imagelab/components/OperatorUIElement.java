@@ -4,45 +4,45 @@ import com.imagelab.components.events.OnUIElementCloneCreated;
 import com.imagelab.components.events.OnUIElementDragDone;
 import com.imagelab.operators.OpenCVOperator;
 import javafx.scene.Node;
-import lombok.Data;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 
 /**
  * Abstract class related to the operator UI elements.
  *
  * @param <T> any node
  */
-@Data
-@RequiredArgsConstructor
+
 public abstract class OperatorUIElement<T extends Node, E extends Node> {
 
     /*Operator logic related*/
-    @NonNull
+
+    public OperatorUIElement(OpenCVOperator operator, String operatorId, String operatorName, OnUIElementCloneCreated onCloneCreated, OnUIElementDragDone onDragDone, String stylingId, double width, double height, boolean addedToOperatorsStack, boolean cloneable, boolean previewOnly) {
+        this.operator = operator;
+        this.operatorId = operatorId;
+        this.operatorName = operatorName;
+        this.onCloneCreated = onCloneCreated;
+        this.onDragDone = onDragDone;
+        this.stylingId = stylingId;
+        this.width = width;
+        this.height = height;
+        this.addedToOperatorsStack = addedToOperatorsStack;
+        this.cloneable = cloneable;
+        this.previewOnly = previewOnly;
+    }
+
     private final OpenCVOperator operator;
-    @NonNull
     private final String operatorId;
-    @NonNull
     private final String operatorName;
 
     /*Events*/
-    @NonNull
     private final OnUIElementCloneCreated onCloneCreated;
-    @NonNull
     private final OnUIElementDragDone onDragDone;
 
-    @NonNull
     private final String stylingId;
-    @NonNull
     private final double width;
-    @NonNull
     private final double height;
 
-    @NonNull
     private boolean addedToOperatorsStack;
-    @NonNull
     private boolean cloneable;
-    @NonNull
     private boolean previewOnly;
 
     // is null initially. have to set this instance once called
@@ -53,5 +53,78 @@ public abstract class OperatorUIElement<T extends Node, E extends Node> {
     public abstract void buildNode();
 
     public abstract void buildForm();
+
+    //Getters and Setters
+    public OpenCVOperator getOperator() {
+        return operator;
+    }
+
+    public String getOperatorId() {
+        return operatorId;
+    }
+
+    public String getOperatorName() {
+        return operatorName;
+    }
+
+    public OnUIElementCloneCreated getOnCloneCreated() {
+        return onCloneCreated;
+    }
+
+    public OnUIElementDragDone getOnDragDone() {
+        return onDragDone;
+    }
+
+    public String getStylingId() {
+        return stylingId;
+    }
+
+    public double getWidth() {
+        return width;
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
+    public boolean isAddedToOperatorsStack() {
+        return addedToOperatorsStack;
+    }
+
+    public void setAddedToOperatorsStack(boolean addedToOperatorsStack) {
+        this.addedToOperatorsStack = addedToOperatorsStack;
+    }
+
+    public boolean isCloneable() {
+        return cloneable;
+    }
+
+    public void setCloneable(boolean cloneable) {
+        this.cloneable = cloneable;
+    }
+
+    public boolean isPreviewOnly() {
+        return previewOnly;
+    }
+
+    public void setPreviewOnly(boolean previewOnly) {
+        this.previewOnly = previewOnly;
+    }
+
+    public T getNode() {
+        return node;
+    }
+
+    public void setNode(T node) {
+        this.node = node;
+    }
+
+    public E getForm() {
+        return form;
+    }
+
+    public void setForm(E form) {
+        this.form = form;
+    }
 
 }
