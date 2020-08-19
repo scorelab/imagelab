@@ -11,9 +11,24 @@ import javafx.scene.Node;
  * @param <T> any node
  */
 
-public abstract class OperatorUIElement<T extends Node, E extends Node> {
-
-    /*Operator logic related*/
+public abstract class OperatorUIElement<T extends Node, E extends Node, N extends Node> {
+    private final OpenCVOperator operator;
+    private final String operatorId;
+    private final String operatorName;
+    /*Events*/
+    private final OnUIElementCloneCreated onCloneCreated;
+    private final OnUIElementDragDone onDragDone;
+    private final String stylingId;
+    private final double width;
+    private final double height;
+    private boolean addedToOperatorsStack;
+    private boolean cloneable;
+    private boolean previewOnly;
+    // is null initially. have to set this instance once called
+    // the build() method.
+    private T node = null;
+    private E form = null;
+    private N information = null;
 
     public OperatorUIElement(OpenCVOperator operator, String operatorId, String operatorName, OnUIElementCloneCreated onCloneCreated, OnUIElementDragDone onDragDone, String stylingId, double width, double height, boolean addedToOperatorsStack, boolean cloneable, boolean previewOnly) {
         this.operator = operator;
@@ -29,30 +44,11 @@ public abstract class OperatorUIElement<T extends Node, E extends Node> {
         this.previewOnly = previewOnly;
     }
 
-    private final OpenCVOperator operator;
-    private final String operatorId;
-    private final String operatorName;
-
-    /*Events*/
-    private final OnUIElementCloneCreated onCloneCreated;
-    private final OnUIElementDragDone onDragDone;
-
-    private final String stylingId;
-    private final double width;
-    private final double height;
-
-    private boolean addedToOperatorsStack;
-    private boolean cloneable;
-    private boolean previewOnly;
-
-    // is null initially. have to set this instance once called
-    // the build() method.
-    private T node = null;
-    private E form = null;
-
     public abstract void buildNode();
 
     public abstract void buildForm();
+
+    public abstract void populateInformationPane();
 
     //Getters and Setters
     public OpenCVOperator getOperator() {
@@ -125,6 +121,14 @@ public abstract class OperatorUIElement<T extends Node, E extends Node> {
 
     public void setForm(E form) {
         this.form = form;
+    }
+
+    public N getInformation() {
+        return information;
+    }
+
+    public void setInformation(N information) {
+        this.information = information;
     }
 
 }

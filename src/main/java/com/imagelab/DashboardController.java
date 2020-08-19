@@ -37,7 +37,7 @@ import static com.imagelab.utils.Constants.ANY_NODE;
  */
 public class DashboardController implements Initializable {
 
-    private final Stack<OperatorUIElement<Node, Node>> appliedOperators;
+    private final Stack<OperatorUIElement<Node, Node, Node>> appliedOperators;
     @FXML
     private Pane playground;
     @FXML
@@ -49,7 +49,10 @@ public class DashboardController implements Initializable {
     @FXML
     private ScrollPane uiElementPropertiesPane;
 
-    private OperatorUIElement<Node, Node> curApplyingOpUIElement;
+    @FXML
+    private ScrollPane informationScrollPane;
+
+    private OperatorUIElement<Node, Node, Node> curApplyingOpUIElement;
 
     //To capture mouse position of the user
     private double dropX, dropY;
@@ -63,7 +66,7 @@ public class DashboardController implements Initializable {
 
         Mat image = null;
 
-        for (OperatorUIElement<Node, Node> op : appliedOperators) {
+        for (OperatorUIElement<Node, Node, Node> op : appliedOperators) {
             image = op.getOperator().compute(image);
         }
 
@@ -167,14 +170,16 @@ public class DashboardController implements Initializable {
 
         final OnUIElementCloneCreated anyCloneCreated = (uiElement) -> {
             //noinspection unchecked
-            this.curApplyingOpUIElement = ((OperatorUIElement<Node, Node>) uiElement);
+            this.curApplyingOpUIElement = ((OperatorUIElement<Node, Node, Node>) uiElement);
         };
 
         final OnUIElementDragDone anyElementDragDone = (opUiEl) -> {
             if (opUiEl == null) {
                 this.uiElementPropertiesPane.setContent(null);
+                this.informationScrollPane.setContent(null);
             } else {
                 this.uiElementPropertiesPane.setContent(opUiEl.getForm());
+                this.informationScrollPane.setContent(opUiEl.getInformation());
             }
             this.curApplyingOpUIElement = null;
         };
@@ -188,19 +193,22 @@ public class DashboardController implements Initializable {
         ReadImageOpUIElement readImageOpUIElement = new ReadImageOpUIElement(
                 anyCloneCreated,
                 anyElementDragDone,
-                uiElementPropertiesPane
+                uiElementPropertiesPane,
+                informationScrollPane
         );
 
         RotateImageOpUIElement rotateImageOpUIElement = new RotateImageOpUIElement(
                 anyCloneCreated,
                 anyElementDragDone,
-                uiElementPropertiesPane
+                uiElementPropertiesPane,
+                informationScrollPane
         );
 
         WriteImageOpUIElement writeImageOpUIElement = new WriteImageOpUIElement(
                 anyCloneCreated,
                 anyElementDragDone,
-                uiElementPropertiesPane
+                uiElementPropertiesPane,
+                informationScrollPane
         );
         readImageOpUIElement.buildNode();
         rotateImageOpUIElement.buildNode();
@@ -214,4 +222,5 @@ public class DashboardController implements Initializable {
         );
 
     }
+
 }

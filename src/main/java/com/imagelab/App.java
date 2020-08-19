@@ -1,15 +1,18 @@
 package com.imagelab;
 
 import com.imagelab.operators.ReadImage;
+import com.imagelab.utils.Constants;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.opencv.core.Core;
+import org.opencv.core.CvType;
+import org.opencv.core.Mat;
+import org.opencv.core.Scalar;
 
 import java.io.IOException;
-
-import org.opencv.core.*;
 
 import static com.imagelab.utils.Constants.DASHBOARD_HEIGHT;
 import static com.imagelab.utils.Constants.DASHBOARD_WIDTH;
@@ -30,18 +33,10 @@ public class App extends Application {
         nu.pattern.OpenCV.loadShared();
     }
 
-    @Override
-    public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("dashboard"), DASHBOARD_WIDTH, DASHBOARD_HEIGHT);
-        scene.getStylesheets().add(getClass().getResource("/com/imagelab/style.css").toExternalForm());
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.show();
-    }
-
     /**
      * To set the root for the created scene.
-     * @param fxml  The fxml related to the root.
+     *
+     * @param fxml The fxml related to the root.
      */
     static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
@@ -49,7 +44,8 @@ public class App extends Application {
 
     /**
      * To load parent view from the fxml
-     * @param fxml  The fxml related to the parent.
+     *
+     * @param fxml The fxml related to the parent.
      */
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
@@ -67,7 +63,7 @@ public class App extends Application {
     /**
      * This method is to make sure the loaded openCV libraries are working
      * within the project
-     *
+     * <p>
      * Note: this can be removed once the openCV related operations are developed
      */
     static void testOpenCVConfig() {
@@ -79,6 +75,15 @@ public class App extends Application {
         Mat mc5 = m.col(5);
         mc5.setTo(new Scalar(5));
         System.out.println("OpenCV Mat data:\n" + m.dump());
+    }
+
+    @Override
+    public void start(Stage stage) throws IOException {
+        scene = new Scene(loadFXML("dashboard"), DASHBOARD_WIDTH, DASHBOARD_HEIGHT);
+        scene.getStylesheets().add(getClass().getResource(Constants.STYLESHEET_PATH).toExternalForm());
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.show();
     }
 
 }

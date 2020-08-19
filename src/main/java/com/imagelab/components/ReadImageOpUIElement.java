@@ -3,8 +3,9 @@ package com.imagelab.components;
 import com.imagelab.components.events.OnUIElementCloneCreated;
 import com.imagelab.components.events.OnUIElementDragDone;
 import com.imagelab.operators.ReadImage;
+import com.imagelab.utils.Information;
+import com.imagelab.views.InformationContainerView;
 import com.imagelab.views.forms.ReadImgPropertiesForm;
-import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.ClipboardContent;
@@ -12,7 +13,6 @@ import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 
 import static com.imagelab.utils.Constants.ANY_NODE;
 import static javafx.scene.input.TransferMode.MOVE;
@@ -21,21 +21,20 @@ import static javafx.scene.input.TransferMode.MOVE;
  * Class which builds the Read image operation
  * related UI element
  */
-public class ReadImageOpUIElement extends OperatorUIElement<Button, AnchorPane> implements Draggable, Cloneable {
+public class ReadImageOpUIElement extends OperatorUIElement<Button, AnchorPane, AnchorPane> implements Draggable, Cloneable {
 
     // Associate an control panel for each of the operator UI elements.
     // that way we can set / hide the control panel content directly inside
     // the operator element.
-    //
-    private final ScrollPane uiElementPropertiesPane;
 
-    @FXML
-    private Pane playground;
+    private final ScrollPane uiElementPropertiesPane;
+    private final ScrollPane informationScrollPane;
 
     public ReadImageOpUIElement(
             OnUIElementCloneCreated onCloneCreated,
             OnUIElementDragDone onDragDone,
-            ScrollPane uiElementPropertiesPane
+            ScrollPane uiElementPropertiesPane,
+            ScrollPane informationScrollPane
     ) {
         super(
                 new ReadImage(), // To invoke openCV related logic
@@ -51,6 +50,7 @@ public class ReadImageOpUIElement extends OperatorUIElement<Button, AnchorPane> 
                 false
         );
         this.uiElementPropertiesPane = uiElementPropertiesPane;
+        this.informationScrollPane = informationScrollPane;
     }
 
 
@@ -81,7 +81,6 @@ public class ReadImageOpUIElement extends OperatorUIElement<Button, AnchorPane> 
         content.put(ANY_NODE, "operation");
         dragboard.setContent(content);
         event.consume();
-
     }
 
     /**
@@ -91,20 +90,22 @@ public class ReadImageOpUIElement extends OperatorUIElement<Button, AnchorPane> 
      * @return - a cloned ReadImageOpUIElement
      * @throws CloneNotSupportedException x
      */
-    public OperatorUIElement<Button, AnchorPane> clone() throws CloneNotSupportedException {
+    public OperatorUIElement<Button, AnchorPane, AnchorPane> clone() throws CloneNotSupportedException {
 
         super.clone();
 
-        final OperatorUIElement<Button, AnchorPane> copy = new ReadImageOpUIElement(
+        final OperatorUIElement<Button, AnchorPane, AnchorPane> copy = new ReadImageOpUIElement(
                 this.getOnCloneCreated(),
                 this.getOnDragDone(),
-                this.uiElementPropertiesPane
+                this.uiElementPropertiesPane,
+                this.informationScrollPane
         );
         copy.setCloneable(false);
         copy.setPreviewOnly(false);
         copy.setAddedToOperatorsStack(false);
         copy.buildNode();
         copy.buildForm();
+        copy.populateInformationPane();
 
         return copy;
 
@@ -118,6 +119,7 @@ public class ReadImageOpUIElement extends OperatorUIElement<Button, AnchorPane> 
      */
     public void onClicked() {
         this.uiElementPropertiesPane.setContent(this.getForm());
+        this.informationScrollPane.setContent(this.getInformation());
         System.out.println("now this element is enabled");
     }
 
@@ -150,7 +152,6 @@ public class ReadImageOpUIElement extends OperatorUIElement<Button, AnchorPane> 
         });
 
         setNode(button);
-
     }
 
     @Override
@@ -159,4 +160,9 @@ public class ReadImageOpUIElement extends OperatorUIElement<Button, AnchorPane> 
         setForm(new ReadImgPropertiesForm(operator));
     }
 
+    @Override
+    public void populateInformationPane() {
+        ReadImage operator = (ReadImage) ReadImageOpUIElement.this.getOperator();
+        setInformation(new InformationContainerView(Information.READ_IMAGE.OP_INFO));
+    }
 }
