@@ -2,8 +2,9 @@ package com.imagelab.components;
 
 import com.imagelab.components.events.OnUIElementCloneCreated;
 import com.imagelab.components.events.OnUIElementDragDone;
-
 import com.imagelab.operators.WriteImage;
+import com.imagelab.utils.Information;
+import com.imagelab.views.InformationContainerView;
 import com.imagelab.views.forms.WriteImgPropertiesForm;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -19,13 +20,15 @@ import static javafx.scene.input.TransferMode.MOVE;
  * Class which builds the Read image operation
  * related UI element
  */
-public class WriteImageOpUIElement extends OperatorUIElement<Button, AnchorPane> implements Draggable, Cloneable {
+public class WriteImageOpUIElement extends OperatorUIElement<Button, AnchorPane, AnchorPane> implements Draggable, Cloneable {
 
     private final ScrollPane uiElementPropertiesPane;
+    private final ScrollPane informationScrollPane;
 
     public WriteImageOpUIElement(OnUIElementCloneCreated onCloneCreated,
                                  OnUIElementDragDone onDragDone,
-                                 ScrollPane uiElementPropertiesPane
+                                 ScrollPane uiElementPropertiesPane,
+                                 ScrollPane informationScrollPane
     ) {
         super(
                 new WriteImage(), // To invoke openCV related logic
@@ -41,6 +44,7 @@ public class WriteImageOpUIElement extends OperatorUIElement<Button, AnchorPane>
                 false
         );
         this.uiElementPropertiesPane = uiElementPropertiesPane;
+        this.informationScrollPane = informationScrollPane;
     }
 
 
@@ -81,20 +85,22 @@ public class WriteImageOpUIElement extends OperatorUIElement<Button, AnchorPane>
      * @return - a cloned ReadImageOpUIElement
      * @throws CloneNotSupportedException x
      */
-    public OperatorUIElement<Button, AnchorPane> clone() throws CloneNotSupportedException {
+    public OperatorUIElement<Button, AnchorPane, AnchorPane> clone() throws CloneNotSupportedException {
 
         super.clone();
 
-        final OperatorUIElement<Button, AnchorPane> copy = new WriteImageOpUIElement(
+        final OperatorUIElement<Button, AnchorPane, AnchorPane> copy = new WriteImageOpUIElement(
                 this.getOnCloneCreated(),
                 this.getOnDragDone(),
-                this.uiElementPropertiesPane
+                this.uiElementPropertiesPane,
+                this.informationScrollPane
         );
         copy.setCloneable(false);
         copy.setPreviewOnly(false);
         copy.setAddedToOperatorsStack(false);
         copy.buildNode();
         copy.buildForm();
+        copy.populateInformationPane();
 
         return copy;
 
@@ -108,6 +114,7 @@ public class WriteImageOpUIElement extends OperatorUIElement<Button, AnchorPane>
      */
     public void onClicked() {
         this.uiElementPropertiesPane.setContent(this.getForm());
+        this.informationScrollPane.setContent(this.getInformation());
         System.out.println("now this element is enabled");
     }
 
@@ -148,6 +155,11 @@ public class WriteImageOpUIElement extends OperatorUIElement<Button, AnchorPane>
     public void buildForm() {
         WriteImage operator = (WriteImage) WriteImageOpUIElement.this.getOperator();
         setForm(new WriteImgPropertiesForm(operator));
+    }
+
+    @Override
+    public void populateInformationPane() {
+        setInformation(new InformationContainerView(Information.WRITE_IMAGE.OP_INFO));
     }
 
 }
