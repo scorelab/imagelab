@@ -3,6 +3,7 @@ package com.imagelab.operators.geotransformation;
 import com.imagelab.operators.OpenCVOperator;
 import com.imagelab.operators.basic.ReadImage;
 import com.imagelab.operators.basic.WriteImage;
+import com.imagelab.operators.imageconversion.ConvertToGrayscale;
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
 import org.opencv.core.Size;
@@ -36,6 +37,7 @@ public class RotateImage extends OpenCVOperator {
         allowed.add(ReadImage.class);
         allowed.add(RotateImage.class);
         allowed.add(WriteImage.class);
+        allowed.add(ConvertToGrayscale.class);
         return allowed;
     }
 

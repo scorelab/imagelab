@@ -4,10 +4,12 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-
+/**
+ * Information view which is used to populate operations related
+ * information.
+ */
 public class InformationContainerView extends AnchorPane {
     public InformationContainerView(String description) {
-
         VBox informationContainer = new VBox();
         informationContainer.setSpacing(20.0);
         informationContainer.setLayoutX(10);
@@ -18,9 +20,7 @@ public class InformationContainerView extends AnchorPane {
         lblDescription.setWrapText(true);
 
         informationContainer.getChildren().addAll(lblDescription);
-
         setPrefWidth(230.0);
         getChildren().addAll(informationContainer);
-
     }
 }

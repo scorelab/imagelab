@@ -77,6 +77,12 @@ public class App extends Application {
         System.out.println("OpenCV Mat data:\n" + m.dump());
     }
 
+    /**
+     * Method which loads the UI from fxml resource and set the stylesheet.
+     *
+     * @param stage - stage which need to be showed.
+     * @throws IOException - exceptions related loading stage.
+     */
     @Override
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("dashboard"), DASHBOARD_WIDTH, DASHBOARD_HEIGHT);

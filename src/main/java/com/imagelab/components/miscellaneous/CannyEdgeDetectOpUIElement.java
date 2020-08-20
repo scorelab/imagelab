@@ -17,8 +17,11 @@ import javafx.scene.layout.AnchorPane;
 import static com.imagelab.utils.Constants.ANY_NODE;
 import static javafx.scene.input.TransferMode.MOVE;
 
+/**
+ * Class which builds the canny edge detection
+ * related UI element.
+ */
 public class CannyEdgeDetectOpUIElement extends OperatorUIElement<Button, AnchorPane, AnchorPane> implements Draggable, Cloneable {
-
     private final ScrollPane uiElementPropertiesPane;
     private final ScrollPane informationScrollPane;
 
@@ -29,7 +32,7 @@ public class CannyEdgeDetectOpUIElement extends OperatorUIElement<Button, Anchor
             ScrollPane informationScrollPane
     ) {
         super(
-                new CannyEdgeDetect(), // To invoke openCV related logic
+                new CannyEdgeDetect(), // To invoke openCV related logic.
                 CannyEdgeDetect.class.getCanonicalName(),
                 CannyEdgeDetect.class.getSimpleName(),
                 onCloneCreated,
@@ -47,9 +50,9 @@ public class CannyEdgeDetectOpUIElement extends OperatorUIElement<Button, Anchor
 
     /**
      * Overridden method from the draggable interface to
-     * detect if the user is dragging and UI element
+     * detect if the user is dragging and UI element.
      *
-     * @param event - Mouse event at the time of element being dragged
+     * @param event - Mouse event at the time of element being dragged.
      */
     @Override
     public void dragDetected(MouseEvent event) {
@@ -77,13 +80,11 @@ public class CannyEdgeDetectOpUIElement extends OperatorUIElement<Button, Anchor
      * Custom clone method to create a clone from the
      * dragged UI element.
      *
-     * @return - a cloned ReadImageOpUIElement
+     * @return - a cloned ReadImageOpUIElement.
      * @throws CloneNotSupportedException x
      */
     public OperatorUIElement<Button, AnchorPane, AnchorPane> clone() throws CloneNotSupportedException {
-
         super.clone();
-
         final OperatorUIElement<Button, AnchorPane, AnchorPane> copy = new CannyEdgeDetectOpUIElement(
                 this.getOnCloneCreated(),
                 this.getOnDragDone(),
@@ -96,21 +97,24 @@ public class CannyEdgeDetectOpUIElement extends OperatorUIElement<Button, Anchor
         copy.buildNode();
         copy.buildForm();
         copy.populateInformationPane();
-
         return copy;
-
     }
 
     /**
      * Method to be triggered when user clicks on a UI element
      * in the playground.
-     * Usage - this can be used to populate the side pane when needed
+     * Usage - this can be used to populate the side pane when needed.
      */
     public void onClicked() {
         this.uiElementPropertiesPane.setContent(this.getForm());
         this.informationScrollPane.setContent(this.getInformation());
     }
 
+    /**
+     * Overridden method which builds an UIElement
+     * once it's dragged on to the playground area
+     * to build an openCV pipeline.
+     */
     @Override
     public void buildNode() {
         final Button button = new Button();
@@ -120,7 +124,6 @@ public class CannyEdgeDetectOpUIElement extends OperatorUIElement<Button, Anchor
         button.setPrefWidth(super.getWidth());
         button.setOnDragDetected(this::dragDetected);
 
-        // source
         button.setOnDragDone((DragEvent event) -> {
             if (event.isAccepted()) {
                 getOnDragDone().accept(this);
@@ -133,15 +136,24 @@ public class CannyEdgeDetectOpUIElement extends OperatorUIElement<Button, Anchor
                 this.onClicked();
             }
         });
-
         setNode(button);
     }
 
+    /**
+     * This method builds the UI element related properties
+     * for which allows user to change the property values
+     * before executing the pipeline.
+     */
     @Override
     public void buildForm() {
         CannyEdgeDetect operator = (CannyEdgeDetect) CannyEdgeDetectOpUIElement.this.getOperator();
     }
 
+    /**
+     * This method populates the information pane with
+     * UI element related information. So, that user can get a basic idea
+     * what sort of functionality it does.
+     */
     @Override
     public void populateInformationPane() {
         CannyEdgeDetect operator = (CannyEdgeDetect) CannyEdgeDetectOpUIElement.this.getOperator();

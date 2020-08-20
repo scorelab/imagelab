@@ -21,10 +21,9 @@ import static javafx.scene.input.TransferMode.MOVE;
 
 /**
  * Class which builds the Read image operation
- * related UI element
+ * related UI element.
  */
 public class RotateImageOpUIElement extends OperatorUIElement<Button, AnchorPane, AnchorPane> implements Draggable, Cloneable {
-
     private final ScrollPane uiElementPropertiesPane;
     private final ScrollPane informationScrollPane;
 
@@ -34,7 +33,7 @@ public class RotateImageOpUIElement extends OperatorUIElement<Button, AnchorPane
                                   ScrollPane informationScrollPane
     ) {
         super(
-                new RotateImage(), // To invoke openCV related logic
+                new RotateImage(), // To invoke openCV related logic.
                 RotateImage.class.getCanonicalName(),
                 RotateImage.class.getSimpleName(),
                 onCloneCreated,
@@ -50,17 +49,15 @@ public class RotateImageOpUIElement extends OperatorUIElement<Button, AnchorPane
         this.informationScrollPane = informationScrollPane;
     }
 
-
     /**
      * Overridden method from the draggable interface to
-     * detect if the user is dragging and UI element
+     * detect if the user is dragging and UI element.
      *
-     * @param event - Mouse event at the time of element being dragged
+     * @param event - Mouse event at the time of element being dragged.
      */
     @Override
     public void dragDetected(MouseEvent event) {
-
-        // create new clone
+        // create a new clone if cloneable.
         assert getOnCloneCreated() != null;
         try {
             if (!isCloneable()) {
@@ -78,20 +75,17 @@ public class RotateImageOpUIElement extends OperatorUIElement<Button, AnchorPane
         content.put(ANY_NODE, "operation");
         dragboard.setContent(content);
         event.consume();
-
     }
 
     /**
      * Custom clone method to create a clone from the
      * dragged UI element.
      *
-     * @return - a cloned ReadImageOpUIElement
+     * @return - a cloned ReadImageOpUIElement.
      * @throws CloneNotSupportedException x
      */
     public OperatorUIElement<Button, AnchorPane, AnchorPane> clone() throws CloneNotSupportedException {
-
         super.clone();
-
         final OperatorUIElement<Button, AnchorPane, AnchorPane> copy = new RotateImageOpUIElement(
                 this.getOnCloneCreated(),
                 this.getOnDragDone(),
@@ -104,15 +98,13 @@ public class RotateImageOpUIElement extends OperatorUIElement<Button, AnchorPane
         copy.buildNode();
         copy.buildForm();
         copy.populateInformationPane();
-
         return copy;
-
     }
 
     /**
      * Method to be triggered when user clicks on a UI element
      * in the playground.
-     * Usage - this can be used to populate the side pane when needed
+     * Usage - this can be used to populate the side pane when needed.
      */
     public void onClicked() {
         this.uiElementPropertiesPane.setContent(this.getForm());
@@ -121,20 +113,18 @@ public class RotateImageOpUIElement extends OperatorUIElement<Button, AnchorPane
     }
 
     /**
-     * Overridden method which builds an UI element.
+     * Overridden method which builds an UIElement
+     * once it's dragged on to the playground area
+     * to build an openCV pipeline.
      */
     @Override
     public void buildNode() {
-
         final Button button = new Button();
-
         button.setId(getStylingId());
         button.setText(super.getOperatorName());
         button.prefHeight(super.getHeight());
         button.setPrefWidth(super.getWidth());
         button.setOnDragDetected(this::dragDetected);
-
-        // source
 
         button.setOnDragDone((event) -> {
             if (event.isAccepted()) {
@@ -148,17 +138,25 @@ public class RotateImageOpUIElement extends OperatorUIElement<Button, AnchorPane
                 this.onClicked();
             }
         });
-
         setNode(button);
-
     }
 
+    /**
+     * This method builds the UI element related properties
+     * for which allows user to change the property values
+     * before executing the pipeline.
+     */
     @Override
     public void buildForm() {
         RotateImage operator = (RotateImage) RotateImageOpUIElement.this.getOperator();
         setForm(new RotateImgPropertiesForm(operator));
     }
 
+    /**
+     * This method populates the information pane with
+     * UI element related information. So, that user can get a basic idea
+     * what sort of functionality it does.
+     */
     @Override
     public void populateInformationPane() {
         setInformation(new InformationContainerView(Information.ROTATE_IMAGE.OP_INFO));
