@@ -1,11 +1,14 @@
-package com.imagelab.components;
+package com.imagelab.components.geotransformation;
 
+import com.imagelab.components.Draggable;
+import com.imagelab.components.OperatorUIElement;
 import com.imagelab.components.events.OnUIElementCloneCreated;
 import com.imagelab.components.events.OnUIElementDragDone;
-import com.imagelab.operators.WriteImage;
+import com.imagelab.operators.geotransformation.RotateImage;
+import com.imagelab.utils.Constants;
 import com.imagelab.utils.Information;
 import com.imagelab.views.InformationContainerView;
-import com.imagelab.views.forms.WriteImgPropertiesForm;
+import com.imagelab.views.forms.RotateImgPropertiesForm;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.ClipboardContent;
@@ -20,25 +23,25 @@ import static javafx.scene.input.TransferMode.MOVE;
  * Class which builds the Read image operation
  * related UI element
  */
-public class WriteImageOpUIElement extends OperatorUIElement<Button, AnchorPane, AnchorPane> implements Draggable, Cloneable {
+public class RotateImageOpUIElement extends OperatorUIElement<Button, AnchorPane, AnchorPane> implements Draggable, Cloneable {
 
     private final ScrollPane uiElementPropertiesPane;
     private final ScrollPane informationScrollPane;
 
-    public WriteImageOpUIElement(OnUIElementCloneCreated onCloneCreated,
-                                 OnUIElementDragDone onDragDone,
-                                 ScrollPane uiElementPropertiesPane,
-                                 ScrollPane informationScrollPane
+    public RotateImageOpUIElement(OnUIElementCloneCreated onCloneCreated,
+                                  OnUIElementDragDone onDragDone,
+                                  ScrollPane uiElementPropertiesPane,
+                                  ScrollPane informationScrollPane
     ) {
         super(
-                new WriteImage(), // To invoke openCV related logic
-                WriteImage.class.getCanonicalName(),
-                WriteImage.class.getSimpleName(),
+                new RotateImage(), // To invoke openCV related logic
+                RotateImage.class.getCanonicalName(),
+                RotateImage.class.getSimpleName(),
                 onCloneCreated,
                 onDragDone,
-                "writeImage",
-                100d,
-                60d,
+                "rotateImage",
+                Constants.OPERATOR_UI_ELEMENT.WIDTH,
+                Constants.OPERATOR_UI_ELEMENT.HEIGHT,
                 true,
                 true,
                 false
@@ -89,7 +92,7 @@ public class WriteImageOpUIElement extends OperatorUIElement<Button, AnchorPane,
 
         super.clone();
 
-        final OperatorUIElement<Button, AnchorPane, AnchorPane> copy = new WriteImageOpUIElement(
+        final OperatorUIElement<Button, AnchorPane, AnchorPane> copy = new RotateImageOpUIElement(
                 this.getOnCloneCreated(),
                 this.getOnDragDone(),
                 this.uiElementPropertiesPane,
@@ -108,8 +111,7 @@ public class WriteImageOpUIElement extends OperatorUIElement<Button, AnchorPane,
 
     /**
      * Method to be triggered when user clicks on a UI element
-     * in the build pane.
-     * <p>
+     * in the playground.
      * Usage - this can be used to populate the side pane when needed
      */
     public void onClicked() {
@@ -153,13 +155,12 @@ public class WriteImageOpUIElement extends OperatorUIElement<Button, AnchorPane,
 
     @Override
     public void buildForm() {
-        WriteImage operator = (WriteImage) WriteImageOpUIElement.this.getOperator();
-        setForm(new WriteImgPropertiesForm(operator));
+        RotateImage operator = (RotateImage) RotateImageOpUIElement.this.getOperator();
+        setForm(new RotateImgPropertiesForm(operator));
     }
 
     @Override
     public void populateInformationPane() {
-        setInformation(new InformationContainerView(Information.WRITE_IMAGE.OP_INFO));
+        setInformation(new InformationContainerView(Information.ROTATE_IMAGE.OP_INFO));
     }
-
 }

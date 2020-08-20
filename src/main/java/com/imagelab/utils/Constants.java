@@ -22,4 +22,10 @@ public final class Constants {
     //File Paths or URLs
     public static final String STYLESHEET_PATH = "/com/imagelab/style.css";
 
+    //Operator UI element related values
+    public static final class OPERATOR_UI_ELEMENT {
+        public static final double HEIGHT = 60.0;
+        public static final double WIDTH = 150.0;
+    }
+
 }

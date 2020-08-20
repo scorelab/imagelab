@@ -1,5 +1,6 @@
-package com.imagelab.operators;
+package com.imagelab.operators.basic;
 
+import com.imagelab.operators.OpenCVOperator;
 import org.opencv.core.Mat;
 import java.util.HashSet;
 import java.util.Set;

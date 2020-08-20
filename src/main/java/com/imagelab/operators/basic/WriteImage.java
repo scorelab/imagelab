@@ -1,5 +1,7 @@
-package com.imagelab.operators;
+package com.imagelab.operators.basic;
 
+import com.imagelab.operators.OpenCVOperator;
+import com.imagelab.operators.geotransformation.RotateImage;
 import org.opencv.core.Mat;
 
 import java.util.HashSet;

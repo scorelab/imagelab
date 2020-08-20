@@ -1,8 +1,11 @@
-package com.imagelab.components;
+package com.imagelab.components.basic;
 
+import com.imagelab.components.Draggable;
+import com.imagelab.components.OperatorUIElement;
 import com.imagelab.components.events.OnUIElementCloneCreated;
 import com.imagelab.components.events.OnUIElementDragDone;
-import com.imagelab.operators.ReadImage;
+import com.imagelab.operators.basic.ReadImage;
+import com.imagelab.utils.Constants;
 import com.imagelab.utils.Information;
 import com.imagelab.views.InformationContainerView;
 import com.imagelab.views.forms.ReadImgPropertiesForm;
@@ -43,8 +46,8 @@ public class ReadImageOpUIElement extends OperatorUIElement<Button, AnchorPane, 
                 onCloneCreated,
                 onDragDone,
                 "readImage",
-                100d,
-                60d,
+                Constants.OPERATOR_UI_ELEMENT.WIDTH,
+                Constants.OPERATOR_UI_ELEMENT.HEIGHT,
                 true,
                 true,
                 false
@@ -113,8 +116,7 @@ public class ReadImageOpUIElement extends OperatorUIElement<Button, AnchorPane, 
 
     /**
      * Method to be triggered when user clicks on a UI element
-     * in the build pane.
-     * <p>
+     * in the playground.
      * Usage - this can be used to populate the side pane when needed
      */
     public void onClicked() {
@@ -128,9 +130,7 @@ public class ReadImageOpUIElement extends OperatorUIElement<Button, AnchorPane, 
      */
     @Override
     public void buildNode() {
-
         final Button button = new Button();
-
         button.setId(getStylingId());
         button.setText(super.getOperatorName());
         button.prefHeight(super.getHeight());

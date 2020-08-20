@@ -1,6 +1,6 @@
 package com.imagelab.views.forms;
 
-import com.imagelab.operators.RotateImage;
+import com.imagelab.operators.geotransformation.RotateImage;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;

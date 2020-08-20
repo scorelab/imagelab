@@ -1,6 +1,6 @@
 package com.imagelab.views.forms;
 
-import com.imagelab.operators.ReadImage;
+import com.imagelab.operators.basic.ReadImage;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;

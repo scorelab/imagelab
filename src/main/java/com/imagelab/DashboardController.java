@@ -1,13 +1,15 @@
 package com.imagelab;
 
-import com.imagelab.components.OperatorUIElement;
-import com.imagelab.components.ReadImageOpUIElement;
-import com.imagelab.components.RotateImageOpUIElement;
-import com.imagelab.components.WriteImageOpUIElement;
+import com.imagelab.components.*;
+import com.imagelab.components.basic.ReadImageOpUIElement;
+import com.imagelab.components.basic.WriteImageOpUIElement;
 import com.imagelab.components.events.OnUIElementCloneCreated;
 import com.imagelab.components.events.OnUIElementDragDone;
+import com.imagelab.components.geotransformation.RotateImageOpUIElement;
+import com.imagelab.components.imageconversion.ConvertToGrayOpUIElement;
+import com.imagelab.components.miscellaneous.CannyEdgeDetectOpUIElement;
 import com.imagelab.operators.OpenCVOperator;
-import com.imagelab.operators.ReadImage;
+import com.imagelab.operators.basic.ReadImage;
 import com.imagelab.utils.Utilities;
 import com.imagelab.views.ProcessedImageView;
 import javafx.event.ActionEvent;
@@ -37,11 +39,39 @@ import static com.imagelab.utils.Constants.ANY_NODE;
  */
 public class DashboardController implements Initializable {
 
-    private final Stack<OperatorUIElement<Node, Node, Node>> appliedOperators;
+
+    private final Stack<OperatorUIElement<Node, Node, Node>> appliedOperators; //Stack which holds all the UI elements dragged and dropped into the playground.
+    private OperatorUIElement<Node, Node, Node> curApplyingOpUIElement; //To capture the latest applied operator to the playground.
+    private double dropX, dropY; //To capture mouse position of the user.
+
+    /**
+     * playground: : the pane where users build the pipeline by
+     * dragging and dropping operator ui elements.
+     */
     @FXML
     private Pane playground;
+
+    /**
+     * Operator Containers
+     * <p>
+     * basicOperatorsContainer - contains - ReadImage, WriteImage.
+     * geoTransformationOperatorsContainer contains - RotateImage, Affine Transformation, Scaling, Color Maps.
+     * imageConversionsOperatorsContainer - contains - ConvertToGrayscale, ColoredToBinary, GrayScaleToBinary.
+     * drawingOperatorsContainer - contains - DrawLine, DrawCircle, DrawRectangle, DrawEllipse, DrawPolyline.
+     * miscellaneousOperatorsContainer - contains - CannyEdgeDetection
+     */
     @FXML
-    private VBox operatorsContainer;
+    private VBox basicOperatorsContainer;
+    @FXML
+    private VBox geoTransformationOperatorsContainer;
+    @FXML
+    private VBox imageConversionsOperatorsContainer;
+    @FXML
+    private VBox drawingOperatorsContainer;
+    @FXML
+    private VBox miscellaneousOperatorsContainer;
+
+
     @FXML
     private AnchorPane previewPane;
 
@@ -51,11 +81,6 @@ public class DashboardController implements Initializable {
 
     @FXML
     private ScrollPane informationScrollPane;
-
-    private OperatorUIElement<Node, Node, Node> curApplyingOpUIElement;
-
-    //To capture mouse position of the user
-    private double dropX, dropY;
 
     public DashboardController() {
         this.appliedOperators = new Stack<>();
@@ -71,7 +96,7 @@ public class DashboardController implements Initializable {
         }
 
         //Displaying the processed image in the preview pane
-        WritableImage writableImage = Utilities.loadImage(image);
+        WritableImage writableImage = Utilities.loadImage(image, ".jpg");
         ProcessedImageView processedImage = new ProcessedImageView(writableImage);
         previewPane.getChildren().addAll(processedImage);
     }
@@ -184,41 +209,84 @@ public class DashboardController implements Initializable {
             this.curApplyingOpUIElement = null;
         };
 
+        // basicOperatorsContainer
+        basicOperatorsContainer.setSpacing(15);
+        // basicOperatorsContainer.setAlignment(Pos.TOP_CENTER);
+        basicOperatorsContainer.setLayoutY(20);
+        basicOperatorsContainer.setLayoutX(20);
 
-        operatorsContainer.setSpacing(15);
-
-        // Create the Operator UI Elements
-
-        // Initiating read image operation related UI element
-        ReadImageOpUIElement readImageOpUIElement = new ReadImageOpUIElement(
+        ReadImageOpUIElement readImageOpUIElement = new ReadImageOpUIElement( // Initiating readImageOpUIElement
                 anyCloneCreated,
                 anyElementDragDone,
                 uiElementPropertiesPane,
                 informationScrollPane
         );
-
-        RotateImageOpUIElement rotateImageOpUIElement = new RotateImageOpUIElement(
-                anyCloneCreated,
-                anyElementDragDone,
-                uiElementPropertiesPane,
-                informationScrollPane
-        );
-
-        WriteImageOpUIElement writeImageOpUIElement = new WriteImageOpUIElement(
+        WriteImageOpUIElement writeImageOpUIElement = new WriteImageOpUIElement( // Initiating writeImageOpUIElement
                 anyCloneCreated,
                 anyElementDragDone,
                 uiElementPropertiesPane,
                 informationScrollPane
         );
         readImageOpUIElement.buildNode();
-        rotateImageOpUIElement.buildNode();
         writeImageOpUIElement.buildNode();
 
-        // Populating or adding created UI elements to left operators panel
-        operatorsContainer.getChildren().addAll(
+        basicOperatorsContainer.getChildren().addAll(  // Populating basicOperatorsContainer
                 readImageOpUIElement.getNode(),
-                rotateImageOpUIElement.getNode(),
                 writeImageOpUIElement.getNode()
+        );
+
+        // geoTransformationOperatorsContainer
+        geoTransformationOperatorsContainer.setSpacing(15);
+        // imageConversionsOperatorsContainer.setAlignment(Pos.TOP_CENTER);
+        geoTransformationOperatorsContainer.setLayoutY(20);
+        geoTransformationOperatorsContainer.setLayoutX(20);
+
+        RotateImageOpUIElement rotateImageOpUIElement = new RotateImageOpUIElement( // Initiating rotateImageOpUIElement
+                anyCloneCreated,
+                anyElementDragDone,
+                uiElementPropertiesPane,
+                informationScrollPane
+        );
+        rotateImageOpUIElement.buildNode();
+
+        geoTransformationOperatorsContainer.getChildren().addAll( // Populating geoTransformationOperatorsContainer
+                rotateImageOpUIElement.getNode()
+        );
+
+        // imageConversionsOperatorsContainer
+        imageConversionsOperatorsContainer.setSpacing(15);
+        // imageConversionsOperatorsContainer.setAlignment(Pos.TOP_CENTER);
+        imageConversionsOperatorsContainer.setLayoutY(20);
+        imageConversionsOperatorsContainer.setLayoutX(20);
+
+        ConvertToGrayOpUIElement convertToGrayOpUIElement = new ConvertToGrayOpUIElement( // Initiating convertToGrayOpUIElement
+                anyCloneCreated,
+                anyElementDragDone,
+                uiElementPropertiesPane,
+                informationScrollPane
+        );
+        convertToGrayOpUIElement.buildNode();
+
+        imageConversionsOperatorsContainer.getChildren().addAll( // Populating imageConversionsOperatorsContainer
+                convertToGrayOpUIElement.getNode()
+        );
+
+        // miscellaneousOperatorsContainer
+        miscellaneousOperatorsContainer.setSpacing(15);
+        // imageConversionsOperatorsContainer.setAlignment(Pos.TOP_CENTER);
+        miscellaneousOperatorsContainer.setLayoutY(20);
+        miscellaneousOperatorsContainer.setLayoutX(20);
+
+        CannyEdgeDetectOpUIElement cannyEdgeDetectOpUIElement = new CannyEdgeDetectOpUIElement( // Initiating cannyEdgeDetectOpUIElement
+                anyCloneCreated,
+                anyElementDragDone,
+                uiElementPropertiesPane,
+                informationScrollPane
+        );
+        cannyEdgeDetectOpUIElement.buildNode();
+
+        miscellaneousOperatorsContainer.getChildren().addAll( // Populating miscellaneousOperatorsContainer
+                cannyEdgeDetectOpUIElement.getNode()
         );
 
     }
