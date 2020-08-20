@@ -1,14 +1,15 @@
-package com.imagelab.components;
+package com.imagelab.components.imageconversion;
 
+import com.imagelab.components.Draggable;
+import com.imagelab.components.OperatorUIElement;
 import com.imagelab.components.events.OnUIElementCloneCreated;
 import com.imagelab.components.events.OnUIElementDragDone;
-import com.imagelab.operators.RotateImage;
-import com.imagelab.utils.Information;
-import com.imagelab.views.InformationContainerView;
-import com.imagelab.views.forms.RotateImgPropertiesForm;
+import com.imagelab.operators.imageconversion.ConvertToGrayscale;
+import com.imagelab.utils.Constants;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -16,29 +17,26 @@ import javafx.scene.layout.AnchorPane;
 import static com.imagelab.utils.Constants.ANY_NODE;
 import static javafx.scene.input.TransferMode.MOVE;
 
-/**
- * Class which builds the Read image operation
- * related UI element
- */
-public class RotateImageOpUIElement extends OperatorUIElement<Button, AnchorPane, AnchorPane> implements Draggable, Cloneable {
+public class ConvertToGrayOpUIElement extends OperatorUIElement<Button, AnchorPane, AnchorPane> implements Draggable, Cloneable {
 
     private final ScrollPane uiElementPropertiesPane;
     private final ScrollPane informationScrollPane;
 
-    public RotateImageOpUIElement(OnUIElementCloneCreated onCloneCreated,
-                                  OnUIElementDragDone onDragDone,
-                                  ScrollPane uiElementPropertiesPane,
-                                  ScrollPane informationScrollPane
+    public ConvertToGrayOpUIElement(
+            OnUIElementCloneCreated onCloneCreated,
+            OnUIElementDragDone onDragDone,
+            ScrollPane uiElementPropertiesPane,
+            ScrollPane informationScrollPane
     ) {
         super(
-                new RotateImage(), // To invoke openCV related logic
-                RotateImage.class.getCanonicalName(),
-                RotateImage.class.getSimpleName(),
+                new ConvertToGrayscale(), // To invoke openCV related logic
+                ConvertToGrayscale.class.getCanonicalName(),
+                ConvertToGrayscale.class.getSimpleName(),
                 onCloneCreated,
                 onDragDone,
-                "rotateImage",
-                100d,
-                60d,
+                "convertToGrayScale",
+                Constants.OPERATOR_UI_ELEMENT.WIDTH,
+                Constants.OPERATOR_UI_ELEMENT.HEIGHT,
                 true,
                 true,
                 false
@@ -46,7 +44,6 @@ public class RotateImageOpUIElement extends OperatorUIElement<Button, AnchorPane
         this.uiElementPropertiesPane = uiElementPropertiesPane;
         this.informationScrollPane = informationScrollPane;
     }
-
 
     /**
      * Overridden method from the draggable interface to
@@ -56,7 +53,6 @@ public class RotateImageOpUIElement extends OperatorUIElement<Button, AnchorPane
      */
     @Override
     public void dragDetected(MouseEvent event) {
-
         // create new clone
         assert getOnCloneCreated() != null;
         try {
@@ -75,7 +71,6 @@ public class RotateImageOpUIElement extends OperatorUIElement<Button, AnchorPane
         content.put(ANY_NODE, "operation");
         dragboard.setContent(content);
         event.consume();
-
     }
 
     /**
@@ -89,7 +84,7 @@ public class RotateImageOpUIElement extends OperatorUIElement<Button, AnchorPane
 
         super.clone();
 
-        final OperatorUIElement<Button, AnchorPane, AnchorPane> copy = new RotateImageOpUIElement(
+        final OperatorUIElement<Button, AnchorPane, AnchorPane> copy = new ConvertToGrayOpUIElement(
                 this.getOnCloneCreated(),
                 this.getOnDragDone(),
                 this.uiElementPropertiesPane,
@@ -108,24 +103,17 @@ public class RotateImageOpUIElement extends OperatorUIElement<Button, AnchorPane
 
     /**
      * Method to be triggered when user clicks on a UI element
-     * in the build pane.
-     * <p>
+     * in the playground.
      * Usage - this can be used to populate the side pane when needed
      */
     public void onClicked() {
         this.uiElementPropertiesPane.setContent(this.getForm());
         this.informationScrollPane.setContent(this.getInformation());
-        System.out.println("now this element is enabled");
     }
 
-    /**
-     * Overridden method which builds an UI element.
-     */
     @Override
     public void buildNode() {
-
         final Button button = new Button();
-
         button.setId(getStylingId());
         button.setText(super.getOperatorName());
         button.prefHeight(super.getHeight());
@@ -133,8 +121,7 @@ public class RotateImageOpUIElement extends OperatorUIElement<Button, AnchorPane
         button.setOnDragDetected(this::dragDetected);
 
         // source
-
-        button.setOnDragDone((event) -> {
+        button.setOnDragDone((DragEvent event) -> {
             if (event.isAccepted()) {
                 getOnDragDone().accept(this);
             } else {
@@ -148,17 +135,15 @@ public class RotateImageOpUIElement extends OperatorUIElement<Button, AnchorPane
         });
 
         setNode(button);
-
     }
 
     @Override
     public void buildForm() {
-        RotateImage operator = (RotateImage) RotateImageOpUIElement.this.getOperator();
-        setForm(new RotateImgPropertiesForm(operator));
+        ConvertToGrayscale operator = (ConvertToGrayscale) ConvertToGrayOpUIElement.this.getOperator();
     }
 
     @Override
     public void populateInformationPane() {
-        setInformation(new InformationContainerView(Information.ROTATE_IMAGE.OP_INFO));
+        ConvertToGrayscale operator = (ConvertToGrayscale) ConvertToGrayOpUIElement.this.getOperator();
     }
 }

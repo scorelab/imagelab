@@ -1,5 +1,8 @@
-package com.imagelab.operators;
+package com.imagelab.operators.geotransformation;
 
+import com.imagelab.operators.OpenCVOperator;
+import com.imagelab.operators.basic.ReadImage;
+import com.imagelab.operators.basic.WriteImage;
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
 import org.opencv.core.Size;
@@ -7,9 +10,6 @@ import org.opencv.imgproc.Imgproc;
 
 import java.util.HashSet;
 import java.util.Set;
-
-import static org.opencv.imgcodecs.Imgcodecs.imread;
-import static org.opencv.imgcodecs.Imgcodecs.imwrite;
 
 public class RotateImage extends OpenCVOperator {
 

@@ -38,27 +38,212 @@
                             <children>
                                 <Accordion prefHeight="678.0" prefWidth="278.0">
                                     <panes>
-                                        <TitledPane animated="false" text="Operations">
+                                        <TitledPane animated="false" text="Basic Operations">
                                             <content>
                                                 <AnchorPane fx:id="operationsPane" minHeight="0.0" minWidth="0.0"
                                                             prefHeight="180.0" prefWidth="200.0">
                                                     <children>
-                                                        <VBox fx:id="operatorsContainer" layoutX="12.0" layoutY="14.0"
-                                                              prefHeight="571.0" prefWidth="222.0"/>
+                                                        <ScrollPane prefHeight="597.0" prefWidth="246.0">
+                                                            <content>
+                                                                <AnchorPane minHeight="0.0" minWidth="0.0"
+                                                                            prefHeight="741.0" prefWidth="222.0">
+                                                                    <children>
+                                                                        <VBox fx:id="basicOperatorsContainer"
+                                                                              prefHeight="571.0" prefWidth="222.0"/>
+                                                                    </children>
+                                                                </AnchorPane>
+                                                            </content>
+                                                        </ScrollPane>
                                                     </children>
                                                 </AnchorPane>
                                             </content>
                                         </TitledPane>
-                                        <TitledPane animated="false" text="Controllers">
+                                        <TitledPane animated="false" layoutX="10.0" layoutY="10.0"
+                                                    text="Geometric Transformations">
                                             <content>
-                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0"
-                                                            prefWidth="200.0"/>
+                                                <AnchorPane fx:id="operationsPane3" minHeight="0.0" minWidth="0.0"
+                                                            prefHeight="180.0" prefWidth="200.0">
+                                                    <children>
+                                                        <ScrollPane prefHeight="597.0" prefWidth="246.0">
+                                                            <content>
+                                                                <AnchorPane minHeight="0.0" minWidth="0.0"
+                                                                            prefHeight="741.0" prefWidth="222.0">
+                                                                    <children>
+                                                                        <VBox fx:id="geoTransformationOperatorsContainer"
+                                                                              prefHeight="571.0" prefWidth="222.0"/>
+                                                                    </children>
+                                                                </AnchorPane>
+                                                            </content>
+                                                        </ScrollPane>
+                                                    </children>
+                                                </AnchorPane>
                                             </content>
                                         </TitledPane>
-                                        <TitledPane animated="false" prefHeight="604.0" prefWidth="278.0" text="Other">
+                                        <TitledPane animated="false" text="Image Conversions">
                                             <content>
-                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="591.0"
-                                                            prefWidth="276.0"/>
+                                                <AnchorPane fx:id="operationsPane1" minHeight="0.0" minWidth="0.0"
+                                                            prefHeight="180.0" prefWidth="200.0">
+                                                    <children>
+                                                        <ScrollPane prefHeight="598.0" prefWidth="246.0">
+                                                            <content>
+                                                                <AnchorPane minHeight="0.0" minWidth="0.0"
+                                                                            prefHeight="741.0" prefWidth="222.0">
+                                                                    <children>
+                                                                        <VBox fx:id="imageConversionsOperatorsContainer"
+                                                                              prefHeight="595.0" prefWidth="222.0"/>
+                                                                    </children>
+                                                                </AnchorPane>
+                                                            </content>
+                                                        </ScrollPane>
+                                                    </children>
+                                                </AnchorPane>
+                                            </content>
+                                        </TitledPane>
+                                        <TitledPane animated="false" prefHeight="604.0" prefWidth="278.0"
+                                                    text="Drawing Operations">
+                                            <content>
+                                                <AnchorPane fx:id="operationsPane2" minHeight="0.0" minWidth="0.0"
+                                                            prefHeight="180.0" prefWidth="200.0">
+                                                    <children>
+                                                        <ScrollPane prefHeight="597.0" prefWidth="246.0">
+                                                            <content>
+                                                                <AnchorPane minHeight="0.0" minWidth="0.0"
+                                                                            prefHeight="741.0" prefWidth="222.0">
+                                                                    <children>
+                                                                        <VBox fx:id="drawingOperatorsContainer"
+                                                                              prefHeight="596.0" prefWidth="222.0"/>
+                                                                    </children>
+                                                                </AnchorPane>
+                                                            </content>
+                                                        </ScrollPane>
+                                                    </children>
+                                                </AnchorPane>
+                                            </content>
+                                        </TitledPane>
+                                        <TitledPane animated="false" layoutX="10.0" layoutY="10.0"
+                                                    text="Bluring Operations">
+                                            <content>
+                                                <AnchorPane fx:id="operationsPane31" minHeight="0.0" minWidth="0.0"
+                                                            prefHeight="180.0" prefWidth="200.0">
+                                                    <children>
+                                                        <ScrollPane prefHeight="597.0" prefWidth="246.0">
+                                                            <content>
+                                                                <AnchorPane minHeight="0.0" minWidth="0.0"
+                                                                            prefHeight="741.0" prefWidth="222.0">
+                                                                    <children>
+                                                                        <VBox fx:id="bluringOperatorsContainer"
+                                                                              prefHeight="571.0" prefWidth="222.0"/>
+                                                                    </children>
+                                                                </AnchorPane>
+                                                            </content>
+                                                        </ScrollPane>
+                                                    </children>
+                                                </AnchorPane>
+                                            </content>
+                                        </TitledPane>
+                                        <TitledPane animated="false" layoutX="10.0" layoutY="661.0"
+                                                    text="Filtering Operations">
+                                            <content>
+                                                <AnchorPane fx:id="operationsPane311" minHeight="0.0" minWidth="0.0"
+                                                            prefHeight="180.0" prefWidth="200.0">
+                                                    <children>
+                                                        <ScrollPane prefHeight="597.0" prefWidth="246.0">
+                                                            <content>
+                                                                <AnchorPane minHeight="0.0" minWidth="0.0"
+                                                                            prefHeight="741.0" prefWidth="222.0">
+                                                                    <children>
+                                                                        <VBox fx:id="filteringOperatorsContainer"
+                                                                              prefHeight="571.0" prefWidth="222.0"/>
+                                                                    </children>
+                                                                </AnchorPane>
+                                                            </content>
+                                                        </ScrollPane>
+                                                    </children>
+                                                </AnchorPane>
+                                            </content>
+                                        </TitledPane>
+                                        <TitledPane animated="false" layoutX="10.0" layoutY="118.0"
+                                                    text="Thresholding Operations">
+                                            <content>
+                                                <AnchorPane fx:id="operationsPane3111" minHeight="0.0" minWidth="0.0"
+                                                            prefHeight="180.0" prefWidth="200.0">
+                                                    <children>
+                                                        <ScrollPane prefHeight="597.0" prefWidth="246.0">
+                                                            <content>
+                                                                <AnchorPane minHeight="0.0" minWidth="0.0"
+                                                                            prefHeight="741.0" prefWidth="222.0">
+                                                                    <children>
+                                                                        <VBox fx:id="thresholdingOperatorsContainer"
+                                                                              prefHeight="571.0" prefWidth="222.0"/>
+                                                                    </children>
+                                                                </AnchorPane>
+                                                            </content>
+                                                        </ScrollPane>
+                                                    </children>
+                                                </AnchorPane>
+                                            </content>
+                                        </TitledPane>
+                                        <TitledPane animated="false" layoutX="10.0" layoutY="145.0"
+                                                    text="Sobel Derivatives">
+                                            <content>
+                                                <AnchorPane fx:id="operationsPane31111" minHeight="0.0" minWidth="0.0"
+                                                            prefHeight="180.0" prefWidth="200.0">
+                                                    <children>
+                                                        <ScrollPane prefHeight="597.0" prefWidth="246.0">
+                                                            <content>
+                                                                <AnchorPane minHeight="0.0" minWidth="0.0"
+                                                                            prefHeight="741.0" prefWidth="222.0">
+                                                                    <children>
+                                                                        <VBox fx:id="sobelDOperatorsContainer"
+                                                                              prefHeight="571.0" prefWidth="222.0"/>
+                                                                    </children>
+                                                                </AnchorPane>
+                                                            </content>
+                                                        </ScrollPane>
+                                                    </children>
+                                                </AnchorPane>
+                                            </content>
+                                        </TitledPane>
+                                        <TitledPane animated="false" layoutX="10.0" layoutY="172.0"
+                                                    text="Transformation Operations">
+                                            <content>
+                                                <AnchorPane fx:id="operationsPane311111" minHeight="0.0" minWidth="0.0"
+                                                            prefHeight="180.0" prefWidth="200.0">
+                                                    <children>
+                                                        <ScrollPane prefHeight="597.0" prefWidth="246.0">
+                                                            <content>
+                                                                <AnchorPane minHeight="0.0" minWidth="0.0"
+                                                                            prefHeight="741.0" prefWidth="222.0">
+                                                                    <children>
+                                                                        <VBox fx:id="transformationOperatorsContainer"
+                                                                              prefHeight="571.0" prefWidth="222.0"/>
+                                                                    </children>
+                                                                </AnchorPane>
+                                                            </content>
+                                                        </ScrollPane>
+                                                    </children>
+                                                </AnchorPane>
+                                            </content>
+                                        </TitledPane>
+                                        <TitledPane animated="false" layoutX="10.0" layoutY="226.0"
+                                                    text="Miscellaneous Operations">
+                                            <content>
+                                                <AnchorPane fx:id="operationsPane3111111" minHeight="0.0" minWidth="0.0"
+                                                            prefHeight="180.0" prefWidth="200.0">
+                                                    <children>
+                                                        <ScrollPane prefHeight="597.0" prefWidth="246.0">
+                                                            <content>
+                                                                <AnchorPane minHeight="0.0" minWidth="0.0"
+                                                                            prefHeight="741.0" prefWidth="222.0">
+                                                                    <children>
+                                                                        <VBox fx:id="miscellaneousOperatorsContainer"
+                                                                              prefHeight="571.0" prefWidth="222.0"/>
+                                                                    </children>
+                                                                </AnchorPane>
+                                                            </content>
+                                                        </ScrollPane>
+                                                    </children>
+                                                </AnchorPane>
                                             </content>
                                         </TitledPane>
                                     </panes>

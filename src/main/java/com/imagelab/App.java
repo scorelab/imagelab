@@ -1,6 +1,6 @@
 package com.imagelab;
 
-import com.imagelab.operators.ReadImage;
+import com.imagelab.operators.basic.ReadImage;
 import com.imagelab.utils.Constants;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
