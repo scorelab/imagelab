@@ -21,15 +21,10 @@ import static com.imagelab.utils.Constants.ANY_NODE;
 import static javafx.scene.input.TransferMode.MOVE;
 
 /**
- * Class which builds the Read image operation
- * related UI element
+ * Class which builds the read image operation
+ * related UI element.
  */
 public class ReadImageOpUIElement extends OperatorUIElement<Button, AnchorPane, AnchorPane> implements Draggable, Cloneable {
-
-    // Associate an control panel for each of the operator UI elements.
-    // that way we can set / hide the control panel content directly inside
-    // the operator element.
-
     private final ScrollPane uiElementPropertiesPane;
     private final ScrollPane informationScrollPane;
 
@@ -40,7 +35,7 @@ public class ReadImageOpUIElement extends OperatorUIElement<Button, AnchorPane, 
             ScrollPane informationScrollPane
     ) {
         super(
-                new ReadImage(), // To invoke openCV related logic
+                new ReadImage(), // To invoke openCV related logic.
                 ReadImage.class.getCanonicalName(),
                 ReadImage.class.getSimpleName(),
                 onCloneCreated,
@@ -56,17 +51,15 @@ public class ReadImageOpUIElement extends OperatorUIElement<Button, AnchorPane, 
         this.informationScrollPane = informationScrollPane;
     }
 
-
     /**
      * Overridden method from the draggable interface to
-     * detect if the user is dragging and UI element
+     * detect if the user is dragging and UI element.
      *
-     * @param event - Mouse event at the time of element being dragged
+     * @param event - Mouse event at the time of element being dragged.
      */
     @Override
     public void dragDetected(MouseEvent event) {
-
-        // create new clone
+        // create a new clone if cloneable.
         assert getOnCloneCreated() != null;
         try {
             if (!isCloneable()) {
@@ -90,13 +83,11 @@ public class ReadImageOpUIElement extends OperatorUIElement<Button, AnchorPane, 
      * Custom clone method to create a clone from the
      * dragged UI element.
      *
-     * @return - a cloned ReadImageOpUIElement
+     * @return - a cloned ReadImageOpUIElement.
      * @throws CloneNotSupportedException x
      */
     public OperatorUIElement<Button, AnchorPane, AnchorPane> clone() throws CloneNotSupportedException {
-
         super.clone();
-
         final OperatorUIElement<Button, AnchorPane, AnchorPane> copy = new ReadImageOpUIElement(
                 this.getOnCloneCreated(),
                 this.getOnDragDone(),
@@ -109,24 +100,24 @@ public class ReadImageOpUIElement extends OperatorUIElement<Button, AnchorPane, 
         copy.buildNode();
         copy.buildForm();
         copy.populateInformationPane();
-
         return copy;
-
     }
 
     /**
      * Method to be triggered when user clicks on a UI element
      * in the playground.
-     * Usage - this can be used to populate the side pane when needed
+     * Usage - this can be used to populate the side pane when needed.
      */
     public void onClicked() {
         this.uiElementPropertiesPane.setContent(this.getForm());
         this.informationScrollPane.setContent(this.getInformation());
-        System.out.println("now this element is enabled");
+        System.out.println("Now this element is enabled");
     }
 
     /**
-     * Overridden method which builds an UI element.
+     * Overridden method which builds an UIElement
+     * once it's dragged on to the playground area
+     * to build an openCV pipeline.
      */
     @Override
     public void buildNode() {
@@ -137,7 +128,6 @@ public class ReadImageOpUIElement extends OperatorUIElement<Button, AnchorPane, 
         button.setPrefWidth(super.getWidth());
         button.setOnDragDetected(this::dragDetected);
 
-        // source
         button.setOnDragDone((DragEvent event) -> {
             if (event.isAccepted()) {
                 getOnDragDone().accept(this);
@@ -150,19 +140,27 @@ public class ReadImageOpUIElement extends OperatorUIElement<Button, AnchorPane, 
                 this.onClicked();
             }
         });
-
         setNode(button);
     }
 
+    /**
+     * This method builds the UI element related properties
+     * for which allows user to change the property values
+     * before executing the pipeline.
+     */
     @Override
     public void buildForm() {
         ReadImage operator = (ReadImage) ReadImageOpUIElement.this.getOperator();
         setForm(new ReadImgPropertiesForm(operator));
     }
 
+    /**
+     * This method populates the information pane with
+     * UI element related information. So, that user can get a basic idea
+     * what sort of functionality it does.
+     */
     @Override
     public void populateInformationPane() {
-        ReadImage operator = (ReadImage) ReadImageOpUIElement.this.getOperator();
         setInformation(new InformationContainerView(Information.READ_IMAGE.OP_INFO));
     }
 }

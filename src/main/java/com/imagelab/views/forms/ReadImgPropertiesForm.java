@@ -11,11 +11,13 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+/**
+ * Read image properties form view.
+ */
 public class ReadImgPropertiesForm extends AnchorPane {
     public ReadImgPropertiesForm(ReadImage operator) {
         setPrefSize(224.0, 523.0);
-
-        //Read Image Properties Title
+        //Read Image Properties Title.
         PropertiesFormTitleContainer readImgTitleContainer = new PropertiesFormTitleContainer("Read Image Properties");
 
         Label lblSelectImage = new Label("Select Image");
@@ -34,22 +36,18 @@ public class ReadImgPropertiesForm extends AnchorPane {
             operator.setImageURL(filepath);
             imgURLTextField.setText(filepath);
         };
-
         btnBrowseImage.setOnAction(event);
 
         VBox imageURLContainer = new VBox();
         imageURLContainer.setSpacing(10);
-
         imageURLContainer.getChildren().addAll(lblSelectImage, imgURLTextField, btnBrowseImage);
-
+        //Read image properties container.
         VBox readImgPropertiesContainer = new VBox();
         readImgPropertiesContainer.setPrefSize(205.0, 47.0);
         readImgPropertiesContainer.setLayoutX(14.0);
         readImgPropertiesContainer.setLayoutY(14.0);
         readImgPropertiesContainer.setSpacing(20.0);
         readImgPropertiesContainer.getChildren().addAll(readImgTitleContainer, imageURLContainer);
-
         getChildren().addAll(readImgPropertiesContainer);
     }
-
 }

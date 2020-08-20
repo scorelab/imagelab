@@ -11,8 +11,18 @@ import java.awt.image.BufferedImage;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Operator class which contains the logic related to the
+ * ConvertToGrayscale UI element.
+ */
 public class ConvertToGrayscale extends OpenCVOperator {
-
+    /**
+     * This method validates the acceptable operations before perform
+     * this operation.
+     *
+     * @param previous - previous elements acceptable for the grayScale operation.
+     * @return - true/false.
+     */
     @Override
     public boolean validate(OpenCVOperator previous) {
         if (previous == null) {
@@ -21,12 +31,24 @@ public class ConvertToGrayscale extends OpenCVOperator {
         return allowedOperators().contains(previous.getClass());
     }
 
+    /**
+     * This method execute the openCV logic related to this operator.
+     *
+     * @param image - Mat object need to be processed.
+     * @return - gray scaled image in mat format.
+     */
     @Override
     public Mat compute(Mat image) {
         System.out.println("Performed - Convert to Grayscale");
         return convertToGrayScale(image);
     }
 
+    /**
+     * This method contains the allowed previous elements related to
+     * this openCV operation.
+     *
+     * @return - allowed operation set.
+     */
     @Override
     public Set<Class<?>> allowedOperators() {
         Set<Class<?>> allowed = new HashSet<>();
@@ -36,23 +58,28 @@ public class ConvertToGrayscale extends OpenCVOperator {
         return allowed;
     }
 
+    /**
+     * This method contains the openCV logic to convert an image to a grays.
+     *
+     * @param imageFile - Mat image that needs to be converted to gray.
+     * @return - gray scaled Mat object.
+     */
     private Mat convertToGrayScale(Mat imageFile) {
-        Mat image = new Mat(); //Creating the empty destination matrix
+        Mat image = new Mat(); //Creating the empty destination matrix.
 
-        //Converting the image to grayscale and saving it in the dst matrix
+        //Converting the image to grayscale and saving it in the dst matrix.
         Imgproc.cvtColor(imageFile, image, Imgproc.COLOR_RGB2GRAY);
 
-        //Extracting data from the transformed image (dst)
+        //Extracting data from the transformed image (dst).
         byte[] data1 = new byte[image.rows() * image.cols() * (int) (image.elemSize())];
         image.get(0, 0, data1);
 
-        //Creating Buffered image using the data
+        //Creating Buffered image using the data.
         BufferedImage bufImage = new BufferedImage(image.cols(), image.rows(),
                 BufferedImage.TYPE_BYTE_GRAY);
 
-        //Setting the data elements to the image
+        //Setting the data elements to the image.
         bufImage.getRaster().setDataElements(0, 0, image.cols(), image.rows(), data1);
-
         return image;
     }
 }

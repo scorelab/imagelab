@@ -3,8 +3,10 @@ package com.imagelab.views;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 
+/**
+ * View which is used to populate the output image.
+ */
 public class ProcessedImageView extends ImageView {
-
     public ProcessedImageView(WritableImage image) {
         setImage(image);
         setX(50);
@@ -15,5 +17,4 @@ public class ProcessedImageView extends ImageView {
         setSmooth(true);
         setCache(true);
     }
-
 }

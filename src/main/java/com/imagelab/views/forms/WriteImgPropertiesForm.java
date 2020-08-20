@@ -11,14 +11,16 @@ import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
+/**
+ * Write image properties form view.
+ */
 public class WriteImgPropertiesForm extends AnchorPane {
     public WriteImgPropertiesForm(WriteImage operator) {
         setPrefSize(224.0, 523.0);
-
-        //Write Image Properties Title
+        //Write Image Properties Title.
         PropertiesFormTitleContainer writeImgTitleContainer = new PropertiesFormTitleContainer("Write Image Properties");
 
-        //Saving Image Name
+        //Saving Image Name.
         VBox saveImgNameContainer = new VBox();
         saveImgNameContainer.setPrefWidth(205.0);
         saveImgNameContainer.setSpacing(10);
@@ -30,7 +32,7 @@ public class WriteImgPropertiesForm extends AnchorPane {
 
         saveImgNameContainer.getChildren().addAll(lblSaveImgName, saveImgNameTextField);
 
-        //Saving Image Path
+        //Saving Image Path.
         VBox saveDirPathContainer = new VBox();
         saveImgNameContainer.setPrefWidth(205.0);
         saveDirPathContainer.setSpacing(10);
@@ -58,12 +60,9 @@ public class WriteImgPropertiesForm extends AnchorPane {
                     String defaultDir = "src/main/resources/com/imagelab/images/ProcessedImage.jpg";
                     System.err.println("No directory has been selected");
                     System.out.println("Saving to default directory: " + defaultDir);
-
                 }
-
             }
         };
-
         btnBrowseImage.setOnAction(event);
         saveDirPathContainer.getChildren().addAll(lblSelectSaveDir, saveDirTextField, btnBrowseImage);
 
@@ -73,7 +72,6 @@ public class WriteImgPropertiesForm extends AnchorPane {
         readImgPropertiesContainer.setLayoutY(14);
         readImgPropertiesContainer.setSpacing(20);
         readImgPropertiesContainer.getChildren().addAll(writeImgTitleContainer, saveImgNameContainer, saveDirPathContainer);
-
         getChildren().addAll(readImgPropertiesContainer);
     }
 }

@@ -6,16 +6,15 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+/**
+ * Rotate image properties form view.
+ */
 public class RotateImgPropertiesForm extends AnchorPane {
-
     public RotateImgPropertiesForm(RotateImage operator) {
-
         setPrefSize(224.0, 523.0);
-
-        //Rotation Properties Title
+        //Rotation Properties Title.
         PropertiesFormTitleContainer rotationTitleContainer = new PropertiesFormTitleContainer("Rotate Image Properties");
-
-        //Rotation Angle
+        //Rotation Angle.
         VBox rotationAngleContainer = new VBox();
         rotationAngleContainer.setPrefWidth(205.0);
         rotationAngleContainer.setSpacing(10);
@@ -24,14 +23,13 @@ public class RotateImgPropertiesForm extends AnchorPane {
 
         TextField angleTextField = new TextField(String.valueOf(0.0));
         angleTextField.setPrefSize(205.0, 27.0);
-        //Listener to capture angle value text change
+        //Listener to capture angle value text change.
         angleTextField.textProperty().addListener((observable, oldValue, newValue) -> {
             operator.setAngle(Double.parseDouble(newValue));
         });
-
         rotationAngleContainer.getChildren().addAll(lblRotationAngle, angleTextField);
 
-        //Rotation Scale
+        //Rotation Scale.
         VBox rotationScaleContainer = new VBox();
         rotationScaleContainer.setPrefWidth(205.0);
         rotationScaleContainer.setSpacing(10);
@@ -40,11 +38,10 @@ public class RotateImgPropertiesForm extends AnchorPane {
 
         TextField scaleTextField = new TextField(String.valueOf(0.0));
         scaleTextField.setPrefSize(205, 27);
-        //Listener to capture scale value change
+        //Listener to capture scale value change.
         scaleTextField.textProperty().addListener((observable, oldValue, newValue) -> {
             operator.setScale(Double.parseDouble(newValue));
         });
-
         rotationScaleContainer.getChildren().addAll(lblRotationScale, scaleTextField);
 
         VBox rotationPropertiesContainer = new VBox();
@@ -57,9 +54,6 @@ public class RotateImgPropertiesForm extends AnchorPane {
                 rotationAngleContainer,
                 rotationScaleContainer
         );
-
         getChildren().addAll(rotationPropertiesContainer);
-
     }
-
 }
