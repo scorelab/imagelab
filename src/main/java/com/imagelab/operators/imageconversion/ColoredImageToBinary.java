@@ -18,14 +18,16 @@ public class ColoredImageToBinary extends OpenCVOperator {
              * @return - Operator information and name of the operator.
              */
             public String toString() {
-                return "Convert Grayscale\n\nThis operations allows you to convert your image into a gray image.";
+                return "Color Image to Binary\n\nThis operations allows you to convert your" +
+                        " colored (RGB) images into a binary image. Moreover, you can adjust the" +
+                        "conversion threshold values and the threshold values as well.";
             }
         }
     }
 
     private double thresholdValue;
     private double maxValue;
-    private int thresholdType;
+    private String thresholdType;
 
     /**
      * This method contains the logic which validates the applicable
@@ -50,7 +52,7 @@ public class ColoredImageToBinary extends OpenCVOperator {
      */
     @Override
     public Mat compute(Mat image) {
-        return convertColorToBinary(image, getThresholdValue(), getMaxValue());
+        return convertColorToBinary(image, getThresholdValue(), getMaxValue(), getThresholdType());
     }
 
     /**
@@ -71,11 +73,30 @@ public class ColoredImageToBinary extends OpenCVOperator {
         return allowed;
     }
 
-    private Mat convertColorToBinary(Mat imageFile, Double threshVal, Double maxValue) {
+    /**
+     * This method converts a given mat rgb image to binary image.
+     *
+     * @param imageFile     - mat RGB image.
+     * @param threshVal     - conversion threshold value.
+     * @param maxValue      - conversion threshold maxValue.
+     * @param thresholdType - THRESH_BINARY or THRESH_BINARY_INV
+     * @return - image (binary mat image).
+     */
+    private Mat convertColorToBinary(Mat imageFile, Double threshVal, Double maxValue, String thresholdType) {
         Mat image = new Mat(); //Creating the empty destination matrix.
 
         // Converting to binary image.
-        Imgproc.threshold(imageFile, image, threshVal, maxValue, Imgproc.THRESH_BINARY_INV);
+        switch (thresholdType) {
+            case "THRESH_BINARY":
+                Imgproc.threshold(imageFile, image, threshVal, maxValue, Imgproc.THRESH_BINARY);
+                System.out.println("Selected Thresh Type: THRESH_BINARY");
+                break;
+            case "THRESH_BINARY_INV":
+                Imgproc.threshold(imageFile, image, threshVal, maxValue, Imgproc.THRESH_BINARY_INV);
+                System.out.println("Selected Thresh Type: THRESH_BINARY_INV");
+            default:
+                Imgproc.threshold(imageFile, image, threshVal, maxValue, Imgproc.THRESH_BINARY);
+        }
 
         // Extracting data from the transformed image (dst).
         byte[] data1 = new byte[image.rows() * image.cols() * (int) (image.elemSize())];
@@ -83,6 +104,7 @@ public class ColoredImageToBinary extends OpenCVOperator {
         return image;
     }
 
+    //Getters and setters
     public double getThresholdValue() {
         return thresholdValue;
     }
@@ -99,11 +121,11 @@ public class ColoredImageToBinary extends OpenCVOperator {
         this.maxValue = maxValue;
     }
 
-    public int getThresholdType() {
+    public String getThresholdType() {
         return thresholdType;
     }
 
-    public void setThresholdType(int thresholdType) {
+    public void setThresholdType(String thresholdType) {
         this.thresholdType = thresholdType;
     }
 }
