@@ -7,15 +7,14 @@ import com.imagelab.operators.geotransformation.RotateImage;
 import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
 
-import java.awt.image.BufferedImage;
 import java.util.HashSet;
 import java.util.Set;
 
 /**
  * Operator class which contains the logic related to the
- * ConvertToGrayscale UI element.
+ * image conversion from a grayscale image to a binary.
  */
-public class ConvertToGrayscale extends OpenCVOperator {
+public class GrayscaleToBinary extends OpenCVOperator {
 
     public enum Information {
         OPERATOR_INFO {
@@ -29,11 +28,11 @@ public class ConvertToGrayscale extends OpenCVOperator {
     }
 
     /**
-     * This method validates the acceptable operations before perform
-     * this operation.
+     * This method contains the logic which validates the applicable
+     * openCV operations for a particular openCV operator.
      *
-     * @param previous - previous elements acceptable for the grayScale operation.
-     * @return - true/false.
+     * @param previous - accepts the previous operator to validate.
+     * @return - whether the received operator is valid or not.
      */
     @Override
     public boolean validate(OpenCVOperator previous) {
@@ -44,22 +43,21 @@ public class ConvertToGrayscale extends OpenCVOperator {
     }
 
     /**
-     * This method execute the openCV logic related to this operator.
+     * This method contains the openCV operator related specific logic.
      *
-     * @param image - Mat object need to be processed.
-     * @return - gray scaled image in mat format.
+     * @param image - accepts the mat object processed from the previous steps.
+     * @return - processed computed Mat obj.
      */
     @Override
     public Mat compute(Mat image) {
-        System.out.println("Performed - Convert to Grayscale");
-        return convertToGrayScale(image);
+        return convertGrayscaleToBinary(image);
     }
 
     /**
-     * This method contains the allowed previous elements related to
-     * this openCV operation.
+     * This method contains the applicable openCV operators for the selected
+     * openCV operator.
      *
-     * @return - allowed operation set.
+     * @return - applicable operators.
      */
     @Override
     public Set<Class<?>> allowedOperators() {
@@ -68,31 +66,19 @@ public class ConvertToGrayscale extends OpenCVOperator {
         allowed.add(RotateImage.class);
         allowed.add(WriteImage.class);
         allowed.add(ConvertToGrayscale.class);
+        allowed.add(GrayscaleToBinary.class);
         return allowed;
     }
 
-    /**
-     * This method contains the openCV logic to convert an image to a grays.
-     *
-     * @param imageFile - Mat image that needs to be converted to gray.
-     * @return - gray scaled Mat object.
-     */
-    private Mat convertToGrayScale(Mat imageFile) {
+    private Mat convertGrayscaleToBinary(Mat imageFile) {
         Mat image = new Mat(); //Creating the empty destination matrix.
 
-        //Converting the image to grayscale and saving it in the dst matrix.
-        Imgproc.cvtColor(imageFile, image, Imgproc.COLOR_RGB2GRAY);
+        // Converting to binary image...
+        Imgproc.threshold(imageFile, image, 200, 500, Imgproc.THRESH_BINARY);
 
-        //Extracting data from the transformed image (dst).
+        // Extracting data from the transformed image (dst)
         byte[] data1 = new byte[image.rows() * image.cols() * (int) (image.elemSize())];
         image.get(0, 0, data1);
-
-        //Creating Buffered image using the data.
-        BufferedImage bufImage = new BufferedImage(image.cols(), image.rows(),
-                BufferedImage.TYPE_BYTE_GRAY);
-
-        //Setting the data elements to the image.
-        bufImage.getRaster().setDataElements(0, 0, image.cols(), image.rows(), data1);
         return image;
     }
 }

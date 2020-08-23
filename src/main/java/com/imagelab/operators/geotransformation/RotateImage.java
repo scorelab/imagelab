@@ -12,11 +12,33 @@ import org.opencv.imgproc.Imgproc;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Rotate image operator class which contains
+ * rotating an image related functionalities.
+ */
 public class RotateImage extends OpenCVOperator {
+    public enum Information {
+        OPERATOR_INFO {
+            /**
+             * @return - Operator information and name of the operator.
+             */
+            public String toString() {
+                return "Rotate Image\n\nThis operator allows you to rotate an image to a specific angle." +
+                        " Moreover you can change angle and scale related to the rotation.";
+            }
+        }
+    }
 
-    private double angle;
-    private double scale;
+    private double angle; // Rotation angle.
+    private double scale; // Rotation scale.
 
+    /**
+     * This method contains the logic which validates the applicable
+     * openCV operations for a particular openCV operator.
+     *
+     * @param previous - accepts the previous operator to validate.
+     * @return - whether the received operator is valid or not.
+     */
     @Override
     public boolean validate(OpenCVOperator previous) {
         if (previous == null) {
@@ -25,10 +47,16 @@ public class RotateImage extends OpenCVOperator {
         return allowedOperators().contains(previous.getClass());
     }
 
+    /**
+     * This method contains the openCV operator related specific logic.
+     *
+     * @param image - accepts the mat object processed from the previous steps.
+     * @return - processed computed Mat obj.
+     */
     @Override
-    public Mat compute(Mat mat) {
+    public Mat compute(Mat image) {
         System.out.println("Image Rotated");
-        return rotateImage(mat, getAngle(), getScale());
+        return rotateImage(image, getAngle(), getScale());
     }
 
     @Override
@@ -42,26 +70,27 @@ public class RotateImage extends OpenCVOperator {
     }
 
     private Mat rotateImage(Mat imageFile, double rotationAngle, double scale) {
-        // Creating an empty matrix to store the result
+        // Creating an empty matrix to store the result.
         Mat image = new Mat();
 
-        // Creating a Point object
+        // Creating a Point object.
         Point point = new Point(300, 200);
 
-        // Creating the transformation matrix M
-        //rotationAngle - 90, scale - 1
+        // Creating the transformation matrix M.
+        //rotationAngle - 90, scale - 1.
         Mat rotationMatrix = Imgproc.getRotationMatrix2D(point, rotationAngle, scale);
 
-        // Creating the object of the class Size
+        // Creating the object of the class Size.
         Size size = new Size(imageFile.cols(), imageFile.cols());
 
-        // Rotating the given image
+        // Rotating the given image.
         Imgproc.warpAffine(imageFile, image, rotationMatrix, size);
 
-        //Rotated Image
+        //Rotated Image.
         return image;
     }
 
+    //Getters and setters.
     public double getAngle() {
         return angle;
     }

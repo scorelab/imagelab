@@ -1,6 +1,7 @@
 package com.imagelab.views.forms;
 
 import com.imagelab.operators.geotransformation.RotateImage;
+import com.imagelab.views.AbstractInformationUI;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -9,7 +10,7 @@ import javafx.scene.layout.VBox;
 /**
  * Rotate image properties form view.
  */
-public class RotateImgPropertiesForm extends AnchorPane {
+public class RotateImgPropertiesForm extends AbstractPropertiesFormUI {
     public RotateImgPropertiesForm(RotateImage operator) {
         setPrefSize(224.0, 523.0);
         //Rotation Properties Title.

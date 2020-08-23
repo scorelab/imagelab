@@ -1,14 +1,13 @@
 package com.imagelab.views;
 
 import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 /**
  * Information view which is used to populate operations related
  * information.
  */
-public class InformationContainerView extends AnchorPane {
+public class InformationContainerView extends AbstractInformationUI {
     public InformationContainerView(String description) {
         VBox informationContainer = new VBox();
         informationContainer.setSpacing(20.0);

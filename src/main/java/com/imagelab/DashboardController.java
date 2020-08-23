@@ -1,21 +1,22 @@
 package com.imagelab;
 
-import com.imagelab.components.*;
-import com.imagelab.components.basic.ReadImageOpUIElement;
-import com.imagelab.components.basic.WriteImageOpUIElement;
-import com.imagelab.components.events.OnUIElementCloneCreated;
-import com.imagelab.components.events.OnUIElementDragDone;
-import com.imagelab.components.geotransformation.RotateImageOpUIElement;
-import com.imagelab.components.imageconversion.ConvertToGrayOpUIElement;
-import com.imagelab.components.miscellaneous.CannyEdgeDetectOpUIElement;
+import com.imagelab.components.OperatorUIElement;
 import com.imagelab.operators.OpenCVOperator;
 import com.imagelab.operators.basic.ReadImage;
+import com.imagelab.operators.basic.WriteImage;
+import com.imagelab.operators.geotransformation.RotateImage;
+import com.imagelab.operators.imageconversion.ColoredImageToBinary;
+import com.imagelab.operators.imageconversion.ConvertToGrayscale;
+import com.imagelab.operators.imageconversion.GrayscaleToBinary;
 import com.imagelab.utils.Utilities;
+import com.imagelab.views.AbstractInformationUI;
+import com.imagelab.views.InformationContainerView;
 import com.imagelab.views.ProcessedImageView;
+import com.imagelab.views.forms.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
+import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.WritableImage;
@@ -38,10 +39,8 @@ import static com.imagelab.utils.Constants.ANY_NODE;
  * The controller class of the dashboard
  */
 public class DashboardController implements Initializable {
-
-
-    private final Stack<OperatorUIElement<Node, Node, Node>> appliedOperators; //Stack which holds all the UI elements dragged and dropped into the playground.
-    private OperatorUIElement<Node, Node, Node> curApplyingOpUIElement; //To capture the latest applied operator to the playground.
+    private final Stack<OperatorUIElement> appliedOperators; //Stack which holds all the UI elements dragged and dropped into the playground.
+    private OperatorUIElement curApplyingOpUIElement2; //To capture the latest applied operator to the playground.
     private double dropX, dropY; //To capture mouse position of the user.
 
     /**
@@ -71,10 +70,8 @@ public class DashboardController implements Initializable {
     @FXML
     private VBox miscellaneousOperatorsContainer;
 
-
     @FXML
     private AnchorPane previewPane;
-
 
     @FXML
     private ScrollPane uiElementPropertiesPane;
@@ -91,8 +88,8 @@ public class DashboardController implements Initializable {
 
         Mat image = null;
 
-        for (OperatorUIElement<Node, Node, Node> op : appliedOperators) {
-            image = op.getOperator().compute(image);
+        for (OperatorUIElement op : appliedOperators) {
+            image = op.operator.compute(image);
         }
 
         //Displaying the processed image in the preview pane
@@ -130,8 +127,12 @@ public class DashboardController implements Initializable {
     @FXML
     private void handleDrop(DragEvent event) {
 
+        System.out.println(appliedOperators.size());
+        System.out.println(curApplyingOpUIElement2.operatorName);
+        System.out.println(curApplyingOpUIElement2.operator.hashCode());
+
         // if this was the initial move then no need to validate. just move on to the next step.
-        if (appliedOperators.size() == 0 && curApplyingOpUIElement.getOperator() instanceof ReadImage) {
+        if (appliedOperators.size() == 0 && curApplyingOpUIElement2.operator instanceof ReadImage) {
             proceedToMoveOperator(event);
         } else {
             if (appliedOperators.size() == 0) {
@@ -142,15 +143,15 @@ public class DashboardController implements Initializable {
                 alert.showAndWait();
                 return;
             }
-            OpenCVOperator operator = appliedOperators.peek().getOperator();
-            boolean isValid = curApplyingOpUIElement.getOperator().validate(operator);
+            OpenCVOperator operator = appliedOperators.peek().operator;
+            boolean isValid = curApplyingOpUIElement2.operator.validate(operator);
             if (!isValid) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error Dialog");
                 alert.setHeaderText("Error");
-                alert.setContentText("You are trying to apply an invalid operator on top of " + curApplyingOpUIElement.getOperatorName());
+                alert.setContentText("You are trying to apply an invalid operator on top of " + curApplyingOpUIElement2.operatorName);
                 alert.showAndWait();
-                System.err.println("cannot drag this element on top of : " + curApplyingOpUIElement.getOperatorName());
+                System.err.println("cannot drag this element on top of : " + curApplyingOpUIElement2.operatorName);
                 return;
             }
             proceedToMoveOperator(event);
@@ -158,27 +159,33 @@ public class DashboardController implements Initializable {
 
     }
 
+    /**
+     * This method handles the the logic related to moving and UI element and
+     * relocating it in a new position.
+     *
+     * @param event - dragEvent
+     */
     private void proceedToMoveOperator(DragEvent event) {
 
-        assert curApplyingOpUIElement != null : "currentlyApplyingOperator cannot be null here...";
+        assert curApplyingOpUIElement2 != null : "currentlyApplyingOperator cannot be null here...";
 
-        double relocateX = dropX - (curApplyingOpUIElement.getWidth() / 2);
-        double relocateY = dropY - (curApplyingOpUIElement.getHeight() / 4);
+        double relocateX = dropX - (OperatorUIElement.WIDTH / 2);
+        double relocateY = dropY - (OperatorUIElement.HEIGHT / 4);
 
         Dragboard dragboard = event.getDragboard();
 
         if (dragboard.hasContent(ANY_NODE)) {
-            if (playground.getChildren().contains(curApplyingOpUIElement.getNode())) {
-                curApplyingOpUIElement.getNode().relocate(relocateX, relocateY);
+            if (playground.getChildren().contains(curApplyingOpUIElement2.element)) {
+                curApplyingOpUIElement2.element.relocate(relocateX, relocateY);
             } else {
-                curApplyingOpUIElement.getNode().setLayoutX(relocateX);
-                curApplyingOpUIElement.getNode().setLayoutY(relocateY);
-                playground.getChildren().add(curApplyingOpUIElement.getNode());
+                curApplyingOpUIElement2.element.setLayoutX(relocateX);
+                curApplyingOpUIElement2.element.setLayoutY(relocateY);
+                playground.getChildren().add(curApplyingOpUIElement2.element);
             }
-            if (!this.curApplyingOpUIElement.isAddedToOperatorsStack()) {
-                this.appliedOperators.push(curApplyingOpUIElement);
-                this.curApplyingOpUIElement.setAddedToOperatorsStack(true);
-                System.out.println(curApplyingOpUIElement.getOperatorName() + " has been added to the operation stack");
+            if (!this.curApplyingOpUIElement2.addedToOperatorsStack) {
+                this.appliedOperators.push(curApplyingOpUIElement2);
+                this.curApplyingOpUIElement2.addedToOperatorsStack = true;
+                System.out.println(curApplyingOpUIElement2.operatorName + " has been added to the operation stack");
             } else {
                 System.out.println("This operator is already in the queue");
             }
@@ -186,109 +193,137 @@ public class DashboardController implements Initializable {
             event.setDropCompleted(true);
             event.consume();
         }
-        System.out.println("Drop detected: " + curApplyingOpUIElement.getOperatorName() + "\n");
+        System.out.println("Drop detected: " + curApplyingOpUIElement2.operatorName + "\n");
 
     }
 
-    @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        final OnUIElementCloneCreated anyCloneCreated = (uiElement) -> {
-            //noinspection unchecked
-            this.curApplyingOpUIElement = ((OperatorUIElement<Node, Node, Node>) uiElement);
-        };
-
-        final OnUIElementDragDone anyElementDragDone = (opUiEl) -> {
-            if (opUiEl == null) {
+        OperatorUIElement.onDragDone = (element) -> {
+            if (element == null) {
                 this.uiElementPropertiesPane.setContent(null);
                 this.informationScrollPane.setContent(null);
             } else {
-                this.uiElementPropertiesPane.setContent(opUiEl.getForm());
-                this.informationScrollPane.setContent(opUiEl.getInformation());
+                this.uiElementPropertiesPane.setContent(element.buildPropertiesFormUI());
+                this.informationScrollPane.setContent(element.buildInformationUI());
             }
-            this.curApplyingOpUIElement = null;
+            this.curApplyingOpUIElement2 = null;
+        };
+        OperatorUIElement.onCloneCreated = (element) -> {
+            this.curApplyingOpUIElement2 = element;
         };
 
-        // basicOperatorsContainer
-        basicOperatorsContainer.setSpacing(15);
-        // basicOperatorsContainer.setAlignment(Pos.TOP_CENTER);
-        basicOperatorsContainer.setLayoutY(20);
-        basicOperatorsContainer.setLayoutX(20);
+        OperatorUIElement.propertiesPane = uiElementPropertiesPane;
+        OperatorUIElement.informationPane = informationScrollPane;
 
-        ReadImageOpUIElement readImageOpUIElement = new ReadImageOpUIElement( // Initiating readImageOpUIElement
-                anyCloneCreated,
-                anyElementDragDone,
-                uiElementPropertiesPane,
-                informationScrollPane
+
+        //ReadImage UI element.
+        OperatorUIElement readImage = new OperatorUIElement() {
+            @Override
+            public AbstractInformationUI buildInformationUI() {
+                return new InformationContainerView(ReadImage.Information.OPERATOR_INFO.toString());
+            }
+
+            @Override
+            public AbstractPropertiesFormUI buildPropertiesFormUI() {
+                return new ReadImgPropertiesForm((ReadImage) this.operator);
+            }
+        };
+        readImage.operator = new ReadImage();
+        readImage.operatorId = ReadImage.class.getCanonicalName();
+        readImage.operatorName = "READ_IMAGE";
+        readImage.elementStyleId = "readImage";
+        readImage.buildElement();
+
+        //WriteImage UI element.
+        OperatorUIElement writeImage = new OperatorUIElement() {
+            @Override
+            public AbstractInformationUI buildInformationUI() {
+                return new InformationContainerView(WriteImage.Information.OPERATOR_INFO.toString());
+            }
+
+            @Override
+            public AbstractPropertiesFormUI buildPropertiesFormUI() {
+                return new WriteImgPropertiesForm((WriteImage) this.operator);
+            }
+        };
+        writeImage.operator = new WriteImage();
+        writeImage.operatorId = WriteImage.class.getCanonicalName();
+        writeImage.operatorName = "WRITE_IMAGE";
+        writeImage.elementStyleId = "writeImage";
+        writeImage.buildElement();
+
+        //RotateImage UI element.
+        OperatorUIElement rotateImage = new OperatorUIElement() {
+            @Override
+            public AbstractInformationUI buildInformationUI() {
+                return new InformationContainerView(RotateImage.Information.OPERATOR_INFO.toString());
+            }
+
+            @Override
+            public AbstractPropertiesFormUI buildPropertiesFormUI() {
+                return new RotateImgPropertiesForm((RotateImage) this.operator);
+            }
+        };
+        rotateImage.operator = new RotateImage();
+        rotateImage.operatorId = RotateImage.class.getCanonicalName();
+        rotateImage.operatorName = "ROTATE_IMAGE";
+        rotateImage.elementStyleId = "rotateImage";
+        rotateImage.buildElement();
+
+        //ConvertGrayscale UI element.
+        OperatorUIElement convertToGrayScaleImage = new OperatorUIElement() {
+            @Override
+            public AbstractInformationUI buildInformationUI() {
+                return new InformationContainerView(ConvertToGrayscale.Information.OPERATOR_INFO.toString());
+            }
+        };
+        convertToGrayScaleImage.operator = new ConvertToGrayscale();
+        convertToGrayScaleImage.operatorId = ConvertToGrayscale.class.getCanonicalName();
+        convertToGrayScaleImage.operatorName = "GRAY_IMAGE";
+        convertToGrayScaleImage.elementStyleId = "grayscaleImage";
+        convertToGrayScaleImage.buildElement();
+
+        //ConvertGrayscale UI element.
+        OperatorUIElement convertColoredImageToBinary = new OperatorUIElement() {
+            @Override
+            public AbstractInformationUI buildInformationUI() {
+                return new InformationContainerView(ColoredImageToBinary.Information.OPERATOR_INFO.toString());
+            }
+
+            @Override
+            public AbstractPropertiesFormUI buildPropertiesFormUI() {
+                return new ColoredToBinaryPropertiesForm((ColoredImageToBinary) this.operator);
+            }
+        };
+        convertColoredImageToBinary.operator = new ColoredImageToBinary();
+        convertColoredImageToBinary.operatorId = ColoredImageToBinary.class.getCanonicalName();
+        convertColoredImageToBinary.operatorName = "COLOR_BINARY";
+        convertColoredImageToBinary.elementStyleId = "coloredBinary";
+        convertColoredImageToBinary.buildElement();
+
+        // basicOperatorsContainer.
+        basicOperatorsContainer.setSpacing(15d);
+        basicOperatorsContainer.setAlignment(Pos.TOP_CENTER);
+        basicOperatorsContainer.setLayoutY(20d);
+        basicOperatorsContainer.getChildren().addAll(  // Populating basicOperatorsContainer.
+                readImage.element,
+                writeImage.element
         );
-        WriteImageOpUIElement writeImageOpUIElement = new WriteImageOpUIElement( // Initiating writeImageOpUIElement
-                anyCloneCreated,
-                anyElementDragDone,
-                uiElementPropertiesPane,
-                informationScrollPane
+        geoTransformationOperatorsContainer.setSpacing(15d);
+        geoTransformationOperatorsContainer.setAlignment(Pos.TOP_CENTER);
+        geoTransformationOperatorsContainer.setLayoutY(20d);
+        geoTransformationOperatorsContainer.getChildren().addAll( // Populating geoTransformationOperatorsContainer.
+                rotateImage.element
         );
-        readImageOpUIElement.buildNode();
-        writeImageOpUIElement.buildNode();
-
-        basicOperatorsContainer.getChildren().addAll(  // Populating basicOperatorsContainer
-                readImageOpUIElement.getNode(),
-                writeImageOpUIElement.getNode()
-        );
-
-        // geoTransformationOperatorsContainer
-        geoTransformationOperatorsContainer.setSpacing(15);
-        // imageConversionsOperatorsContainer.setAlignment(Pos.TOP_CENTER);
-        geoTransformationOperatorsContainer.setLayoutY(20);
-        geoTransformationOperatorsContainer.setLayoutX(20);
-
-        RotateImageOpUIElement rotateImageOpUIElement = new RotateImageOpUIElement( // Initiating rotateImageOpUIElement
-                anyCloneCreated,
-                anyElementDragDone,
-                uiElementPropertiesPane,
-                informationScrollPane
-        );
-        rotateImageOpUIElement.buildNode();
-
-        geoTransformationOperatorsContainer.getChildren().addAll( // Populating geoTransformationOperatorsContainer
-                rotateImageOpUIElement.getNode()
+        imageConversionsOperatorsContainer.setSpacing(15d);
+        imageConversionsOperatorsContainer.setAlignment(Pos.TOP_CENTER);
+        imageConversionsOperatorsContainer.setLayoutY(20d);
+        imageConversionsOperatorsContainer.getChildren().addAll( // Populating imageConversionsOperatorsContainer.
+                convertToGrayScaleImage.element,
+                convertColoredImageToBinary.element
         );
 
-        // imageConversionsOperatorsContainer
-        imageConversionsOperatorsContainer.setSpacing(15);
-        // imageConversionsOperatorsContainer.setAlignment(Pos.TOP_CENTER);
-        imageConversionsOperatorsContainer.setLayoutY(20);
-        imageConversionsOperatorsContainer.setLayoutX(20);
-
-        ConvertToGrayOpUIElement convertToGrayOpUIElement = new ConvertToGrayOpUIElement( // Initiating convertToGrayOpUIElement
-                anyCloneCreated,
-                anyElementDragDone,
-                uiElementPropertiesPane,
-                informationScrollPane
-        );
-        convertToGrayOpUIElement.buildNode();
-
-        imageConversionsOperatorsContainer.getChildren().addAll( // Populating imageConversionsOperatorsContainer
-                convertToGrayOpUIElement.getNode()
-        );
-
-        // miscellaneousOperatorsContainer
-        miscellaneousOperatorsContainer.setSpacing(15);
-        // imageConversionsOperatorsContainer.setAlignment(Pos.TOP_CENTER);
-        miscellaneousOperatorsContainer.setLayoutY(20);
-        miscellaneousOperatorsContainer.setLayoutX(20);
-
-        CannyEdgeDetectOpUIElement cannyEdgeDetectOpUIElement = new CannyEdgeDetectOpUIElement( // Initiating cannyEdgeDetectOpUIElement
-                anyCloneCreated,
-                anyElementDragDone,
-                uiElementPropertiesPane,
-                informationScrollPane
-        );
-        cannyEdgeDetectOpUIElement.buildNode();
-
-        miscellaneousOperatorsContainer.getChildren().addAll( // Populating miscellaneousOperatorsContainer
-                cannyEdgeDetectOpUIElement.getNode()
-        );
 
     }
-
 }
