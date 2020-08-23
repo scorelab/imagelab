@@ -15,7 +15,18 @@ import static org.opencv.imgcodecs.Imgcodecs.imwrite;
  */
 public class WriteImage extends OpenCVOperator {
 
-    //Default destination dir path to save the processed image.
+    public enum Information {
+        OPERATOR_INFO {
+            /**
+             * @return - Operator information and name of the operator.
+             */
+            public String toString() {
+                return "Write Image\n\nThis operator allows you to save your processed image as a file";
+            }
+        }
+    }
+
+    // Default destination dir path to save the processed image.
     private String destinationURL = "src/main/resources/com/imagelab/images/ProcessedImage.jpg";
 
     /**

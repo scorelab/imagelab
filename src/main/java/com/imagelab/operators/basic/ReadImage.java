@@ -14,6 +14,17 @@ import static org.opencv.imgcodecs.Imgcodecs.imread;
  */
 public class ReadImage extends OpenCVOperator {
 
+    public enum Information {
+        OPERATOR_INFO {
+            /**
+             * @return - Operator information and name of the operator.
+             */
+            public String toString() {
+                return "Read Image\n\nThis operator helps you to read an image file and convert it to an OpenCV Mat object.";
+            }
+        }
+    }
+
     //Default URL to load an image resource.
     private String ImageURL = "imageFile/main/resources/com/imagelab/images/scorelabLogo.jpg";
 

@@ -3,251 +3,125 @@ package com.imagelab.components;
 import com.imagelab.components.events.OnUIElementCloneCreated;
 import com.imagelab.components.events.OnUIElementDragDone;
 import com.imagelab.operators.OpenCVOperator;
+import com.imagelab.utils.Constants;
+import com.imagelab.views.AbstractInformationUI;
+import com.imagelab.views.forms.AbstractPropertiesFormUI;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.MouseEvent;
+
+import static com.imagelab.utils.Constants.ANY_NODE;
+import static javafx.scene.input.TransferMode.MOVE;
 
 /**
- * Abstract class related to the operator UI elements.
- *
- * @param <T> - node of the UI element.
- * @param <E> - properties form.
- * @param <N> - information form.
+ * This is class is the base of operator UI elements.
  */
-public abstract class OperatorUIElement<T extends Node, E extends Node, N extends Node> {
-    private final OpenCVOperator operator;
-    private final String operatorId;
-    private final String operatorName;
-    //Events related
-    private final OnUIElementCloneCreated onCloneCreated;
-    private final OnUIElementDragDone onDragDone;
+public class OperatorUIElement {
+    public static final double WIDTH = Constants.OPERATOR_UI_ELEMENT.WIDTH;
+    public static final double HEIGHT = Constants.OPERATOR_UI_ELEMENT.HEIGHT;
 
-    private final String stylingId;
-    private final double width;
-    private final double height;
-    private boolean addedToOperatorsStack;
-    private boolean cloneable;
-    private boolean previewOnly;
-    private T node = null;
-    private E form = null;
-    private N information = null;
+    // Events related:
+    // Must be initialized before creating any instances of this class.
+    public static OnUIElementCloneCreated onCloneCreated;
+    public static OnUIElementDragDone onDragDone;
 
-    public OperatorUIElement(OpenCVOperator operator, String operatorId, String operatorName, OnUIElementCloneCreated onCloneCreated, OnUIElementDragDone onDragDone, String stylingId, double width, double height, boolean addedToOperatorsStack, boolean cloneable, boolean previewOnly) {
-        this.operator = operator;
-        this.operatorId = operatorId;
-        this.operatorName = operatorName;
-        this.onCloneCreated = onCloneCreated;
-        this.onDragDone = onDragDone;
-        this.stylingId = stylingId;
-        this.width = width;
-        this.height = height;
-        this.addedToOperatorsStack = addedToOperatorsStack;
-        this.cloneable = cloneable;
-        this.previewOnly = previewOnly;
+    // Passed from parent
+    public static ScrollPane propertiesPane;
+    public static ScrollPane informationPane;
+
+    // Must pass when creating an instance
+    public OpenCVOperator operator;
+    public String operatorId;
+    public String operatorName;
+    public String elementStyleId;
+
+    // Controller logic related.
+    public boolean addedToOperatorsStack = true;
+    public boolean cloneable = true;
+    public boolean previewOnly = false;
+
+    public Node element;
+    public AbstractPropertiesFormUI propertiesFormUI;
+    public AbstractInformationUI informationUI;
+
+    public void buildElement() {
+
+        final Button button = new Button();
+        button.setId(this.elementStyleId);
+        button.setText(this.operatorName);
+        button.prefHeight(HEIGHT);
+        button.setPrefWidth(WIDTH);
+        button.setOnDragDetected(this::onElementDragDetected);
+
+        button.setOnDragDone((event) -> {
+            if (event.isAccepted()) {
+                onDragDone.accept(this);
+            } else {
+                onDragDone.accept(null);
+            }
+        });
+
+        button.setOnMouseClicked((event) -> {
+            if (!this.previewOnly) {
+                propertiesPane.setContent(this.propertiesFormUI);
+                informationPane.setContent(this.informationUI);
+            }
+        });
+
+        this.element = button;
+
     }
 
-    /**
-     * Abstract method which builds an UIElement
-     * once it's dragged on to the playground area
-     * to build an openCV pipeline.
-     */
-    public abstract void buildNode();
-
-    /**
-     * Abstract method that builds the UI element related
-     * properties form for which allows user to change
-     * the property values before executing the pipeline.
-     */
-    public abstract void buildForm();
-
-    /**
-     * Abstract method that populates the information pane with
-     * UI element related information. So, that user can get a basic idea
-     * what sort of functionality it does.
-     */
-    public abstract void populateInformationPane();
-
-    //Getters and setters.
-
-    /**
-     * Usage - to get operator.
-     *
-     * @return - operator.
-     */
-    public OpenCVOperator getOperator() {
-        return operator;
+    public AbstractPropertiesFormUI buildPropertiesFormUI() {
+        return null;
     }
 
-    /**
-     * Usage - to get operation ID.
-     *
-     * @return - operationID.
-     */
-    public String getOperatorId() {
-        return operatorId;
+    public AbstractInformationUI buildInformationUI() {
+        return null;
     }
 
-    /**
-     * Usage - to get operator name.
-     *
-     * @return - operatorName.
-     */
-    public String getOperatorName() {
-        return operatorName;
+    private void onElementDragDetected(MouseEvent e) {
+
+        // create a new clone if cloneable.
+        assert onCloneCreated != null;
+        if (!cloneable) {
+            onCloneCreated.accept(this);
+        } else {
+            onCloneCreated.accept(this.cloneElement());
+        }
+        Dragboard dragboard = element.startDragAndDrop(MOVE);
+        dragboard.setDragView(element.snapshot(null, null));
+        ClipboardContent content = new ClipboardContent();
+        content.put(ANY_NODE, "operation");
+        dragboard.setContent(content);
+        e.consume();
+
     }
 
-    /**
-     * Usage - to get clone creation state.
-     *
-     * @return - onCloneCreated.
-     */
-    public OnUIElementCloneCreated getOnCloneCreated() {
-        return onCloneCreated;
+    private OperatorUIElement cloneElement() {
+
+        OperatorUIElement copy = new OperatorUIElement();
+
+        copy.operator = this.operator;
+        copy.operatorId = this.operatorId;
+        copy.operatorName = this.operatorName;
+
+        copy.cloneable = false;
+        copy.previewOnly = false;
+        copy.addedToOperatorsStack = false;
+
+        copy.propertiesFormUI = buildPropertiesFormUI();
+        copy.informationUI = buildInformationUI();
+        copy.elementStyleId = this.elementStyleId;
+
+        copy.buildElement();
+
+        return copy;
+
     }
 
-    /**
-     * Usage - to get drag done state.
-     *
-     * @return - onDragDone.
-     */
-    public OnUIElementDragDone getOnDragDone() {
-        return onDragDone;
-    }
 
-    /**
-     * Usage - to get operator styling id.
-     *
-     * @return - stylingId.
-     */
-    public String getStylingId() {
-        return stylingId;
-    }
-
-    /**
-     * Usage - to get operator width.
-     *
-     * @return - width.
-     */
-    public double getWidth() {
-        return width;
-    }
-
-    /**
-     * Usage - to get operator height.
-     *
-     * @return - height.
-     */
-    public double getHeight() {
-        return height;
-    }
-
-    /**
-     * Usage - to get whether operator has been added
-     * to the stack state.
-     *
-     * @return - addedToOperatorsStack.
-     */
-    public boolean isAddedToOperatorsStack() {
-        return addedToOperatorsStack;
-    }
-
-    /**
-     * To set the state of whether operator has been added
-     * to the stack.
-     *
-     * @param addedToOperatorsStack - true/false.
-     */
-    public void setAddedToOperatorsStack(boolean addedToOperatorsStack) {
-        this.addedToOperatorsStack = addedToOperatorsStack;
-    }
-
-    /**
-     * Usage - to check whether operator has
-     * cloneable permission.
-     *
-     * @return - cloneable.
-     */
-    public boolean isCloneable() {
-        return cloneable;
-    }
-
-    /**
-     * To set the state of whether the element is cloneable or not.
-     *
-     * @param cloneable - true/false.
-     */
-    public void setCloneable(boolean cloneable) {
-        this.cloneable = cloneable;
-    }
-
-    /**
-     * Usage - to check whether operator is
-     * only available to preview.
-     *
-     * @return - previewOnly.
-     */
-    public boolean isPreviewOnly() {
-        return previewOnly;
-    }
-
-    /**
-     * To set the state of whether the UI element is only preview.
-     *
-     * @param previewOnly - true/false.
-     */
-    public void setPreviewOnly(boolean previewOnly) {
-        this.previewOnly = previewOnly;
-    }
-
-    /**
-     * Usage - to get operator node.
-     *
-     * @return - node.
-     */
-    public T getNode() {
-        return node;
-    }
-
-    /**
-     * To set the node element.
-     *
-     * @param node - accepts a UI element node.
-     */
-    public void setNode(T node) {
-        this.node = node;
-    }
-
-    /**
-     * Usage - to get operator properties form.
-     *
-     * @return - form.
-     */
-    public E getForm() {
-        return form;
-    }
-
-    /**
-     * To set the UI element related properties form
-     *
-     * @param form -  properties from node.
-     */
-    public void setForm(E form) {
-        this.form = form;
-    }
-
-    /**
-     * Usage - to get operator information.
-     *
-     * @return - information.
-     */
-    public N getInformation() {
-        return information;
-    }
-
-    /**
-     * To set the information related to the UI element.
-     *
-     * @param information - information pane form.
-     */
-    public void setInformation(N information) {
-        this.information = information;
-    }
 }

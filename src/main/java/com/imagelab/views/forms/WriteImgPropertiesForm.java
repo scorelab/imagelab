@@ -1,6 +1,7 @@
 package com.imagelab.views.forms;
 
 import com.imagelab.operators.basic.WriteImage;
+import com.imagelab.views.AbstractInformationUI;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -14,7 +15,7 @@ import javafx.stage.Stage;
 /**
  * Write image properties form view.
  */
-public class WriteImgPropertiesForm extends AnchorPane {
+public class WriteImgPropertiesForm extends AbstractPropertiesFormUI {
     public WriteImgPropertiesForm(WriteImage operator) {
         setPrefSize(224.0, 523.0);
         //Write Image Properties Title.

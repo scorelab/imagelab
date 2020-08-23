@@ -14,7 +14,8 @@ import javafx.stage.Stage;
 /**
  * Read image properties form view.
  */
-public class ReadImgPropertiesForm extends AnchorPane {
+public class ReadImgPropertiesForm extends AbstractPropertiesFormUI {
+
     public ReadImgPropertiesForm(ReadImage operator) {
         setPrefSize(224.0, 523.0);
         //Read Image Properties Title.
