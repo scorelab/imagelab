@@ -1,13 +1,11 @@
 package com.imagelab.views.forms;
 
 import com.imagelab.operators.basic.WriteImage;
-import com.imagelab.views.AbstractInformationUI;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;

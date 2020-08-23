@@ -7,7 +7,6 @@ import com.imagelab.operators.basic.WriteImage;
 import com.imagelab.operators.geotransformation.RotateImage;
 import com.imagelab.operators.imageconversion.ColoredImageToBinary;
 import com.imagelab.operators.imageconversion.ConvertToGrayscale;
-import com.imagelab.operators.imageconversion.GrayscaleToBinary;
 import com.imagelab.utils.Utilities;
 import com.imagelab.views.AbstractInformationUI;
 import com.imagelab.views.InformationContainerView;
@@ -126,10 +125,7 @@ public class DashboardController implements Initializable {
      */
     @FXML
     private void handleDrop(DragEvent event) {
-
-        System.out.println(appliedOperators.size());
         System.out.println(curApplyingOpUIElement2.operatorName);
-        System.out.println(curApplyingOpUIElement2.operator.hashCode());
 
         // if this was the initial move then no need to validate. just move on to the next step.
         if (appliedOperators.size() == 0 && curApplyingOpUIElement2.operator instanceof ReadImage) {
@@ -156,7 +152,6 @@ public class DashboardController implements Initializable {
             }
             proceedToMoveOperator(event);
         }
-
     }
 
     /**
@@ -194,7 +189,6 @@ public class DashboardController implements Initializable {
             event.consume();
         }
         System.out.println("Drop detected: " + curApplyingOpUIElement2.operatorName + "\n");
-
     }
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -215,7 +209,6 @@ public class DashboardController implements Initializable {
 
         OperatorUIElement.propertiesPane = uiElementPropertiesPane;
         OperatorUIElement.informationPane = informationScrollPane;
-
 
         //ReadImage UI element.
         OperatorUIElement readImage = new OperatorUIElement() {
@@ -299,7 +292,7 @@ public class DashboardController implements Initializable {
         convertColoredImageToBinary.operator = new ColoredImageToBinary();
         convertColoredImageToBinary.operatorId = ColoredImageToBinary.class.getCanonicalName();
         convertColoredImageToBinary.operatorName = "COLOR_BINARY";
-        convertColoredImageToBinary.elementStyleId = "coloredBinary";
+        convertColoredImageToBinary.elementStyleId = "coloredToBinary";
         convertColoredImageToBinary.buildElement();
 
         // basicOperatorsContainer.
@@ -323,7 +316,5 @@ public class DashboardController implements Initializable {
                 convertToGrayScaleImage.element,
                 convertColoredImageToBinary.element
         );
-
-
     }
 }

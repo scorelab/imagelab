@@ -91,5 +91,4 @@ public class App extends Application {
         stage.setResizable(false);
         stage.show();
     }
-
 }

@@ -7,7 +7,6 @@ import javafx.scene.input.DataFormat;
  * related to the project.
  */
 public final class Constants {
-
     private Constants() {
         // restrict instantiation
     }
@@ -27,5 +26,4 @@ public final class Constants {
         public static final double HEIGHT = 60.0;
         public static final double WIDTH = 150.0;
     }
-
 }

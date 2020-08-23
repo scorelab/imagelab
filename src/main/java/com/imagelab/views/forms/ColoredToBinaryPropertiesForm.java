@@ -1,6 +1,9 @@
 package com.imagelab.views.forms;
 
 import com.imagelab.operators.imageconversion.ColoredImageToBinary;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
@@ -21,7 +24,7 @@ public class ColoredToBinaryPropertiesForm extends AbstractPropertiesFormUI {
 
         Label lblThreshVal = new Label("Set Threshold Value");
 
-        TextField threshValTextField = new TextField(String.valueOf(100.0));
+        TextField threshValTextField = new TextField(String.valueOf(200.0));
         threshValTextField.setPrefSize(205.0, 27.0);
         //Listener to capture thresh value text change.
         threshValTextField.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -36,13 +39,32 @@ public class ColoredToBinaryPropertiesForm extends AbstractPropertiesFormUI {
 
         Label lblMaxVal = new Label("Max Value");
 
-        TextField maxValTextField = new TextField(String.valueOf(200.0));
+        TextField maxValTextField = new TextField(String.valueOf(500.0));
         maxValTextField.setPrefSize(205, 27);
         //Listener to capture scale value change.
         maxValTextField.textProperty().addListener((observable, oldValue, newValue) -> {
             operator.setMaxValue(Double.parseDouble(newValue));
         });
         maxValContainer.getChildren().addAll(lblMaxVal, maxValTextField);
+
+        //Thresh type container: dropbox.
+        VBox threshTypeContainer = new VBox();
+        threshTypeContainer.setPrefWidth(205.0);
+        threshTypeContainer.setSpacing(10);
+        Label lblThreshType = new Label("Thresh Type");
+        ComboBox<String> threshTypeComboBox = new ComboBox<String>();
+        threshTypeComboBox.setPrefSize(205, 27);
+        threshTypeComboBox.getItems().addAll(
+                "THRESH_BINARY",
+                "THRESH_BINARY_INV"
+        );
+        threshTypeComboBox.valueProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                operator.setThresholdType(newValue);
+            }
+        });
+        threshTypeContainer.getChildren().addAll(lblThreshType, threshTypeComboBox);
 
         VBox clrToBinaryImagePropertiesContainer = new VBox();
         clrToBinaryImagePropertiesContainer.setPrefSize(205, 47);
@@ -52,9 +74,9 @@ public class ColoredToBinaryPropertiesForm extends AbstractPropertiesFormUI {
         clrToBinaryImagePropertiesContainer.getChildren().addAll(
                 clrToBinaryTitleContainer,
                 threshValueContainer,
-                maxValContainer
+                maxValContainer,
+                threshTypeContainer
         );
         getChildren().addAll(clrToBinaryImagePropertiesContainer);
     }
 }
-
