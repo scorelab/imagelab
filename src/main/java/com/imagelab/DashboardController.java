@@ -7,6 +7,7 @@ import com.imagelab.operators.basic.WriteImage;
 import com.imagelab.operators.geotransformation.RotateImage;
 import com.imagelab.operators.imageconversion.ColoredImageToBinary;
 import com.imagelab.operators.imageconversion.ConvertToGrayscale;
+import com.imagelab.operators.imageconversion.GrayscaleToBinary;
 import com.imagelab.utils.Utilities;
 import com.imagelab.views.AbstractInformationUI;
 import com.imagelab.views.InformationContainerView;
@@ -277,7 +278,7 @@ public class DashboardController implements Initializable {
         convertToGrayScaleImage.elementStyleId = "grayscaleImage";
         convertToGrayScaleImage.buildElement();
 
-        //ConvertGrayscale UI element.
+        //convertColoredImageToBinary UI element.
         OperatorUIElement convertColoredImageToBinary = new OperatorUIElement() {
             @Override
             public AbstractInformationUI buildInformationUI() {
@@ -291,9 +292,27 @@ public class DashboardController implements Initializable {
         };
         convertColoredImageToBinary.operator = new ColoredImageToBinary();
         convertColoredImageToBinary.operatorId = ColoredImageToBinary.class.getCanonicalName();
-        convertColoredImageToBinary.operatorName = "COLOR_BINARY";
+        convertColoredImageToBinary.operatorName = "COLOR-TO-BINARY";
         convertColoredImageToBinary.elementStyleId = "coloredToBinary";
         convertColoredImageToBinary.buildElement();
+
+        //convertGrayImageToBinary UI element.
+        OperatorUIElement convertGrayImageToBinary = new OperatorUIElement() {
+            @Override
+            public AbstractInformationUI buildInformationUI() {
+                return new InformationContainerView(GrayscaleToBinary.Information.OPERATOR_INFO.toString());
+            }
+
+            @Override
+            public AbstractPropertiesFormUI buildPropertiesFormUI() {
+                return new GrayscaleToBinaryPropertiesForm((GrayscaleToBinary) this.operator);
+            }
+        };
+        convertGrayImageToBinary.operator = new GrayscaleToBinary();
+        convertGrayImageToBinary.operatorId = GrayscaleToBinary.class.getCanonicalName();
+        convertGrayImageToBinary.operatorName = "GRAY-TO-BINARY";
+        convertGrayImageToBinary.elementStyleId = "grayToBinary";
+        convertGrayImageToBinary.buildElement();
 
         // basicOperatorsContainer.
         basicOperatorsContainer.setSpacing(15d);
@@ -314,7 +333,8 @@ public class DashboardController implements Initializable {
         imageConversionsOperatorsContainer.setLayoutY(20d);
         imageConversionsOperatorsContainer.getChildren().addAll( // Populating imageConversionsOperatorsContainer.
                 convertToGrayScaleImage.element,
-                convertColoredImageToBinary.element
+                convertColoredImageToBinary.element,
+                convertGrayImageToBinary.element
         );
     }
 }
