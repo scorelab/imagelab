@@ -22,10 +22,15 @@ public class GrayscaleToBinary extends OpenCVOperator {
              * @return - Operator information and name of the operator.
              */
             public String toString() {
-                return "Convert Grayscale\n\nThis operations allows you to convert your image into a gray image.";
+                return "Grayscale Image to Binary\n\nThis operations allows you to convert your" +
+                        " grayscale image into a binary image. Moreover, you can adjust the" +
+                        "conversion threshold values as well.";
             }
         }
     }
+
+    private double thresholdValue;
+    private double maxValue;
 
     /**
      * This method contains the logic which validates the applicable
@@ -50,7 +55,9 @@ public class GrayscaleToBinary extends OpenCVOperator {
      */
     @Override
     public Mat compute(Mat image) {
-        return convertGrayscaleToBinary(image);
+        return convertGrayscaleToBinary(image,
+                getThresholdValue(),
+                getMaxValue());
     }
 
     /**
@@ -62,15 +69,12 @@ public class GrayscaleToBinary extends OpenCVOperator {
     @Override
     public Set<Class<?>> allowedOperators() {
         Set<Class<?>> allowed = new HashSet<>();
-        allowed.add(ReadImage.class);
-        allowed.add(RotateImage.class);
-        allowed.add(WriteImage.class);
         allowed.add(ConvertToGrayscale.class);
         allowed.add(GrayscaleToBinary.class);
         return allowed;
     }
 
-    private Mat convertGrayscaleToBinary(Mat imageFile) {
+    private Mat convertGrayscaleToBinary(Mat imageFile, Double threshVal, Double maxValue) {
         Mat image = new Mat(); //Creating the empty destination matrix.
 
         // Converting to binary image...
@@ -80,5 +84,22 @@ public class GrayscaleToBinary extends OpenCVOperator {
         byte[] data1 = new byte[image.rows() * image.cols() * (int) (image.elemSize())];
         image.get(0, 0, data1);
         return image;
+    }
+
+    //Getters and setters
+    public double getThresholdValue() {
+        return thresholdValue;
+    }
+
+    public void setThresholdValue(double thresholdValue) {
+        this.thresholdValue = thresholdValue;
+    }
+
+    public double getMaxValue() {
+        return maxValue;
+    }
+
+    public void setMaxValue(double maxValue) {
+        this.maxValue = maxValue;
     }
 }

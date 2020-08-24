@@ -20,7 +20,7 @@ public class ColoredImageToBinary extends OpenCVOperator {
             public String toString() {
                 return "Color Image to Binary\n\nThis operations allows you to convert your" +
                         " colored (RGB) images into a binary image. Moreover, you can adjust the" +
-                        "conversion threshold values and the threshold values as well.";
+                        "conversion threshold values and the threshold type as well.";
             }
         }
     }
@@ -52,7 +52,10 @@ public class ColoredImageToBinary extends OpenCVOperator {
      */
     @Override
     public Mat compute(Mat image) {
-        return convertColorToBinary(image, getThresholdValue(), getMaxValue(), getThresholdType());
+        return convertColorToBinary(image,
+                getThresholdValue(),
+                getMaxValue(),
+                getThresholdType());
     }
 
     /**
@@ -67,8 +70,6 @@ public class ColoredImageToBinary extends OpenCVOperator {
         allowed.add(ReadImage.class);
         allowed.add(RotateImage.class);
         allowed.add(WriteImage.class);
-        allowed.add(ConvertToGrayscale.class);
-        allowed.add(GrayscaleToBinary.class);
         allowed.add(ColoredImageToBinary.class);
         return allowed;
     }
