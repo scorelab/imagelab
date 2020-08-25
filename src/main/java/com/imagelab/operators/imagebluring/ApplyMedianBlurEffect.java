@@ -23,11 +23,15 @@ public class ApplyMedianBlurEffect extends OpenCVOperator {
              * @return - Operator information and name of the operator.
              */
             public String toString() {
-                return "Apply median blur\n\nThis operations allows you to apply" +
-                        "median blur effects to your image.";
+                return "Apply median blur\n\nThis operations allows you to apply " +
+                        "median blur effects to your image. Moreover, you can change" +
+                        " kernel value from the properties.";
             }
         }
     }
+
+    // properties of median blur effect.
+    private int kernelSize = 15;
 
     /**
      * This method contains the logic which validates the applicable
@@ -52,7 +56,7 @@ public class ApplyMedianBlurEffect extends OpenCVOperator {
      */
     @Override
     public Mat compute(Mat image) {
-        return applyMedianBlurEffect(image);
+        return applyMedianBlurEffect(image, getKernelSize());
     }
 
     /**
@@ -75,12 +79,29 @@ public class ApplyMedianBlurEffect extends OpenCVOperator {
         return allowed;
     }
 
-    private Mat applyMedianBlurEffect(Mat imageFile) {
-        // Creating an empty matrix to store the result
+    /**
+     * This method contains applying median blur related
+     * opencv logic.
+     *
+     * @param imageFile  - source file.
+     * @param kernelSize - size of the kernel. Should be int odd value.
+     * @return - median blur applied mat obj.
+     */
+    private Mat applyMedianBlurEffect(Mat imageFile, int kernelSize) {
+        // Creating an empty matrix to store the result.
         Mat image = new Mat();
 
-        // Applying MedianBlur on the Image
-        Imgproc.medianBlur(imageFile, image, 15);
+        // Applying MedianBlur on the Image.
+        Imgproc.medianBlur(imageFile, image, kernelSize);
         return image;
+    }
+
+    //Getters and setters.
+    public int getKernelSize() {
+        return kernelSize;
+    }
+
+    public void setKernelSize(int kernelSize) {
+        this.kernelSize = kernelSize;
     }
 }
