@@ -73,6 +73,7 @@ public class SimpleBlurPropertiesFormUI extends AbstractPropertiesFormUI {
         simpleBlurPropertiesContainer.setLayoutX(14);
         simpleBlurPropertiesContainer.setLayoutY(14);
         simpleBlurPropertiesContainer.getChildren().addAll(
+                simpleBlurTitleContainer,
                 widthSizeContainer,
                 heightSizeContainer,
                 xPointContainer,

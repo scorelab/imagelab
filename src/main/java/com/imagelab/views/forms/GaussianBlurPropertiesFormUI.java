@@ -1,18 +1,20 @@
 package com.imagelab.views.forms;
 
 import com.imagelab.operators.imagebluring.ApplyGaussianBlurEffect;
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
+/**
+ * Applying gaussian blur effects operation related
+ * UI properties form.
+ */
 public class GaussianBlurPropertiesFormUI extends AbstractPropertiesFormUI {
     public GaussianBlurPropertiesFormUI(ApplyGaussianBlurEffect operator) {
         setPrefSize(224.0, 523.0);
         //Simple blur tittle container.
-        PropertiesFormTitleContainer simpleBlurTitleContainer = new PropertiesFormTitleContainer("Gaussian Blur Properties");
+        PropertiesFormTitleContainer gaussianBlurTitleContainer = new PropertiesFormTitleContainer("Gaussian Blur Properties");
 
         //Size - width.
         VBox widthSizeContainer = new VBox();
@@ -72,18 +74,18 @@ public class GaussianBlurPropertiesFormUI extends AbstractPropertiesFormUI {
                 }
             }
         });
-        widthSizeContainer.getChildren().addAll(lblHeightSize, heightSizeTextField, lblErrHeight);
+        heightSizeContainer.getChildren().addAll(lblHeightSize, heightSizeTextField, lblErrHeight);
 
-        VBox simpleBlurPropertiesContainer = new VBox();
-        simpleBlurPropertiesContainer.setPrefSize(205, 47);
-        simpleBlurPropertiesContainer.setSpacing(20);
-        simpleBlurPropertiesContainer.setLayoutX(14);
-        simpleBlurPropertiesContainer.setLayoutY(14);
-        simpleBlurPropertiesContainer.getChildren().addAll(
-                simpleBlurTitleContainer,
+        VBox gaussianBlurPropertiesContainer = new VBox();
+        gaussianBlurPropertiesContainer.setPrefSize(205, 47);
+        gaussianBlurPropertiesContainer.setSpacing(20);
+        gaussianBlurPropertiesContainer.setLayoutX(14);
+        gaussianBlurPropertiesContainer.setLayoutY(14);
+        gaussianBlurPropertiesContainer.getChildren().addAll(
+                gaussianBlurTitleContainer,
                 widthSizeContainer,
                 heightSizeContainer
         );
-        getChildren().addAll(simpleBlurPropertiesContainer);
+        getChildren().addAll(gaussianBlurPropertiesContainer);
     }
 }

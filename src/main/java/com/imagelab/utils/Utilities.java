@@ -36,7 +36,11 @@ public final class Utilities {
     private static BufferedImage convertMatToBufImage(Mat image, String fileExtension) {
         //convert the matrix into a matrix of bytes appropriate for this file extension.
         MatOfByte matOfByte = new MatOfByte();
-        imencode(fileExtension, image, matOfByte);
+        if (image != null) {
+            imencode(fileExtension, image, matOfByte);
+        } else {
+            throw new NullPointerException("image");
+        }
         //convert the "matrix of bytes" into a byte array.
         byte[] byteArray = matOfByte.toArray();
         BufferedImage bufImage = null;

@@ -89,6 +89,17 @@ public class ApplyBlurEffect extends OpenCVOperator {
         return allowed;
     }
 
+    /**
+     * This method contains applying simple blur related
+     * opencv logic.
+     *
+     * @param imageFile - source mat image.
+     * @param width     - width size.
+     * @param height    - height size.
+     * @param X         - point x.
+     * @param Y         - point y.
+     * @return - simple blur applied mat image.
+     */
     private Mat applyBlurEffect(Mat imageFile, double width, double height, double X, double Y) {
         // Creating an empty matrix to store the result.
         Mat image = new Mat();
