@@ -10,8 +10,11 @@ import org.opencv.imgproc.Imgproc;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Operator class which contains the logic related to the
+ * converting a RGB image to binary UI element.
+ */
 public class ColoredImageToBinary extends OpenCVOperator {
-
     public enum Information {
         OPERATOR_INFO {
             /**

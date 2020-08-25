@@ -5,6 +5,9 @@ import com.imagelab.operators.OpenCVOperator;
 import com.imagelab.operators.basic.ReadImage;
 import com.imagelab.operators.basic.WriteImage;
 import com.imagelab.operators.geotransformation.RotateImage;
+import com.imagelab.operators.imagebluring.ApplyBlurEffect;
+import com.imagelab.operators.imagebluring.ApplyGaussianBlurEffect;
+import com.imagelab.operators.imagebluring.ApplyMedianBlurEffect;
 import com.imagelab.operators.imageconversion.ColoredImageToBinary;
 import com.imagelab.operators.imageconversion.ConvertToGrayscale;
 import com.imagelab.operators.imageconversion.GrayscaleToBinary;
@@ -67,6 +70,8 @@ public class DashboardController implements Initializable {
     private VBox imageConversionsOperatorsContainer;
     @FXML
     private VBox drawingOperatorsContainer;
+    @FXML
+    private VBox blurringOperatorsContainer;
     @FXML
     private VBox miscellaneousOperatorsContainer;
 
@@ -314,6 +319,60 @@ public class DashboardController implements Initializable {
         convertGrayImageToBinary.elementStyleId = "grayToBinary";
         convertGrayImageToBinary.buildElement();
 
+        //applyBlurEffect UI element.
+        OperatorUIElement applyBlurEffect = new OperatorUIElement() {
+            @Override
+            public AbstractInformationUI buildInformationUI() {
+                return new InformationContainerView(ApplyBlurEffect.Information.OPERATOR_INFO.toString());
+            }
+
+//            @Override
+//            public AbstractPropertiesFormUI buildPropertiesFormUI() {
+//                return new GrayscaleToBinaryPropertiesForm((GrayscaleToBinary) this.operator);
+//            }
+        };
+        applyBlurEffect.operator = new ApplyBlurEffect();
+        applyBlurEffect.operatorId = ApplyBlurEffect.class.getCanonicalName();
+        applyBlurEffect.operatorName = "APPLY-BLUR";
+        applyBlurEffect.elementStyleId = "applyBlur";
+        applyBlurEffect.buildElement();
+
+        //applyGaussianBlurEffect UI element.
+        OperatorUIElement applyGaussianBlurEffect = new OperatorUIElement() {
+            @Override
+            public AbstractInformationUI buildInformationUI() {
+                return new InformationContainerView(ApplyGaussianBlurEffect.Information.OPERATOR_INFO.toString());
+            }
+
+//            @Override
+//            public AbstractPropertiesFormUI buildPropertiesFormUI() {
+//                return new GrayscaleToBinaryPropertiesForm((GrayscaleToBinary) this.operator);
+//            }
+        };
+        applyGaussianBlurEffect.operator = new ApplyGaussianBlurEffect();
+        applyGaussianBlurEffect.operatorId = ApplyGaussianBlurEffect.class.getCanonicalName();
+        applyGaussianBlurEffect.operatorName = "APPLY-GAUSSIAN-BLUR";
+        applyGaussianBlurEffect.elementStyleId = "applyGaussianBlur";
+        applyGaussianBlurEffect.buildElement();
+
+        //applyMedianBlurEffect UI element.
+        OperatorUIElement applyMedianBlurEffect = new OperatorUIElement() {
+            @Override
+            public AbstractInformationUI buildInformationUI() {
+                return new InformationContainerView(ApplyMedianBlurEffect.Information.OPERATOR_INFO.toString());
+            }
+
+//            @Override
+//            public AbstractPropertiesFormUI buildPropertiesFormUI() {
+//                return new GrayscaleToBinaryPropertiesForm((GrayscaleToBinary) this.operator);
+//            }
+        };
+        applyMedianBlurEffect.operator = new ApplyMedianBlurEffect();
+        applyMedianBlurEffect.operatorId = ApplyMedianBlurEffect.class.getCanonicalName();
+        applyMedianBlurEffect.operatorName = "APPLY-MEDIAN-BLUR";
+        applyMedianBlurEffect.elementStyleId = "applyMedianBlur";
+        applyMedianBlurEffect.buildElement();
+
         // basicOperatorsContainer.
         basicOperatorsContainer.setSpacing(15d);
         basicOperatorsContainer.setAlignment(Pos.TOP_CENTER);
@@ -336,5 +395,14 @@ public class DashboardController implements Initializable {
                 convertColoredImageToBinary.element,
                 convertGrayImageToBinary.element
         );
+        blurringOperatorsContainer.setSpacing(15d);
+        blurringOperatorsContainer.setAlignment(Pos.TOP_CENTER);
+        blurringOperatorsContainer.setLayoutY(20d);
+        blurringOperatorsContainer.getChildren().addAll( // Populating blurringOperatorsContainer.
+                applyBlurEffect.element,
+                applyGaussianBlurEffect.element,
+                applyMedianBlurEffect.element
+        );
+
     }
 }
