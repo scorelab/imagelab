@@ -326,10 +326,10 @@ public class DashboardController implements Initializable {
                 return new InformationContainerView(ApplyBlurEffect.Information.OPERATOR_INFO.toString());
             }
 
-//            @Override
-//            public AbstractPropertiesFormUI buildPropertiesFormUI() {
-//                return new GrayscaleToBinaryPropertiesForm((GrayscaleToBinary) this.operator);
-//            }
+            @Override
+            public AbstractPropertiesFormUI buildPropertiesFormUI() {
+                return new SimpleBlurPropertiesFormUI((ApplyBlurEffect) this.operator);
+            }
         };
         applyBlurEffect.operator = new ApplyBlurEffect();
         applyBlurEffect.operatorId = ApplyBlurEffect.class.getCanonicalName();

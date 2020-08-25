@@ -1,6 +1,5 @@
 package com.imagelab.operators.imagebluring;
 
-import com.imagelab.App;
 import com.imagelab.operators.OpenCVOperator;
 import com.imagelab.operators.basic.ReadImage;
 import com.imagelab.operators.basic.WriteImage;
@@ -27,11 +26,18 @@ public class ApplyBlurEffect extends OpenCVOperator {
              * @return - Operator information and name of the operator.
              */
             public String toString() {
-                return "Apply simple blur\n\nThis operations allows you to apply" +
-                        "blur effects to your image.";
+                return "Simple Blur Effect\n\nThis operations allows you to apply" +
+                        "simple blur effects to your image. You can change size and point" +
+                        "properties to change the blur effect";
             }
         }
     }
+
+    // properties of simple blur effect.
+    private double widthSize = 45d;
+    private double heightSize = 45d;
+    private double pointX = 20d;
+    private double pointY = 30d;
 
     /**
      * This method contains the logic which validates the applicable
@@ -56,7 +62,11 @@ public class ApplyBlurEffect extends OpenCVOperator {
      */
     @Override
     public Mat compute(Mat image) {
-        return applyBlurEffect(image);
+        return applyBlurEffect(
+                image,
+                getWidthSize(), getHeightSize(),
+                getPointX(), getPointY()
+        );
     }
 
     /**
@@ -79,16 +89,49 @@ public class ApplyBlurEffect extends OpenCVOperator {
         return allowed;
     }
 
-    private Mat applyBlurEffect(Mat imageFile) {
-        // Creating an empty matrix to store the result
+    private Mat applyBlurEffect(Mat imageFile, double width, double height, double X, double Y) {
+        // Creating an empty matrix to store the result.
         Mat image = new Mat();
 
-        // Creating the Size and Point objects
-        Size size = new Size(45, 45);
-        Point point = new Point(20, 30);
+        // Creating the Size and Point objects.
+        Size size = new Size(width, height);
+        Point point = new Point(X, Y);
 
-        // Applying Blur effect on the Image
+        // Applying Blur effect on the Image.
         Imgproc.blur(imageFile, image, size, point, Core.BORDER_DEFAULT);
         return image;
+    }
+
+    // Getter and setter related to the properties.
+    public double getWidthSize() {
+        return widthSize;
+    }
+
+    public void setWidthSize(double widthSize) {
+        this.widthSize = widthSize;
+    }
+
+    public double getHeightSize() {
+        return heightSize;
+    }
+
+    public void setHeightSize(double heightSize) {
+        this.heightSize = heightSize;
+    }
+
+    public double getPointX() {
+        return pointX;
+    }
+
+    public void setPointX(double pointX) {
+        this.pointX = pointX;
+    }
+
+    public double getPointY() {
+        return pointY;
+    }
+
+    public void setPointY(double pointY) {
+        this.pointY = pointY;
     }
 }
