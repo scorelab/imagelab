@@ -344,10 +344,10 @@ public class DashboardController implements Initializable {
                 return new InformationContainerView(ApplyGaussianBlurEffect.Information.OPERATOR_INFO.toString());
             }
 
-//            @Override
-//            public AbstractPropertiesFormUI buildPropertiesFormUI() {
-//                return new GrayscaleToBinaryPropertiesForm((GrayscaleToBinary) this.operator);
-//            }
+            @Override
+            public AbstractPropertiesFormUI buildPropertiesFormUI() {
+                return new GaussianBlurPropertiesFormUI((ApplyGaussianBlurEffect) this.operator);
+            }
         };
         applyGaussianBlurEffect.operator = new ApplyGaussianBlurEffect();
         applyGaussianBlurEffect.operatorId = ApplyGaussianBlurEffect.class.getCanonicalName();
