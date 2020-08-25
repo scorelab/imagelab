@@ -32,6 +32,10 @@ public class ApplyGaussianBlurEffect extends OpenCVOperator {
         }
     }
 
+    // properties of gaussian blur effect.
+    private double widthSize = 45D;
+    private double heightSize = 45D;
+
     /**
      * This method contains the logic which validates the applicable
      * openCV operations for a particular openCV operator.
@@ -55,7 +59,7 @@ public class ApplyGaussianBlurEffect extends OpenCVOperator {
      */
     @Override
     public Mat compute(Mat image) {
-        return applyGaussianBlurEffect(image);
+        return applyGaussianBlurEffect(image, getWidthSize(), getHeightSize());
     }
 
     /**
@@ -78,12 +82,35 @@ public class ApplyGaussianBlurEffect extends OpenCVOperator {
         return allowed;
     }
 
-    private Mat applyGaussianBlurEffect(Mat imageFile) {
-        // Creating an empty matrix to store the result
+    /**
+     * @param imageFile
+     * @param width
+     * @param height
+     * @return
+     */
+    private Mat applyGaussianBlurEffect(Mat imageFile, Double width, Double height) {
+        // Creating an empty matrix to store the result.
         Mat image = new Mat();
-        Size size = new Size(45, 45);
-        // Applying GaussianBlur on the Image
+        Size size = new Size(width, height);
+        // Applying GaussianBlur on the Image.
         Imgproc.GaussianBlur(imageFile, image, size, 0);
         return image;
+    }
+
+    // Getters and setter related to the gaussian blur properties.
+    public double getWidthSize() {
+        return widthSize;
+    }
+
+    public void setWidthSize(double widthSize) {
+        this.widthSize = widthSize;
+    }
+
+    public double getHeightSize() {
+        return heightSize;
+    }
+
+    public void setHeightSize(double heightSize) {
+        this.heightSize = heightSize;
     }
 }
