@@ -40,7 +40,7 @@
                                     <panes>
                                         <TitledPane animated="false" text="Basic Operations">
                                             <content>
-                                                <AnchorPane fx:id="operationsPane" minHeight="0.0" minWidth="0.0"
+                                                <AnchorPane fx:id="opBasic" minHeight="0.0" minWidth="0.0"
                                                             prefHeight="180.0" prefWidth="200.0">
                                                     <children>
                                                         <ScrollPane prefHeight="597.0" prefWidth="246.0">
@@ -61,7 +61,7 @@
                                         <TitledPane animated="false" layoutX="10.0" layoutY="10.0"
                                                     text="Geometric Transformations">
                                             <content>
-                                                <AnchorPane fx:id="operationsPane3" minHeight="0.0" minWidth="0.0"
+                                                <AnchorPane fx:id="opGeoTrasformation" minHeight="0.0" minWidth="0.0"
                                                             prefHeight="180.0" prefWidth="200.0">
                                                     <children>
                                                         <ScrollPane prefHeight="597.0" prefWidth="246.0">
@@ -81,7 +81,7 @@
                                         </TitledPane>
                                         <TitledPane animated="false" text="Image Conversions">
                                             <content>
-                                                <AnchorPane fx:id="operationsPane1" minHeight="0.0" minWidth="0.0"
+                                                <AnchorPane fx:id="opImageConversions" minHeight="0.0" minWidth="0.0"
                                                             prefHeight="180.0" prefWidth="200.0">
                                                     <children>
                                                         <ScrollPane prefHeight="598.0" prefWidth="246.0">
@@ -102,7 +102,7 @@
                                         <TitledPane animated="false" prefHeight="604.0" prefWidth="278.0"
                                                     text="Drawing Operations">
                                             <content>
-                                                <AnchorPane fx:id="operationsPane2" minHeight="0.0" minWidth="0.0"
+                                                <AnchorPane fx:id="opDrawingOperations" minHeight="0.0" minWidth="0.0"
                                                             prefHeight="180.0" prefWidth="200.0">
                                                     <children>
                                                         <ScrollPane prefHeight="597.0" prefWidth="246.0">
@@ -121,9 +121,9 @@
                                             </content>
                                         </TitledPane>
                                         <TitledPane animated="false" layoutX="10.0" layoutY="10.0"
-                                                    text="Bluring Operations">
+                                                    text="Blurring Operations">
                                             <content>
-                                                <AnchorPane fx:id="operationsPane31" minHeight="0.0" minWidth="0.0"
+                                                <AnchorPane fx:id="opBluringEffects" minHeight="0.0" minWidth="0.0"
                                                             prefHeight="180.0" prefWidth="200.0">
                                                     <children>
                                                         <ScrollPane prefHeight="597.0" prefWidth="246.0">
@@ -131,7 +131,7 @@
                                                                 <AnchorPane minHeight="0.0" minWidth="0.0"
                                                                             prefHeight="741.0" prefWidth="222.0">
                                                                     <children>
-                                                                        <VBox fx:id="bluringOperatorsContainer"
+                                                                        <VBox fx:id="blurringOperatorsContainer"
                                                                               prefHeight="571.0" prefWidth="222.0"/>
                                                                     </children>
                                                                 </AnchorPane>

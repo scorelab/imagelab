@@ -24,6 +24,6 @@ public final class Constants {
     //Operator UI element related values
     public static final class OPERATOR_UI_ELEMENT {
         public static final double HEIGHT = 60.0;
-        public static final double WIDTH = 150.0;
+        public static final double WIDTH = 170.0;
     }
 }

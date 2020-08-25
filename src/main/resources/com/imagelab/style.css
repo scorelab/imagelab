@@ -17,38 +17,61 @@
 }
 
 /*styles related to the custom shapes*/
+
+/*Read Image UI element*/
 #readImage {
     /*-fx-shape: "M 0 3 L 0 2 L 0 1 L 0 0 L 3 0 L 3 1 L 4 1 L 4 2 L 3 2 L 3 3 Z";*/
     -fx-background-color: green;
     -fx-text-fill: white;
 }
 
+/*Write image UI element*/
 #writeImage {
-    /*-fx-shape: "M 0 3 L 0 2 L 0 1 L 0 0 L 3 0 L 3 1 L 4 1 L 4 2 L 3 2 L 3 3 Z";*/
     -fx-background-color: #003380;
     -fx-text-fill: white;
 }
 
+/*Rotate image UI element*/
 #rotateImage {
-    /*-fx-shape: "M 0 3 L 0 2 L 0 1 L 0 0 L 3 0 L 3 1 L 4 1 L 4 2 L 3 2 L 3 3 Z";*/
     -fx-background-color: #ff9233;
     -fx-text-fill: white;
 }
 
+/*Convert to grayscale image UI element*/
 #grayscaleImage {
-    /*-fx-shape: "M 0 3 L 0 2 L 0 1 L 0 0 L 3 0 L 3 1 L 4 1 L 4 2 L 3 2 L 3 3 Z";*/
     -fx-background-color: #535353;
     -fx-text-fill: white;
 }
 
+/*Convert RGB image to binary UI element*/
 #coloredToBinary {
-    /*-fx-shape: "M 0 3 L 0 2 L 0 1 L 0 0 L 3 0 L 3 1 L 4 1 L 4 2 L 3 2 L 3 3 Z";*/
     -fx-background-color: #9446d4;
     -fx-text-fill: white;
 }
 
+/*Convert gray image to binary UI element*/
 #grayToBinary {
-    /*-fx-shape: "M 0 3 L 0 2 L 0 1 L 0 0 L 3 0 L 3 1 L 4 1 L 4 2 L 3 2 L 3 3 Z";*/
     -fx-background-color: #482c5e;
+    -fx-text-fill: white;
+}
+
+/*Apply blur effects
+ to an image UI element*/
+#applyBlur {
+    -fx-background-color: #699c67;
+    -fx-text-fill: white;
+}
+
+/*Apply gaussian blur effects
+ to an image UI element*/
+#applyGaussianBlur {
+    -fx-background-color: #73de6f;
+    -fx-text-fill: white;
+}
+
+/*Apply median blur effects
+ to an image UI element*/
+#applyMedianBlur {
+    -fx-background-color: #254a23;
     -fx-text-fill: white;
 }

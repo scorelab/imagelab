@@ -16,7 +16,6 @@ import java.util.Set;
  * ConvertToGrayscale UI element.
  */
 public class ConvertToGrayscale extends OpenCVOperator {
-
     public enum Information {
         OPERATOR_INFO {
             /**
