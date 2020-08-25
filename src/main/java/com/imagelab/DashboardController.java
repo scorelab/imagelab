@@ -43,7 +43,7 @@ import static com.imagelab.utils.Constants.ANY_NODE;
  */
 public class DashboardController implements Initializable {
     private final Stack<OperatorUIElement> appliedOperators; //Stack which holds all the UI elements dragged and dropped into the playground.
-    private OperatorUIElement curApplyingOpUIElement2; //To capture the latest applied operator to the playground.
+    private OperatorUIElement curApplyingOpUIElement; //To capture the latest applied operator to the playground.
     private double dropX, dropY; //To capture mouse position of the user.
 
     /**
@@ -131,10 +131,10 @@ public class DashboardController implements Initializable {
      */
     @FXML
     private void handleDrop(DragEvent event) {
-        System.out.println(curApplyingOpUIElement2.operatorName);
+        System.out.println(curApplyingOpUIElement.operatorName);
 
         // if this was the initial move then no need to validate. just move on to the next step.
-        if (appliedOperators.size() == 0 && curApplyingOpUIElement2.operator instanceof ReadImage) {
+        if (appliedOperators.size() == 0 && curApplyingOpUIElement.operator instanceof ReadImage) {
             proceedToMoveOperator(event);
         } else {
             if (appliedOperators.size() == 0) {
@@ -146,14 +146,14 @@ public class DashboardController implements Initializable {
                 return;
             }
             OpenCVOperator operator = appliedOperators.peek().operator;
-            boolean isValid = curApplyingOpUIElement2.operator.validate(operator);
+            boolean isValid = curApplyingOpUIElement.operator.validate(operator);
             if (!isValid) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error Dialog");
                 alert.setHeaderText("Error");
-                alert.setContentText("You are trying to apply an invalid operator on top of " + curApplyingOpUIElement2.operatorName);
+                alert.setContentText("You are trying to apply an invalid operator on top of " + curApplyingOpUIElement.operatorName);
                 alert.showAndWait();
-                System.err.println("cannot drag this element on top of : " + curApplyingOpUIElement2.operatorName);
+                System.err.println("cannot drag this element on top of : " + curApplyingOpUIElement.operatorName);
                 return;
             }
             proceedToMoveOperator(event);
@@ -168,7 +168,7 @@ public class DashboardController implements Initializable {
      */
     private void proceedToMoveOperator(DragEvent event) {
 
-        assert curApplyingOpUIElement2 != null : "currentlyApplyingOperator cannot be null here...";
+        assert curApplyingOpUIElement != null : "currentlyApplyingOperator cannot be null here...";
 
         double relocateX = dropX - (OperatorUIElement.WIDTH / 2);
         double relocateY = dropY - (OperatorUIElement.HEIGHT / 4);
@@ -176,17 +176,17 @@ public class DashboardController implements Initializable {
         Dragboard dragboard = event.getDragboard();
 
         if (dragboard.hasContent(ANY_NODE)) {
-            if (playground.getChildren().contains(curApplyingOpUIElement2.element)) {
-                curApplyingOpUIElement2.element.relocate(relocateX, relocateY);
+            if (playground.getChildren().contains(curApplyingOpUIElement.element)) {
+                curApplyingOpUIElement.element.relocate(relocateX, relocateY);
             } else {
-                curApplyingOpUIElement2.element.setLayoutX(relocateX);
-                curApplyingOpUIElement2.element.setLayoutY(relocateY);
-                playground.getChildren().add(curApplyingOpUIElement2.element);
+                curApplyingOpUIElement.element.setLayoutX(relocateX);
+                curApplyingOpUIElement.element.setLayoutY(relocateY);
+                playground.getChildren().add(curApplyingOpUIElement.element);
             }
-            if (!this.curApplyingOpUIElement2.addedToOperatorsStack) {
-                this.appliedOperators.push(curApplyingOpUIElement2);
-                this.curApplyingOpUIElement2.addedToOperatorsStack = true;
-                System.out.println(curApplyingOpUIElement2.operatorName + " has been added to the operation stack");
+            if (!this.curApplyingOpUIElement.addedToOperatorsStack) {
+                this.appliedOperators.push(curApplyingOpUIElement);
+                this.curApplyingOpUIElement.addedToOperatorsStack = true;
+                System.out.println(curApplyingOpUIElement.operatorName + " has been added to the operation stack");
             } else {
                 System.out.println("This operator is already in the queue");
             }
@@ -194,7 +194,7 @@ public class DashboardController implements Initializable {
             event.setDropCompleted(true);
             event.consume();
         }
-        System.out.println("Drop detected: " + curApplyingOpUIElement2.operatorName + "\n");
+        System.out.println("Drop detected: " + curApplyingOpUIElement.operatorName + "\n");
     }
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -207,10 +207,10 @@ public class DashboardController implements Initializable {
                 this.uiElementPropertiesPane.setContent(element.buildPropertiesFormUI());
                 this.informationScrollPane.setContent(element.buildInformationUI());
             }
-            this.curApplyingOpUIElement2 = null;
+            this.curApplyingOpUIElement = null;
         };
         OperatorUIElement.onCloneCreated = (element) -> {
-            this.curApplyingOpUIElement2 = element;
+            this.curApplyingOpUIElement = element;
         };
 
         OperatorUIElement.propertiesPane = uiElementPropertiesPane;
@@ -362,10 +362,10 @@ public class DashboardController implements Initializable {
                 return new InformationContainerView(ApplyMedianBlurEffect.Information.OPERATOR_INFO.toString());
             }
 
-//            @Override
-//            public AbstractPropertiesFormUI buildPropertiesFormUI() {
-//                return new GrayscaleToBinaryPropertiesForm((GrayscaleToBinary) this.operator);
-//            }
+            @Override
+            public AbstractPropertiesFormUI buildPropertiesFormUI() {
+                return new MedianBlurPropertiesFormUI((ApplyMedianBlurEffect) this.operator);
+            }
         };
         applyMedianBlurEffect.operator = new ApplyMedianBlurEffect();
         applyMedianBlurEffect.operatorId = ApplyMedianBlurEffect.class.getCanonicalName();
