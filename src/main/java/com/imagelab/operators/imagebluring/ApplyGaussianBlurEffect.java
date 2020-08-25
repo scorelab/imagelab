@@ -6,9 +6,7 @@ import com.imagelab.operators.basic.WriteImage;
 import com.imagelab.operators.geotransformation.RotateImage;
 import com.imagelab.operators.imageconversion.ColoredImageToBinary;
 import com.imagelab.operators.imageconversion.ConvertToGrayscale;
-import org.opencv.core.Core;
 import org.opencv.core.Mat;
-import org.opencv.core.Point;
 import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
 
@@ -83,10 +81,13 @@ public class ApplyGaussianBlurEffect extends OpenCVOperator {
     }
 
     /**
-     * @param imageFile
-     * @param width
-     * @param height
-     * @return
+     * This method contains applying gaussian blur related
+     * opencv logic.
+     *
+     * @param imageFile - source mat image.
+     * @param width     - width size.
+     * @param height    - height size.
+     * @return - gaussian blur applied mat image.
      */
     private Mat applyGaussianBlurEffect(Mat imageFile, Double width, Double height) {
         // Creating an empty matrix to store the result.
