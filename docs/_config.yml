@@ -21,9 +21,7 @@ description: 'ImageLab is a standalone tool which supports anyone to get started
 # project gh-pages enabled URL to host the site.
 # For testing enable gh-page for your forked repo (point the /docs folder)
 # and use that URL instead.
-# https://dilum1995.github.io/ImageLab/.
-# https://scorelab.github.io/ImageLab
-url: https://dilum1995.github.io
+url: https://scorelab.github.io/ImageLab
 baseurl: /ImageLab
 
 author:
