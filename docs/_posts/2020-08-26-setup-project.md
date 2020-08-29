@@ -122,21 +122,179 @@ to the following result.
 <br>
 
 Cone the repository by pasting following command in your terminal.
+
 ```
 git clone https://github.com/scorelab/ImageLab.git
 ```
+
+Open the project in your preferred IDE. It will take a couple of minutes
+to sync with the project related maven dependencies.
+
+Then navigate to the project directory in terminal and type following command
+to build the project.
+
+```
+mvn clean install
+```
+
+Once the project build is successful, in order to execute the project run 
+following command in the terminal.
+
+```
+mvn exec:java
+``` 
 
 <br>
 
 ## 3. Starting Contribution
 
+This section contains the information of project structure and its usage. including the contributing guidelines
+and good practises related to the project.
+
+Following illustration shows the project folder structure.
+
+![verify_java](assets/ss_project_folder_structure.png)
+
+- ```docs``` - this directory contains the documentation related jekyll site.
+- ```src``` - contains the app related java classes.
+    - ```main/java``` - contains the application classes.
+    - ```main/resources``` - resource files.
+ 
+In the ```main/java/com/imagelab``` we have 
+- ```components``` - which contains all the UI elements related classes.
+- ```operators``` - openCV operators related classes.
+- ```utills``` - utility classes which has been reused in the other classes.
+- ```views``` - application views related to the app.
+
+and 
+
+```App.java```  - contains the main method and other methods to load the FXML resource files related to the 
+application GUI. Also, this class contains javaFX related GUI loading functionalities as well.
+
+```DashboardController.java``` - which works as the controller for all the views and it contains the GUI related
+functionalities as well.
+
 <br>
 
 ## 4. Adding new OpenCV operations
 
+This section contains the steps to add new openCV operations to the project.
+
+### 4.1 Add operation to ```imagelab/operators/``` as a java class.
+
+### 4.2 Extend ```OpenCVOperator``` abstract class. 
+
+In this step you need to implement the methods from the super class which gives you access to
+validate --> allowed operators --> compute the logic.
+
+Following is a code snippet which shoes how the demo operator look like.
+
+```
+public class OperatorName extends OpenCVOperator{
+  
+    //To have the logic realted to prevoious operator validation.
+     @Override
+        public boolean validate(OpenCVOperator previous) {
+            return false;
+     }
+
+    //To have the openCV processing logic. 
+     @Override
+         public Mat compute(Mat image) {
+             return null;
+     }
+    
+    //To have the allowed operators for this operator.
+    @Override
+        public Set<Class<?>> allowedOperators() {
+            return null;
+    }
+}
+```
+
+In addition to above this operator can hold anything related to the openCV operator
+such as information related to the operation or any additional logic.
+
+### 4.3 Register your newly developed operator.
+
+For this you need to navigation to ```imagelab/DashboardController.java``` and register your
+newly developed operator in the initialize method.
+
+Following is sample code snippet related to operator registration.
+
+```
+        //newOperatorName UI element.
+        OperatorUIElement newOperatorName = new OperatorUIElement() {
+            @Override
+            public AbstractInformationUI buildInformationUI() {
+                // return the information pane.
+                return null;
+            }
+
+            @Override
+            public AbstractPropertiesFormUI buildPropertiesFormUI() {
+                // return the properties pane.
+                return null;
+            }
+        };
+        newOperatorName.operator = new OperatorName();
+        newOperatorName.operatorId = OperatorName.class.getCanonicalName();
+        newOperatorName.operatorName = "OPERATOR-NAME";
+        newOperatorName.elementStyleId = "newOperatorName";
+        newOperatorName.buildElement();
+```
+
+### 4.4 Add it to the relevant UI container.
+
+In this step you can investigate the image lab dashboard side bar and decide to which operation category
+you should insert your newly developed operation. Based on that create a FXML binding in the
+ ```DashboardController.java``` and insert the operator to that container to populate it in the dashboard.
+
+### 4.5 Add styles to operator.
+
+Navigate to the ```resources/styles.css``` and add styles with the style ID you assigned when you register
+the operator.
+
+
+<br>
 <br>
 
 ## 5. Updating Docs
+
+This section contains the steps to update documentation related to this project.
+
+### 5.1 Prerequisites for the docs site.
+
+You need to install following technologies in order to run the docs site locally.
+
+- Ruby 2.7
+    - [Setup Ruby on macOS](https://gorails.com/setup/osx/10.15-catalina)
+    - [Setup Ruby on Windows](https://gorails.com/setup/windows/10)
+    - [Setup Ruby on Linux/Ubuntu](https://gorails.com/setup/ubuntu/20.04)
+- Jekyll 4.1
+    - [Setup Jekyll on macOS](https://jekyllrb.com/docs/installation/macos)
+    - [Setup Jekyll on Windows](https://jekyllrb.com/docs/installation/windows)
+    - [Setup Jekyll on Linux/Ubuntu](https://jekyllrb.com/docs/installation/ubuntu)
+    
+### 5.2 Run Documentation offline.
+
+To install relevant dependencies run the following command.
+```
+bundle install
+```
+
+```
+bundle update
+```
+
+To run the documentation jekyll website, run following command.
+```--livereload``` flag will enable you to populate your changes realtime on your browser.
+
+```
+bundle exec jekyll serve --livereload
+```
+
+This site will run on your browser at ```localhost:4000```
 
 <br>
 
