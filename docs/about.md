@@ -8,6 +8,8 @@ ImageLab is a standalone tool which supports anyone to get started with image pr
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) 
 <br>
 
+![demo_giff](assets/Demo.gif)
+
 ## Communication channels
 [![Gitter](https://badges.gitter.im/scorelab/ImageLab.svg)](https://gitter.im/scorelab/ImageLab?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 <br>
@@ -15,12 +17,15 @@ ImageLab is a standalone tool which supports anyone to get started with image pr
 
 Following technologies has been used to develop and maintain this project.
 
-| Technology   | Version |
-|--------------|---------|
-| Java         | 8       |
-| JavaFX       | 8      |
-| OpenCV       | 3.2.0   |
-| Apache Maven | 3.6.3   |
+| Technology   | Version              |
+|--------------|----------------------|
+|              |                      |
+| Java         | 1.8                  |
+| JavaFX       | 1.8 JDK (inbuilt)    |
+| OpenCV       | 3.2.0                |
+| Apache Maven | 3.6.3                |
+| Ruby         | 3.6.3                |
+| Jekyll       | 4.1.1                |
 
 <br>
 
