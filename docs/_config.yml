@@ -1,0 +1,39 @@
+# This includes the configurations related to the jekyll docs site.
+# Changes to this file requires some time to populate in the web.
+
+# Dependencies
+markdown: redcarpet
+highlighter: pygments
+
+# Gems (for Jekyll 3.0)
+gems: [ jekyll-paginate ]
+
+# Permalinks
+permalink: pretty
+relative_permalinks: false
+
+# Setup
+title: ImageLab
+tagline: 'by SCoRE Lab'
+description: 'ImageLab is a standalone tool which supports anyone to get started with image processing related
+                  concepts and techniques in an interactive, less logical way.'
+
+# project gh-pages enabled URL to host the site.
+# For testing enable gh-page for your forked repo (point the /docs folder)
+# and use that URL instead.
+# https://dilum1995.github.io/ImageLab/.
+# https://scorelab.github.io/ImageLab
+url: https://dilum1995.github.io
+baseurl: /ImageLab
+
+author:
+  name: 'SCoRE Lab'
+  url: https://www.scorelab.org
+
+paginate: 5
+
+# Custom vars
+version: 1.0.0
+
+github:
+  repo: https://github.com/scorelab/ImageLab
