@@ -13,35 +13,53 @@ ImageLab is a standalone tool which supports anyone to get started with image pr
 
 See the [LICENSE](https://github.com/scorelab) file for details.
 
-## User Guide
+![demo](docs/assets/Demo.gif)
+
+## Project Documentation
+
+Complete setup guidelines and other details can be found in the **[project documentation](https://scorelab.github.io/ImageLab)**.
+
+### Technologies
 
 You need to setup following technologies in order to run this project and start contribution.
 
-| Technology   | Version |
-|--------------|---------|
-| Java         | 11      |
-| JavaFX       | 13      |
-| OpenCV       | 3.2.0   |
-| Apache Maven | 3.6.3   |
+| Technology   | Version              |
+|--------------|----------------------|
+|              |                      |
+| Java         | 1.8                  |
+| JavaFX       | 1.8 JDK (inbuilt)    |
+| OpenCV       | 3.2.0                |
+| Apache Maven | 3.6.3                |
+| Ruby         | 3.6.3                |
+| Jekyll       | 4.1.1                |
 
 
-#### How to Setup
+### Setup Guidelines
 
-Setup `$JAVA_HOME` in your *.**zshrc*** or *.**bash_profile**:* 
+Cone the repository by pasting following command in your terminal.
 
-check whether you have installed and setup path properly by running
-`java --version` and `javac --version`
+```
+git clone https://github.com/scorelab/ImageLab.git
+```
 
-make sure you have setup Apache Maven by runing `mvn -v`. If not follow [this](https://maven.apache.org/install.html) and install maven.
+Open the project in your preferred IDE. It will take a couple of minutes
+to sync with the project related maven dependencies.
 
-Clone the repository.
-`git clone https://github.com/scorelab/ImageLab`
+Then navigate to the project directory in terminal and type following command
+to build the project.
 
-in the project directory, run following commands to build and run the project.
+```
+mvn clean install
+```
 
-`mvn run` or `mvn package`
+Once the project build is successful, in order to execute the project run 
+following command in the terminal.
 
-`mvn compile`
+```
+mvn exec:java
+``` 
 
-`mvn clean javafx:run`
+Check the **[project documentation](https://scorelab.github.io/ImageLab)** for more instructions.
+
+
 

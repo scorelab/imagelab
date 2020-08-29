@@ -223,25 +223,26 @@ newly developed operator in the initialize method.
 Following is sample code snippet related to operator registration.
 
 ```
-        //newOperatorName UI element.
-        OperatorUIElement newOperatorName = new OperatorUIElement() {
-            @Override
-            public AbstractInformationUI buildInformationUI() {
-                // return the information pane.
-                return null;
-            }
+//newOperatorName UI element.
+OperatorUIElement newOperatorName = new OperatorUIElement() {
 
-            @Override
-            public AbstractPropertiesFormUI buildPropertiesFormUI() {
-                // return the properties pane.
-                return null;
-            }
-        };
-        newOperatorName.operator = new OperatorName();
-        newOperatorName.operatorId = OperatorName.class.getCanonicalName();
-        newOperatorName.operatorName = "OPERATOR-NAME";
-        newOperatorName.elementStyleId = "newOperatorName";
-        newOperatorName.buildElement();
+@Override
+public AbstractInformationUI buildInformationUI() {
+// return the information pane.
+    return null;
+}
+
+@Override
+public AbstractPropertiesFormUI buildPropertiesFormUI() {
+// return the properties pane.
+    return null;
+}
+};
+newOperatorName.operator = new OperatorName();
+newOperatorName.operatorId = OperatorName.class.getCanonicalName();
+newOperatorName.operatorName = "OPERATOR-NAME";
+newOperatorName.elementStyleId = "newOperatorName";
+newOperatorName.buildElement();
 ```
 
 ### 4.4 Add it to the relevant UI container.
