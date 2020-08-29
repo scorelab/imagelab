@@ -8,6 +8,11 @@ import com.imagelab.components.OperatorUIElement;
  */
 @FunctionalInterface
 public interface OnUIElementDragDone {
+    /**
+     * Call back function to accept an OperatorUIElement
+     * during onDrag.
+     *
+     * @param element - OperatorUIElement.
+     */
     void accept(OperatorUIElement element);
-
 }

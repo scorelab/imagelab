@@ -15,19 +15,31 @@ import java.util.Set;
  * converting a RGB image to binary UI element.
  */
 public class ColoredImageToBinary extends OpenCVOperator {
+    /**
+     * Information related to the ColoredImageToBinary operator.
+     */
     public enum Information {
+        /**
+         * Operator information in string format.
+         */
         OPERATOR_INFO {
             /**
              * @return - Operator information and name of the operator.
              */
             public String toString() {
-                return "Color Image to Binary\n\nThis operations allows you to convert your" +
-                        " colored (RGB) images into a binary image. Moreover, you can adjust the" +
-                        "conversion threshold values and the threshold type as well.";
+                return "Color Image to Binary\n\nThis operations allows"
+                        + " you to convert your colored (RGB) images into "
+                        + "a binary image. Moreover, you can adjust the"
+                        + "conversion threshold values and the threshold"
+                        + " type as well.";
             }
         }
     }
 
+    /**
+     * Properties related to the
+     * colored image to binary conversion.
+     */
     private double thresholdValue;
     private double maxValue;
     private String thresholdType;
@@ -86,49 +98,93 @@ public class ColoredImageToBinary extends OpenCVOperator {
      * @param thresholdType - THRESH_BINARY or THRESH_BINARY_INV
      * @return - image (binary mat image).
      */
-    private Mat convertColorToBinary(Mat imageFile, Double threshVal, Double maxValue, String thresholdType) {
+    private Mat convertColorToBinary(Mat imageFile,
+                                     Double threshVal, Double maxValue,
+                                     String thresholdType) {
         Mat image = new Mat(); //Creating the empty destination matrix.
-
         // Converting to binary image.
         switch (thresholdType) {
             case "THRESH_BINARY":
-                Imgproc.threshold(imageFile, image, threshVal, maxValue, Imgproc.THRESH_BINARY);
+                Imgproc.threshold(imageFile,
+                        image, threshVal, maxValue,
+                        Imgproc.THRESH_BINARY);
                 System.out.println("Selected Thresh Type: THRESH_BINARY");
                 break;
             case "THRESH_BINARY_INV":
-                Imgproc.threshold(imageFile, image, threshVal, maxValue, Imgproc.THRESH_BINARY_INV);
+                Imgproc.threshold(imageFile, image,
+                        threshVal, maxValue,
+                        Imgproc.THRESH_BINARY_INV);
                 System.out.println("Selected Thresh Type: THRESH_BINARY_INV");
             default:
-                Imgproc.threshold(imageFile, image, threshVal, maxValue, Imgproc.THRESH_BINARY);
+                Imgproc.threshold(imageFile, image,
+                        threshVal, maxValue,
+                        Imgproc.THRESH_BINARY);
         }
 
         // Extracting data from the transformed image (dst).
-        byte[] data1 = new byte[image.rows() * image.cols() * (int) (image.elemSize())];
-        image.get(0, 0, data1);
+        byte[] byteData = new byte[image.rows()
+                * image.cols()
+                * (int) (image.elemSize())];
+        image.get(0, 0, byteData);
         return image;
     }
 
-    //Getters and setters
+    /**
+     * To get threshold value related
+     * to the conversion.
+     *
+     * @return - thresholdValue.
+     */
     public double getThresholdValue() {
         return thresholdValue;
     }
 
+    /**
+     * To set threshold value related
+     * to the conversion.
+     *
+     * @param thresholdValue - double.
+     */
     public void setThresholdValue(double thresholdValue) {
         this.thresholdValue = thresholdValue;
     }
 
+    /**
+     * To get the max value related
+     * to the conversion.
+     *
+     * @return - maxValue.
+     */
     public double getMaxValue() {
         return maxValue;
     }
 
+    /**
+     * To set the max value related
+     * to the conversion.
+     *
+     * @param maxValue - double.
+     */
     public void setMaxValue(double maxValue) {
         this.maxValue = maxValue;
     }
 
+    /**
+     * To get the threshold type related
+     * to the conversion.
+     *
+     * @return thresholdType.
+     */
     public String getThresholdType() {
         return thresholdType;
     }
 
+    /**
+     * To set the threshold type related
+     * to the conversion.
+     *
+     * @param thresholdType - double.
+     */
     public void setThresholdType(String thresholdType) {
         this.thresholdType = thresholdType;
     }

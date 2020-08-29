@@ -39,12 +39,31 @@ import java.util.Stack;
 import static com.imagelab.utils.Constants.ANY_NODE;
 
 /**
- * The controller class of the dashboard
+ * The controller class of the dashboard.
  */
 public class DashboardController implements Initializable {
-    private final Stack<OperatorUIElement> appliedOperators; //Stack which holds all the UI elements dragged and dropped into the playground.
-    private OperatorUIElement curApplyingOpUIElement; //To capture the latest applied operator to the playground.
-    private double dropX, dropY; //To capture mouse position of the user.
+    /**
+     * Stack which holds all the UI elements
+     * dragged and dropped into the playground.
+     */
+    private final Stack<OperatorUIElement> appliedOperators;
+
+    /**
+     * To capture the latest applied operator
+     * to the playground.
+     */
+    private OperatorUIElement curApplyingOpUIElement;
+
+    /**
+     * To capture mouse position of the user.
+     * dropX - X drag position.
+     */
+    private double dropX;
+    /**
+     * To capture mouse position of the user.
+     * dropY - Y drag position.
+     */
+    private double dropY;
 
     /**
      * playground: : the pane where users build the pipeline by
@@ -54,52 +73,86 @@ public class DashboardController implements Initializable {
     private Pane playground;
 
     /**
-     * Operator Containers
-     * <p>
-     * basicOperatorsContainer - contains - ReadImage, WriteImage.
-     * geoTransformationOperatorsContainer contains - RotateImage, Affine Transformation, Scaling, Color Maps.
-     * imageConversionsOperatorsContainer - contains - ConvertToGrayscale, ColoredToBinary, GrayScaleToBinary.
-     * drawingOperatorsContainer - contains - DrawLine, DrawCircle, DrawRectangle, DrawEllipse, DrawPolyline.
-     * miscellaneousOperatorsContainer - contains - CannyEdgeDetection
+     * basicOperatorsContainer contains,
+     * ReadImage
+     * WriteImage.
      */
     @FXML
     private VBox basicOperatorsContainer;
+
+    /**
+     * geoTransformationOperatorsContainer contains,
+     * RotateImage,
+     * Affine Transformation.
+     */
     @FXML
     private VBox geoTransformationOperatorsContainer;
+
+    /**
+     * imageConversionsOperatorsContainer contains,
+     * ConvertToGrayscale,
+     * ColoredToBinary,
+     * GrayScaleToBinary.
+     */
     @FXML
     private VBox imageConversionsOperatorsContainer;
-    @FXML
-    private VBox drawingOperatorsContainer;
+
+    /**
+     * blurringOperatorsContainer contains,
+     * simpleBlurring,
+     * gaussianBlurring,
+     * medianBlurring.
+     */
     @FXML
     private VBox blurringOperatorsContainer;
-    @FXML
-    private VBox miscellaneousOperatorsContainer;
 
+    /**
+     * previewPane which outputs the
+     * processed preview.
+     */
     @FXML
     private AnchorPane previewPane;
 
+    /**
+     * uiElementPropertiesPane which contains
+     * the each element related properties.
+     */
     @FXML
     private ScrollPane uiElementPropertiesPane;
 
+    /**
+     * informationScrollPane which shows the
+     * information related to the operators dragged
+     * to the playground.
+     */
     @FXML
     private ScrollPane informationScrollPane;
 
+    /**
+     * Controller constructor.
+     */
     public DashboardController() {
         this.appliedOperators = new Stack<>();
     }
 
+    /**
+     * Method which executes the operation order ones
+     * the user clicked on the run button related to the playground.
+     *
+     * @param event - onClick Mouse Event.
+     * @throws IOException - if the event was not captured.
+     */
     @FXML
     public void onExecuteClicked(ActionEvent event) throws IOException {
-
         Mat image = null;
-
         for (OperatorUIElement op : appliedOperators) {
             image = op.operator.compute(image);
         }
-
         //Displaying the processed image in the preview pane
-        WritableImage writableImage = Utilities.loadImage(image, ".jpg");
-        ProcessedImageView processedImage = new ProcessedImageView(writableImage);
+        WritableImage writableImage;
+        writableImage = Utilities.loadImage(image, ".jpg");
+        ProcessedImageView processedImage;
+        processedImage = new ProcessedImageView(writableImage);
         previewPane.getChildren().addAll(processedImage);
     }
 
@@ -132,9 +185,10 @@ public class DashboardController implements Initializable {
     @FXML
     private void handleDrop(DragEvent event) {
         System.out.println(curApplyingOpUIElement.operatorName);
-
-        // if this was the initial move then no need to validate. just move on to the next step.
-        if (appliedOperators.size() == 0 && curApplyingOpUIElement.operator instanceof ReadImage) {
+        // if this was the initial move then no need to validate.
+        // just move on to the next step.
+        if (appliedOperators.size() == 0
+                && curApplyingOpUIElement.operator instanceof ReadImage) {
             proceedToMoveOperator(event);
         } else {
             if (appliedOperators.size() == 0) {
@@ -146,14 +200,18 @@ public class DashboardController implements Initializable {
                 return;
             }
             OpenCVOperator operator = appliedOperators.peek().operator;
-            boolean isValid = curApplyingOpUIElement.operator.validate(operator);
+            boolean isValid;
+            isValid = curApplyingOpUIElement.operator.validate(operator);
             if (!isValid) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error Dialog");
                 alert.setHeaderText("Error");
-                alert.setContentText("You are trying to apply an invalid operator on top of " + curApplyingOpUIElement.operatorName);
+                alert.setContentText("You are trying to apply an"
+                        + " invalid operator on top of "
+                        + curApplyingOpUIElement.operatorName);
                 alert.showAndWait();
-                System.err.println("cannot drag this element on top of : " + curApplyingOpUIElement.operatorName);
+                System.err.println("cannot drag this element on top of : "
+                        + curApplyingOpUIElement.operatorName);
                 return;
             }
             proceedToMoveOperator(event);
@@ -168,7 +226,8 @@ public class DashboardController implements Initializable {
      */
     private void proceedToMoveOperator(DragEvent event) {
 
-        assert curApplyingOpUIElement != null : "currentlyApplyingOperator cannot be null here...";
+        assert curApplyingOpUIElement != null : "currentlyApplyingOperator"
+                + " cannot be null here...";
 
         double relocateX = dropX - (OperatorUIElement.WIDTH / 2);
         double relocateY = dropY - (OperatorUIElement.HEIGHT / 4);
@@ -186,7 +245,8 @@ public class DashboardController implements Initializable {
             if (!this.curApplyingOpUIElement.addedToOperatorsStack) {
                 this.appliedOperators.push(curApplyingOpUIElement);
                 this.curApplyingOpUIElement.addedToOperatorsStack = true;
-                System.out.println(curApplyingOpUIElement.operatorName + " has been added to the operation stack");
+                System.out.println(curApplyingOpUIElement.operatorName
+                        + " has been added to the operation stack");
             } else {
                 System.out.println("This operator is already in the queue");
             }
@@ -197,8 +257,16 @@ public class DashboardController implements Initializable {
         System.out.println("Drop detected: " + curApplyingOpUIElement.operatorName + "\n");
     }
 
+    /**
+     * Method which builds the UI elements
+     * and add them to the side operators bar.
+     * Moreover, this handles the UI dragDone event
+     * related cloning.
+     *
+     * @param url            - URL.
+     * @param resourceBundle - ResourceBundle.
+     */
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
         OperatorUIElement.onDragDone = (element) -> {
             if (element == null) {
                 this.uiElementPropertiesPane.setContent(null);
@@ -220,7 +288,8 @@ public class DashboardController implements Initializable {
         OperatorUIElement readImage = new OperatorUIElement() {
             @Override
             public AbstractInformationUI buildInformationUI() {
-                return new InformationContainerView(ReadImage.Information.OPERATOR_INFO.toString());
+                return new InformationContainerView(ReadImage
+                        .Information.OPERATOR_INFO.toString());
             }
 
             @Override
@@ -238,7 +307,8 @@ public class DashboardController implements Initializable {
         OperatorUIElement writeImage = new OperatorUIElement() {
             @Override
             public AbstractInformationUI buildInformationUI() {
-                return new InformationContainerView(WriteImage.Information.OPERATOR_INFO.toString());
+                return new InformationContainerView(WriteImage
+                        .Information.OPERATOR_INFO.toString());
             }
 
             @Override
@@ -256,7 +326,8 @@ public class DashboardController implements Initializable {
         OperatorUIElement rotateImage = new OperatorUIElement() {
             @Override
             public AbstractInformationUI buildInformationUI() {
-                return new InformationContainerView(RotateImage.Information.OPERATOR_INFO.toString());
+                return new InformationContainerView(RotateImage
+                        .Information.OPERATOR_INFO.toString());
             }
 
             @Override
@@ -274,7 +345,8 @@ public class DashboardController implements Initializable {
         OperatorUIElement convertToGrayScaleImage = new OperatorUIElement() {
             @Override
             public AbstractInformationUI buildInformationUI() {
-                return new InformationContainerView(ConvertToGrayscale.Information.OPERATOR_INFO.toString());
+                return new InformationContainerView(ConvertToGrayscale
+                        .Information.OPERATOR_INFO.toString());
             }
         };
         convertToGrayScaleImage.operator = new ConvertToGrayscale();
@@ -287,7 +359,8 @@ public class DashboardController implements Initializable {
         OperatorUIElement convertColoredImageToBinary = new OperatorUIElement() {
             @Override
             public AbstractInformationUI buildInformationUI() {
-                return new InformationContainerView(ColoredImageToBinary.Information.OPERATOR_INFO.toString());
+                return new InformationContainerView(ColoredImageToBinary
+                        .Information.OPERATOR_INFO.toString());
             }
 
             @Override
@@ -305,7 +378,8 @@ public class DashboardController implements Initializable {
         OperatorUIElement convertGrayImageToBinary = new OperatorUIElement() {
             @Override
             public AbstractInformationUI buildInformationUI() {
-                return new InformationContainerView(GrayscaleToBinary.Information.OPERATOR_INFO.toString());
+                return new InformationContainerView(GrayscaleToBinary
+                        .Information.OPERATOR_INFO.toString());
             }
 
             @Override
@@ -323,7 +397,8 @@ public class DashboardController implements Initializable {
         OperatorUIElement applyBlurEffect = new OperatorUIElement() {
             @Override
             public AbstractInformationUI buildInformationUI() {
-                return new InformationContainerView(ApplyBlurEffect.Information.OPERATOR_INFO.toString());
+                return new InformationContainerView(ApplyBlurEffect
+                        .Information.OPERATOR_INFO.toString());
             }
 
             @Override
@@ -341,7 +416,8 @@ public class DashboardController implements Initializable {
         OperatorUIElement applyGaussianBlurEffect = new OperatorUIElement() {
             @Override
             public AbstractInformationUI buildInformationUI() {
-                return new InformationContainerView(ApplyGaussianBlurEffect.Information.OPERATOR_INFO.toString());
+                return new InformationContainerView(ApplyGaussianBlurEffect
+                        .Information.OPERATOR_INFO.toString());
             }
 
             @Override
@@ -359,7 +435,8 @@ public class DashboardController implements Initializable {
         OperatorUIElement applyMedianBlurEffect = new OperatorUIElement() {
             @Override
             public AbstractInformationUI buildInformationUI() {
-                return new InformationContainerView(ApplyMedianBlurEffect.Information.OPERATOR_INFO.toString());
+                return new InformationContainerView(ApplyMedianBlurEffect
+                        .Information.OPERATOR_INFO.toString());
             }
 
             @Override
@@ -377,20 +454,23 @@ public class DashboardController implements Initializable {
         basicOperatorsContainer.setSpacing(15d);
         basicOperatorsContainer.setAlignment(Pos.TOP_CENTER);
         basicOperatorsContainer.setLayoutY(20d);
-        basicOperatorsContainer.getChildren().addAll(  // Populating basicOperatorsContainer.
+        basicOperatorsContainer.getChildren().addAll(
+                // Populating basicOperatorsContainer.
                 readImage.element,
                 writeImage.element
         );
         geoTransformationOperatorsContainer.setSpacing(15d);
         geoTransformationOperatorsContainer.setAlignment(Pos.TOP_CENTER);
         geoTransformationOperatorsContainer.setLayoutY(20d);
-        geoTransformationOperatorsContainer.getChildren().addAll( // Populating geoTransformationOperatorsContainer.
+        geoTransformationOperatorsContainer.getChildren().addAll(
+                // Populating geoTransformationOperatorsContainer.
                 rotateImage.element
         );
         imageConversionsOperatorsContainer.setSpacing(15d);
         imageConversionsOperatorsContainer.setAlignment(Pos.TOP_CENTER);
         imageConversionsOperatorsContainer.setLayoutY(20d);
-        imageConversionsOperatorsContainer.getChildren().addAll( // Populating imageConversionsOperatorsContainer.
+        imageConversionsOperatorsContainer.getChildren().addAll(
+                // Populating imageConversionsOperatorsContainer.
                 convertToGrayScaleImage.element,
                 convertColoredImageToBinary.element,
                 convertGrayImageToBinary.element
@@ -398,7 +478,8 @@ public class DashboardController implements Initializable {
         blurringOperatorsContainer.setSpacing(15d);
         blurringOperatorsContainer.setAlignment(Pos.TOP_CENTER);
         blurringOperatorsContainer.setLayoutY(20d);
-        blurringOperatorsContainer.getChildren().addAll( // Populating blurringOperatorsContainer.
+        blurringOperatorsContainer.getChildren().addAll(
+                // Populating blurringOperatorsContainer.
                 applyBlurEffect.element,
                 applyGaussianBlurEffect.element,
                 applyMedianBlurEffect.element

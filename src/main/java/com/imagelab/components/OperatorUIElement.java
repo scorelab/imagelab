@@ -20,7 +20,9 @@ import static javafx.scene.input.TransferMode.MOVE;
  * This is class is the base of operator UI elements.
  */
 public class OperatorUIElement {
+    // Width of the OperatorUIElement.
     public static final double WIDTH = Constants.OPERATOR_UI_ELEMENT.WIDTH;
+    // Height of the OperatorUIElement.
     public static final double HEIGHT = Constants.OPERATOR_UI_ELEMENT.HEIGHT;
 
     // Events related:
@@ -43,12 +45,15 @@ public class OperatorUIElement {
     public boolean cloneable = true;
     public boolean previewOnly = false;
 
+    // Element and its UIs.
     public Node element;
     public AbstractPropertiesFormUI propertiesFormUI;
     public AbstractInformationUI informationUI;
 
+    /**
+     * To build an Operator UI element.
+     */
     public void buildElement() {
-
         final Button button = new Button();
         button.setId(this.elementStyleId);
         button.setText(this.operatorName);
@@ -70,21 +75,34 @@ public class OperatorUIElement {
                 informationPane.setContent(this.informationUI);
             }
         });
-
         this.element = button;
-
     }
 
+    /**
+     * To build the properties form UI during the cloning.
+     *
+     * @return - null
+     */
     public AbstractPropertiesFormUI buildPropertiesFormUI() {
         return null;
     }
 
+    /**
+     * To build the information UI during the cloning.
+     *
+     * @return null;
+     */
     public AbstractInformationUI buildInformationUI() {
         return null;
     }
 
+    /**
+     * To capture the operator dragging from the operators \
+     * tool bar on the left.
+     *
+     * @param e - MouseEvent.
+     */
     private void onElementDragDetected(MouseEvent e) {
-
         // create a new clone if cloneable.
         assert onCloneCreated != null;
         if (!cloneable) {
@@ -98,30 +116,26 @@ public class OperatorUIElement {
         content.put(ANY_NODE, "operation");
         dragboard.setContent(content);
         e.consume();
-
     }
 
+    /**
+     * To clone the dragged element from the side
+     * operators bar.
+     *
+     * @return - cloned of the dragged element.
+     */
     private OperatorUIElement cloneElement() {
-
-        OperatorUIElement copy = new OperatorUIElement();
-
-        copy.operator = this.operator;
-        copy.operatorId = this.operatorId;
-        copy.operatorName = this.operatorName;
-
-        copy.cloneable = false;
-        copy.previewOnly = false;
-        copy.addedToOperatorsStack = false;
-
-        copy.propertiesFormUI = buildPropertiesFormUI();
-        copy.informationUI = buildInformationUI();
-        copy.elementStyleId = this.elementStyleId;
-
-        copy.buildElement();
-
-        return copy;
-
+        OperatorUIElement clonedElement = new OperatorUIElement();
+        clonedElement.operator = this.operator;
+        clonedElement.operatorId = this.operatorId;
+        clonedElement.operatorName = this.operatorName;
+        clonedElement.cloneable = false;
+        clonedElement.previewOnly = false;
+        clonedElement.addedToOperatorsStack = false;
+        clonedElement.propertiesFormUI = buildPropertiesFormUI();
+        clonedElement.informationUI = buildInformationUI();
+        clonedElement.elementStyleId = this.elementStyleId;
+        clonedElement.buildElement(); //Building the clone.
+        return clonedElement;
     }
-
-
 }

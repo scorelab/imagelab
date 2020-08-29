@@ -2,15 +2,13 @@ package com.imagelab;
 
 import com.imagelab.operators.basic.ReadImage;
 import com.imagelab.utils.Constants;
+import com.imagelab.utils.Utilities;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.opencv.core.Core;
-import org.opencv.core.CvType;
-import org.opencv.core.Mat;
-import org.opencv.core.Scalar;
 
 import java.io.IOException;
 
@@ -29,52 +27,54 @@ public class App extends Application {
      * To load openCV libraries
      */
     static {
-//        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
         nu.pattern.OpenCV.loadShared();
     }
 
     /**
      * To set the root for the created scene.
      *
-     * @param fxml The fxml related to the root.
+     * @param fxml - the fxml to be set as root.
+     * @throws IOException - errors related to setting the root.
      */
     static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
     }
 
     /**
-     * To load parent view from the fxml
+     * To load parent view from the fxml.
      *
-     * @param fxml The fxml related to the parent.
+     * @param fxml - fxml to be loaded.
+     * @return - loaded fxml.
+     * @throws IOException any errors
+     *                     occurs between loading the fxml.
      */
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();
     }
 
+    /**
+     * main method of the application.
+     *
+     * @param args - arguments to run the app.
+     */
     public static void main(String[] args) {
         // stack empty
         ReadImage readImage = new ReadImage();
-
-        testOpenCVConfig();
+        generateWelcomeMessage();
         launch();
     }
 
     /**
-     * This method is to make sure the loaded openCV libraries are working
-     * within the project
-     * <p>
-     * Note: this can be removed once the openCV related operations are developed
+     * This method has been used to generate ASCII welcome message
+     * and to make sure openCV configured version is running properly.
      */
-    static void testOpenCVConfig() {
-        System.out.println("Welcome to OpenCV " + Core.VERSION);
-        Mat m = new Mat(5, 10, CvType.CV_8UC1, new Scalar(0));
-        System.out.println("OpenCV Mat: " + m);
-        Mat mr1 = m.row(1);
-        mr1.setTo(new Scalar(1));
-        Mat mc5 = m.col(5);
-        mc5.setTo(new Scalar(5));
-        System.out.println("OpenCV Mat data:\n" + m.dump());
+    static void generateWelcomeMessage() {
+        System.out.println("\n\n");
+        Utilities.drawAsciiArt("Image Lab", 230, 20);
+        System.out.println("\n" + Constants.IMAGELAB_VERSION);
+        System.out.println("A project by " + Constants.ORG_INFO);
+        System.out.println("OpenCV configured version " + Core.VERSION);
     }
 
     /**
@@ -86,7 +86,8 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("dashboard"), DASHBOARD_WIDTH, DASHBOARD_HEIGHT);
-        scene.getStylesheets().add(getClass().getResource(Constants.STYLESHEET_PATH).toExternalForm());
+        scene.getStylesheets().add(getClass()
+                .getResource(Constants.STYLESHEET_PATH).toExternalForm());
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();

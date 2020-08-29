@@ -14,20 +14,29 @@ import static org.opencv.imgcodecs.Imgcodecs.imwrite;
  * WriteImage UI element.
  */
 public class WriteImage extends OpenCVOperator {
-
+    /**
+     * Information related to the WriteImage operator.
+     */
     public enum Information {
+        /**
+         * Operator information in string format.
+         */
         OPERATOR_INFO {
             /**
              * @return - Operator information and name of the operator.
              */
             public String toString() {
-                return "Write Image\n\nThis operator allows you to save your processed image as a file";
+                return "Write Image\n\nThis operator allows"
+                        + " you to save your processed image as a file";
             }
         }
     }
 
-    // Default destination dir path to save the processed image.
-    private String destinationURL = "src/main/resources/com/imagelab/images/ProcessedImage.jpg";
+    /**
+     * Default destination dir path to save the processed image.
+     */
+    private String destinationURL = "src/main/resources/com/imagelab/"
+            + "images/ProcessedImage.jpg";
 
     /**
      * This method validates the possible operations before the
@@ -39,7 +48,6 @@ public class WriteImage extends OpenCVOperator {
     @Override
     public boolean validate(OpenCVOperator previous) {
         return true;
-        // return allowedOperators().contains(previous.getClass());
     }
 
     /**
@@ -51,7 +59,8 @@ public class WriteImage extends OpenCVOperator {
      */
     @Override
     public Mat compute(Mat image) {
-        System.out.println("Processed image file has saved to: " + getDestinationURL());
+        System.out.println("Processed image file has saved to: "
+                + getDestinationURL());
         return writeImage(getDestinationURL(), image);
     }
 

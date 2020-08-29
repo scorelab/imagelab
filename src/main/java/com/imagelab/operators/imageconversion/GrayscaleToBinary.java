@@ -1,9 +1,6 @@
 package com.imagelab.operators.imageconversion;
 
 import com.imagelab.operators.OpenCVOperator;
-import com.imagelab.operators.basic.ReadImage;
-import com.imagelab.operators.basic.WriteImage;
-import com.imagelab.operators.geotransformation.RotateImage;
 import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
 
@@ -15,15 +12,22 @@ import java.util.Set;
  * image conversion from a grayscale image to a binary.
  */
 public class GrayscaleToBinary extends OpenCVOperator {
+    /**
+     * Information related to the GrayscaleToBinary operator.
+     */
     public enum Information {
+        /**
+         * Operator information in string format.
+         */
         OPERATOR_INFO {
             /**
              * @return - Operator information and name of the operator.
              */
             public String toString() {
-                return "Grayscale Image to Binary\n\nThis operations allows you to convert your" +
-                        " grayscale image into a binary image. Moreover, you can adjust the" +
-                        "conversion threshold values as well.";
+                return "Grayscale Image to Binary\n\nThis operations"
+                        + " allows you to convert your grayscale image"
+                        + " into a binary image. Moreover, you can adjust"
+                        + " the conversion threshold values as well.";
             }
         }
     }
@@ -73,31 +77,63 @@ public class GrayscaleToBinary extends OpenCVOperator {
         return allowed;
     }
 
-    private Mat convertGrayscaleToBinary(Mat imageFile, Double threshVal, Double maxValue) {
+    /**
+     * This method contains the operation logic related
+     * to the openCV grayscale to binary image conversion.
+     *
+     * @param imageFile - Mat source image.
+     * @param threshVal - threshold value.
+     * @param maxValue  - double max value.
+     * @return - converted binary image.
+     */
+    private Mat convertGrayscaleToBinary(Mat imageFile,
+                                         Double threshVal, Double maxValue) {
         Mat image = new Mat(); //Creating the empty destination matrix.
-
         // Converting to binary image...
         Imgproc.threshold(imageFile, image, 200, 500, Imgproc.THRESH_BINARY);
-
         // Extracting data from the transformed image (dst)
-        byte[] data1 = new byte[image.rows() * image.cols() * (int) (image.elemSize())];
+        byte[] data1 = new byte[image.rows()
+                * image.cols() * (int) (image.elemSize())];
         image.get(0, 0, data1);
         return image;
     }
 
-    //Getters and setters
+    /**
+     * To get the threshold value related
+     * to the conversion.
+     *
+     * @return thresholdValue.
+     */
     public double getThresholdValue() {
         return thresholdValue;
     }
 
+    /**
+     * To set the threshold value related
+     * to the conversion.
+     *
+     * @param thresholdValue - double.
+     */
     public void setThresholdValue(double thresholdValue) {
         this.thresholdValue = thresholdValue;
     }
 
+    /**
+     * To get the max value related
+     * to the conversion.
+     *
+     * @return maxValue.
+     */
     public double getMaxValue() {
         return maxValue;
     }
 
+    /**
+     * To set the max value related
+     * to the conversion.
+     *
+     * @param maxValue - double.
+     */
     public void setMaxValue(double maxValue) {
         this.maxValue = maxValue;
     }

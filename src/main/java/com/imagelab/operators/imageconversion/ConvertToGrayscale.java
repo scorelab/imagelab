@@ -16,13 +16,20 @@ import java.util.Set;
  * ConvertToGrayscale UI element.
  */
 public class ConvertToGrayscale extends OpenCVOperator {
+    /**
+     * Information related to the ConvertToGrayscale operator.
+     */
     public enum Information {
+        /**
+         * Operator information in string format.
+         */
         OPERATOR_INFO {
             /**
              * @return - Operator information and name of the operator.
              */
             public String toString() {
-                return "Convert Grayscale\n\nThis operations allows you to convert your image into a gray image.";
+                return "Convert Grayscale\n\nThis operations allows"
+                        + " you to convert your image into a gray image.";
             }
         }
     }
@@ -31,7 +38,8 @@ public class ConvertToGrayscale extends OpenCVOperator {
      * This method validates the acceptable operations before perform
      * this operation.
      *
-     * @param previous - previous elements acceptable for the grayScale operation.
+     * @param previous - previous elements acceptable
+     *                 for the grayScale operation.
      * @return - true/false.
      */
     @Override
@@ -83,7 +91,9 @@ public class ConvertToGrayscale extends OpenCVOperator {
         Imgproc.cvtColor(imageFile, image, Imgproc.COLOR_RGB2GRAY);
 
         //Extracting data from the transformed image (dst).
-        byte[] data1 = new byte[image.rows() * image.cols() * (int) (image.elemSize())];
+        byte[] data1 = new byte[image.rows()
+                * image.cols()
+                * (int) (image.elemSize())];
         image.get(0, 0, data1);
 
         //Creating Buffered image using the data.
@@ -91,7 +101,10 @@ public class ConvertToGrayscale extends OpenCVOperator {
                 BufferedImage.TYPE_BYTE_GRAY);
 
         //Setting the data elements to the image.
-        bufImage.getRaster().setDataElements(0, 0, image.cols(), image.rows(), data1);
+        bufImage.getRaster().setDataElements(0, 0,
+                image.cols(),
+                image.rows(),
+                data1);
         return image;
     }
 }
