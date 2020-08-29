@@ -14,10 +14,16 @@ import javafx.stage.Stage;
  * Write image properties form view.
  */
 public class WriteImgPropertiesForm extends AbstractPropertiesFormUI {
+    /**
+     * Builds the WriteImgPropertiesForm.
+     *
+     * @param operator - operator which requires this properties form.
+     */
     public WriteImgPropertiesForm(WriteImage operator) {
         setPrefSize(224.0, 523.0);
         //Write Image Properties Title.
-        PropertiesFormTitleContainer writeImgTitleContainer = new PropertiesFormTitleContainer("Write Image Properties");
+        PropertiesFormTitleContainer writeImgTitleContainer;
+        writeImgTitleContainer = new PropertiesFormTitleContainer("Write Image Properties");
 
         //Saving Image Name.
         VBox saveImgNameContainer = new VBox();
@@ -63,14 +69,21 @@ public class WriteImgPropertiesForm extends AbstractPropertiesFormUI {
             }
         };
         btnBrowseImage.setOnAction(event);
-        saveDirPathContainer.getChildren().addAll(lblSelectSaveDir, saveDirTextField, btnBrowseImage);
-
+        saveDirPathContainer.getChildren().addAll(
+                lblSelectSaveDir,
+                saveDirTextField,
+                btnBrowseImage
+        );
         VBox readImgPropertiesContainer = new VBox();
         readImgPropertiesContainer.setPrefSize(205, 47);
         readImgPropertiesContainer.setLayoutX(14);
         readImgPropertiesContainer.setLayoutY(14);
         readImgPropertiesContainer.setSpacing(20);
-        readImgPropertiesContainer.getChildren().addAll(writeImgTitleContainer, saveImgNameContainer, saveDirPathContainer);
+        readImgPropertiesContainer.getChildren().addAll(
+                writeImgTitleContainer,
+                saveImgNameContainer,
+                saveDirPathContainer
+        );
         getChildren().addAll(readImgPropertiesContainer);
     }
 }

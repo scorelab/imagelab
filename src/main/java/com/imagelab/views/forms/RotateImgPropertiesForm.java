@@ -9,10 +9,16 @@ import javafx.scene.layout.VBox;
  * Rotate image properties form view.
  */
 public class RotateImgPropertiesForm extends AbstractPropertiesFormUI {
+    /**
+     * Builds the RotateImgPropertiesForm.
+     *
+     * @param operator - operator which requires this properties form.
+     */
     public RotateImgPropertiesForm(RotateImage operator) {
         setPrefSize(224.0, 523.0);
         //Rotation Properties Title.
-        PropertiesFormTitleContainer rotationTitleContainer = new PropertiesFormTitleContainer("Rotate Image Properties");
+        PropertiesFormTitleContainer rotationTitleContainer;
+        rotationTitleContainer = new PropertiesFormTitleContainer("Rotate Image Properties");
         //Rotation Angle.
         VBox rotationAngleContainer = new VBox();
         rotationAngleContainer.setPrefWidth(205.0);

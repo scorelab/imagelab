@@ -18,14 +18,20 @@ import java.util.Set;
  * applying gaussian blur effects to an image  UI element.
  */
 public class ApplyGaussianBlurEffect extends OpenCVOperator {
+    /**
+     * Information related to the ApplyGaussianBlurEffect operator.
+     */
     public enum Information {
+        /**
+         * Operator information in string format.
+         */
         OPERATOR_INFO {
             /**
              * @return - Operator information and name of the operator.
              */
             public String toString() {
-                return "Apply gaussian blur\n\nThis operations allows you to apply" +
-                        "gaussian blur effects to your image.";
+                return "Apply gaussian blur\n\nThis operations allows"
+                        + " you to apply gaussian blur effects to your image.";
             }
         }
     }
@@ -89,7 +95,8 @@ public class ApplyGaussianBlurEffect extends OpenCVOperator {
      * @param height    - height size.
      * @return - gaussian blur applied mat image.
      */
-    private Mat applyGaussianBlurEffect(Mat imageFile, Double width, Double height) {
+    private Mat applyGaussianBlurEffect(Mat imageFile,
+                                        Double width, Double height) {
         // Creating an empty matrix to store the result.
         Mat image = new Mat();
         Size size = new Size(width, height);
@@ -98,19 +105,42 @@ public class ApplyGaussianBlurEffect extends OpenCVOperator {
         return image;
     }
 
-    // Getters and setter related to the gaussian blur properties.
+    /**
+     * To get the width size related
+     * to the blur effect.
+     *
+     * @return widthSize.
+     */
     public double getWidthSize() {
         return widthSize;
     }
 
+    /**
+     * To set the width size related
+     * to the blur effect.
+     *
+     * @param widthSize - double.
+     */
     public void setWidthSize(double widthSize) {
         this.widthSize = widthSize;
     }
 
+    /**
+     * To get the height size related
+     * to the blur effect.
+     *
+     * @return heightSize.
+     */
     public double getHeightSize() {
         return heightSize;
     }
 
+    /**
+     * To set the height size related
+     * to the blur effect.
+     *
+     * @param heightSize - double.
+     */
     public void setHeightSize(double heightSize) {
         this.heightSize = heightSize;
     }

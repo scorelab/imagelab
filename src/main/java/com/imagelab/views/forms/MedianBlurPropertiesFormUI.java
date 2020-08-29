@@ -11,10 +11,16 @@ import javafx.scene.paint.Color;
  * UI properties form.
  */
 public class MedianBlurPropertiesFormUI extends AbstractPropertiesFormUI {
+    /**
+     * Builds the MedianBlurPropertiesFormUI.
+     *
+     * @param operator - operator which requires this properties form.
+     */
     public MedianBlurPropertiesFormUI(ApplyMedianBlurEffect operator) {
         setPrefSize(224.0, 523.0);
         //Simple blur tittle container.
-        PropertiesFormTitleContainer medianBlurTitleContainer = new PropertiesFormTitleContainer("Median Blur Properties");
+        PropertiesFormTitleContainer medianBlurTitleContainer;
+        medianBlurTitleContainer = new PropertiesFormTitleContainer("Median Blur Properties");
 
         //Size - width.
         VBox kernelSizeContainer = new VBox();
@@ -44,8 +50,11 @@ public class MedianBlurPropertiesFormUI extends AbstractPropertiesFormUI {
                 }
             }
         });
-        kernelSizeContainer.getChildren().addAll(lblKernelSize, kernelSizeTextField, lblErrKernelSize);
-
+        kernelSizeContainer.getChildren().addAll(
+                lblKernelSize,
+                kernelSizeTextField,
+                lblErrKernelSize
+        );
         VBox gaussianBlurPropertiesContainer = new VBox();
         gaussianBlurPropertiesContainer.setPrefSize(205, 47);
         gaussianBlurPropertiesContainer.setSpacing(20);

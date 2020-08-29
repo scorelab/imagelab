@@ -10,10 +10,16 @@ import javafx.scene.layout.VBox;
  * UI properties form.
  */
 public class SimpleBlurPropertiesFormUI extends AbstractPropertiesFormUI {
+    /**
+     * Builds the SimpleBlurPropertiesFormUI.
+     *
+     * @param operator - operator which requires this properties form.
+     */
     public SimpleBlurPropertiesFormUI(ApplyBlurEffect operator) {
         setPrefSize(224.0, 523.0);
         //Simple blur tittle container.
-        PropertiesFormTitleContainer simpleBlurTitleContainer = new PropertiesFormTitleContainer("Simple Blur Properties");
+        PropertiesFormTitleContainer simpleBlurTitleContainer;
+        simpleBlurTitleContainer = new PropertiesFormTitleContainer("Simple Blur Properties");
 
         //Size - width.
         VBox widthSizeContainer = new VBox();

@@ -14,11 +14,16 @@ import javafx.stage.Stage;
  * Read image properties form view.
  */
 public class ReadImgPropertiesForm extends AbstractPropertiesFormUI {
-
+    /**
+     * Builds the ReadImgPropertiesForm.
+     *
+     * @param operator - operator which requires this properties form.
+     */
     public ReadImgPropertiesForm(ReadImage operator) {
         setPrefSize(224.0, 523.0);
         //Read Image Properties Title.
-        PropertiesFormTitleContainer readImgTitleContainer = new PropertiesFormTitleContainer("Read Image Properties");
+        PropertiesFormTitleContainer readImgTitleContainer;
+        readImgTitleContainer = new PropertiesFormTitleContainer("Read Image Properties");
 
         Label lblSelectImage = new Label("Select Image");
 

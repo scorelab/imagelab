@@ -8,5 +8,11 @@ import com.imagelab.components.OperatorUIElement;
  */
 @FunctionalInterface
 public interface OnUIElementCloneCreated {
+    /**
+     * Call back function to accept an OperatorUIElement
+     * during the cloning.
+     *
+     * @param element - OperatorUIElement.
+     */
     void accept(OperatorUIElement element);
 }

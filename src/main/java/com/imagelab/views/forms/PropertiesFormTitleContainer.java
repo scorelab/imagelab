@@ -11,6 +11,13 @@ import javafx.scene.layout.VBox;
  * tittle label and the separator.
  */
 public class PropertiesFormTitleContainer extends VBox {
+    /**
+     * Builds the tittle container which is
+     * a reusable view for properties containers
+     * of each operator.
+     *
+     * @param title - title of the container.
+     */
     PropertiesFormTitleContainer(String title) {
         setPrefWidth(205.0);
         setSpacing(10);

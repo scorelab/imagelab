@@ -33,5 +33,4 @@ public abstract class OpenCVOperator {
      * @return - applicable operators.
      */
     public abstract Set<Class<?>> allowedOperators();
-
 }

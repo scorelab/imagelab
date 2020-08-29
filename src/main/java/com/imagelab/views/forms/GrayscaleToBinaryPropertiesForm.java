@@ -1,18 +1,26 @@
 package com.imagelab.views.forms;
 
 import com.imagelab.operators.imageconversion.GrayscaleToBinary;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
+/**
+ * Converting grayscale image to binary
+ * operation related UI properties form.
+ */
 public class GrayscaleToBinaryPropertiesForm extends AbstractPropertiesFormUI {
+    /**
+     * Builds the GrayscaleToBinaryPropertiesForm.
+     *
+     * @param operator - operator which requires this properties form.
+     */
     public GrayscaleToBinaryPropertiesForm(GrayscaleToBinary operator) {
         setPrefSize(224.0, 523.0);
         //Colored to binary image conversion Properties Title.
-        PropertiesFormTitleContainer grayToBinaryTitleContainer = new PropertiesFormTitleContainer("Image Conversion Properties");
+        PropertiesFormTitleContainer grayToBinaryTitleContainer;
+        grayToBinaryTitleContainer = new PropertiesFormTitleContainer(""
+                + "Image Conversion Properties");
         //Threshold Value container.
         VBox threshValueContainer = new VBox();
         threshValueContainer.setPrefWidth(0.0);

@@ -13,24 +13,35 @@ import static org.opencv.imgcodecs.Imgcodecs.imread;
  * ReadImage UI element.
  */
 public class ReadImage extends OpenCVOperator {
-
+    /**
+     * Information related to the RotateImage operation.
+     */
     public enum Information {
+        /**
+         * Operator information in string format.
+         */
         OPERATOR_INFO {
             /**
              * @return - Operator information and name of the operator.
              */
             public String toString() {
-                return "Read Image\n\nThis operator helps you to read an image file and convert it to an OpenCV Mat object.";
+                return "Read Image\n\nThis operator helps you to"
+                        + " read an image file and convert it"
+                        + " to an OpenCV Mat object.";
             }
         }
     }
 
     //Default URL to load an image resource.
-    private String ImageURL = "imageFile/main/resources/com/imagelab/images/scorelabLogo.jpg";
+    private String ImageURL = "src/main/resources/com/imagelab/"
+            + "images/scorelabLogo.jpg";
+
 
     /**
-     * This method validates the possible operations before the readImage
-     * operation. Here this returns true since there are no previous elements
+     * This method validates the possible
+     * operations before the readImage
+     * operation. Here this returns true
+     * since there are no previous elements
      * to this element.
      *
      * @param previous - previous elements acceptable for the Read Image.
@@ -43,8 +54,10 @@ public class ReadImage extends OpenCVOperator {
     }
 
     /**
-     * This method accepts a Mat object processed from previous steps and point
-     * it to the openCV logic related to this element. This method is responsible for
+     * This method accepts a Mat object processed
+     * from previous steps and point
+     * it to the openCV logic related to this element.
+     * This method is responsible for
      * executing the openCV logic.
      *
      * @param image - accepts a null Mat object to initiate the process.

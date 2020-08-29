@@ -17,15 +17,22 @@ import java.util.Set;
  * applying median blur effects to an image  UI element.
  */
 public class ApplyMedianBlurEffect extends OpenCVOperator {
+    /**
+     * Information related to the ApplyMedianBlurEffect operator.
+     */
     public enum Information {
+        /**
+         * Operator information in string format.
+         */
         OPERATOR_INFO {
             /**
              * @return - Operator information and name of the operator.
              */
             public String toString() {
-                return "Apply median blur\n\nThis operations allows you to apply " +
-                        "median blur effects to your image. Moreover, you can change" +
-                        " kernel value from the properties.";
+                return "Apply median blur\n\nThis operations allows"
+                        + " you to apply median blur effects to your image."
+                        + " Moreover, you can change kernel value from"
+                        + " the properties.";
             }
         }
     }
@@ -96,11 +103,21 @@ public class ApplyMedianBlurEffect extends OpenCVOperator {
         return image;
     }
 
-    //Getters and setters.
+    /**
+     * To get the kernel size related
+     * to the blur effect.
+     *
+     * @return kernelSize.
+     */
     public int getKernelSize() {
         return kernelSize;
     }
 
+    /***
+     * To set the kernel size related
+     * to the blur effect.
+     * @param kernelSize - int.
+     */
     public void setKernelSize(int kernelSize) {
         this.kernelSize = kernelSize;
     }

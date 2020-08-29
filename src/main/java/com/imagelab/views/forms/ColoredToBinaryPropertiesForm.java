@@ -13,10 +13,16 @@ import javafx.scene.layout.VBox;
  * UI properties form.
  */
 public class ColoredToBinaryPropertiesForm extends AbstractPropertiesFormUI {
+    /**
+     * Builds the ColoredToBinaryPropertiesForm.
+     *
+     * @param operator - operator which requires this properties form.
+     */
     public ColoredToBinaryPropertiesForm(ColoredImageToBinary operator) {
         setPrefSize(224.0, 523.0);
         //Colored to binary image conversion Properties Title.
-        PropertiesFormTitleContainer clrToBinaryTitleContainer = new PropertiesFormTitleContainer("Image Conversion Properties");
+        PropertiesFormTitleContainer clrToBinaryTitleContainer;
+        clrToBinaryTitleContainer = new PropertiesFormTitleContainer("Image Conversion Properties");
         //Threshold Value container.
         VBox threshValueContainer = new VBox();
         threshValueContainer.setPrefWidth(0.0);
@@ -60,7 +66,8 @@ public class ColoredToBinaryPropertiesForm extends AbstractPropertiesFormUI {
         );
         threshTypeComboBox.valueProperty().addListener(new ChangeListener<String>() {
             @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+            public void changed(ObservableValue<? extends String> observable,
+                                String oldValue, String newValue) {
                 operator.setThresholdType(newValue);
             }
         });
