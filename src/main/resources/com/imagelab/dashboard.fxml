@@ -218,7 +218,7 @@
                     <children>
                         <HBox fx:id="topToolbarContainer" alignment="CENTER_RIGHT" prefHeight="44.0" prefWidth="1005.0" spacing="20.0" styleClass="topNavBar">
                             <children>
-                                <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="117.0" text="Refresh">
+                                <Button mnemonicParsing="false" onAction="#onRefreshClicked" prefHeight="32.0" prefWidth="117.0" text="Refresh">
                                     <opaqueInsets>
                                         <Insets />
                                     </opaqueInsets>
@@ -239,12 +239,24 @@
                                         <Pane fx:id="playground" onDragDropped="#handleDrop" onDragOver="#handleDragOver" prefHeight="488.0" prefWidth="1495.0">
                                  <children>
                                     <HBox fx:id="playgroundOpContainer" layoutX="29.0" layoutY="144.0" prefHeight="100.0" prefWidth="1454.0" />
+                                    <Label fx:id="playgroundGuideLabel" layoutX="327.0" layoutY="73.0" prefHeight="52.0" prefWidth="164.0" text="Playground" textAlignment="CENTER" textFill="#00000078">
+                                       <font>
+                                          <Font size="33.0" />
+                                       </font>
+                                    </Label>
                                  </children></Pane>
                                     </content>
                                 </ScrollPane>
                                 <ScrollPane fx:id="uiElementPropertiesPane" prefHeight="381.0" prefWidth="246.0">
                                     <content>
-                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="523.0" prefWidth="224.0" />
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="523.0" prefWidth="224.0">
+                                 <children>
+                                    <Label fx:id="propertiesPaneGuideLabel" layoutX="30.0" layoutY="129.0" prefHeight="137.0" prefWidth="164.0" text="Properties Pane" textAlignment="CENTER" textFill="#00000078" wrapText="true">
+                                       <font>
+                                          <Font size="33.0" />
+                                       </font>
+                                    </Label>
+                                 </children></AnchorPane>
                                     </content>
                                 </ScrollPane>
                             </children>
@@ -268,7 +280,14 @@
                                 </VBox>
                                 <ScrollPane fx:id="previewScrollPane" prefHeight="359.0" prefWidth="765.0">
                                     <content>
-                                        <AnchorPane fx:id="previewPane" minHeight="0.0" minWidth="0.0" prefHeight="548.0" prefWidth="932.0" />
+                                        <AnchorPane fx:id="previewPane" minHeight="0.0" minWidth="0.0" prefHeight="548.0" prefWidth="932.0">
+                                 <children>
+                                    <Label fx:id="previewPaneGuideLabel" layoutX="290.0" layoutY="139.0" prefHeight="52.0" prefWidth="193.0" text="Preview Pane" textAlignment="CENTER" textFill="#00000078">
+                                       <font>
+                                          <Font size="33.0" />
+                                       </font>
+                                    </Label>
+                                 </children></AnchorPane>
                                     </content>
                                 </ScrollPane>
                             </children>
