@@ -1,5 +1,6 @@
 package com.imagelab.util;
 
+import com.imagelab.component.OperatorUIElement;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.WritableImage;
 import org.opencv.core.Mat;
@@ -8,8 +9,9 @@ import org.opencv.core.MatOfByte;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
+import java.io.*;
+import java.util.Date;
+import java.util.Stack;
 
 import static org.opencv.imgcodecs.Imgcodecs.imencode;
 
@@ -107,6 +109,44 @@ public final class Utilities {
                 continue;
             }
             System.out.println(stringBuilder);
+        }
+    }
+
+    /**
+     * This utility methods generate a report content
+     * in string format for a give stack data source.
+     *
+     * @param stackOfOperators - stack datasource.
+     */
+    public static void generate(Stack<OperatorUIElement> stackOfOperators) {
+        // Generate string.
+        Date date = java.util.Calendar.getInstance().getTime();
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(String.format("%50s%n", "ImageLab v1 | Operation Pipeline"));
+        stringBuilder.append(String.format("%48s%n", date));
+        stringBuilder.append(String.format("%50s%n", "\n"));
+        for (OperatorUIElement operator : stackOfOperators) {
+            stringBuilder.append(String.format("%-30s%n", operator.operatorName));
+            stringBuilder.append(String.format("%-30s%n", "|"));
+            stringBuilder.append(String.format("%-30s%n", "↓"));
+        }
+        writeContentToAFile(stringBuilder.toString(), date.toString());
+    }
+
+    /**
+     * This utility method writes a given content to file.
+     *
+     * @param content  - content to be write to a file.
+     * @param fileName - name of the file.
+     */
+    public static void writeContentToAFile(String content, String fileName) {
+        File file = new File("src/main/resources/com/imagelab/reports/ImageLabReport.txt");
+        try {
+            FileWriter fr = new FileWriter(file);
+            fr.write(content);
+            fr.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
