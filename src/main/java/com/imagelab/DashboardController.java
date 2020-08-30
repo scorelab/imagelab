@@ -21,6 +21,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.DragEvent;
@@ -28,7 +29,6 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import org.opencv.core.Mat;
 
@@ -56,25 +56,28 @@ public class DashboardController implements Initializable {
     private OperatorUIElement curApplyingOpUIElement;
 
     /**
-     * To capture mouse position of the user.
-     * dropX - X drag position.
-     */
-    private double dropX;
-    /**
-     * To capture mouse position of the user.
-     * dropY - Y drag position.
-     */
-    private double dropY;
-
-    /**
-     * playground: : the pane where users build the pipeline by
-     * dragging and dropping operator ui elements.
+     * To indicate/guide user to the
+     * properties pane area.
      */
     @FXML
-    private Pane playground;
+    private Label propertiesPaneGuideLabel;
 
     /**
-     * playgroundOpContainer: : the Hbox container where
+     * To indicate/guide user to the
+     * playground area.
+     */
+    @FXML
+    private Label playgroundGuideLabel;
+
+    /**
+     * To indicate/guide user to the
+     * preview pane area.
+     */
+    @FXML
+    private Label previewPaneGuideLabel;
+
+    /**
+     * playgroundOpContainer: : the HBox container where
      * users build the pipeline by
      * dragging and dropping operator ui elements.
      */
@@ -154,15 +157,43 @@ public class DashboardController implements Initializable {
     @FXML
     public void onExecuteClicked(ActionEvent event) throws IOException {
         Mat image = null;
-        for (OperatorUIElement op : appliedOperators) {
-            image = op.operator.compute(image);
+        if (!appliedOperators.empty()) {
+            for (OperatorUIElement op : appliedOperators) {
+                image = op.operator.compute(image);
+            }
+            //Displaying the processed image in the preview pane
+            WritableImage writableImage;
+            writableImage = Utilities.loadImage(image, ".jpg");
+            ProcessedImageView processedImage;
+            processedImage = new ProcessedImageView(writableImage);
+            previewPane.getChildren().addAll(processedImage);
+        } else {
+            System.out.println("Stack is empty");
         }
-        //Displaying the processed image in the preview pane
-        WritableImage writableImage;
-        writableImage = Utilities.loadImage(image, ".jpg");
-        ProcessedImageView processedImage;
-        processedImage = new ProcessedImageView(writableImage);
-        previewPane.getChildren().addAll(processedImage);
+    }
+
+    /**
+     * Method which reset the playground ones user
+     * pressed on the refresh.
+     *
+     * @param event - onClick Mouse Event.
+     * @throws IOException - if the event was not captured.
+     */
+    @FXML
+    public void onRefreshClicked(ActionEvent event) throws IOException {
+        if (!appliedOperators.empty()) {
+            // Removing all the elements from appliedOperators.
+            this.appliedOperators.clear();
+            // Removing elements from the operators container.
+            this.playgroundOpContainer.getChildren().clear();
+            // Clearing the content of properties pane
+            this.uiElementPropertiesPane.setContent(null);
+            // Setting the dashboard to initial state.
+            serDashboardToInitialState();
+            System.out.println("Pipeline and dashboard has been cleared.");
+        } else {
+            System.out.println("Stack is empty. There's nothing to reset.");
+        }
     }
 
     /**
@@ -179,8 +210,6 @@ public class DashboardController implements Initializable {
         if (dragboard.hasContent(ANY_NODE)) {
             event.acceptTransferModes(TransferMode.MOVE);
         }
-        dropX = event.getX();
-        dropY = event.getY();
     }
 
     /**
@@ -193,9 +222,18 @@ public class DashboardController implements Initializable {
      */
     @FXML
     private void handleDrop(DragEvent event) {
+        /*
+         * Disable visibility for the playground and properties
+         * pane related indications.
+         */
+        this.playgroundGuideLabel.setVisible(false);
+        this.propertiesPaneGuideLabel.setVisible(false);
+
         System.out.println(curApplyingOpUIElement.operatorName);
-        // if this was the initial move then no need to validate.
-        // just move on to the next step.
+        /*
+         * if this was the initial move then no need to validate,
+         *  just move on to the next step.
+         */
         if (appliedOperators.size() == 0
                 && curApplyingOpUIElement.operator instanceof ReadImage) {
             proceedLocateOperator(event);
@@ -489,14 +527,23 @@ public class DashboardController implements Initializable {
                 applyGaussianBlurEffect.element,
                 applyMedianBlurEffect.element
         );
-        initializePlayground();
+        serDashboardToInitialState();
     }
 
     /**
-     * Method which setup playground
+     * Method which setup the initial dashboard
      * when the dashboard UI renders.
      */
-    private void initializePlayground() {
-        playgroundOpContainer.setSpacing(5);
+    private void serDashboardToInitialState() {
+        // To set spacing between stacked operators.
+        playgroundOpContainer.setSpacing(0);
+        /*
+         * Enable visibility for the playground, properties
+         * and preview pane related indications.
+         */
+        this.playgroundGuideLabel.setVisible(true);
+        this.propertiesPaneGuideLabel.setVisible(true);
+        this.previewPaneGuideLabel.setVisible(true);
+        // Disabling run and refresh invoking.
     }
 }
