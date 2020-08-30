@@ -4,9 +4,10 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="785.0"
-            prefWidth="1285.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.imagelab.DashboardController">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+            minWidth="-Infinity"
+            prefHeight="785.0" prefWidth="1285.0" stylesheets="@style.css"
+            xmlns="http://javafx.com/javafx/11.0.1" fx:controller="com.imagelab.DashboardController">
     <children>
         <HBox fx:id="dashbaordContainer" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity"
               minHeight="-Infinity" minWidth="-Infinity" prefHeight="785.0" prefWidth="1285.0">
@@ -254,8 +255,8 @@
                         <HBox fx:id="topToolbarContainer" alignment="CENTER_RIGHT" prefHeight="44.0" prefWidth="1005.0"
                               spacing="20.0" styleClass="topNavBar">
                             <children>
-                                <Button mnemonicParsing="false" onAction="#onRefreshClicked" prefHeight="32.0"
-                                        prefWidth="117.0" text="Refresh">
+                                <Button mnemonicParsing="false" onAction="#onResetClicked" prefHeight="32.0"
+                                        prefWidth="117.0" text="Reset">
                                     <opaqueInsets>
                                         <Insets/>
                                     </opaqueInsets>

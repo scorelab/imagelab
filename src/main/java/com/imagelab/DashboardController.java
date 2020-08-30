@@ -156,6 +156,13 @@ public class DashboardController implements Initializable {
             processedImage = new ProcessedImageView(writableImage);
             previewPane.getChildren().addAll(processedImage);
         } else {
+            Utilities.showAlert(
+                    "Invalid Operation",
+                    "Empty pipeline detected",
+                    "Cannot execute an empty"
+                            + " pipeline",
+                    Alert.AlertType.WARNING
+            );
             System.err.println("ERROR: empty pipeline, execution failed.");
         }
     }
@@ -173,7 +180,21 @@ public class DashboardController implements Initializable {
     public void onExportClicked(ActionEvent event) throws IOException {
         if (!appliedOperators.empty()) {
             Utilities.generate(appliedOperators);
+            Utilities.showAlert(
+                    "Report Generation",
+                    "Report generation successful.",
+                    "Report saved to\n"
+                            + "resources/com/imagelab/reports/ImageLabReport.txt",
+                    Alert.AlertType.INFORMATION
+            );
         } else {
+            Utilities.showAlert(
+                    "Invalid Operation",
+                    "Empty pipeline detected",
+                    "Cannot export an empty"
+                            + " pipeline",
+                    Alert.AlertType.WARNING
+            );
             System.err.println("ERROR: empty pipeline, report"
                     + " generation failed,");
         }
@@ -187,21 +208,41 @@ public class DashboardController implements Initializable {
      * @throws IOException - if the event was not captured.
      */
     @FXML
-    public void onRefreshClicked(ActionEvent event) throws IOException {
+    public void onResetClicked(ActionEvent event) throws IOException {
         if (!appliedOperators.empty()) {
-            // Removing all the elements from appliedOperators.
-            this.appliedOperators.clear();
-            // Removing rendered output images.
-            this.previewPane.getChildren().clear();
-            // Removing elements from the operators container.
-            this.playgroundOpContainer.getChildren().clear();
-            // Clearing the content of properties pane
-            this.uiElementPropertiesPane.setContent(null);
-            // Setting the dashboard to initial state.
-            setDashboardToInitialState();
-            System.out.println("Pipeline and dashboard"
-                    + " has been cleared.");
+            String reply = Utilities.showAlert(
+                    "Resetting Dashboard",
+                    "Do you want to reset dashboard?",
+                    "please confirm your action",
+                    Alert.AlertType.CONFIRMATION
+            );
+            if (reply.equals("OK")) {
+                // Removing all the elements from appliedOperators.
+                this.appliedOperators.clear();
+                // Removing rendered output images.
+                this.previewPane.getChildren().clear();
+                // Removing elements from the operators container.
+                this.playgroundOpContainer.getChildren().clear();
+                // Clearing the content of properties pane
+                this.uiElementPropertiesPane.setContent(null);
+                // Setting the dashboard to initial state.
+                setDashboardToInitialState();
+                System.out.println("Pipeline and dashboard"
+                        + " has been cleared.");
+            } else if (reply.equals("CANCEL")) {
+                System.out.println("Aborting reset");
+            } else {
+                System.err.println("ERROR: not identified"
+                        + " reset type executed.");
+            }
         } else {
+            Utilities.showAlert(
+                    "Invalid Operation",
+                    "Empty pipeline detected",
+                    "Cannot reset an empty"
+                            + " pipeline",
+                    Alert.AlertType.WARNING
+            );
             System.err.println("ERROR: empty pipeline,"
                     + " nothing to be cleared.");
         }
@@ -245,26 +286,32 @@ public class DashboardController implements Initializable {
             proceedLocateOperator(event);
         } else {
             if (appliedOperators.size() == 0) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error Dialog");
-                alert.setHeaderText("Error");
-                alert.setContentText("Invalid initial operator!");
-                alert.showAndWait();
+                Utilities.showAlert(
+                        "Invalid Operation",
+                        "Invalid initial operator",
+                        "This operator is not valid "
+                                + "as an initial operator\n"
+                                + "Try ReadImage operator.",
+                        Alert.AlertType.ERROR
+                );
+                setDashboardToInitialState();
+                System.err.println("ERROR: Invalid initial operator"
+                        + curApplyingOpUIElement.operatorName);
                 return;
             }
             OpenCVOperator operator = appliedOperators.peek().operator;
             boolean isValid;
             isValid = curApplyingOpUIElement.operator.validate(operator);
             if (!isValid) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error Dialog");
-                alert.setHeaderText("Error");
-                alert.setContentText("You are trying to apply an"
-                        + " invalid operator on top of "
+                Utilities.showAlert(
+                        "Invalid Operation",
+                        "Operator mismatching error",
+                        "Cannot apply this operator. "
+                                + "Please try another combination.",
+                        Alert.AlertType.ERROR
+                );
+                System.err.println("ERROR: Cannot apply this operator"
                         + curApplyingOpUIElement.operatorName);
-                alert.showAndWait();
-                System.err.println("ERROR: cannot drag this"
-                        + " element on top");
                 return;
             }
             proceedLocateOperator(event);
@@ -342,7 +389,7 @@ public class DashboardController implements Initializable {
             }
 
             @Override
-            public AbstractPropertiesFormUI buildPropertiesFormUI() {
+            public AbstractPropertiesForm buildPropertiesFormUI() {
                 return new ReadImgPropertiesForm((ReadImage) this.operator);
             }
         };
@@ -361,7 +408,7 @@ public class DashboardController implements Initializable {
             }
 
             @Override
-            public AbstractPropertiesFormUI buildPropertiesFormUI() {
+            public AbstractPropertiesForm buildPropertiesFormUI() {
                 return new WriteImgPropertiesForm((WriteImage) this.operator);
             }
         };
@@ -380,7 +427,7 @@ public class DashboardController implements Initializable {
             }
 
             @Override
-            public AbstractPropertiesFormUI buildPropertiesFormUI() {
+            public AbstractPropertiesForm buildPropertiesFormUI() {
                 return new RotateImgPropertiesForm((RotateImage) this.operator);
             }
         };
@@ -413,7 +460,7 @@ public class DashboardController implements Initializable {
             }
 
             @Override
-            public AbstractPropertiesFormUI buildPropertiesFormUI() {
+            public AbstractPropertiesForm buildPropertiesFormUI() {
                 return new ColoredToBinaryPropertiesForm((ColoredImageToBinary) this.operator);
             }
         };
@@ -432,7 +479,7 @@ public class DashboardController implements Initializable {
             }
 
             @Override
-            public AbstractPropertiesFormUI buildPropertiesFormUI() {
+            public AbstractPropertiesForm buildPropertiesFormUI() {
                 return new GrayscaleToBinaryPropertiesForm((GrayscaleToBinary) this.operator);
             }
         };
@@ -451,8 +498,8 @@ public class DashboardController implements Initializable {
             }
 
             @Override
-            public AbstractPropertiesFormUI buildPropertiesFormUI() {
-                return new SimpleBlurPropertiesFormUI((ApplyBlurEffect) this.operator);
+            public AbstractPropertiesForm buildPropertiesFormUI() {
+                return new SimpleBlurPropertiesForm((ApplyBlurEffect) this.operator);
             }
         };
         applyBlurEffect.operator = new ApplyBlurEffect();
@@ -470,8 +517,8 @@ public class DashboardController implements Initializable {
             }
 
             @Override
-            public AbstractPropertiesFormUI buildPropertiesFormUI() {
-                return new GaussianBlurPropertiesFormUI((ApplyGaussianBlurEffect) this.operator);
+            public AbstractPropertiesForm buildPropertiesFormUI() {
+                return new GaussianBlurPropertiesForm((ApplyGaussianBlurEffect) this.operator);
             }
         };
         applyGaussianBlurEffect.operator = new ApplyGaussianBlurEffect();
@@ -489,8 +536,8 @@ public class DashboardController implements Initializable {
             }
 
             @Override
-            public AbstractPropertiesFormUI buildPropertiesFormUI() {
-                return new MedianBlurPropertiesFormUI((ApplyMedianBlurEffect) this.operator);
+            public AbstractPropertiesForm buildPropertiesFormUI() {
+                return new MedianBlurPropertiesForm((ApplyMedianBlurEffect) this.operator);
             }
         };
         applyMedianBlurEffect.operator = new ApplyMedianBlurEffect();
@@ -556,9 +603,9 @@ public class DashboardController implements Initializable {
          * Setup initial properties pane with
          * a area indication label.
          */
-        InitialPropertiesFromUI initialPropertiesFromUI;
-        initialPropertiesFromUI = new InitialPropertiesFromUI();
-        this.uiElementPropertiesPane.setContent(initialPropertiesFromUI);
+        InitialPropertiesFrom initialPropertiesFrom;
+        initialPropertiesFrom = new InitialPropertiesFrom();
+        this.uiElementPropertiesPane.setContent(initialPropertiesFrom);
         /*
          * Setup initial preview pane with
          * a area indication label.

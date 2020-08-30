@@ -5,7 +5,7 @@ import com.imagelab.component.event.OnUIElementDragDone;
 import com.imagelab.operator.OpenCVOperator;
 import com.imagelab.util.Constants;
 import com.imagelab.view.AbstractInformationUI;
-import com.imagelab.view.forms.AbstractPropertiesFormUI;
+import com.imagelab.view.forms.AbstractPropertiesForm;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -47,7 +47,7 @@ public class OperatorUIElement {
 
     // Element and its UIs.
     public Node element;
-    public AbstractPropertiesFormUI propertiesFormUI;
+    public AbstractPropertiesForm propertiesFormUI;
     public AbstractInformationUI informationUI;
 
     /**
@@ -83,7 +83,7 @@ public class OperatorUIElement {
      *
      * @return - null
      */
-    public AbstractPropertiesFormUI buildPropertiesFormUI() {
+    public AbstractPropertiesForm buildPropertiesFormUI() {
         return null;
     }
 

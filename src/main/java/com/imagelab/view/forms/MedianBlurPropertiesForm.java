@@ -10,13 +10,13 @@ import javafx.scene.paint.Color;
  * Applying median blur effects operation related
  * UI properties form.
  */
-public class MedianBlurPropertiesFormUI extends AbstractPropertiesFormUI {
+public class MedianBlurPropertiesForm extends AbstractPropertiesForm {
     /**
-     * Builds the MedianBlurPropertiesFormUI.
+     * Builds the MedianBlurPropertiesForm.
      *
      * @param operator - operator which requires this properties form.
      */
-    public MedianBlurPropertiesFormUI(ApplyMedianBlurEffect operator) {
+    public MedianBlurPropertiesForm(ApplyMedianBlurEffect operator) {
         setPrefSize(224.0, 523.0);
         //Simple blur tittle container.
         PropertiesFormTitleContainer medianBlurTitleContainer;

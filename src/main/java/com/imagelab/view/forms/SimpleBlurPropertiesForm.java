@@ -9,13 +9,13 @@ import javafx.scene.layout.VBox;
  * Applying blur effects operation related
  * UI properties form.
  */
-public class SimpleBlurPropertiesFormUI extends AbstractPropertiesFormUI {
+public class SimpleBlurPropertiesForm extends AbstractPropertiesForm {
     /**
-     * Builds the SimpleBlurPropertiesFormUI.
+     * Builds the SimpleBlurPropertiesForm.
      *
      * @param operator - operator which requires this properties form.
      */
-    public SimpleBlurPropertiesFormUI(ApplyBlurEffect operator) {
+    public SimpleBlurPropertiesForm(ApplyBlurEffect operator) {
         setPrefSize(224.0, 523.0);
         //Simple blur tittle container.
         PropertiesFormTitleContainer simpleBlurTitleContainer;

@@ -9,7 +9,7 @@ import javafx.scene.layout.VBox;
  * Converting grayscale image to binary
  * operation related UI properties form.
  */
-public class GrayscaleToBinaryPropertiesForm extends AbstractPropertiesFormUI {
+public class GrayscaleToBinaryPropertiesForm extends AbstractPropertiesForm {
     /**
      * Builds the GrayscaleToBinaryPropertiesForm.
      *

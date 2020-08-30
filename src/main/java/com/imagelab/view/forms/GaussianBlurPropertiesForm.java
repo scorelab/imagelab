@@ -10,13 +10,13 @@ import javafx.scene.paint.Color;
  * Applying gaussian blur effects operation related
  * UI properties form.
  */
-public class GaussianBlurPropertiesFormUI extends AbstractPropertiesFormUI {
+public class GaussianBlurPropertiesForm extends AbstractPropertiesForm {
     /**
-     * Builds the GaussianBlurPropertiesFormUI.
+     * Builds the GaussianBlurPropertiesForm.
      *
      * @param operator - operator which requires this properties form.
      */
-    public GaussianBlurPropertiesFormUI(ApplyGaussianBlurEffect operator) {
+    public GaussianBlurPropertiesForm(ApplyGaussianBlurEffect operator) {
         setPrefSize(224.0, 523.0);
         //Simple blur tittle container.
         PropertiesFormTitleContainer gaussianBlurTitleContainer;

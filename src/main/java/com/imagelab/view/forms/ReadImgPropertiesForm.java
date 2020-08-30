@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 /**
  * Read image properties form view.
  */
-public class ReadImgPropertiesForm extends AbstractPropertiesFormUI {
+public class ReadImgPropertiesForm extends AbstractPropertiesForm {
     /**
      * Builds the ReadImgPropertiesForm.
      *
