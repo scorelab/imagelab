@@ -1,21 +1,21 @@
 package com.imagelab;
 
-import com.imagelab.components.OperatorUIElement;
-import com.imagelab.operators.OpenCVOperator;
-import com.imagelab.operators.basic.ReadImage;
-import com.imagelab.operators.basic.WriteImage;
-import com.imagelab.operators.geotransformation.RotateImage;
-import com.imagelab.operators.imagebluring.ApplyBlurEffect;
-import com.imagelab.operators.imagebluring.ApplyGaussianBlurEffect;
-import com.imagelab.operators.imagebluring.ApplyMedianBlurEffect;
-import com.imagelab.operators.imageconversion.ColoredImageToBinary;
-import com.imagelab.operators.imageconversion.ConvertToGrayscale;
-import com.imagelab.operators.imageconversion.GrayscaleToBinary;
-import com.imagelab.utils.Utilities;
-import com.imagelab.views.AbstractInformationUI;
-import com.imagelab.views.InformationContainerView;
-import com.imagelab.views.ProcessedImageView;
-import com.imagelab.views.forms.*;
+import com.imagelab.component.OperatorUIElement;
+import com.imagelab.operator.OpenCVOperator;
+import com.imagelab.operator.basic.ReadImage;
+import com.imagelab.operator.basic.WriteImage;
+import com.imagelab.operator.geotransformation.RotateImage;
+import com.imagelab.operator.imagebluring.ApplyBlurEffect;
+import com.imagelab.operator.imagebluring.ApplyGaussianBlurEffect;
+import com.imagelab.operator.imagebluring.ApplyMedianBlurEffect;
+import com.imagelab.operator.imageconversion.ColoredImageToBinary;
+import com.imagelab.operator.imageconversion.ConvertToGrayscale;
+import com.imagelab.operator.imageconversion.GrayscaleToBinary;
+import com.imagelab.util.Utilities;
+import com.imagelab.view.AbstractInformationUI;
+import com.imagelab.view.InformationContainerView;
+import com.imagelab.view.ProcessedImageView;
+import com.imagelab.view.forms.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -36,7 +36,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Stack;
 
-import static com.imagelab.utils.Constants.ANY_NODE;
+import static com.imagelab.util.Constants.ANY_NODE;
 
 /**
  * The controller class of the dashboard.
@@ -122,7 +122,7 @@ public class DashboardController implements Initializable {
 
     /**
      * informationScrollPane which shows the
-     * information related to the operators dragged
+     * information related to the operator dragged
      * to the playground.
      */
     @FXML
@@ -259,7 +259,7 @@ public class DashboardController implements Initializable {
 
     /**
      * Method which builds the UI elements
-     * and add them to the side operators bar.
+     * and add them to the side operator bar.
      * Moreover, this handles the UI dragDone event
      * related cloning.
      *
