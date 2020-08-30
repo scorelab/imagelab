@@ -1,8 +1,8 @@
 package com.imagelab;
 
-import com.imagelab.operators.basic.ReadImage;
-import com.imagelab.utils.Constants;
-import com.imagelab.utils.Utilities;
+import com.imagelab.operator.basic.ReadImage;
+import com.imagelab.util.Constants;
+import com.imagelab.util.Utilities;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,8 +12,8 @@ import org.opencv.core.Core;
 
 import java.io.IOException;
 
-import static com.imagelab.utils.Constants.DASHBOARD_HEIGHT;
-import static com.imagelab.utils.Constants.DASHBOARD_WIDTH;
+import static com.imagelab.util.Constants.DASHBOARD_HEIGHT;
+import static com.imagelab.util.Constants.DASHBOARD_WIDTH;
 
 /**
  * JavaFX App main class which creates the scene
