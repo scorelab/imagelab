@@ -11,9 +11,11 @@ import com.imagelab.operator.imagebluring.ApplyMedianBlurEffect;
 import com.imagelab.operator.imageconversion.ColoredImageToBinary;
 import com.imagelab.operator.imageconversion.ConvertToGrayscale;
 import com.imagelab.operator.imageconversion.GrayscaleToBinary;
+import com.imagelab.util.Constants;
 import com.imagelab.util.Utilities;
 import com.imagelab.view.AbstractInformationUI;
 import com.imagelab.view.InformationContainerView;
+import com.imagelab.view.InitialPreviewPaneView;
 import com.imagelab.view.ProcessedImageView;
 import com.imagelab.view.forms.*;
 import javafx.event.ActionEvent;
@@ -56,25 +58,11 @@ public class DashboardController implements Initializable {
     private OperatorUIElement curApplyingOpUIElement;
 
     /**
-     * To indicate/guide user to the
-     * properties pane area.
-     */
-    @FXML
-    private Label propertiesPaneGuideLabel;
-
-    /**
-     * To indicate/guide user to the
+     * Label which indicates the
      * playground area.
      */
     @FXML
-    private Label playgroundGuideLabel;
-
-    /**
-     * To indicate/guide user to the
-     * preview pane area.
-     */
-    @FXML
-    private Label previewPaneGuideLabel;
+    private Label playgroundAreaLabel;
 
     /**
      * playgroundOpContainer: : the HBox container where
@@ -168,7 +156,26 @@ public class DashboardController implements Initializable {
             processedImage = new ProcessedImageView(writableImage);
             previewPane.getChildren().addAll(processedImage);
         } else {
-            System.out.println("Stack is empty");
+            System.err.println("ERROR: empty pipeline, execution failed.");
+        }
+    }
+
+    /**
+     * Method which generates a report based
+     * on the pipeline user has been developed by
+     * dragging and dropping OpenCV operators
+     * to the playground area.
+     *
+     * @param event - Mouse click even.
+     * @throws IOException - if the event was not captured.
+     */
+    @FXML
+    public void onExportClicked(ActionEvent event) throws IOException {
+        if (!appliedOperators.empty()) {
+            Utilities.generate(appliedOperators);
+        } else {
+            System.err.println("ERROR: empty pipeline, report"
+                    + " generation failed,");
         }
     }
 
@@ -184,15 +191,19 @@ public class DashboardController implements Initializable {
         if (!appliedOperators.empty()) {
             // Removing all the elements from appliedOperators.
             this.appliedOperators.clear();
+            // Removing rendered output images.
+            this.previewPane.getChildren().clear();
             // Removing elements from the operators container.
             this.playgroundOpContainer.getChildren().clear();
             // Clearing the content of properties pane
             this.uiElementPropertiesPane.setContent(null);
             // Setting the dashboard to initial state.
-            serDashboardToInitialState();
-            System.out.println("Pipeline and dashboard has been cleared.");
+            setDashboardToInitialState();
+            System.out.println("Pipeline and dashboard"
+                    + " has been cleared.");
         } else {
-            System.out.println("Stack is empty. There's nothing to reset.");
+            System.err.println("ERROR: empty pipeline,"
+                    + " nothing to be cleared.");
         }
     }
 
@@ -222,13 +233,8 @@ public class DashboardController implements Initializable {
      */
     @FXML
     private void handleDrop(DragEvent event) {
-        /*
-         * Disable visibility for the playground and properties
-         * pane related indications.
-         */
-        this.playgroundGuideLabel.setVisible(false);
-        this.propertiesPaneGuideLabel.setVisible(false);
-
+        // Hiding playground area indicator.
+        playgroundAreaLabel.setVisible(false);
         System.out.println(curApplyingOpUIElement.operatorName);
         /*
          * if this was the initial move then no need to validate,
@@ -257,8 +263,8 @@ public class DashboardController implements Initializable {
                         + " invalid operator on top of "
                         + curApplyingOpUIElement.operatorName);
                 alert.showAndWait();
-                System.err.println("cannot drag this element on top of : "
-                        + curApplyingOpUIElement.operatorName);
+                System.err.println("ERROR: cannot drag this"
+                        + " element on top");
                 return;
             }
             proceedLocateOperator(event);
@@ -527,23 +533,42 @@ public class DashboardController implements Initializable {
                 applyGaussianBlurEffect.element,
                 applyMedianBlurEffect.element
         );
-        serDashboardToInitialState();
+        setDashboardToInitialState();
     }
 
     /**
      * Method which setup the initial dashboard
      * when the dashboard UI renders.
      */
-    private void serDashboardToInitialState() {
+    private void setDashboardToInitialState() {
         // To set spacing between stacked operators.
         playgroundOpContainer.setSpacing(0);
         /*
-         * Enable visibility for the playground, properties
-         * and preview pane related indications.
+         * Setup the initial information pane
+         * and information to be populated to
+         * introduce the dashboard to the user.
          */
-        this.playgroundGuideLabel.setVisible(true);
-        this.propertiesPaneGuideLabel.setVisible(true);
-        this.previewPaneGuideLabel.setVisible(true);
-        // Disabling run and refresh invoking.
+        InformationContainerView initialInformationContainerView;
+        initialInformationContainerView = new InformationContainerView(
+                Constants.HOW_TO_USE_INFO);
+        this.informationScrollPane.setContent(initialInformationContainerView);
+        /*
+         * Setup initial properties pane with
+         * a area indication label.
+         */
+        InitialPropertiesFromUI initialPropertiesFromUI;
+        initialPropertiesFromUI = new InitialPropertiesFromUI();
+        this.uiElementPropertiesPane.setContent(initialPropertiesFromUI);
+        /*
+         * Setup initial preview pane with
+         * a area indication label.
+         */
+        InitialPreviewPaneView initialPreviewPaneView;
+        initialPreviewPaneView = new InitialPreviewPaneView();
+        this.previewPane.getChildren().addAll(initialPreviewPaneView);
+        /*
+         * Enable playground area indicator Label.
+         */
+        playgroundAreaLabel.setVisible(true);
     }
 }

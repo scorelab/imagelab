@@ -34,6 +34,32 @@ public final class Constants {
     public static final String STYLESHEET_PATH = "/com/imagelab/style.css";
 
     /**
+     * Dashboard area indicator label
+     * font size.
+     */
+    public static final double AREA_LBL_FONT_SIZE = 33.0;
+    /**
+     * Dashboard area indicator label
+     * font color.
+     */
+    public static final String AREA_LBL_FONT_CLR = "#b0b0b0";
+    /**
+     * Initial information or the instructions to use dashboard
+     * to be displayed in the information pane
+     * when the app starts.
+     */
+    public static final String HOW_TO_USE_INFO = "Let's get stated with"
+            + " ImageLab.\n\nImageLab dashboard consist four main parts"
+            + " such as,\n"
+            + "Operators pane: panel on your left contains the"
+            + "operators that you can drag and drop to the"
+            + "playground area.\n\n"
+            + "Playground: area that you can use to build your"
+            + "openCV pipeline.\n\n"
+            + "Preview pane: area which you can see your output.\n\n"
+            + "Properties pane: where you can change the properties"
+            + "related to the operators.";
+    /**
      * Private constructor to restrict
      * instantiation.
      */
@@ -47,7 +73,7 @@ public final class Constants {
         /**
          * Height of the operator UI element.
          */
-        public static final double HEIGHT = 60.0;
+        public static final double HEIGHT = 70.0;
         /**
          * Width of the operator UI element.
          */
