@@ -27,6 +27,7 @@ import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import org.opencv.core.Mat;
@@ -71,6 +72,14 @@ public class DashboardController implements Initializable {
      */
     @FXML
     private Pane playground;
+
+    /**
+     * playgroundOpContainer: : the Hbox container where
+     * users build the pipeline by
+     * dragging and dropping operator ui elements.
+     */
+    @FXML
+    private HBox playgroundOpContainer;
 
     /**
      * basicOperatorsContainer contains,
@@ -189,7 +198,7 @@ public class DashboardController implements Initializable {
         // just move on to the next step.
         if (appliedOperators.size() == 0
                 && curApplyingOpUIElement.operator instanceof ReadImage) {
-            proceedToMoveOperator(event);
+            proceedLocateOperator(event);
         } else {
             if (appliedOperators.size() == 0) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -214,33 +223,28 @@ public class DashboardController implements Initializable {
                         + curApplyingOpUIElement.operatorName);
                 return;
             }
-            proceedToMoveOperator(event);
+            proceedLocateOperator(event);
         }
     }
 
     /**
-     * This method handles the the logic related to moving and UI element and
-     * relocating it in a new position.
+     * This method handles the the logic related to locating
+     * a UI element automatically one after the other.
      *
      * @param event - dragEvent
      */
-    private void proceedToMoveOperator(DragEvent event) {
+    private void proceedLocateOperator(DragEvent event) {
 
         assert curApplyingOpUIElement != null : "currentlyApplyingOperator"
                 + " cannot be null here...";
-
-        double relocateX = dropX - (OperatorUIElement.WIDTH / 2);
-        double relocateY = dropY - (OperatorUIElement.HEIGHT / 4);
-
         Dragboard dragboard = event.getDragboard();
 
         if (dragboard.hasContent(ANY_NODE)) {
-            if (playground.getChildren().contains(curApplyingOpUIElement.element)) {
-                curApplyingOpUIElement.element.relocate(relocateX, relocateY);
+            if (playgroundOpContainer.getChildren().contains(curApplyingOpUIElement.element)) {
+                System.out.println(curApplyingOpUIElement.operatorName
+                        + " Operator has been placed already");
             } else {
-                curApplyingOpUIElement.element.setLayoutX(relocateX);
-                curApplyingOpUIElement.element.setLayoutY(relocateY);
-                playground.getChildren().add(curApplyingOpUIElement.element);
+                playgroundOpContainer.getChildren().add(curApplyingOpUIElement.element);
             }
             if (!this.curApplyingOpUIElement.addedToOperatorsStack) {
                 this.appliedOperators.push(curApplyingOpUIElement);
@@ -267,6 +271,7 @@ public class DashboardController implements Initializable {
      * @param resourceBundle - ResourceBundle.
      */
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         OperatorUIElement.onDragDone = (element) -> {
             if (element == null) {
                 this.uiElementPropertiesPane.setContent(null);
@@ -484,6 +489,14 @@ public class DashboardController implements Initializable {
                 applyGaussianBlurEffect.element,
                 applyMedianBlurEffect.element
         );
+        initializePlayground();
+    }
 
+    /**
+     * Method which setup playground
+     * when the dashboard UI renders.
+     */
+    private void initializePlayground() {
+        playgroundOpContainer.setSpacing(5);
     }
 }
