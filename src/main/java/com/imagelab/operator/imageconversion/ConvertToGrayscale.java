@@ -17,24 +17,6 @@ import java.util.Set;
  */
 public class ConvertToGrayscale extends OpenCVOperator {
     /**
-     * Information related to the ConvertToGrayscale operator.
-     */
-    public enum Information {
-        /**
-         * Operator information in string format.
-         */
-        OPERATOR_INFO {
-            /**
-             * @return - Operator information and name of the operator.
-             */
-            public String toString() {
-                return "Convert Grayscale\n\nThis operations allows"
-                        + " you to convert your image into a gray image.";
-            }
-        }
-    }
-
-    /**
      * This method validates the acceptable operations before perform
      * this operation.
      *
@@ -106,5 +88,23 @@ public class ConvertToGrayscale extends OpenCVOperator {
                 image.rows(),
                 data1);
         return image;
+    }
+
+    /**
+     * Information related to the ConvertToGrayscale operator.
+     */
+    public enum Information {
+        /**
+         * Operator information in string format.
+         */
+        OPERATOR_INFO {
+            /**
+             * @return - Operator information and name of the operator.
+             */
+            public String toString() {
+                return "Convert Grayscale\n\nThis operations allows"
+                        + " you to convert your image into a gray image.";
+            }
+        }
     }
 }

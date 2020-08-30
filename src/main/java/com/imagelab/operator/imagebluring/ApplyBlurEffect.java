@@ -21,26 +21,6 @@ import java.util.Set;
  */
 public class ApplyBlurEffect extends OpenCVOperator {
     /**
-     * Information related to the ApplyBlurEffect operator.
-     */
-    public enum Information {
-        /**
-         * Operator information in string format.
-         */
-        OPERATOR_INFO {
-            /**
-             * @return - Operator information and name of the operator.
-             */
-            public String toString() {
-                return "Simple Blur Effect\n\nThis operations allows"
-                        + " you to apply simple blur effects to your image."
-                        + " You can change size and point properties to"
-                        + " change the blur effect";
-            }
-        }
-    }
-
-    /**
      * width of the openCV Size obj.
      */
     private double widthSize = 45d;
@@ -203,5 +183,25 @@ public class ApplyBlurEffect extends OpenCVOperator {
      */
     public void setPointY(double pointY) {
         this.pointY = pointY;
+    }
+
+    /**
+     * Information related to the ApplyBlurEffect operator.
+     */
+    public enum Information {
+        /**
+         * Operator information in string format.
+         */
+        OPERATOR_INFO {
+            /**
+             * @return - Operator information and name of the operator.
+             */
+            public String toString() {
+                return "Simple Blur Effect\n\nThis operations allows"
+                        + " you to apply simple blur effects to your image."
+                        + " You can change size and point properties to"
+                        + " change the blur effect";
+            }
+        }
     }
 }

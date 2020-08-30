@@ -16,27 +16,6 @@ import java.util.Set;
  */
 public class ColoredImageToBinary extends OpenCVOperator {
     /**
-     * Information related to the ColoredImageToBinary operator.
-     */
-    public enum Information {
-        /**
-         * Operator information in string format.
-         */
-        OPERATOR_INFO {
-            /**
-             * @return - Operator information and name of the operator.
-             */
-            public String toString() {
-                return "Color Image to Binary\n\nThis operations allows"
-                        + " you to convert your colored (RGB) images into "
-                        + "a binary image. Moreover, you can adjust the"
-                        + "conversion threshold values and the threshold"
-                        + " type as well.";
-            }
-        }
-    }
-
-    /**
      * Properties related to the
      * colored image to binary conversion.
      */
@@ -187,5 +166,26 @@ public class ColoredImageToBinary extends OpenCVOperator {
      */
     public void setThresholdType(String thresholdType) {
         this.thresholdType = thresholdType;
+    }
+
+    /**
+     * Information related to the ColoredImageToBinary operator.
+     */
+    public enum Information {
+        /**
+         * Operator information in string format.
+         */
+        OPERATOR_INFO {
+            /**
+             * @return - Operator information and name of the operator.
+             */
+            public String toString() {
+                return "Color Image to Binary\n\nThis operations allows"
+                        + " you to convert your colored (RGB) images into "
+                        + "a binary image. Moreover, you can adjust the"
+                        + "conversion threshold values and the threshold"
+                        + " type as well.";
+            }
+        }
     }
 }

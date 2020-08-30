@@ -18,24 +18,6 @@ import java.util.Set;
  * applying gaussian blur effects to an image  UI element.
  */
 public class ApplyGaussianBlurEffect extends OpenCVOperator {
-    /**
-     * Information related to the ApplyGaussianBlurEffect operator.
-     */
-    public enum Information {
-        /**
-         * Operator information in string format.
-         */
-        OPERATOR_INFO {
-            /**
-             * @return - Operator information and name of the operator.
-             */
-            public String toString() {
-                return "Apply gaussian blur\n\nThis operations allows"
-                        + " you to apply gaussian blur effects to your image.";
-            }
-        }
-    }
-
     // properties of gaussian blur effect.
     private double widthSize = 45D;
     private double heightSize = 45D;
@@ -143,5 +125,23 @@ public class ApplyGaussianBlurEffect extends OpenCVOperator {
      */
     public void setHeightSize(double heightSize) {
         this.heightSize = heightSize;
+    }
+
+    /**
+     * Information related to the ApplyGaussianBlurEffect operator.
+     */
+    public enum Information {
+        /**
+         * Operator information in string format.
+         */
+        OPERATOR_INFO {
+            /**
+             * @return - Operator information and name of the operator.
+             */
+            public String toString() {
+                return "Apply gaussian blur\n\nThis operations allows"
+                        + " you to apply gaussian blur effects to your image.";
+            }
+        }
     }
 }

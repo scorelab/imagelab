@@ -12,26 +12,6 @@ import java.util.Set;
  * image conversion from a grayscale image to a binary.
  */
 public class GrayscaleToBinary extends OpenCVOperator {
-    /**
-     * Information related to the GrayscaleToBinary operator.
-     */
-    public enum Information {
-        /**
-         * Operator information in string format.
-         */
-        OPERATOR_INFO {
-            /**
-             * @return - Operator information and name of the operator.
-             */
-            public String toString() {
-                return "Grayscale Image to Binary\n\nThis operations"
-                        + " allows you to convert your grayscale image"
-                        + " into a binary image. Moreover, you can adjust"
-                        + " the conversion threshold values as well.";
-            }
-        }
-    }
-
     private double thresholdValue;
     private double maxValue;
 
@@ -136,5 +116,25 @@ public class GrayscaleToBinary extends OpenCVOperator {
      */
     public void setMaxValue(double maxValue) {
         this.maxValue = maxValue;
+    }
+
+    /**
+     * Information related to the GrayscaleToBinary operator.
+     */
+    public enum Information {
+        /**
+         * Operator information in string format.
+         */
+        OPERATOR_INFO {
+            /**
+             * @return - Operator information and name of the operator.
+             */
+            public String toString() {
+                return "Grayscale Image to Binary\n\nThis operations"
+                        + " allows you to convert your grayscale image"
+                        + " into a binary image. Moreover, you can adjust"
+                        + " the conversion threshold values as well.";
+            }
+        }
     }
 }
