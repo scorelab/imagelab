@@ -59,6 +59,7 @@ public final class Constants {
             + "Preview pane: area which you can see your output.\n\n"
             + "Properties pane: where you can change the properties"
             + "related to the operators.";
+
     /**
      * Private constructor to restrict
      * instantiation.

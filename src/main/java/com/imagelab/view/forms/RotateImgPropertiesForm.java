@@ -8,7 +8,7 @@ import javafx.scene.layout.VBox;
 /**
  * Rotate image properties form view.
  */
-public class RotateImgPropertiesForm extends AbstractPropertiesFormUI {
+public class RotateImgPropertiesForm extends AbstractPropertiesForm {
     /**
      * Builds the RotateImgPropertiesForm.
      *

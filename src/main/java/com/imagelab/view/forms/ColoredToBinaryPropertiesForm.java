@@ -12,7 +12,7 @@ import javafx.scene.layout.VBox;
  * Color to binary image conversion operation related
  * UI properties form.
  */
-public class ColoredToBinaryPropertiesForm extends AbstractPropertiesFormUI {
+public class ColoredToBinaryPropertiesForm extends AbstractPropertiesForm {
     /**
      * Builds the ColoredToBinaryPropertiesForm.
      *

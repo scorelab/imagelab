@@ -29,8 +29,7 @@ public class ReadImage extends OpenCVOperator {
      */
     @Override
     public boolean validate(OpenCVOperator previous) {
-        return true;
-        // return allowedOperators().contains(previous.getClass());
+        return false;
     }
 
     /**
@@ -58,7 +57,6 @@ public class ReadImage extends OpenCVOperator {
     @Override
     public Set<Class<?>> allowedOperators() {
         Set<Class<?>> allowed = new HashSet<>();
-        allowed.add(ReadImage.class);
         return allowed;
     }
 

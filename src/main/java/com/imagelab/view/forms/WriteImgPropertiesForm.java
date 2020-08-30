@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 /**
  * Write image properties form view.
  */
-public class WriteImgPropertiesForm extends AbstractPropertiesFormUI {
+public class WriteImgPropertiesForm extends AbstractPropertiesForm {
     /**
      * Builds the WriteImgPropertiesForm.
      *

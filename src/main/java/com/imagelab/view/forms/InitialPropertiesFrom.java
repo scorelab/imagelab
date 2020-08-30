@@ -13,12 +13,12 @@ import javafx.scene.text.TextAlignment;
 /**
  * Initial properties form UI.
  */
-public class InitialPropertiesFromUI extends AnchorPane {
+public class InitialPropertiesFrom extends AnchorPane {
     /**
      * Builds the initial properties form UI
      * with one area indicator label.
      */
-    public InitialPropertiesFromUI() {
+    public InitialPropertiesFrom() {
         setPrefSize(224.0, 523.0);
         VBox areaIndicatorLabelContainer = new VBox();
         areaIndicatorLabelContainer.setPrefWidth(205.0);

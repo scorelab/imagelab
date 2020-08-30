@@ -2,6 +2,8 @@ package com.imagelab.util;
 
 import com.imagelab.component.OperatorUIElement;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.WritableImage;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfByte;
@@ -11,6 +13,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.Date;
+import java.util.Optional;
 import java.util.Stack;
 
 import static org.opencv.imgcodecs.Imgcodecs.imencode;
@@ -148,5 +151,37 @@ public final class Utilities {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Reusable method to show alerts when needed.
+     *
+     * @param alertTitle   - title.
+     * @param alertHeader  - header.
+     * @param alertContent - content.
+     * @param alertType    - error/info.
+     * @return - alertReply.
+     */
+    public static String showAlert(String alertTitle,
+                                   String alertHeader,
+                                   String alertContent,
+                                   Alert.AlertType alertType) {
+        String alertReply = "NEUTRAL";
+        Alert alert = new Alert(alertType);
+        alert.setTitle(alertTitle);
+        alert.setHeaderText(alertHeader);
+        alert.setContentText(alertContent);
+        //For confirmation type alerts
+        if (alertType == Alert.AlertType.CONFIRMATION) {
+            Optional<ButtonType> userSelection = alert.showAndWait();
+            if (userSelection.get() == ButtonType.OK) {
+                alertReply = "OK";
+            } else if (userSelection.get() == ButtonType.CANCEL) {
+                alertReply = "CANCEL";
+            }
+        } else {
+            alert.showAndWait();
+        }
+        return alertReply;
     }
 }
