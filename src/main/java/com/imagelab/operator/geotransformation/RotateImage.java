@@ -17,27 +17,6 @@ import java.util.Set;
  * rotating an image related functionalities.
  */
 public class RotateImage extends OpenCVOperator {
-    /**
-     * Information related to the RotateImage operator.
-     */
-    public enum Information {
-        /**
-         * Operator information in string format.
-         */
-        OPERATOR_INFO {
-            /**
-             * @return - Operator information and name
-             * of the operator.
-             */
-            public String toString() {
-                return "Rotate Image\n\nThis operator allows you to"
-                        + " rotate an image to a specific angle."
-                        + " Moreover you can change angle and scale"
-                        + " related to the rotation.";
-            }
-        }
-    }
-
     private double angle; // Rotation angle.
     private double scale; // Rotation scale.
 
@@ -145,5 +124,26 @@ public class RotateImage extends OpenCVOperator {
      */
     public void setScale(double scale) {
         this.scale = scale;
+    }
+
+    /**
+     * Information related to the RotateImage operator.
+     */
+    public enum Information {
+        /**
+         * Operator information in string format.
+         */
+        OPERATOR_INFO {
+            /**
+             * @return - Operator information and name
+             * of the operator.
+             */
+            public String toString() {
+                return "Rotate Image\n\nThis operator allows you to"
+                        + " rotate an image to a specific angle."
+                        + " Moreover you can change angle and scale"
+                        + " related to the rotation.";
+            }
+        }
     }
 }

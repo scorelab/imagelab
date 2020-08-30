@@ -8,28 +8,18 @@ import javafx.scene.input.DataFormat;
  */
 public final class Constants {
     /**
-     * Private constructor to restrict
-     * instantiation.
-     */
-    private Constants() {
-    }
-
-    /**
      * Application version.
      */
     public static final String IMAGELAB_VERSION = "v1.0.0";
-
     /**
      * Organization details.
      */
     public static final String ORG_INFO = "SCoRE Labs";
-
     /**
      * DataFormats related to the app.
      */
     public static final DataFormat ANY_NODE
             = new DataFormat("javafx.scene.Node");
-
     /**
      * Width of the dashboard.
      */
@@ -38,11 +28,17 @@ public final class Constants {
      * Height of the dashboard.
      */
     public static final double DASHBOARD_HEIGHT = 785.0;
-
     /**
      * Stylesheet Paths or URLs.
      */
     public static final String STYLESHEET_PATH = "/com/imagelab/style.css";
+
+    /**
+     * Private constructor to restrict
+     * instantiation.
+     */
+    private Constants() {
+    }
 
     /**
      * Operator UI element related values.
