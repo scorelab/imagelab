@@ -9,7 +9,13 @@
 .idea/**/shelf
 
 # Generated files
-.idea/**/contentModel.xml
+.idea/**/contentModel.
+.idea/**/ImageLab.iml
+.idea/**/compiler.xml
+.idea/vcs.xml
+.idea/**/jarRepositories.xml
+.idea/**/.name
+.idea/**/misc.xml
 
 # Sensitive or high-churn files
 .idea/**/dataSources/
@@ -77,6 +83,9 @@ fabric.properties
 # modules.xml
 # .idea/misc.xml
 # *.ipr
+
+#Checkstyle plugin
+.idea/**/checkstyle-idea.xml
 
 # Sonarlint plugin
 .idea/**/sonarlint/
