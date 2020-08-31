@@ -121,7 +121,7 @@ public final class Utilities {
      *
      * @param stackOfOperators - stack datasource.
      */
-    public static void generate(Stack<OperatorUIElement> stackOfOperators) {
+    public static void generateReport(Stack<OperatorUIElement> stackOfOperators) {
         // Generate string.
         Date date = java.util.Calendar.getInstance().getTime();
         StringBuilder stringBuilder = new StringBuilder();
@@ -133,16 +133,15 @@ public final class Utilities {
             stringBuilder.append(String.format("%-30s%n", "|"));
             stringBuilder.append(String.format("%-30s%n", "↓"));
         }
-        writeContentToAFile(stringBuilder.toString(), date.toString());
+        writeContentToAFile(stringBuilder.toString());
     }
 
     /**
      * This utility method writes a given content to file.
      *
      * @param content  - content to be write to a file.
-     * @param fileName - name of the file.
      */
-    public static void writeContentToAFile(String content, String fileName) {
+    public static void writeContentToAFile(String content) {
         File file = new File("src/main/resources/com/imagelab/reports/ImageLabReport.txt");
         try {
             FileWriter fr = new FileWriter(file);

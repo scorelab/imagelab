@@ -1,6 +1,7 @@
+package com.imagelab.operator.geotransformation;
+
 import com.imagelab.operator.OpenCVOperator;
 import com.imagelab.operator.basic.WriteImage;
-import com.imagelab.operator.geotransformation.RotateImage;
 import com.imagelab.operator.imagebluring.ApplyBlurEffect;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;

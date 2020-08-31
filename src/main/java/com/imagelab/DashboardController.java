@@ -179,7 +179,7 @@ public class DashboardController implements Initializable {
     @FXML
     public void onExportClicked(ActionEvent event) throws IOException {
         if (!appliedOperators.empty()) {
-            Utilities.generate(appliedOperators);
+            Utilities.generateReport(appliedOperators);
             Utilities.showAlert(
                     "Report Generation",
                     "Report generation successful.",
