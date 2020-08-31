@@ -20,13 +20,14 @@
 
 /*Read Image UI element*/
 #readImage {
-    /*-fx-shape: "M 0 3 L 0 2 L 0 1 L 0 0 L 3 0 L 3 1 L 4 1 L 4 2 L 3 2 L 3 3 Z";*/
+    /*-fx-shape: "M 0 0 L 0 -8 L 17 -8 L 22 -4 L 17 0 L 0 0";*/
     -fx-background-color: green;
     -fx-text-fill: white;
 }
 
 /*Write image UI element*/
 #writeImage {
+    /*-fx-shape: "M 0 0 L 19 0 L 19 -8 L 0 -8 L 5 -4";*/
     -fx-background-color: #003380;
     -fx-text-fill: white;
 }
