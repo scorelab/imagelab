@@ -7,15 +7,41 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
+        <!-- Encoding -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- Java 8 -->
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
+        <!-- Dependency versions -->
+        <junit-platform.version>5.6.2</junit-platform.version>
+        <maven-surefire-plugin.version>2.22.0</maven-surefire-plugin.version>
     </properties>
     <dependencies>
+        <!-- OpenCV 3 -->
         <dependency>
             <groupId>org.openpnp</groupId>
             <artifactId>opencv</artifactId>
             <version>3.2.0-0</version>
+        </dependency>
+        <!-- Jupiter API for writing tests -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit-platform.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- Jupiter Engine to run tests -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit-platform.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.vintage</groupId>
+            <artifactId>junit-vintage-engine</artifactId>
+            <version>${junit-platform.version}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
     <build>
@@ -65,6 +91,28 @@
                 <configuration>
                     <mainClass>com.imagelab.App</mainClass>
                 </configuration>
+            </plugin>
+            <!-- Surefire-plugin to run tests -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-surefire-plugin.version}</version>
+                <configuration>
+                    <skipTests>false</skipTests>
+                    <includes>
+                        <include>**/Test*.java</include>
+                        <include>**/*Test.java</include>
+                        <include>**/*Tests.java</include>
+                        <include>**/*TestCase.java</include>
+                    </includes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>test</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

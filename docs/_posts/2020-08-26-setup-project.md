@@ -137,6 +137,18 @@ to build the project.
 mvn clean install
 ```
 
+To run tests
+
+```
+mvn clean test
+```
+
+To skip tests and run the project.
+
+```
+mvn install -Dmaven.test.skip=true
+```
+
 Once the project build is successful, in order to execute the project run 
 following command in the terminal.
 
