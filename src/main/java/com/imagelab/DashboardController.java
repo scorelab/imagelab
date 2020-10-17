@@ -12,6 +12,7 @@ import com.imagelab.operator.imagebluring.ApplyMedianBlurEffect;
 import com.imagelab.operator.imageconversion.ColoredImageToBinary;
 import com.imagelab.operator.imageconversion.ConvertToGrayscale;
 import com.imagelab.operator.imageconversion.GrayscaleToBinary;
+import com.imagelab.operator.thresholding.ApplySimpleThreshold;
 import com.imagelab.util.Constants;
 import com.imagelab.util.Utilities;
 import com.imagelab.view.AbstractInformationUI;
@@ -113,6 +114,13 @@ public class DashboardController implements Initializable {
      */
     @FXML
     private VBox filteringOperatorsContainer;
+
+    /**
+     * thresholdingOperatorsContainer,
+     * simpleThresholding.
+     */
+    @FXML
+    private VBox thresholdingOperatorsContainer;
 
     /**
      * previewPane which outputs the
@@ -554,6 +562,7 @@ public class DashboardController implements Initializable {
         applyMedianBlurEffect.elementStyleId = "applyMedianBlur";
         applyMedianBlurEffect.buildElement();
 
+        //applyBoxFilterEffect UI element.
         OperatorUIElement applyBoxFilterEffect = new OperatorUIElement() {
             @Override
             public AbstractInformationUI buildInformationUI() {
@@ -571,6 +580,25 @@ public class DashboardController implements Initializable {
         applyBoxFilterEffect.operatorName = "APPLY-BOX-FILTER";
         applyBoxFilterEffect.elementStyleId = "applyBoxFilter";
         applyBoxFilterEffect.buildElement();
+
+        //applySimpleThresholdEffect UI element.
+        OperatorUIElement applySimpleThresholdEffect = new OperatorUIElement() {
+            @Override
+            public AbstractInformationUI buildInformationUI() {
+                return new InformationContainerView(ApplySimpleThreshold
+                        .Information.OPERATOR_INFO.toString());
+            }
+
+            @Override
+            public AbstractPropertiesForm buildPropertiesFormUI() {
+                return new SimpleThresholdPropertiesForm((ApplySimpleThreshold) this.operator);
+            }
+        };
+        applySimpleThresholdEffect.operator = new ApplySimpleThreshold();
+        applySimpleThresholdEffect.operatorId = ApplySimpleThreshold.class.getCanonicalName();
+        applySimpleThresholdEffect.operatorName = "APPLY-THRESHOLD";
+        applySimpleThresholdEffect.elementStyleId = "applyThreshold";
+        applySimpleThresholdEffect.buildElement();
 
         // basicOperatorsContainer.
         basicOperatorsContainer.setSpacing(15d);
@@ -606,12 +634,21 @@ public class DashboardController implements Initializable {
                 applyGaussianBlurEffect.element,
                 applyMedianBlurEffect.element
         );
+
         filteringOperatorsContainer.setSpacing(15d);
         filteringOperatorsContainer.setAlignment(Pos.TOP_CENTER);
         filteringOperatorsContainer.setLayoutY(20d);
         filteringOperatorsContainer.getChildren().addAll(
                 // Populating filteringOperatorsContainer.
                 applyBoxFilterEffect.element
+        );
+
+        thresholdingOperatorsContainer.setSpacing(15d);
+        thresholdingOperatorsContainer.setAlignment(Pos.TOP_CENTER);
+        thresholdingOperatorsContainer.setLayoutY(20d);
+        thresholdingOperatorsContainer.getChildren().addAll(
+                // Populating thresholdingOperatorsContainer.
+                applySimpleThresholdEffect.element
         );
         setDashboardToInitialState();
     }
