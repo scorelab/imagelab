@@ -45,7 +45,7 @@ public class SimpleBlurPropertiesForm extends AbstractPropertiesForm {
         heightSizeTextField.textProperty().addListener((observable, oldValue, newValue) -> {
             operator.setHeightSize(Double.parseDouble(newValue));
         });
-        widthSizeContainer.getChildren().addAll(lblHeightSize, heightSizeTextField);
+        heightSizeContainer.getChildren().addAll(lblHeightSize, heightSizeTextField);
 
         //Point - x.
         VBox xPointContainer = new VBox();
