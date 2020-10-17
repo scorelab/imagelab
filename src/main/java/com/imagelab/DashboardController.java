@@ -4,6 +4,7 @@ import com.imagelab.component.OperatorUIElement;
 import com.imagelab.operator.OpenCVOperator;
 import com.imagelab.operator.basic.ReadImage;
 import com.imagelab.operator.basic.WriteImage;
+import com.imagelab.operator.filtering.ApplyBoxFilter;
 import com.imagelab.operator.geotransformation.RotateImage;
 import com.imagelab.operator.imagebluring.ApplyBlurEffect;
 import com.imagelab.operator.imagebluring.ApplyGaussianBlurEffect;
@@ -105,6 +106,13 @@ public class DashboardController implements Initializable {
      */
     @FXML
     private VBox blurringOperatorsContainer;
+
+    /**
+     * filteringOperatorsContainer contains,
+     * boxFilter.
+     */
+    @FXML
+    private VBox filteringOperatorsContainer;
 
     /**
      * previewPane which outputs the
@@ -546,6 +554,24 @@ public class DashboardController implements Initializable {
         applyMedianBlurEffect.elementStyleId = "applyMedianBlur";
         applyMedianBlurEffect.buildElement();
 
+        OperatorUIElement applyBoxFilterEffect = new OperatorUIElement() {
+            @Override
+            public AbstractInformationUI buildInformationUI() {
+                return new InformationContainerView(ApplyBoxFilter
+                        .Information.OPERATOR_INFO.toString());
+            }
+
+            @Override
+            public AbstractPropertiesForm buildPropertiesFormUI() {
+                return new BoxFilterPropertiesForm((ApplyBoxFilter) this.operator);
+            }
+        };
+        applyBoxFilterEffect.operator = new ApplyBoxFilter();
+        applyBoxFilterEffect.operatorId = ApplyBoxFilter.class.getCanonicalName();
+        applyBoxFilterEffect.operatorName = "APPLY-BOX-FILTER";
+        applyBoxFilterEffect.elementStyleId = "applyBoxFilter";
+        applyBoxFilterEffect.buildElement();
+
         // basicOperatorsContainer.
         basicOperatorsContainer.setSpacing(15d);
         basicOperatorsContainer.setAlignment(Pos.TOP_CENTER);
@@ -579,6 +605,13 @@ public class DashboardController implements Initializable {
                 applyBlurEffect.element,
                 applyGaussianBlurEffect.element,
                 applyMedianBlurEffect.element
+        );
+        filteringOperatorsContainer.setSpacing(15d);
+        filteringOperatorsContainer.setAlignment(Pos.TOP_CENTER);
+        filteringOperatorsContainer.setLayoutY(20d);
+        filteringOperatorsContainer.getChildren().addAll(
+                // Populating filteringOperatorsContainer.
+                applyBoxFilterEffect.element
         );
         setDashboardToInitialState();
     }

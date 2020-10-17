@@ -76,3 +76,10 @@
     -fx-background-color: #254a23;
     -fx-text-fill: white;
 }
+
+/*Apply box filter effects
+ to an image UI element*/
+#applyBoxFilter {
+    -fx-background-color: #2957dd;
+    -fx-text-fill: white;
+}
