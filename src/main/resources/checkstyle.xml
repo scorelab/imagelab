@@ -124,7 +124,7 @@
         </module>
         <module name="MethodLength">
             <property name="tokens" value="METHOD_DEF"/>
-            <property name="max" value="250"/>
+            <property name="max" value="350"/>
             <property name="countEmpty" value="false"/>
         </module>
         <module name="ParameterNumber"/>

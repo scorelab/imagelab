@@ -78,6 +78,7 @@ public class ApplySimpleThreshold extends OpenCVOperator {
         allowed.add(ApplyGaussianBlurEffect.class);
         allowed.add(ApplyMedianBlurEffect.class);
         allowed.add(ApplyBoxFilter.class);
+        allowed.add(ApplyBorder.class);
         allowed.add(ApplySimpleThreshold.class);
         return allowed;
     }
@@ -100,8 +101,8 @@ public class ApplySimpleThreshold extends OpenCVOperator {
         // Applying simple threshold on the image.
         Imgproc.threshold(
                 imageFile, image,
-                50,
-                255,
+                thresh,
+                maxVal,
                 Imgproc.THRESH_BINARY);
 
         return image;
