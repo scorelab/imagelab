@@ -12,6 +12,7 @@ import com.imagelab.operator.imagebluring.ApplyMedianBlurEffect;
 import com.imagelab.operator.imageconversion.ColoredImageToBinary;
 import com.imagelab.operator.imageconversion.ConvertToGrayscale;
 import com.imagelab.operator.imageconversion.GrayscaleToBinary;
+import com.imagelab.operator.thresholding.ApplyBorder;
 import com.imagelab.operator.thresholding.ApplySimpleThreshold;
 import com.imagelab.util.Constants;
 import com.imagelab.util.Utilities;
@@ -600,6 +601,24 @@ public class DashboardController implements Initializable {
         applySimpleThresholdEffect.elementStyleId = "applyThreshold";
         applySimpleThresholdEffect.buildElement();
 
+        OperatorUIElement applyBorders = new OperatorUIElement() {
+            @Override
+            public AbstractInformationUI buildInformationUI() {
+                return new InformationContainerView(ApplyBorder
+                        .Information.OPERATOR_INFO.toString());
+            }
+
+            @Override
+            public AbstractPropertiesForm buildPropertiesFormUI() {
+                return new ApplyBordersPropertiesForm((ApplyBorder) this.operator);
+            }
+        };
+        applyBorders.operator = new ApplyBorder();
+        applyBorders.operatorId = ApplyBorder.class.getCanonicalName();
+        applyBorders.operatorName = "APPLY-BORDERS";
+        applyBorders.elementStyleId = "applyBorders";
+        applyBorders.buildElement();
+
         // basicOperatorsContainer.
         basicOperatorsContainer.setSpacing(15d);
         basicOperatorsContainer.setAlignment(Pos.TOP_CENTER);
@@ -648,7 +667,8 @@ public class DashboardController implements Initializable {
         thresholdingOperatorsContainer.setLayoutY(20d);
         thresholdingOperatorsContainer.getChildren().addAll(
                 // Populating thresholdingOperatorsContainer.
-                applySimpleThresholdEffect.element
+                applySimpleThresholdEffect.element,
+                applyBorders.element
         );
         setDashboardToInitialState();
     }
