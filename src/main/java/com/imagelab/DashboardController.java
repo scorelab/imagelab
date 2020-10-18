@@ -12,6 +12,7 @@ import com.imagelab.operator.imagebluring.ApplyMedianBlurEffect;
 import com.imagelab.operator.imageconversion.ColoredImageToBinary;
 import com.imagelab.operator.imageconversion.ConvertToGrayscale;
 import com.imagelab.operator.imageconversion.GrayscaleToBinary;
+import com.imagelab.operator.thresholding.ApplyAdaptiveThreshold;
 import com.imagelab.operator.thresholding.ApplyBorder;
 import com.imagelab.operator.thresholding.ApplySimpleThreshold;
 import com.imagelab.util.Constants;
@@ -601,6 +602,26 @@ public class DashboardController implements Initializable {
         applySimpleThresholdEffect.elementStyleId = "applyThreshold";
         applySimpleThresholdEffect.buildElement();
 
+        //applySimpleThresholdEffect UI element.
+        OperatorUIElement applyAdaptiveThresholdEffect = new OperatorUIElement() {
+            @Override
+            public AbstractInformationUI buildInformationUI() {
+                return new InformationContainerView(ApplyAdaptiveThreshold
+                        .Information.OPERATOR_INFO.toString());
+            }
+
+            @Override
+            public AbstractPropertiesForm buildPropertiesFormUI() {
+                return new AdaptiveThresholdPropertiesForm((ApplyAdaptiveThreshold) this.operator);
+            }
+        };
+        applyAdaptiveThresholdEffect.operator = new ApplyAdaptiveThreshold();
+        applyAdaptiveThresholdEffect.operatorId = ApplyAdaptiveThreshold.class.getCanonicalName();
+        applyAdaptiveThresholdEffect.operatorName = "ADAPTIVE-THRESHOLD";
+        applyAdaptiveThresholdEffect.elementStyleId = "adaptiveThreshold";
+        applyAdaptiveThresholdEffect.buildElement();
+
+        //applyBorders UI element.
         OperatorUIElement applyBorders = new OperatorUIElement() {
             @Override
             public AbstractInformationUI buildInformationUI() {
@@ -668,6 +689,7 @@ public class DashboardController implements Initializable {
         thresholdingOperatorsContainer.getChildren().addAll(
                 // Populating thresholdingOperatorsContainer.
                 applySimpleThresholdEffect.element,
+                applyAdaptiveThresholdEffect.element,
                 applyBorders.element
         );
         setDashboardToInitialState();

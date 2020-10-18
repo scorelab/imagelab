@@ -91,6 +91,13 @@
     -fx-text-fill: white;
 }
 
+/*Apply adaptive threshold effects
+ to an image UI element*/
+#adaptiveThreshold {
+    -fx-background-color: #4f4f0f;
+    -fx-text-fill: white;
+}
+
 /*Apply borders
  to an image UI element*/
 #applyBorders {
