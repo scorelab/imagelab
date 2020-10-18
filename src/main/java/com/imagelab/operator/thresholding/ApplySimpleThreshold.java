@@ -3,6 +3,7 @@ package com.imagelab.operator.thresholding;
 import com.imagelab.operator.OpenCVOperator;
 import com.imagelab.operator.basic.ReadImage;
 import com.imagelab.operator.basic.WriteImage;
+import com.imagelab.operator.filtering.ApplyBoxFilter;
 import com.imagelab.operator.geotransformation.RotateImage;
 import com.imagelab.operator.imagebluring.ApplyBlurEffect;
 import com.imagelab.operator.imagebluring.ApplyGaussianBlurEffect;
@@ -76,6 +77,7 @@ public class ApplySimpleThreshold extends OpenCVOperator {
         allowed.add(ApplyBlurEffect.class);
         allowed.add(ApplyGaussianBlurEffect.class);
         allowed.add(ApplyMedianBlurEffect.class);
+        allowed.add(ApplyBoxFilter.class);
         allowed.add(ApplySimpleThreshold.class);
         return allowed;
     }
@@ -96,7 +98,11 @@ public class ApplySimpleThreshold extends OpenCVOperator {
         Mat image = new Mat();
 
         // Applying simple threshold on the image.
-        Imgproc.threshold(imageFile, image, 50, 255, Imgproc.THRESH_BINARY);
+        Imgproc.threshold(
+                imageFile, image,
+                50,
+                255,
+                Imgproc.THRESH_BINARY);
 
         return image;
     }
