@@ -90,3 +90,10 @@
     -fx-background-color: #cfcb3f;
     -fx-text-fill: white;
 }
+
+/*Apply borders
+ to an image UI element*/
+#applyBorders {
+    -fx-background-color: #282828;
+    -fx-text-fill: white;
+}
