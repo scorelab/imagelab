@@ -43,7 +43,7 @@ public class SimpleThresholdPropertiesForm extends AbstractPropertiesForm {
         maxValTextField.setPrefSize(205.0, 27.0);
         //Listener to capture text change.
         maxValTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-            operator.setThresholdValue(Double.parseDouble(newValue));
+            operator.setMaxValue(Double.parseDouble(newValue));
         });
         maxValueContainer.getChildren().addAll(lblMaxVal, maxValTextField);
 
