@@ -2,7 +2,7 @@
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Gitter](https://badges.gitter.im/scorelab/ImageLab.svg)](https://gitter.im/scorelab/ImageLab?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
-
+[![GitHub issues by-label][hacktoberfest-badge]][hacktoberfest-link]
   
 
 ### Introduction to the project:
@@ -68,4 +68,6 @@ mvn exec:java
 Check the **[project documentation](https://scorelab.github.io/ImageLab)** for more instructions.
 
 
-
+[<--# Generic Links -->]: #
+[hacktoberfest-link]: https://github.com/scorelab/ImageLab/issues?q=is%3Aissue+is%3Aopen+label%3Ahacktoberfest
+[hacktoberfest-badge]: https://img.shields.io/github/issues-raw/scorelab/ImageLab/hacktoberfest.svg?label=Hacktoberfest&color=purple
