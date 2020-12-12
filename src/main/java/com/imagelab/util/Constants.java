@@ -51,13 +51,13 @@ public final class Constants {
     public static final String HOW_TO_USE_INFO = "Let's get stated with"
             + " ImageLab.\n\nImageLab dashboard consist four main parts"
             + " such as,\n"
-            + "Operators pane: panel on your left contains the"
+            + "• Operators pane: panel on your left contains the "
             + "operators that you can drag and drop to the"
             + "playground area.\n\n"
-            + "Playground: area that you can use to build your"
+            + "• Playground: area that you can use to build your "
             + "openCV pipeline.\n\n"
-            + "Preview pane: area which you can see your output.\n\n"
-            + "Properties pane: where you can change the properties"
+            + "• Preview pane: area which you can see your output.\n\n"
+            + "• Properties pane: where you can change the properties "
             + "related to the operators.";
 
     /**
