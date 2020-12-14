@@ -600,7 +600,7 @@ public class DashboardController implements Initializable {
         applyDilationFilterEffect.operator = new ApplyDilation();
         applyDilationFilterEffect.operatorId = ApplyDilation.class.getCanonicalName();
         applyDilationFilterEffect.operatorName = "APPLY-DILATION";
-        applyDilationFilterEffect.elementStyleId = "applyImageDilation";
+        applyDilationFilterEffect.elementStyleId = "applyDilationFilter";
         applyDilationFilterEffect.buildElement();
 
         //applySimpleThresholdEffect UI element.
