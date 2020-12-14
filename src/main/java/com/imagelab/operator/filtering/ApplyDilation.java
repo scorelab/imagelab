@@ -96,7 +96,7 @@ public class ApplyDilation extends OpenCVOperator{
 	      // MorphsShapes supported :- MORPH_RECT,MORPH_CROSS,MORPH_ELLIPSE
 	      //
 	      Mat kernel = Imgproc.getStructuringElement(Imgproc.MORPH_ELLIPSE, 
-	         new Size((2*2) +1 , (2*2)+1));
+	         new Size((2*1) +1 , (2*1)+1));
 	      
 	      Point point = new Point(xPoint, yPoint);
 
