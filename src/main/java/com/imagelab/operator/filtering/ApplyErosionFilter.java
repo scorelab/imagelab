@@ -129,10 +129,10 @@ public class ApplyErosionFilter extends OpenCVOperator{
 	public enum Information{
 		OPERATOR_INFO{
 			public String toString() {
-				return "Erosion\n\n This Filter operation allows"
-						+" opposite action of dilation"
-						+" the size of an object in white shade or bright shade increases."
-						+" while the size of an object in black shade or dark shade decreases";
+				return "Erosion Filter\n\n Erosion is quite a similar process as dilation."
+						+" With this procedure the areas of dark regions grow in size and bright regions reduce."
+						+" The size of an object in white shade or bright shade increases."
+						+" while it decreases in white shade or bright shade";
 			}
 		}
 	}
