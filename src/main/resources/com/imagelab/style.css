@@ -84,6 +84,13 @@
     -fx-text-fill: white;
 }
 
+/*Apply erosion filter effects
+ to an image UI element*/
+#applyErosionFilter {
+    -fx-background-color: #0b475e;
+    -fx-text-fill: white;
+}
+
 /*Apply threshold effects
  to an image UI element*/
 #applyThreshold {

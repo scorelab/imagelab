@@ -5,6 +5,7 @@ import com.imagelab.operator.OpenCVOperator;
 import com.imagelab.operator.basic.ReadImage;
 import com.imagelab.operator.basic.WriteImage;
 import com.imagelab.operator.filtering.ApplyBoxFilter;
+import com.imagelab.operator.filtering.ApplyErosionFilter;
 import com.imagelab.operator.geotransformation.RotateImage;
 import com.imagelab.operator.imagebluring.ApplyBlurEffect;
 import com.imagelab.operator.imagebluring.ApplyGaussianBlurEffect;
@@ -582,6 +583,25 @@ public class DashboardController implements Initializable {
         applyBoxFilterEffect.operatorName = "APPLY-BOX-FILTER";
         applyBoxFilterEffect.elementStyleId = "applyBoxFilter";
         applyBoxFilterEffect.buildElement();
+        
+        //applyErosionFilterEffect UI element.
+        OperatorUIElement applyErosionFilterEffect = new OperatorUIElement() {
+            @Override
+            public AbstractInformationUI buildInformationUI() {
+                return new InformationContainerView(ApplyErosionFilter
+                        .Information.OPERATOR_INFO.toString());
+            }
+
+            @Override
+            public AbstractPropertiesForm buildPropertiesFormUI() {
+                return new ErosionFilterPropertiesForm((ApplyErosionFilter) this.operator);
+            }
+        };
+        applyErosionFilterEffect.operator = new ApplyErosionFilter();
+        applyErosionFilterEffect.operatorId =  ApplyErosionFilter.class.getCanonicalName();
+        applyErosionFilterEffect.operatorName = "APPLY-EROSION";
+        applyErosionFilterEffect.elementStyleId = "applyErosionFilter";
+        applyErosionFilterEffect.buildElement();
 
         //applySimpleThresholdEffect UI element.
         OperatorUIElement applySimpleThresholdEffect = new OperatorUIElement() {
@@ -680,7 +700,8 @@ public class DashboardController implements Initializable {
         filteringOperatorsContainer.setLayoutY(20d);
         filteringOperatorsContainer.getChildren().addAll(
                 // Populating filteringOperatorsContainer.
-                applyBoxFilterEffect.element
+                applyBoxFilterEffect.element,
+                applyErosionFilterEffect.element
         );
 
         thresholdingOperatorsContainer.setSpacing(15d);
