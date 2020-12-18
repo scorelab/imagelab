@@ -48,7 +48,7 @@ public final class Constants {
      * to be displayed in the information pane
      * when the app starts.
      */
-    public static final String HOW_TO_USE_INFO =  "Let's get stated with"
+    public static final String HOW_TO_USE_INFO = "Let's get stated with"
             + " ImageLab.\n\nImageLab dashboard consist four main parts"
             + " such as,\n"
             + "Operators pane: panel on your left contains the"
