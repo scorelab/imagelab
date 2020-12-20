@@ -5,6 +5,7 @@ import com.imagelab.operator.OpenCVOperator;
 import com.imagelab.operator.basic.ReadImage;
 import com.imagelab.operator.basic.WriteImage;
 import com.imagelab.operator.filtering.ApplyBoxFilter;
+import com.imagelab.operator.filtering.ApplyDilation;
 import com.imagelab.operator.geotransformation.RotateImage;
 import com.imagelab.operator.imagebluring.ApplyBlurEffect;
 import com.imagelab.operator.imagebluring.ApplyGaussianBlurEffect;
@@ -582,6 +583,25 @@ public class DashboardController implements Initializable {
         applyBoxFilterEffect.operatorName = "APPLY-BOX-FILTER";
         applyBoxFilterEffect.elementStyleId = "applyBoxFilter";
         applyBoxFilterEffect.buildElement();
+        
+        //applyDilationFilterEffect UI element.
+        OperatorUIElement applyDilationFilterEffect = new OperatorUIElement() {
+            @Override
+            public AbstractInformationUI buildInformationUI() {
+                return new InformationContainerView(ApplyDilation
+                        .Information.OPERATOR_INFO.toString());
+            }
+
+            @Override
+            public AbstractPropertiesForm buildPropertiesFormUI() {
+                return new DilationFilterPropertiesForm((ApplyDilation) this.operator);
+            }
+        };
+        applyDilationFilterEffect.operator = new ApplyDilation();
+        applyDilationFilterEffect.operatorId = ApplyDilation.class.getCanonicalName();
+        applyDilationFilterEffect.operatorName = "APPLY-DILATION";
+        applyDilationFilterEffect.elementStyleId = "applyDilationFilter";
+        applyDilationFilterEffect.buildElement();
 
         //applySimpleThresholdEffect UI element.
         OperatorUIElement applySimpleThresholdEffect = new OperatorUIElement() {
@@ -680,7 +700,8 @@ public class DashboardController implements Initializable {
         filteringOperatorsContainer.setLayoutY(20d);
         filteringOperatorsContainer.getChildren().addAll(
                 // Populating filteringOperatorsContainer.
-                applyBoxFilterEffect.element
+                applyBoxFilterEffect.element,
+                applyDilationFilterEffect.element
         );
 
         thresholdingOperatorsContainer.setSpacing(15d);
