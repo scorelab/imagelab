@@ -83,10 +83,16 @@
     -fx-background-color: #2957dd;
     -fx-text-fill: white;
 }
-/*Apply box filter effects
+/*Apply dilation filter effects
  to an image UI element*/
 #applyDilationFilter {
     -fx-background-color: #4d9fbf;
+    -fx-text-fill: white;
+}
+/*Apply erosion filter effects
+ to an image UI element*/
+#applyErosionFilter{
+	-fx-background-color: #4d9fbf;
     -fx-text-fill: white;
 }
 
