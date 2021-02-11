@@ -38,6 +38,12 @@
     -fx-text-fill: white;
 }
 
+/*Rotate image UI element*/
+#colorMaps {
+    -fx-background-color: #ff5733;
+    -fx-text-fill: white;
+}
+
 /*Convert to grayscale image UI element*/
 #grayscaleImage {
     -fx-background-color: #535353;
