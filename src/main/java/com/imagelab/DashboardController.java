@@ -7,6 +7,7 @@ import com.imagelab.operator.basic.WriteImage;
 import com.imagelab.operator.filtering.ApplyBoxFilter;
 import com.imagelab.operator.filtering.ApplyDilation;
 import com.imagelab.operator.filtering.ApplyErosion;
+import com.imagelab.operator.geotransformation.ColorMaps;
 import com.imagelab.operator.geotransformation.RotateImage;
 import com.imagelab.operator.imagebluring.ApplyBlurEffect;
 import com.imagelab.operator.imagebluring.ApplyGaussianBlurEffect;
@@ -457,6 +458,25 @@ public class DashboardController implements Initializable {
         rotateImage.elementStyleId = "rotateImage";
         rotateImage.buildElement();
 
+        //ColorMaps UI element
+        OperatorUIElement colorMaps = new OperatorUIElement() {
+            @Override
+            public AbstractInformationUI buildInformationUI() {
+                return new InformationContainerView(ColorMaps
+                        .Information.OPERATOR_INFO.toString());
+            }
+
+            @Override
+            public AbstractPropertiesForm buildPropertiesFormUI() {
+                return new ColorMapsPropertiesForm((ColorMaps) this.operator);
+            }
+        };
+        colorMaps.operator = new ColorMaps();
+        colorMaps.operatorId = ColorMaps.class.getCanonicalName();
+        colorMaps.operatorName = "COLOR_MAPS";
+        colorMaps.elementStyleId = "colorMaps";
+        colorMaps.buildElement();
+        
         //ConvertGrayscale UI element.
         OperatorUIElement convertToGrayScaleImage = new OperatorUIElement() {
             @Override
@@ -695,7 +715,8 @@ public class DashboardController implements Initializable {
         geoTransformationOperatorsContainer.setLayoutY(20d);
         geoTransformationOperatorsContainer.getChildren().addAll(
                 // Populating geoTransformationOperatorsContainer.
-                rotateImage.element
+                rotateImage.element,
+                colorMaps.element
         );
         imageConversionsOperatorsContainer.setSpacing(15d);
         imageConversionsOperatorsContainer.setAlignment(Pos.TOP_CENTER);
