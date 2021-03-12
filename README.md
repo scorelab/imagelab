@@ -17,7 +17,7 @@ See the [LICENSE](https://github.com/scorelab) file for details.
 
 ## Project Documentation
 
-Complete setup guidelines and other details can be found in the **[project documentation](https://scorelab.github.io/ImageLab)**.
+Complete setup guidelines and other details can be found in the **[project documentation](https://scorelab.org/imagelab/)**.
 
 ### Technologies
 
@@ -65,7 +65,7 @@ following command in the terminal.
 mvn exec:java
 ``` 
 
-Check the **[project documentation](https://scorelab.github.io/ImageLab)** for more instructions.
+Check the **[project documentation](https://scorelab.org/imagelab/)** for more instructions.
 
 
 [<--# Generic Links -->]: #
