@@ -98,9 +98,16 @@
 /*Apply erosion filter effects
  to an image UI element*/
 #applyErosionFilter{
-	-fx-background-color: #4d9fbf;
+	-fx-background-color: #1d2f73;
     -fx-text-fill: white;
 }
+/*Apply Image Pyramids Up Filter
+ * to an image UI element
+ */
+ #imagePyramidUpFilter {
+ 	-fx-background-color: #382bcf;
+ 	-fx-text-fill: white;
+ }
 
 /*Apply threshold effects
  to an image UI element*/
