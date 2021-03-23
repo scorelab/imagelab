@@ -9,6 +9,7 @@ import com.imagelab.operator.imagebluring.ApplyGaussianBlurEffect;
 import com.imagelab.operator.imagebluring.ApplyMedianBlurEffect;
 import com.imagelab.operator.imageconversion.ColoredImageToBinary;
 import com.imagelab.operator.imageconversion.ConvertToGrayscale;
+import com.imagelab.operator.filtering.*;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.Size;
@@ -18,7 +19,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 
-public class ApplyImagePyramid extends OpenCVOperator {
+public class ApplyImagePyramidDown extends OpenCVOperator {
 
 	@Override
 	public boolean validate(OpenCVOperator previous) {
@@ -35,7 +36,7 @@ public class ApplyImagePyramid extends OpenCVOperator {
      */
 	@Override
 	public Mat compute(Mat image) {
-		return imagePyramidsUp(image);
+		return imagePyramidsDown(image);
 	}
 
 	@Override
@@ -57,7 +58,7 @@ public class ApplyImagePyramid extends OpenCVOperator {
         return allowed;
 	}
 	
-	private Mat imagePyramidsUp(
+	private Mat imagePyramidsDown(
 					Mat src) {
 		// Creating an empty matrix to store the result
         Mat image = new Mat();
@@ -67,7 +68,7 @@ public class ApplyImagePyramid extends OpenCVOperator {
         
 
         // Applying Pyramid up filter on the Image
-        Imgproc.pyrUp(src,image,new Size(src.cols()*2, src.rows()*2),Core.BORDER_DEFAULT);
+        Imgproc.pyrDown(src,image,new Size(src.cols()/2, src.rows()/2),Core.BORDER_DEFAULT);
         
         
         return image;
@@ -78,12 +79,12 @@ public class ApplyImagePyramid extends OpenCVOperator {
 	public enum Information{
 		OPERATOR_INFO{
 			public String toString() {
-				return "Pyramids Up\n\n This Filter operation allows"
+				return "Pyramids Down\n\n This Filter operation allows"
 						+" Pyramid, or pyramid representation, is a type of multi scale signal reprsenatation"
 						+" in which a signal or an image is subject to repeated smooted and subsampling"
 						+" you to apply pyramid up effect to your image"
 						+" image is initially up-sampled and then blurred from this filter."
-						+" use scaler to up sampled the image";
+						+" use scaler to down sampled the image";
 			}
 		}
 	}
