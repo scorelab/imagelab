@@ -17,8 +17,8 @@ public class ProcessedImageView extends ImageView {
         setImage(image);
         setX(50);
         setY(25);
-        setFitHeight(400);
-        setFitWidth(500);
+        //setFitHeight(400);
+        //setFitWidth(500);
         setPreserveRatio(true);
         setSmooth(true);
         setCache(true);

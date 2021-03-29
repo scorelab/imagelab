@@ -56,6 +56,8 @@ public class ApplyErosion extends OpenCVOperator{
         allowed.add(ApplyGaussianBlurEffect.class);
         allowed.add(ApplyMedianBlurEffect.class);
         allowed.add(ApplyBoxFilter.class);
+        allowed.add(ApplyImagePyramidDown.class);
+        allowed.add(ApplyImagePyramid.class);
         allowed.add(ApplyDilation.class);
         allowed.add(ApplyErosion.class);
         return allowed;
