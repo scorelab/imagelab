@@ -17,8 +17,6 @@ See the [LICENSE](https://github.com/scorelab) file for details.
 
 ## Project Documentation
 
-Complete setup guidelines and other details can be found in the **[project documentation](https://scorelab.org/imagelab/)**.
-
 ### Technologies
 
 You need to setup following technologies in order to run this project and start contribution.
