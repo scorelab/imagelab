@@ -1,10 +1,16 @@
                   ImageLab v1 | Operation Pipeline
-                    Sun Aug 30 23:52:38 IST 2020
+                    Thu Apr 01 00:34:17 EET 2021
                                                  
 
 READ_IMAGE                    
 |                             
-↓                             
-GRAY_IMAGE                    
+?                             
+COLOR_MAPS                    
 |                             
-↓                             
+?                             
+WRITE_IMAGE                   
+|                             
+?                             
+APPLY-BORDERS                 
+|                             
+?                             
