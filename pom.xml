@@ -56,7 +56,6 @@
                     <verbose>true</verbose>
                 </configuration>
             </plugin>
-            <!-- Checkstyle plugin causes errors while building -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
