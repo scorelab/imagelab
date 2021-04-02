@@ -16,10 +16,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Operator class which contains the logic related to the
- * applying simple blur effects to an image  UI element.
+ * Operator class which contains the logic related to the applying simple blur
+ * effects to an image UI element.
  */
 public class ApplyBlurEffect extends OpenCVOperator {
+
     /**
      * width of the openCV Size obj.
      */
@@ -38,8 +39,8 @@ public class ApplyBlurEffect extends OpenCVOperator {
     private double pointY = 30d;
 
     /**
-     * This method contains the logic which validates the applicable
-     * openCV operations for a particular openCV operator.
+     * This method contains the logic which validates the applicable openCV
+     * operations for a particular openCV operator.
      *
      * @param previous - accepts the previous operator to validate.
      * @return - whether the received operator is valid or not.
@@ -88,19 +89,18 @@ public class ApplyBlurEffect extends OpenCVOperator {
     }
 
     /**
-     * This method contains applying simple blur related
-     * opencv logic.
+     * This method contains applying simple blur related opencv logic.
      *
      * @param imageFile - source mat image.
-     * @param width     - width size.
-     * @param height    - height size.
-     * @param pointX    - point x.
-     * @param pointY    - point y.
+     * @param width - width size.
+     * @param height - height size.
+     * @param pointX - point x.
+     * @param pointY - point y.
      * @return - simple blur applied mat image.
      */
     private Mat applyBlurEffect(Mat imageFile,
-                                double width, double height,
-                                double pointX, double pointY) {
+            double width, double height,
+            double pointX, double pointY) {
         // Creating an empty matrix to store the result.
         Mat image = new Mat();
 
@@ -159,7 +159,7 @@ public class ApplyBlurEffect extends OpenCVOperator {
     }
 
     /**
-     * To ser the point X for the OpenCV Point obj.
+     * To set the point X for the OpenCV Point obj.
      *
      * @param pointX - double.
      */
@@ -196,6 +196,7 @@ public class ApplyBlurEffect extends OpenCVOperator {
             /**
              * @return - Operator information and name of the operator.
              */
+            @Override
             public String toString() {
                 return "Simple Blur Effect\n\nThis operations allows"
                         + " you to apply simple blur effects to your image."
