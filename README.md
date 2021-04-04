@@ -17,7 +17,6 @@ See the [LICENSE](https://github.com/scorelab) file for details.
 
 ## Project Documentation
 
-Complete setup guidelines and other details can be found in the **[project documentation](https://scorelab.org/imagelab/)**.
 
 ### Technologies
 
@@ -36,37 +35,7 @@ You need to setup following technologies in order to run this project and start 
 
 ### Setup Guidelines
 
-Cone the repository by pasting following command in your terminal.
-
-```
-git clone https://github.com/scorelab/ImageLab.git
-```
-
-Open the project in your preferred IDE. It will take a couple of minutes
-to sync with the project related maven dependencies.
-
-Then navigate to the project directory in terminal and type following command
-to build the project.
-
-```
-mvn clean install
-```
-
-To skip tests and run the project.
-
-```
-mvn install -Dmaven.test.skip=true
-```
-
-Once the project build is successful, in order to execute the project run 
-following command in the terminal.
-
-```
-mvn exec:java
-``` 
-
-Check the **[project documentation](https://scorelab.org/imagelab/)** for more instructions.
-
+Follow this step-by-step guideline **[project documentation](https://scorelab.org/imagelab/)** to setup the project on your local PC.
 
 [<--# Generic Links -->]: #
 [hacktoberfest-link]: https://github.com/scorelab/ImageLab/issues?q=is%3Aissue+is%3Aopen+label%3Ahacktoberfest
