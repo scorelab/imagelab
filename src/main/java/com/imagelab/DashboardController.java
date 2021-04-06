@@ -4,6 +4,7 @@ import com.imagelab.component.OperatorUIElement;
 import com.imagelab.operator.OpenCVOperator;
 import com.imagelab.operator.basic.ReadImage;
 import com.imagelab.operator.basic.WriteImage;
+import com.imagelab.operator.filtering.ApplyBilateralFilter;
 import com.imagelab.operator.filtering.ApplyBoxFilter;
 import com.imagelab.operator.filtering.ApplyDilation;
 import com.imagelab.operator.filtering.ApplyErosion;
@@ -683,6 +684,24 @@ public class DashboardController implements Initializable {
         applyPyramidDownFilterEffect.elementStyleId = "imagePyramidDownFilter";
         applyPyramidDownFilterEffect.buildElement();
         
+        //applyBilateral Filter UI element
+        OperatorUIElement applybilateralFilter = new OperatorUIElement() {
+        	@Override
+        	public AbstractInformationUI buildInformationUI() {
+        		return new InformationContainerView(ApplyBilateralFilter
+                        .Information.OPERATOR_INFO.toString());
+        	}
+        	@Override
+            public AbstractPropertiesForm buildPropertiesFormUI() {
+                return new BilateralFilterPropertiesForm((ApplyBilateralFilter) this.operator);
+            }
+        };
+        applybilateralFilter.operator = new ApplyBilateralFilter();
+        applybilateralFilter.operatorId = ApplyBilateralFilter.class.getCanonicalName();
+        applybilateralFilter.operatorName = "APPLY-BILATERAL";
+        applybilateralFilter.elementStyleId = "applyBilateralFilter";
+        applybilateralFilter.buildElement();
+        
         //applySimpleThresholdEffect UI element.
         OperatorUIElement applySimpleThresholdEffect = new OperatorUIElement() {
             @Override
@@ -784,8 +803,10 @@ public class DashboardController implements Initializable {
                 applyBoxFilterEffect.element,
                 applyDilationFilterEffect.element,
                 applyErosionFilterEffect.element,
+                applybilateralFilter.element,
                 applyPyramidUpFilterEffect.element,
                 applyPyramidDownFilterEffect.element
+                
         );
 
         thresholdingOperatorsContainer.setSpacing(15d);
