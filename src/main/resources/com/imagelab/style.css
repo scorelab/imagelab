@@ -115,6 +115,13 @@
 	-fx-background-color: #58589b;
  	-fx-text-fill: white;
 }
+/*Apply Bilateral Filter
+ * to an image UI element
+ */
+#applyBilateralFilter{
+	-fx-background-color: #3268b1;
+ 	-fx-text-fill: white;
+}
 /*Apply threshold effects
  to an image UI element*/
 #applyThreshold {
