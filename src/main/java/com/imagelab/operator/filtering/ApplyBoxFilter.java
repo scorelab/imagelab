@@ -119,7 +119,7 @@ public class ApplyBoxFilter extends OpenCVOperator {
                                double pointX, double pointY) {
         // Creating an empty matrix to store the result
         Mat image = new Mat();
-
+        
         // Creating the objects for Size and Point
         Size size = new Size(width, height);
         Point point = new Point(pointX, pointY);
