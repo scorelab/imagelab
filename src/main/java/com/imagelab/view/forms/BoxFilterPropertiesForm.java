@@ -6,6 +6,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
@@ -29,7 +30,9 @@ public class BoxFilterPropertiesForm extends AbstractPropertiesForm {
         depthSliderContainer.setPrefWidth(205.0);
         depthSliderContainer.setSpacing(10);
         Label lblDepthSlider = new Label("Depth :");
-     
+        TextField boxdepthTextField = new TextField(String.valueOf(1));
+        boxdepthTextField.setPrefSize(205.0, 27.0);
+        
         Slider depthSlider = new Slider();
         depthSlider.setMin(0);
         depthSlider.setMax(100);
@@ -47,9 +50,14 @@ public class BoxFilterPropertiesForm extends AbstractPropertiesForm {
 				lblDepthSlider.setText(String.format("Depth : %d units", (int)newValue.doubleValue()));
 				operator.setDepth((int)newValue.doubleValue());
 			}
-        	
+			
 		});
-        depthSliderContainer.getChildren().addAll(lblDepthSlider, depthSlider);
+        boxdepthTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+        	depthSlider.setValue(Integer.parseInt(newValue));
+            operator.setDepth(Integer.parseInt(newValue));
+        });
+        
+        depthSliderContainer.getChildren().addAll(lblDepthSlider, depthSlider, boxdepthTextField);
 
         //Size - width.
         VBox widthSizeContainer = new VBox();
@@ -108,12 +116,11 @@ public class BoxFilterPropertiesForm extends AbstractPropertiesForm {
         //Point - x.
         VBox xPointContainer = new VBox();
         xPointContainer.setPrefWidth(205.0);
-        xPointContainer.setSpacing(10);
         Label lblXPoint = new Label("Point: X");
-        Label lblxPointDisplay = new Label(" ");
+        TextField xPointTextField = new TextField(String.valueOf(1));
+        xPointTextField.setPrefSize(205.0, 27.0);
         
         // set the color of the text
-        lblxPointDisplay.setTextFill(Color.BLACK);
         Slider xPointSlider = new Slider();
         xPointSlider.setMin(-10);
         xPointSlider.setMax(10);
@@ -128,22 +135,26 @@ public class BoxFilterPropertiesForm extends AbstractPropertiesForm {
 			@Override
 			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
 				// TODO Auto-generated method stub
-				lblxPointDisplay.setText(String.format("%.2f units", newValue.doubleValue()));
+				lblXPoint.setText(String.format("Point: X : %.2f units", newValue.doubleValue()));
+				xPointTextField.setText(newValue.toString());
 				operator.setPointX(newValue.doubleValue());
 			}
         	
 		});
-        xPointContainer.getChildren().addAll(lblXPoint, lblxPointDisplay, xPointSlider);
+        xPointTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+        	xPointSlider.setValue(Double.parseDouble(newValue));
+            operator.setPointX(Double.parseDouble(newValue));
+        });
+        xPointContainer.getChildren().addAll(lblXPoint, xPointSlider, xPointTextField);
 
         //Point - y.
         VBox yPointContainer = new VBox();
         yPointContainer.setPrefWidth(205.0);
-        yPointContainer.setSpacing(10);
         Label lblYPoint = new Label("Point: Y");
-        Label lblYPointDisplay = new Label(" ");
+        TextField yPointTextField = new TextField(String.valueOf(1));
+        yPointTextField.setPrefSize(205.0, 27.0);
         
         // set the color of the text
-        lblYPointDisplay.setTextFill(Color.BLACK);
         Slider yPointSlider = new Slider();
         yPointSlider.setMin(-10);
         yPointSlider.setMax(10);
@@ -158,12 +169,17 @@ public class BoxFilterPropertiesForm extends AbstractPropertiesForm {
 			@Override
 			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
 				// TODO Auto-generated method stub
-				lblYPointDisplay.setText(String.format("%.2f units", newValue.doubleValue()));
+				lblYPoint.setText(String.format("Point: Y : %.2f units", newValue.doubleValue()));
+				yPointTextField.setText(newValue.toString());
 				operator.setPointY(newValue.doubleValue());
 			}
         	
 		});
-        yPointContainer.getChildren().addAll(lblYPoint, lblYPointDisplay, yPointSlider);
+        yPointTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+        	yPointSlider.setValue(Double.parseDouble(newValue));
+        	operator.setPointY(Double.parseDouble(newValue));
+        });
+        yPointContainer.getChildren().addAll(lblYPoint, yPointSlider, yPointTextField);
 
         //Space container
         VBox spaceContainer = new VBox();
