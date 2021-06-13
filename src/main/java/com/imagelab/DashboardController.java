@@ -1,29 +1,11 @@
 package com.imagelab;
 
 import com.imagelab.component.OperatorUIElement;
+import com.imagelab.controllers.*;
 import com.imagelab.operator.OpenCVOperator;
 import com.imagelab.operator.basic.ReadImage;
-import com.imagelab.operator.basic.WriteImage;
-import com.imagelab.operator.filtering.ApplyBilateralFilter;
-import com.imagelab.operator.filtering.ApplyBoxFilter;
-import com.imagelab.operator.filtering.ApplyDilation;
-import com.imagelab.operator.filtering.ApplyErosion;
-import com.imagelab.operator.filtering.ApplyImagePyramid;
-import com.imagelab.operator.filtering.ApplyImagePyramidDown;
-import com.imagelab.operator.geotransformation.ColorMaps;
-import com.imagelab.operator.geotransformation.RotateImage;
-import com.imagelab.operator.imagebluring.ApplyBlurEffect;
-import com.imagelab.operator.imagebluring.ApplyGaussianBlurEffect;
-import com.imagelab.operator.imagebluring.ApplyMedianBlurEffect;
-import com.imagelab.operator.imageconversion.ColoredImageToBinary;
-import com.imagelab.operator.imageconversion.ConvertToGrayscale;
-import com.imagelab.operator.imageconversion.GrayscaleToBinary;
-import com.imagelab.operator.thresholding.ApplyAdaptiveThreshold;
-import com.imagelab.operator.thresholding.ApplyBorder;
-import com.imagelab.operator.thresholding.ApplySimpleThreshold;
 import com.imagelab.util.Constants;
 import com.imagelab.util.Utilities;
-import com.imagelab.view.AbstractInformationUI;
 import com.imagelab.view.InformationContainerView;
 import com.imagelab.view.InitialPreviewPaneView;
 import com.imagelab.view.ProcessedImageView;
@@ -404,419 +386,65 @@ public class DashboardController implements Initializable {
         OperatorUIElement.propertiesPane = uiElementPropertiesPane;
         OperatorUIElement.informationPane = informationScrollPane;
 
-        //ReadImage UI element.
-        OperatorUIElement readImage = new OperatorUIElement() {
-            @Override
-            public AbstractInformationUI buildInformationUI() {
-                return new InformationContainerView(ReadImage
-                        .Information.OPERATOR_INFO.toString());
-            }
-
-            @Override
-            public AbstractPropertiesForm buildPropertiesFormUI() {
-                return new ReadImgPropertiesForm((ReadImage) this.operator);
-            }
-        };
-        readImage.operator = new ReadImage();
-        readImage.operatorId = ReadImage.class.getCanonicalName();
-        readImage.operatorName = "READ_IMAGE";
-        readImage.elementStyleId = "readImage";
-        readImage.buildElement();
-
-        //WriteImage UI element.
-        OperatorUIElement writeImage = new OperatorUIElement() {
-            @Override
-            public AbstractInformationUI buildInformationUI() {
-                return new InformationContainerView(WriteImage
-                        .Information.OPERATOR_INFO.toString());
-            }
-
-            @Override
-            public AbstractPropertiesForm buildPropertiesFormUI() {
-                return new WriteImgPropertiesForm((WriteImage) this.operator);
-            }
-        };
-        writeImage.operator = new WriteImage();
-        writeImage.operatorId = WriteImage.class.getCanonicalName();
-        writeImage.operatorName = "WRITE_IMAGE";
-        writeImage.elementStyleId = "writeImage";
-        writeImage.buildElement();
-
-        //RotateImage UI element.
-        OperatorUIElement rotateImage = new OperatorUIElement() {
-            @Override
-            public AbstractInformationUI buildInformationUI() {
-                return new InformationContainerView(RotateImage
-                        .Information.OPERATOR_INFO.toString());
-            }
-
-            @Override
-            public AbstractPropertiesForm buildPropertiesFormUI() {
-                return new RotateImgPropertiesForm((RotateImage) this.operator);
-            }
-        };
-        rotateImage.operator = new RotateImage();
-        rotateImage.operatorId = RotateImage.class.getCanonicalName();
-        rotateImage.operatorName = "ROTATE_IMAGE";
-        rotateImage.elementStyleId = "rotateImage";
-        rotateImage.buildElement();
-
-        //ColorMaps UI element
-        OperatorUIElement colorMaps = new OperatorUIElement() {
-            @Override
-            public AbstractInformationUI buildInformationUI() {
-                return new InformationContainerView(ColorMaps
-                        .Information.OPERATOR_INFO.toString());
-            }
-
-            @Override
-            public AbstractPropertiesForm buildPropertiesFormUI() {
-                return new ColorMapsPropertiesForm((ColorMaps) this.operator);
-            }
-        };
-        colorMaps.operator = new ColorMaps();
-        colorMaps.operatorId = ColorMaps.class.getCanonicalName();
-        colorMaps.operatorName = "COLOR_MAPS";
-        colorMaps.elementStyleId = "colorMaps";
-        colorMaps.buildElement();
-        
-        //ConvertGrayscale UI element.
-        OperatorUIElement convertToGrayScaleImage = new OperatorUIElement() {
-            @Override
-            public AbstractInformationUI buildInformationUI() {
-                return new InformationContainerView(ConvertToGrayscale
-                        .Information.OPERATOR_INFO.toString());
-            }
-        };
-        convertToGrayScaleImage.operator = new ConvertToGrayscale();
-        convertToGrayScaleImage.operatorId = ConvertToGrayscale.class.getCanonicalName();
-        convertToGrayScaleImage.operatorName = "GRAY_IMAGE";
-        convertToGrayScaleImage.elementStyleId = "grayscaleImage";
-        convertToGrayScaleImage.buildElement();
-
-        //convertColoredImageToBinary UI element.
-        OperatorUIElement convertColoredImageToBinary = new OperatorUIElement() {
-            @Override
-            public AbstractInformationUI buildInformationUI() {
-                return new InformationContainerView(ColoredImageToBinary
-                        .Information.OPERATOR_INFO.toString());
-            }
-
-            @Override
-            public AbstractPropertiesForm buildPropertiesFormUI() {
-                return new ColoredToBinaryPropertiesForm((ColoredImageToBinary) this.operator);
-            }
-        };
-        convertColoredImageToBinary.operator = new ColoredImageToBinary();
-        convertColoredImageToBinary.operatorId = ColoredImageToBinary.class.getCanonicalName();
-        convertColoredImageToBinary.operatorName = "COLOR-TO-BINARY";
-        convertColoredImageToBinary.elementStyleId = "coloredToBinary";
-        convertColoredImageToBinary.buildElement();
-
-        //convertGrayImageToBinary UI element.
-        OperatorUIElement convertGrayImageToBinary = new OperatorUIElement() {
-            @Override
-            public AbstractInformationUI buildInformationUI() {
-                return new InformationContainerView(GrayscaleToBinary
-                        .Information.OPERATOR_INFO.toString());
-            }
-
-            @Override
-            public AbstractPropertiesForm buildPropertiesFormUI() {
-                return new GrayscaleToBinaryPropertiesForm((GrayscaleToBinary) this.operator);
-            }
-        };
-        convertGrayImageToBinary.operator = new GrayscaleToBinary();
-        convertGrayImageToBinary.operatorId = GrayscaleToBinary.class.getCanonicalName();
-        convertGrayImageToBinary.operatorName = "GRAY-TO-BINARY";
-        convertGrayImageToBinary.elementStyleId = "grayToBinary";
-        convertGrayImageToBinary.buildElement();
-
-        //applyBlurEffect UI element.
-        OperatorUIElement applyBlurEffect = new OperatorUIElement() {
-            @Override
-            public AbstractInformationUI buildInformationUI() {
-                return new InformationContainerView(ApplyBlurEffect
-                        .Information.OPERATOR_INFO.toString());
-            }
-
-            @Override
-            public AbstractPropertiesForm buildPropertiesFormUI() {
-                return new SimpleBlurPropertiesForm((ApplyBlurEffect) this.operator);
-            }
-        };
-        applyBlurEffect.operator = new ApplyBlurEffect();
-        applyBlurEffect.operatorId = ApplyBlurEffect.class.getCanonicalName();
-        applyBlurEffect.operatorName = "APPLY-BLUR";
-        applyBlurEffect.elementStyleId = "applyBlur";
-        applyBlurEffect.buildElement();
-
-        //applyGaussianBlurEffect UI element.
-        OperatorUIElement applyGaussianBlurEffect = new OperatorUIElement() {
-            @Override
-            public AbstractInformationUI buildInformationUI() {
-                return new InformationContainerView(ApplyGaussianBlurEffect
-                        .Information.OPERATOR_INFO.toString());
-            }
-
-            @Override
-            public AbstractPropertiesForm buildPropertiesFormUI() {
-                return new GaussianBlurPropertiesForm((ApplyGaussianBlurEffect) this.operator);
-            }
-        };
-        applyGaussianBlurEffect.operator = new ApplyGaussianBlurEffect();
-        applyGaussianBlurEffect.operatorId = ApplyGaussianBlurEffect.class.getCanonicalName();
-        applyGaussianBlurEffect.operatorName = "APPLY-GAUSSIAN-BLUR";
-        applyGaussianBlurEffect.elementStyleId = "applyGaussianBlur";
-        applyGaussianBlurEffect.buildElement();
-
-        //applyMedianBlurEffect UI element.
-        OperatorUIElement applyMedianBlurEffect = new OperatorUIElement() {
-            @Override
-            public AbstractInformationUI buildInformationUI() {
-                return new InformationContainerView(ApplyMedianBlurEffect
-                        .Information.OPERATOR_INFO.toString());
-            }
-
-            @Override
-            public AbstractPropertiesForm buildPropertiesFormUI() {
-                return new MedianBlurPropertiesForm((ApplyMedianBlurEffect) this.operator);
-            }
-        };
-        applyMedianBlurEffect.operator = new ApplyMedianBlurEffect();
-        applyMedianBlurEffect.operatorId = ApplyMedianBlurEffect.class.getCanonicalName();
-        applyMedianBlurEffect.operatorName = "APPLY-MEDIAN-BLUR";
-        applyMedianBlurEffect.elementStyleId = "applyMedianBlur";
-        applyMedianBlurEffect.buildElement();
-
-        //applyBoxFilterEffect UI element.
-        OperatorUIElement applyBoxFilterEffect = new OperatorUIElement() {
-            @Override
-            public AbstractInformationUI buildInformationUI() {
-                return new InformationContainerView(ApplyBoxFilter
-                        .Information.OPERATOR_INFO.toString());
-            }
-
-            @Override
-            public AbstractPropertiesForm buildPropertiesFormUI() {
-                return new BoxFilterPropertiesForm((ApplyBoxFilter) this.operator);
-            }
-        };
-        applyBoxFilterEffect.operator = new ApplyBoxFilter();
-        applyBoxFilterEffect.operatorId = ApplyBoxFilter.class.getCanonicalName();
-        applyBoxFilterEffect.operatorName = "APPLY-BOX-FILTER";
-        applyBoxFilterEffect.elementStyleId = "applyBoxFilter";
-        applyBoxFilterEffect.buildElement();
-        
-        //applyDilationFilterEffect UI element.
-        OperatorUIElement applyDilationFilterEffect = new OperatorUIElement() {
-            @Override
-            public AbstractInformationUI buildInformationUI() {
-                return new InformationContainerView(ApplyDilation
-                        .Information.OPERATOR_INFO.toString());
-            }
-
-            @Override
-            public AbstractPropertiesForm buildPropertiesFormUI() {
-                return new DilationFilterPropertiesForm((ApplyDilation) this.operator);
-            }
-        };
-        applyDilationFilterEffect.operator = new ApplyDilation();
-        applyDilationFilterEffect.operatorId = ApplyDilation.class.getCanonicalName();
-        applyDilationFilterEffect.operatorName = "APPLY-DILATION";
-        applyDilationFilterEffect.elementStyleId = "applyDilationFilter";
-        applyDilationFilterEffect.buildElement();
-        
-        //applyErosionFilterEffect UI element
-        OperatorUIElement applyErosionFilterEffect = new OperatorUIElement() {
-            @Override
-            public AbstractInformationUI buildInformationUI() {
-                return new InformationContainerView(ApplyErosion
-                        .Information.OPERATOR_INFO.toString());
-            }
-
-            @Override
-            public AbstractPropertiesForm buildPropertiesFormUI() {
-                return new ErosionFilterPropertiesForm((ApplyErosion) this.operator);
-            }
-        };
-        applyErosionFilterEffect.operator = new ApplyErosion();
-        applyErosionFilterEffect.operatorId =  ApplyErosion.class.getCanonicalName();
-        applyErosionFilterEffect.operatorName = "APPLY-EROSION";
-        applyErosionFilterEffect.elementStyleId = "applyErosionFilter";
-        applyErosionFilterEffect.buildElement();
-
-        //ImagePyramidsUp UI element
-        OperatorUIElement applyPyramidUpFilterEffect = new OperatorUIElement() {
-            @Override
-            public AbstractInformationUI buildInformationUI() {
-                return new InformationContainerView(ApplyImagePyramid
-                        .Information.OPERATOR_INFO.toString());
-            }
-
-            @Override
-            public AbstractPropertiesForm buildPropertiesFormUI() {
-                return new PyramidUpFilterPropertiesForm((ApplyImagePyramid) this.operator);
-            }
-        };
-        applyPyramidUpFilterEffect.operator = new ApplyImagePyramid();
-        applyPyramidUpFilterEffect.operatorId = ApplyImagePyramid.class.getCanonicalName();
-        applyPyramidUpFilterEffect.operatorName = "PYRAMID-UP";
-        applyPyramidUpFilterEffect.elementStyleId = "imagePyramidUpFilter";
-        applyPyramidUpFilterEffect.buildElement();
-        
-        //ImagePyramidsDown UI element
-        OperatorUIElement applyPyramidDownFilterEffect = new OperatorUIElement() {
-        	@Override
-        	public AbstractInformationUI buildInformationUI() {
-				return new InformationContainerView(ApplyImagePyramidDown
-						.Information.OPERATOR_INFO.toString());
-        		
-        	}
-        	@Override
-        	public AbstractPropertiesForm buildPropertiesFormUI() {
-                return new PyramidDownFilterPropertiesForm((ApplyImagePyramidDown) this.operator);
-            }
-        };
-        applyPyramidDownFilterEffect.operator = new ApplyImagePyramidDown();
-        applyPyramidDownFilterEffect.operatorId = ApplyImagePyramidDown.class.getCanonicalName();
-        applyPyramidDownFilterEffect.operatorName = "PYRAMID-DOWN";
-        applyPyramidDownFilterEffect.elementStyleId = "imagePyramidDownFilter";
-        applyPyramidDownFilterEffect.buildElement();
-        
-        //applyBilateral Filter UI element
-        OperatorUIElement applybilateralFilter = new OperatorUIElement() {
-        	@Override
-        	public AbstractInformationUI buildInformationUI() {
-        		return new InformationContainerView(ApplyBilateralFilter
-                        .Information.OPERATOR_INFO.toString());
-        	}
-        	@Override
-            public AbstractPropertiesForm buildPropertiesFormUI() {
-                return new BilateralFilterPropertiesForm((ApplyBilateralFilter) this.operator);
-            }
-        };
-        applybilateralFilter.operator = new ApplyBilateralFilter();
-        applybilateralFilter.operatorId = ApplyBilateralFilter.class.getCanonicalName();
-        applybilateralFilter.operatorName = "APPLY-BILATERAL";
-        applybilateralFilter.elementStyleId = "applyBilateralFilter";
-        applybilateralFilter.buildElement();
-        
-        //applySimpleThresholdEffect UI element.
-        OperatorUIElement applySimpleThresholdEffect = new OperatorUIElement() {
-            @Override
-            public AbstractInformationUI buildInformationUI() {
-                return new InformationContainerView(ApplySimpleThreshold
-                        .Information.OPERATOR_INFO.toString());
-            }
-
-            @Override
-            public AbstractPropertiesForm buildPropertiesFormUI() {
-                return new SimpleThresholdPropertiesForm((ApplySimpleThreshold) this.operator);
-            }
-        };
-        applySimpleThresholdEffect.operator = new ApplySimpleThreshold();
-        applySimpleThresholdEffect.operatorId = ApplySimpleThreshold.class.getCanonicalName();
-        applySimpleThresholdEffect.operatorName = "APPLY-THRESHOLD";
-        applySimpleThresholdEffect.elementStyleId = "applyThreshold";
-        applySimpleThresholdEffect.buildElement();
-
-        //applySimpleThresholdEffect UI element.
-        OperatorUIElement applyAdaptiveThresholdEffect = new OperatorUIElement() {
-            @Override
-            public AbstractInformationUI buildInformationUI() {
-                return new InformationContainerView(ApplyAdaptiveThreshold
-                        .Information.OPERATOR_INFO.toString());
-            }
-
-            @Override
-            public AbstractPropertiesForm buildPropertiesFormUI() {
-                return new AdaptiveThresholdPropertiesForm((ApplyAdaptiveThreshold) this.operator);
-            }
-        };
-        applyAdaptiveThresholdEffect.operator = new ApplyAdaptiveThreshold();
-        applyAdaptiveThresholdEffect.operatorId = ApplyAdaptiveThreshold.class.getCanonicalName();
-        applyAdaptiveThresholdEffect.operatorName = "ADAPTIVE-THRESHOLD";
-        applyAdaptiveThresholdEffect.elementStyleId = "adaptiveThreshold";
-        applyAdaptiveThresholdEffect.buildElement();
-
-        //applyBorders UI element.
-        OperatorUIElement applyBorders = new OperatorUIElement() {
-            @Override
-            public AbstractInformationUI buildInformationUI() {
-                return new InformationContainerView(ApplyBorder
-                        .Information.OPERATOR_INFO.toString());
-            }
-
-            @Override
-            public AbstractPropertiesForm buildPropertiesFormUI() {
-                return new ApplyBordersPropertiesForm((ApplyBorder) this.operator);
-            }
-        };
-        applyBorders.operator = new ApplyBorder();
-        applyBorders.operatorId = ApplyBorder.class.getCanonicalName();
-        applyBorders.operatorName = "APPLY-BORDERS";
-        applyBorders.elementStyleId = "applyBorders";
-        applyBorders.buildElement();
-
+        // Container Controllers
+       
         // basicOperatorsContainer.
         basicOperatorsContainer.setSpacing(15d);
         basicOperatorsContainer.setAlignment(Pos.TOP_CENTER);
         basicOperatorsContainer.setLayoutY(20d);
         basicOperatorsContainer.getChildren().addAll(
-                // Populating basicOperatorsContainer.
-                readImage.element,
-                writeImage.element
+        		// Populating basicOperatorsContainer.
+        		BasicOperatorController.readImageElement().element,
+                BasicOperatorController.writeImageElement().element
         );
         geoTransformationOperatorsContainer.setSpacing(15d);
         geoTransformationOperatorsContainer.setAlignment(Pos.TOP_CENTER);
         geoTransformationOperatorsContainer.setLayoutY(20d);
         geoTransformationOperatorsContainer.getChildren().addAll(
-                // Populating geoTransformationOperatorsContainer.
-                rotateImage.element,
-                colorMaps.element
+        		// Populating geoTransformationOperatorsContainer.
+                GeoTransformationOperatorController.rotateImageElement().element,
+                GeoTransformationOperatorController.colorMapsElement().element
         );
         imageConversionsOperatorsContainer.setSpacing(15d);
         imageConversionsOperatorsContainer.setAlignment(Pos.TOP_CENTER);
         imageConversionsOperatorsContainer.setLayoutY(20d);
         imageConversionsOperatorsContainer.getChildren().addAll(
-                // Populating imageConversionsOperatorsContainer.
-                convertToGrayScaleImage.element,
-                convertColoredImageToBinary.element,
-                convertGrayImageToBinary.element
+        		 // Populating imageConversionsOperatorsContainer.
+                ImageConversionOperatorController.convertToGrayScaleImageElement().element,
+                ImageConversionOperatorController.convertColoredImageToBinaryElement().element,
+                ImageConversionOperatorController.convertGrayImageToBinaryElement().element
         );
         blurringOperatorsContainer.setSpacing(15d);
         blurringOperatorsContainer.setAlignment(Pos.TOP_CENTER);
         blurringOperatorsContainer.setLayoutY(20d);
         blurringOperatorsContainer.getChildren().addAll(
-                // Populating blurringOperatorsContainer.
-                applyBlurEffect.element,
-                applyGaussianBlurEffect.element,
-                applyMedianBlurEffect.element
+        		// Populating blurringOperatorsContainer.
+                BlurringOperatorController.applyBlurEffectElement().element,
+                BlurringOperatorController.applyGaussianEffectElement().element,
+                BlurringOperatorController.applyMedainBlurEffectElement().element
         );
 
         filteringOperatorsContainer.setSpacing(15d);
         filteringOperatorsContainer.setAlignment(Pos.TOP_CENTER);
         filteringOperatorsContainer.setLayoutY(20d);
         filteringOperatorsContainer.getChildren().addAll(
-                // Populating filteringOperatorsContainer.
-                applyBoxFilterEffect.element,
-                applyDilationFilterEffect.element,
-                applyErosionFilterEffect.element,
-                applybilateralFilter.element,
-                applyPyramidUpFilterEffect.element,
-                applyPyramidDownFilterEffect.element
-                
+        		// Populating filteringOperatorsContainer.
+                FilterOperatorController.boxFilerEffectElement().element,
+                FilterOperatorController.imageDilationEffectElement().element,
+                FilterOperatorController.erosionFilterEffectElement().element,
+                FilterOperatorController.bilateralFilterEffectElement().element,
+                FilterOperatorController.pyramidsUpFilterEffectElement().element,
+                FilterOperatorController.pyramidsDownFilterEffectElement().element    
         );
 
         thresholdingOperatorsContainer.setSpacing(15d);
         thresholdingOperatorsContainer.setAlignment(Pos.TOP_CENTER);
         thresholdingOperatorsContainer.setLayoutY(20d);
         thresholdingOperatorsContainer.getChildren().addAll(
-                // Populating thresholdingOperatorsContainer.
-                applySimpleThresholdEffect.element,
-                applyAdaptiveThresholdEffect.element,
-                applyBorders.element
+        		// Populating thresholdingOperatorsContainer.
+        		ThresholdingOperatorController.applyBorderThresholdEffectElement().element,
+                ThresholdingOperatorController.applyAdaptiveThresholdEffectElement().element,
+                ThresholdingOperatorController.applySimpleThresholdEffectElement().element
         );
         setDashboardToInitialState();
     }
