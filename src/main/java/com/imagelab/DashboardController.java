@@ -403,7 +403,8 @@ public class DashboardController implements Initializable {
         geoTransformationOperatorsContainer.getChildren().addAll(
         		// Populating geoTransformationOperatorsContainer.
                 GeoTransformationOperatorController.rotateImageElement().element,
-                GeoTransformationOperatorController.colorMapsElement().element
+                GeoTransformationOperatorController.colorMapsElement().element,
+                GeoTransformationOperatorController.scaleImageElement().element
         );
         imageConversionsOperatorsContainer.setSpacing(15d);
         imageConversionsOperatorsContainer.setAlignment(Pos.TOP_CENTER);

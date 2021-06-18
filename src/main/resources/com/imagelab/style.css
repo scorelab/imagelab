@@ -43,6 +43,11 @@
     -fx-background-color: #ff5733;
     -fx-text-fill: white;
 }
+/*Scale Image UI element */
+#scaleImage{
+	-fx-background-color: #714723;
+    -fx-text-fill: white;
+}
 
 /*Convert to grayscale image UI element*/
 #grayscaleImage {
