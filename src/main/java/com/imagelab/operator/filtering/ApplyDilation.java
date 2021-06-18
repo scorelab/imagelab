@@ -12,6 +12,7 @@ import com.imagelab.operator.OpenCVOperator;
 import com.imagelab.operator.basic.ReadImage;
 import com.imagelab.operator.basic.WriteImage;
 import com.imagelab.operator.geotransformation.RotateImage;
+import com.imagelab.operator.geotransformation.ScaleImage;
 import com.imagelab.operator.imagebluring.ApplyBlurEffect;
 import com.imagelab.operator.imagebluring.ApplyGaussianBlurEffect;
 import com.imagelab.operator.imagebluring.ApplyMedianBlurEffect;
@@ -78,6 +79,7 @@ public class ApplyDilation extends OpenCVOperator{
         allowed.add(ReadImage.class);
         allowed.add(RotateImage.class);
         allowed.add(WriteImage.class);
+        allowed.add(ScaleImage.class);
         allowed.add(ColoredImageToBinary.class);
         allowed.add(ConvertToGrayscale.class);
         allowed.add(ApplyBlurEffect.class);

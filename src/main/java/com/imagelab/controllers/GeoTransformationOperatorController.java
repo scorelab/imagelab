@@ -3,10 +3,12 @@ package com.imagelab.controllers;
 import com.imagelab.component.OperatorUIElement;
 import com.imagelab.operator.geotransformation.ColorMaps;
 import com.imagelab.operator.geotransformation.RotateImage;
+import com.imagelab.operator.geotransformation.ScaleImage;
 import com.imagelab.view.AbstractInformationUI;
 import com.imagelab.view.InformationContainerView;
 import com.imagelab.view.forms.AbstractPropertiesForm;
 import com.imagelab.view.forms.ColorMapsPropertiesForm;
+import com.imagelab.view.forms.ImageScalePropertiesForm;
 import com.imagelab.view.forms.RotateImgPropertiesForm;
 
 public class GeoTransformationOperatorController {
@@ -52,5 +54,26 @@ public class GeoTransformationOperatorController {
         colorMaps.elementStyleId = "colorMaps";
         colorMaps.buildElement();
         return colorMaps;
+	}
+	public static OperatorUIElement scaleImageElement() {
+		//RotateImage UI element.
+        OperatorUIElement scaleImage = new OperatorUIElement() {
+            @Override
+            public AbstractInformationUI buildInformationUI() {
+                return new InformationContainerView(ScaleImage
+                        .Information.OPERATOR_INFO.toString());
+            }
+
+            @Override
+            public AbstractPropertiesForm buildPropertiesFormUI() {
+                return new ImageScalePropertiesForm((ScaleImage) this.operator);
+            }
+        };
+        scaleImage.operator = new ScaleImage();
+        scaleImage.operatorId = ScaleImage.class.getCanonicalName();
+        scaleImage.operatorName = "SCALE_IMAGE";
+        scaleImage.elementStyleId = "scaleImage";
+        scaleImage.buildElement();
+        return scaleImage;
 	}
 }
