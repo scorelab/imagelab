@@ -38,7 +38,7 @@
     -fx-text-fill: white;
 }
 
-/*Rotate image UI element*/
+/*ColorMaps image UI element*/
 #colorMaps {
     -fx-background-color: #ff5733;
     -fx-text-fill: white;
@@ -48,7 +48,16 @@
 	-fx-background-color: #714723;
     -fx-text-fill: white;
 }
-
+/*Affine Transform UI element */
+#affineTransform{
+	-fx-background-color: #c70039;
+    -fx-text-fill: white;
+}
+/*Refection Transform element */
+#reflectionTransform{
+	-fx-background-color: #ffC300;
+    -fx-text-fill: white;
+}
 /*Convert to grayscale image UI element*/
 #grayscaleImage {
     -fx-background-color: #535353;

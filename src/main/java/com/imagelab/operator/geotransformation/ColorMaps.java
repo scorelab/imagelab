@@ -62,8 +62,11 @@ public class ColorMaps extends OpenCVOperator{
 	public Set<Class<?>> allowedOperators() {
 		Set<Class<?>> allowed = new HashSet<>();
 		allowed.add(ReadImage.class);
-        allowed.add(RotateImage.class);
         allowed.add(WriteImage.class);
+        allowed.add(RotateImage.class);
+        allowed.add(ScaleImage.class);
+        allowed.add(ImageAffine.class);
+        allowed.add(ImageReflection.class);
         allowed.add(ColoredImageToBinary.class);
         allowed.add(ConvertToGrayscale.class);
         allowed.add(ApplyBlurEffect.class);
