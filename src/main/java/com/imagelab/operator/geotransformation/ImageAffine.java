@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.opencv.core.Mat;
+import org.opencv.core.MatOfPoint2f;
+import org.opencv.core.Point;
 import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
 
@@ -20,12 +22,7 @@ import com.imagelab.operator.imagebluring.ApplyMedianBlurEffect;
 import com.imagelab.operator.imageconversion.ColoredImageToBinary;
 import com.imagelab.operator.imageconversion.ConvertToGrayscale;
 
-public class ScaleImage extends OpenCVOperator{
-	
-	private double fx = 0.5d;
-	private double fy = 0.5d;
-	private int dsize = 1;
-	
+public class ImageAffine extends OpenCVOperator{
 
 	@Override
 	public boolean validate(OpenCVOperator previous) {
@@ -37,28 +34,44 @@ public class ScaleImage extends OpenCVOperator{
 
 	@Override
 	public Mat compute(Mat image) {
-		System.out.println("Image Scaled");
-        return scaleImage(image,getX(),getY());
+		// call to the private function
+		System.out.println("Image Affine Applied");
+		return imageAffine(image);
 	}
+	
+	private Mat imageAffine(Mat src) {
 
-	private Mat scaleImage(Mat image,double x,double y) {
-		// Creating an empty matrix to store the result
+	      //Creating an empty matrix to store the result
 	      Mat dst = new Mat();
 
-	      // Creating the Size object
-	      Size size = new Size(image.rows()*x, image.rows()*y);
+	      Point p1 = new Point( 0,0 );
+	      Point p2 = new Point( src.cols() - 1, 0 );
+	      Point p3 = new Point( 0, src.rows() - 1 );
+	      Point p4 = new Point( src.cols()*0.0, src.rows()*0.33 );
+	      Point p5 = new Point( src.cols()*0.85, src.rows()*0.25 );
+	      Point p6 = new Point( src.cols()*0.15, src.rows()*0.7 );
+	      
+	      MatOfPoint2f ma1 = new MatOfPoint2f(p1,p2,p3);
+	      MatOfPoint2f ma2 = new MatOfPoint2f(p4,p5,p6);
 
-	      // Scaling the Image
-	      Imgproc.resize(image, dst, size, x, y, Imgproc.INTER_AREA);
+	      // Creating the transformation matrix
+	      Mat tranformMatrix = Imgproc.getAffineTransform(ma1,ma2);
+
+	      // Creating object of the class Size
+	      Size size = new Size(src.cols(), src.cols());
+
+	      // Applying Wrap Affine
+	      Imgproc.warpAffine(src, dst, tranformMatrix, size);
 	      return dst;
 	}
 
 	@Override
 	public Set<Class<?>> allowedOperators() {
 		Set<Class<?>> allowed = new HashSet<>();
-		allowed.add(ReadImage.class);
-        allowed.add(WriteImage.class);
+        allowed.add(ReadImage.class);
         allowed.add(RotateImage.class);
+        allowed.add(WriteImage.class);
+        allowed.add(ScaleImage.class);
         allowed.add(ColorMaps.class);
         allowed.add(ImageAffine.class);
         allowed.add(ImageReflection.class);
@@ -71,57 +84,17 @@ public class ScaleImage extends OpenCVOperator{
         allowed.add(ApplyImagePyramidDown.class);
         allowed.add(ApplyImagePyramid.class);
         allowed.add(ApplyErosion.class);
+        allowed.add(ScaleImage.class);
         return allowed;
 	}
-	public enum Information {
-        /**
-         * Operator information in string format.
-         */
-        OPERATOR_INFO {
-            /**
-             * @return - Operator information and name
-             * of the operator.
-             */
-            public String toString() {
-                return "Scale Image\n\nThis operator allows you to"
-                        + " scale an image to a specific size."
-                        + " Moreover you can change angle and scale"
-                        + " related to the rotation.";
-            }
-        }
-    }
-	 /**
-     * To get the depth of the output image.
-     *
-     * @return - output depth.
-     */
-    public double getX() {
-        return fx;
-    }
+	public enum Information{
+		OPERATOR_INFO{
+			public String toString() {
+				return "Image Affine Transformation\n\n"
+						+"Image Affine Translation or shearing express in a materix form.\n"
+						+"It's a combination of shearing and reflection\n";
+			}
+		}
+	}
 
-    /**
-     * To set the depth of the output image.
-     *
-     * @param depth - output depth.
-     */
-    public void setX(double fx) {
-        this.fx = fx;
-    }
-    /**
-     * To get the depth of the output image.
-     *
-     * @return - output depth.
-     */
-    public double getY() {
-        return fy;
-    }
-
-    /**
-     * To set the depth of the output image.
-     *
-     * @param depth - output depth.
-     */
-    public void setY(double fy) {
-        this.fy = fy;
-    }
 }
