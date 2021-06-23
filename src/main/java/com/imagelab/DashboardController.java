@@ -81,6 +81,15 @@ public class DashboardController implements Initializable {
     private VBox geoTransformationOperatorsContainer;
 
     /**
+     * drawingOperatorsContainer contains,
+     * DrawCircle,
+     * DrawSquare,
+     * Draw Polygone
+     */
+    @FXML
+    private VBox drawingOperatorsContainer;
+    
+    /**
      * imageConversionsOperatorsContainer contains,
      * ConvertToGrayscale,
      * ColoredToBinary,
@@ -408,6 +417,13 @@ public class DashboardController implements Initializable {
                 GeoTransformationOperatorController.affineTransformationElement().element,
                 GeoTransformationOperatorController.scaleImageElement().element
                 
+        );
+        drawingOperatorsContainer.setSpacing(15d);
+        drawingOperatorsContainer.setAlignment(Pos.TOP_CENTER);
+        drawingOperatorsContainer.setLayoutY(20d);
+        drawingOperatorsContainer.getChildren().addAll(
+        		//Populating drawingOperators
+        		DrawingOperatorController.drawCircleEffectElement().element
         );
         imageConversionsOperatorsContainer.setSpacing(15d);
         imageConversionsOperatorsContainer.setAlignment(Pos.TOP_CENTER);

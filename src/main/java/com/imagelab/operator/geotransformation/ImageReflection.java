@@ -10,6 +10,7 @@ import org.opencv.imgproc.Imgproc;
 import com.imagelab.operator.OpenCVOperator;
 import com.imagelab.operator.basic.ReadImage;
 import com.imagelab.operator.basic.WriteImage;
+import com.imagelab.operator.drawing.DrawCircle;
 import com.imagelab.operator.filtering.ApplyBoxFilter;
 import com.imagelab.operator.filtering.ApplyErosion;
 import com.imagelab.operator.filtering.ApplyImagePyramid;
@@ -107,6 +108,7 @@ public class ImageReflection extends OpenCVOperator {
         allowed.add(ScaleImage.class);
         allowed.add(ImageAffine.class);
         allowed.add(ImageReflection.class);
+        allowed.add(DrawCircle.class);
         return allowed;
 	}
 	/**
