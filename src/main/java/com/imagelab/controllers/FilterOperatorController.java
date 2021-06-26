@@ -7,6 +7,7 @@ import com.imagelab.operator.filtering.ApplyDilation;
 import com.imagelab.operator.filtering.ApplyErosion;
 import com.imagelab.operator.filtering.ApplyImagePyramid;
 import com.imagelab.operator.filtering.ApplyImagePyramidDown;
+import com.imagelab.operator.filtering.ApplyMorphological;
 import com.imagelab.view.AbstractInformationUI;
 import com.imagelab.view.InformationContainerView;
 import com.imagelab.view.forms.AbstractPropertiesForm;
@@ -14,6 +15,7 @@ import com.imagelab.view.forms.BilateralFilterPropertiesForm;
 import com.imagelab.view.forms.BoxFilterPropertiesForm;
 import com.imagelab.view.forms.DilationFilterPropertiesForm;
 import com.imagelab.view.forms.ErosionFilterPropertiesForm;
+import com.imagelab.view.forms.MorphologicalPropertiesForm;
 import com.imagelab.view.forms.PyramidDownFilterPropertiesForm;
 import com.imagelab.view.forms.PyramidUpFilterPropertiesForm;
 
@@ -143,6 +145,26 @@ public class FilterOperatorController {
         applybilateralFilter.elementStyleId = "applyBilateralFilter";
         applybilateralFilter.buildElement();
         return applybilateralFilter;
+    }
+    public static OperatorUIElement morphologicalOperatorEffectElement() {
+    	//applyBilateral Filter UI element
+        OperatorUIElement morphologicalOperator = new OperatorUIElement() {
+        	@Override
+        	public AbstractInformationUI buildInformationUI() {
+        		return new InformationContainerView(ApplyMorphological
+                        .Information.OPERATOR_INFO.toString());
+        	}
+        	@Override
+            public AbstractPropertiesForm buildPropertiesFormUI() {
+                return new MorphologicalPropertiesForm((ApplyMorphological) this.operator);
+            }
+        };
+        morphologicalOperator.operator = new ApplyMorphological();
+        morphologicalOperator.operatorId = ApplyMorphological.class.getCanonicalName();
+        morphologicalOperator.operatorName = "MORPHOLOGICAL";
+        morphologicalOperator.elementStyleId = "applyMorphological";
+        morphologicalOperator.buildElement();
+        return morphologicalOperator;
     }
 
 }

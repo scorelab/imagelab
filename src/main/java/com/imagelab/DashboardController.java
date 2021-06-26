@@ -454,7 +454,8 @@ public class DashboardController implements Initializable {
                 FilterOperatorController.erosionFilterEffectElement().element,
                 FilterOperatorController.bilateralFilterEffectElement().element,
                 FilterOperatorController.pyramidsUpFilterEffectElement().element,
-                FilterOperatorController.pyramidsDownFilterEffectElement().element    
+                FilterOperatorController.pyramidsDownFilterEffectElement().element,
+                FilterOperatorController.morphologicalOperatorEffectElement().element
         );
 
         thresholdingOperatorsContainer.setSpacing(15d);
