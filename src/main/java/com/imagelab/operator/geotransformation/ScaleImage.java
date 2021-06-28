@@ -11,6 +11,7 @@ import com.imagelab.operator.OpenCVOperator;
 import com.imagelab.operator.basic.ReadImage;
 import com.imagelab.operator.basic.WriteImage;
 import com.imagelab.operator.drawing.DrawCircle;
+import com.imagelab.operator.drawing.DrawLine;
 import com.imagelab.operator.filtering.ApplyBoxFilter;
 import com.imagelab.operator.filtering.ApplyErosion;
 import com.imagelab.operator.filtering.ApplyImagePyramid;
@@ -73,6 +74,7 @@ public class ScaleImage extends OpenCVOperator{
         allowed.add(ApplyImagePyramid.class);
         allowed.add(ApplyErosion.class);
         allowed.add(DrawCircle.class);
+        allowed.add(DrawLine.class);
         return allowed;
 	}
 	public enum Information {

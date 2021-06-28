@@ -423,7 +423,8 @@ public class DashboardController implements Initializable {
         drawingOperatorsContainer.setLayoutY(20d);
         drawingOperatorsContainer.getChildren().addAll(
         		//Populating drawingOperators
-        		DrawingOperatorController.drawCircleEffectElement().element
+        		DrawingOperatorController.drawCircleEffectElement().element,
+        		DrawingOperatorController.drawLineEffectElement().element
         );
         imageConversionsOperatorsContainer.setSpacing(15d);
         imageConversionsOperatorsContainer.setAlignment(Pos.TOP_CENTER);
