@@ -64,6 +64,12 @@
     -fx-background-color: #ff5733;
     -fx-text-fill: white;
 }
+/*Draw Line filter effects
+ to an image UI element*/
+#drawLine {
+    -fx-background-color: #dd6b5e;
+    -fx-text-fill: white;
+}
 /*Convert to grayscale image UI element*/
 #grayscaleImage {
     -fx-background-color: #535353;
