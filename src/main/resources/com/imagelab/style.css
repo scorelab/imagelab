@@ -70,6 +70,16 @@
     -fx-background-color: #dd6b5e;
     -fx-text-fill: white;
 }
+/*Draw Rectangle effects
+ * to an image UI element
+ */
+#drawRectangle{
+	-fx-background-color: #bf4e96;
+    -fx-text-fill: white;
+}
+/*D25EDF
+ * 
+ */
 /*Convert to grayscale image UI element*/
 #grayscaleImage {
     -fx-background-color: #535353;
