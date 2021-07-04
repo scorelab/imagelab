@@ -70,6 +70,10 @@
     -fx-background-color: #dd6b5e;
     -fx-text-fill: white;
 }
+#drawArrowLine{
+	-fx-background-color: #ef6b5e;
+    -fx-text-fill: white;
+}
 /*Draw Rectangle effects
  * to an image UI element
  */

@@ -1,6 +1,7 @@
 package com.imagelab.controllers;
 
 import com.imagelab.component.OperatorUIElement;
+import com.imagelab.operator.drawing.DrawArrowLine;
 import com.imagelab.operator.drawing.DrawCircle;
 import com.imagelab.operator.drawing.DrawEllipse;
 import com.imagelab.operator.drawing.DrawLine;
@@ -8,6 +9,7 @@ import com.imagelab.operator.drawing.DrawRectangle;
 import com.imagelab.view.AbstractInformationUI;
 import com.imagelab.view.InformationContainerView;
 import com.imagelab.view.forms.AbstractPropertiesForm;
+import com.imagelab.view.forms.DrawArrowLinePropertiesForm;
 import com.imagelab.view.forms.DrawCirclePropertiesForm;
 import com.imagelab.view.forms.DrawEllipsePropertiesForm;
 import com.imagelab.view.forms.DrawLinePropertiesForm;
@@ -55,6 +57,27 @@ public class DrawingOperatorController {
         drawLineEffect.elementStyleId = "drawLine";
         drawLineEffect.buildElement();
         return drawLineEffect;
+	}
+	public static OperatorUIElement drawArrowedLineEffectElement() {
+		//drawEllipse UI element.
+        OperatorUIElement drawArrowLineEffect = new OperatorUIElement() {
+            @Override
+            public AbstractInformationUI buildInformationUI() {
+                return new InformationContainerView(DrawArrowLine
+                        .Information.OPERATOR_INFO.toString());
+            }
+
+            @Override
+            public AbstractPropertiesForm buildPropertiesFormUI() {
+                return new DrawArrowLinePropertiesForm((DrawArrowLine) this.operator);
+            }
+        };
+        drawArrowLineEffect.operator = new DrawArrowLine();
+        drawArrowLineEffect.operatorId = DrawArrowLine.class.getCanonicalName();
+        drawArrowLineEffect.operatorName = "DRAW-ARROW-LINE";
+        drawArrowLineEffect.elementStyleId = "drawArrowLine";
+        drawArrowLineEffect.buildElement();
+        return drawArrowLineEffect;
 	}
 	public static OperatorUIElement drawRectangleEffectElement() {
 		//drawCircle UI element.
