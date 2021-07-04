@@ -58,34 +58,40 @@
 	-fx-background-color: #ffC300;
     -fx-text-fill: white;
 }
-/*Apply drawing circle effects
- to an image UI element*/
-#drawCircle {
-    -fx-background-color: #ff5733;
-    -fx-text-fill: white;
-}
 /*Draw Line filter effects
  to an image UI element*/
 #drawLine {
-    -fx-background-color: #dd6b5e;
+    -fx-background-color: #e1b7e5;
     -fx-text-fill: white;
 }
 #drawArrowLine{
-	-fx-background-color: #ef6b5e;
+	-fx-background-color: #c17fc7;
+    -fx-text-fill: white;
+}
+/*Apply drawing circle effects
+ to an image UI element*/
+#drawCircle {
+    -fx-background-color: #b960c1;
     -fx-text-fill: white;
 }
 /*Draw Rectangle effects
  * to an image UI element
  */
 #drawRectangle{
-	-fx-background-color: #bf4e96;
+	-fx-background-color: #b73ec2;
     -fx-text-fill: white;
 }
 /*Draw Ellipse effects to
  * an image UI element 
  */
 #drawEllipse{
-	-fx-background-color: #d25edf;
+	-fx-background-color: #b11abf;
+    -fx-text-fill: white;
+}
+/*Draw Text effects to 
+ * an image UI element */
+#drawText{
+ 	-fx-background-color: #7e0589;
     -fx-text-fill: white;
 }
 /*Convert to grayscale image UI element*/

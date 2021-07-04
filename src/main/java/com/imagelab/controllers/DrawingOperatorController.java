@@ -6,6 +6,7 @@ import com.imagelab.operator.drawing.DrawCircle;
 import com.imagelab.operator.drawing.DrawEllipse;
 import com.imagelab.operator.drawing.DrawLine;
 import com.imagelab.operator.drawing.DrawRectangle;
+import com.imagelab.operator.drawing.DrawText;
 import com.imagelab.view.AbstractInformationUI;
 import com.imagelab.view.InformationContainerView;
 import com.imagelab.view.forms.AbstractPropertiesForm;
@@ -14,6 +15,7 @@ import com.imagelab.view.forms.DrawCirclePropertiesForm;
 import com.imagelab.view.forms.DrawEllipsePropertiesForm;
 import com.imagelab.view.forms.DrawLinePropertiesForm;
 import com.imagelab.view.forms.DrawRectanglePropertiesForm;
+import com.imagelab.view.forms.DrawTextPropertiesForm;
 
 public class DrawingOperatorController {
 	public static OperatorUIElement drawCircleEffectElement() {
@@ -120,5 +122,26 @@ public class DrawingOperatorController {
         drawEllipseEffect.elementStyleId = "drawEllipse";
         drawEllipseEffect.buildElement();
         return drawEllipseEffect;
+	}
+	public static OperatorUIElement drawTextEffectElement() {
+		//drawEllipse UI element.
+        OperatorUIElement drawTextEffect = new OperatorUIElement() {
+            @Override
+            public AbstractInformationUI buildInformationUI() {
+                return new InformationContainerView(DrawText
+                        .Information.OPERATOR_INFO.toString());
+            }
+
+            @Override
+            public AbstractPropertiesForm buildPropertiesFormUI() {
+                return new DrawTextPropertiesForm((DrawText) this.operator);
+            }
+        };
+        drawTextEffect.operator = new DrawText();
+        drawTextEffect.operatorId = DrawText.class.getCanonicalName();
+        drawTextEffect.operatorName = "DRAW-TEXT";
+        drawTextEffect.elementStyleId = "drawText";
+        drawTextEffect.buildElement();
+        return drawTextEffect;
 	}
 }
