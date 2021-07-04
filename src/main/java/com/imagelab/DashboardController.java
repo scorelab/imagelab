@@ -427,7 +427,8 @@ public class DashboardController implements Initializable {
         		DrawingOperatorController.drawArrowedLineEffectElement().element,
         		DrawingOperatorController.drawCircleEffectElement().element,
         		DrawingOperatorController.drawEllipseEffectElement().element,
-        		DrawingOperatorController.drawRectangleEffectElement().element
+        		DrawingOperatorController.drawRectangleEffectElement().element,
+        		DrawingOperatorController.drawTextEffectElement().element
         		
         );
         imageConversionsOperatorsContainer.setSpacing(15d);
