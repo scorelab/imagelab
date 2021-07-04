@@ -77,9 +77,13 @@
 	-fx-background-color: #bf4e96;
     -fx-text-fill: white;
 }
-/*D25EDF
- * 
+/*Draw Ellipse effects to
+ * an image UI element 
  */
+#drawEllipse{
+	-fx-background-color: #d25edf;
+    -fx-text-fill: white;
+}
 /*Convert to grayscale image UI element*/
 #grayscaleImage {
     -fx-background-color: #535353;
