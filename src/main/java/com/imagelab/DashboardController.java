@@ -483,7 +483,8 @@ public class DashboardController implements Initializable {
         sobelDOperatorsContainer.setLayoutY(20d);
         sobelDOperatorsContainer.getChildren().addAll(
         	    // Populating sobelDerivationContainer
-        		SobelDerivationController.sobelOpeartorElement().element
+        		SobelDerivationController.sobelOpeartorElement().element,
+        		SobelDerivationController.scharrOpeartorElement().element
         );
         setDashboardToInitialState();
     }
