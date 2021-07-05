@@ -120,7 +120,12 @@ public class DashboardController implements Initializable {
      */
     @FXML
     private VBox thresholdingOperatorsContainer;
-
+    /**
+     * sobel Opeartor
+     * scharr Opeartor
+     */
+    @FXML
+    private VBox sobelDOperatorsContainer;
     /**
      * previewPane which outputs the
      * processed preview.
@@ -472,6 +477,13 @@ public class DashboardController implements Initializable {
         		ThresholdingOperatorController.applyBorderThresholdEffectElement().element,
                 ThresholdingOperatorController.applyAdaptiveThresholdEffectElement().element,
                 ThresholdingOperatorController.applySimpleThresholdEffectElement().element
+        );
+        sobelDOperatorsContainer.setSpacing(15d);
+        sobelDOperatorsContainer.setAlignment(Pos.TOP_CENTER);
+        sobelDOperatorsContainer.setLayoutY(20d);
+        sobelDOperatorsContainer.getChildren().addAll(
+        	    // Populating sobelDerivationContainer
+        		SobelDerivationController.sobelOpeartorElement().element
         );
         setDashboardToInitialState();
     }

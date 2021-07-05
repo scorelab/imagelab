@@ -198,3 +198,8 @@
     -fx-background-color: #282828;
     -fx-text-fill: white;
 }
+/*Sobel derivate styles  */
+#sobelDerivate{
+	-fx-background-color: #64d1ca;
+    -fx-text-fill: white;
+}
