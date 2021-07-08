@@ -497,7 +497,8 @@ public class DashboardController implements Initializable {
         transformationOperatorsContainer.setLayoutY(20d);
         transformationOperatorsContainer.getChildren().addAll(
         	    // Populating sobelDerivationContainer
-        		TransformationOperatorController.laplacianTransformationElement().element
+        		TransformationOperatorController.laplacianTransformationElement().element,
+        		TransformationOperatorController.distanceTransformationElement().element
         );
         setDashboardToInitialState();
     }

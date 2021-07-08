@@ -213,3 +213,8 @@
 	-fx-background-color: #5c6a69;
     -fx-text-fill: white;
 }
+/*Distance Transformation styles */
+#distanceTransform{
+	-fx-background-color: #374746;
+    -fx-text-fill: white;
+}
