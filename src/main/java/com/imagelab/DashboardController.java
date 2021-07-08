@@ -127,6 +127,12 @@ public class DashboardController implements Initializable {
     @FXML
     private VBox sobelDOperatorsContainer;
     /**
+     * laplacian transformation
+     * distance transformation
+     */
+    @FXML
+    private VBox transformationOperatorsContainer;
+    /**
      * previewPane which outputs the
      * processed preview.
      */
@@ -485,6 +491,13 @@ public class DashboardController implements Initializable {
         	    // Populating sobelDerivationContainer
         		SobelDerivationController.sobelOpeartorElement().element,
         		SobelDerivationController.scharrOpeartorElement().element
+        );
+        transformationOperatorsContainer.setSpacing(15d);
+        transformationOperatorsContainer.setAlignment(Pos.TOP_CENTER);
+        transformationOperatorsContainer.setLayoutY(20d);
+        transformationOperatorsContainer.getChildren().addAll(
+        	    // Populating sobelDerivationContainer
+        		TransformationOperatorController.laplacianTransformationElement().element
         );
         setDashboardToInitialState();
     }

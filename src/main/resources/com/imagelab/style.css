@@ -208,3 +208,8 @@
 	-fx-background-color: #2ea49d;
     -fx-text-fill: white;
 }
+/*Laplacian Transformation styles */
+#laplacianTransform{
+	-fx-background-color: #5c6a69;
+    -fx-text-fill: white;
+}
