@@ -14,4 +14,4 @@
 # Maven
 target/
 
-node_modules/
+settings.json
