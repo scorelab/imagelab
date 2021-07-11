@@ -1,10 +1,15 @@
+<<<<<<< HEAD
 "use strict";
+=======
+'use strict';
+>>>>>>> add first stagge of electron app
 
 console.log("main process working");
 
 const electron = require("electron");
 const { app, BrowserWindow } = electron;
 
+<<<<<<< HEAD
 let splash;
 
 app.on("ready", () => {
@@ -41,4 +46,22 @@ app.on("ready", () => {
   mainWindow.on("closed", function () {
     mainWindow = null;
   });
+=======
+app.on("ready", () => {
+    let mainWindow = new BrowserWindow({
+        webPreferences: {
+            nodeIntegration: true,
+            contextIsolation: false,
+        }, height: 700, width: 1500, show: false
+    });
+    mainWindow.loadURL(`file://${__dirname}/index.html`);
+    mainWindow.once("ready-to-show", () => {
+        mainWindow.show();
+    });
+
+    mainWindow.on('closed', function () {
+
+        mainWindow = null;
+    })
+>>>>>>> add first stagge of electron app
 });
