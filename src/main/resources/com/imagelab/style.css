@@ -218,3 +218,8 @@
 	-fx-background-color: #374746;
     -fx-text-fill: white;
 }
+/*Canny Edge Detection styles */
+#cannyEdge{
+	-fx-background-color: #8056cb;
+    -fx-text-fill: white;
+}
