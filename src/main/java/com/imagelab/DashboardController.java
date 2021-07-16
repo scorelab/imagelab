@@ -133,6 +133,15 @@ public class DashboardController implements Initializable {
     @FXML
     private VBox transformationOperatorsContainer;
     /**
+     * Canny Edge Detection
+     * Hough Line Transform
+     * Histogram Equalization
+     */
+    @FXML
+    private VBox miscellaneousOperatorsContainer;
+    
+    
+    /**
      * previewPane which outputs the
      * processed preview.
      */
@@ -499,6 +508,13 @@ public class DashboardController implements Initializable {
         	    // Populating sobelDerivationContainer
         		TransformationOperatorController.laplacianTransformationElement().element,
         		TransformationOperatorController.distanceTransformationElement().element
+        );
+        miscellaneousOperatorsContainer.setSpacing(15d);
+        miscellaneousOperatorsContainer.setAlignment(Pos.TOP_CENTER);
+        miscellaneousOperatorsContainer.setLayoutY(20d);
+        miscellaneousOperatorsContainer.getChildren().addAll(
+        	    // Populating sobelDerivationContainer
+        		MiscellaneousOperatorController.cannyEdgeDetectionElement().element
         );
         setDashboardToInitialState();
     }
