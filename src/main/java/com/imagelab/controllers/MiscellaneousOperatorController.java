@@ -34,6 +34,7 @@ public class MiscellaneousOperatorController {
         cannyEdgeDetection.buildElement();
         return cannyEdgeDetection;
 	}
+<<<<<<< HEAD
 	public static OperatorUIElement houghLineTransformElement() {
 		//Hough line transform properties form.
         OperatorUIElement houghLineTransform = new OperatorUIElement() {
@@ -76,4 +77,6 @@ public class MiscellaneousOperatorController {
         histogramEqualization.buildElement();
         return histogramEqualization;
 	}
+=======
+>>>>>>> Add: Canny Edge Detection + Properties + Dashboard sync + styles
 }
