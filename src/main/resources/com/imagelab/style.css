@@ -223,3 +223,8 @@
 	-fx-background-color: #8056cb;
     -fx-text-fill: white;
 }
+/*Hough Line Transfrom styles */
+#houghLine{
+	-fx-background-color: #633fa4;
+    -fx-text-fill: white;
+}
