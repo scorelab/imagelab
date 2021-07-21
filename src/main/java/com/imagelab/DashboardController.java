@@ -522,6 +522,7 @@ public class DashboardController implements Initializable {
         	    // Populating sobelDerivationContainer
         		MiscellaneousOperatorController.cannyEdgeDetectionElement().element,
 <<<<<<< HEAD
+<<<<<<< HEAD
         		MiscellaneousOperatorController.houghLineTransformElement().element,
         		MiscellaneousOperatorController.histogramEqualizationElement().element
         );
@@ -534,6 +535,10 @@ public class DashboardController implements Initializable {
 =======
         		MiscellaneousOperatorController.houghLineTransformElement().element
 >>>>>>> Add: Hough Line Transform with Canny Edge Detection + Properties + dashboard sync + styles
+=======
+        		MiscellaneousOperatorController.houghLineTransformElement().element,
+        		MiscellaneousOperatorController.histogramEqualizationElement().element
+>>>>>>> Add: Histogram Equalization + apply rules + dashboard sync + styles
         );
         setDashboardToInitialState();
     }

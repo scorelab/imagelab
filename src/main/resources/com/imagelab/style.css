@@ -276,13 +276,17 @@
  * Histogram calculation */
 #calHist {
     -fx-text-fill: white;
-<<<<<<< HEAD
     -fx-background-color: linear-gradient(#3e6fdd 21%, #3ddb42 52%, #d61b31 84%);
-=======
 }
+
 /*Hough Line Transfrom styles */
-#houghLine{
-	-fx-background-color: #633fa4;
+#houghLine {
+    -fx-background-color: #633fa4;
     -fx-text-fill: white;
->>>>>>> Add: Hough Line Transform with Canny Edge Detection + Properties + dashboard sync + styles
+}
+
+/*Histogram Equalization styles */
+#histogramEqual {
+    -fx-background-color: #432775;
+    -fx-text-fill: white;
 }
