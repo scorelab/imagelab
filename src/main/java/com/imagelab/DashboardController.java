@@ -515,7 +515,8 @@ public class DashboardController implements Initializable {
         miscellaneousOperatorsContainer.getChildren().addAll(
         	    // Populating sobelDerivationContainer
         		MiscellaneousOperatorController.cannyEdgeDetectionElement().element,
-        		MiscellaneousOperatorController.houghLineTransformElement().element
+        		MiscellaneousOperatorController.houghLineTransformElement().element,
+        		MiscellaneousOperatorController.histogramEqualizationElement().element
         );
         setDashboardToInitialState();
     }
