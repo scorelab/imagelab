@@ -228,3 +228,8 @@
 	-fx-background-color: #633fa4;
     -fx-text-fill: white;
 }
+/*Histogram Equalization styles */
+#histogramEqual{
+	-fx-background-color: #432775;
+    -fx-text-fill: white;
+}
