@@ -2,11 +2,13 @@ package com.imagelab.controllers;
 
 import com.imagelab.component.OperatorUIElement;
 import com.imagelab.operator.miscellaneousoperators.CannyEdgeDetection;
+import com.imagelab.operator.miscellaneousoperators.HistogramEqualization;
 import com.imagelab.operator.miscellaneousoperators.HoughLineTransform;
 import com.imagelab.view.AbstractInformationUI;
 import com.imagelab.view.InformationContainerView;
 import com.imagelab.view.forms.AbstractPropertiesForm;
 import com.imagelab.view.forms.CannyEdgeDetectionPropertiesForm;
+import com.imagelab.view.forms.HistogramEqualizationPropertiesForm;
 import com.imagelab.view.forms.HoughLineTransformPropertiesForm;
 
 
@@ -52,5 +54,26 @@ public class MiscellaneousOperatorController {
         houghLineTransform.elementStyleId = "houghLine";
         houghLineTransform.buildElement();
         return houghLineTransform;
+	}
+	public static OperatorUIElement histogramEqualizationElement() {
+		//Histogram Equalization transform properties form.
+        OperatorUIElement histogramEqualization = new OperatorUIElement() {
+            @Override
+            public AbstractInformationUI buildInformationUI() {
+                return new InformationContainerView(HistogramEqualization
+                        .Information.OPERATOR_INFO.toString());
+            }
+
+            @Override
+            public AbstractPropertiesForm buildPropertiesFormUI() {
+                return new HistogramEqualizationPropertiesForm((HistogramEqualization) this.operator);
+            }
+        };
+        histogramEqualization.operator = new HistogramEqualization();
+        histogramEqualization.operatorId = HistogramEqualization.class.getCanonicalName();
+        histogramEqualization.operatorName = "HISTOGRAM-EQUAL";
+        histogramEqualization.elementStyleId = "histogramEqual";
+        histogramEqualization.buildElement();
+        return histogramEqualization;
 	}
 }
