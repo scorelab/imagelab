@@ -479,6 +479,7 @@ public class DashboardController implements Initializable {
                 FilterOperatorController.imageDilationEffectElement().element,
                 FilterOperatorController.erosionFilterEffectElement().element,
                 FilterOperatorController.bilateralFilterEffectElement().element,
+                FilterOperatorController.filter2DOperatorEffectElement().element,
                 FilterOperatorController.pyramidsUpFilterEffectElement().element,
                 FilterOperatorController.pyramidsDownFilterEffectElement().element,
                 FilterOperatorController.morphologicalOperatorEffectElement().element
