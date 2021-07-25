@@ -178,6 +178,12 @@
  	-fx-background-color: #5177c9;
  	-fx-text-fill: white;
  }
+ /**
+  * Apply SQRBox Filter styles */
+#applySQRBox{
+	-fx-background-color: #2e4b89;
+ 	-fx-text-fill: white;
+}  
 /**Apply Morphological Operator styles
  *  */
  #applyMorphological{
