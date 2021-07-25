@@ -172,6 +172,12 @@
 	-fx-background-color: #3268b1;
  	-fx-text-fill: white;
 }
+/**
+ * Apply Filter2D styles */
+ #applyFilter2D{
+ 	-fx-background-color: #5177c9;
+ 	-fx-text-fill: white;
+ }
 /**Apply Morphological Operator styles
  *  */
  #applyMorphological{
