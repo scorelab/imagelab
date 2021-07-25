@@ -17,6 +17,7 @@ import com.imagelab.operator.filtering.ApplyErosion;
 import com.imagelab.operator.filtering.ApplyFilter2D;
 import com.imagelab.operator.filtering.ApplyImagePyramid;
 import com.imagelab.operator.filtering.ApplyImagePyramidDown;
+import com.imagelab.operator.filtering.ApplySQRBoxFilter;
 import com.imagelab.operator.imagebluring.ApplyBlurEffect;
 import com.imagelab.operator.imagebluring.ApplyGaussianBlurEffect;
 import com.imagelab.operator.imagebluring.ApplyMedianBlurEffect;
@@ -75,6 +76,7 @@ public class ScaleImage extends OpenCVOperator{
         allowed.add(ApplyImagePyramid.class);
         allowed.add(ApplyErosion.class);
         allowed.add(ApplyFilter2D.class);
+        allowed.add(ApplySQRBoxFilter.class);
         allowed.add(DrawCircle.class);
         allowed.add(DrawLine.class);
         return allowed;

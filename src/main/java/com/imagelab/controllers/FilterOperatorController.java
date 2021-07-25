@@ -9,6 +9,7 @@ import com.imagelab.operator.filtering.ApplyFilter2D;
 import com.imagelab.operator.filtering.ApplyImagePyramid;
 import com.imagelab.operator.filtering.ApplyImagePyramidDown;
 import com.imagelab.operator.filtering.ApplyMorphological;
+import com.imagelab.operator.filtering.ApplySQRBoxFilter;
 import com.imagelab.view.AbstractInformationUI;
 import com.imagelab.view.InformationContainerView;
 import com.imagelab.view.forms.AbstractPropertiesForm;
@@ -20,6 +21,7 @@ import com.imagelab.view.forms.Filter2DPropertiesForm;
 import com.imagelab.view.forms.MorphologicalPropertiesForm;
 import com.imagelab.view.forms.PyramidDownFilterPropertiesForm;
 import com.imagelab.view.forms.PyramidUpFilterPropertiesForm;
+import com.imagelab.view.forms.SQRBoxFilterPropertiesForm;
 
 public class FilterOperatorController {
 	public static OperatorUIElement boxFilerEffectElement() {
@@ -187,6 +189,26 @@ public class FilterOperatorController {
         filter2DOperator.elementStyleId = "applyFilter2D";
         filter2DOperator.buildElement();
         return filter2DOperator;
+    }
+    public static OperatorUIElement sqrBoxFilterEffectElement() {
+    	//apply SQRBoxFilter UI element
+    	OperatorUIElement sqrBoxOperator = new OperatorUIElement() {
+    		@Override
+        	public AbstractInformationUI buildInformationUI() {
+        		return new InformationContainerView(ApplySQRBoxFilter
+                        .Information.OPERATOR_INFO.toString());
+        	}
+        	@Override
+            public AbstractPropertiesForm buildPropertiesFormUI() {
+                return new SQRBoxFilterPropertiesForm((ApplySQRBoxFilter) this.operator);
+            }
+    	};
+    	sqrBoxOperator.operator = new ApplySQRBoxFilter();
+    	sqrBoxOperator.operatorId = ApplySQRBoxFilter.class.getCanonicalName();
+    	sqrBoxOperator.operatorName = "SQR-BOX-FILTER";
+    	sqrBoxOperator.elementStyleId = "applySQRBox";
+    	sqrBoxOperator.buildElement();
+        return sqrBoxOperator;
     }
 
 }
