@@ -5,6 +5,7 @@ import com.imagelab.operator.filtering.ApplyBilateralFilter;
 import com.imagelab.operator.filtering.ApplyBoxFilter;
 import com.imagelab.operator.filtering.ApplyDilation;
 import com.imagelab.operator.filtering.ApplyErosion;
+import com.imagelab.operator.filtering.ApplyFilter2D;
 import com.imagelab.operator.filtering.ApplyImagePyramid;
 import com.imagelab.operator.filtering.ApplyImagePyramidDown;
 import com.imagelab.operator.filtering.ApplyMorphological;
@@ -15,6 +16,7 @@ import com.imagelab.view.forms.BilateralFilterPropertiesForm;
 import com.imagelab.view.forms.BoxFilterPropertiesForm;
 import com.imagelab.view.forms.DilationFilterPropertiesForm;
 import com.imagelab.view.forms.ErosionFilterPropertiesForm;
+import com.imagelab.view.forms.Filter2DPropertiesForm;
 import com.imagelab.view.forms.MorphologicalPropertiesForm;
 import com.imagelab.view.forms.PyramidDownFilterPropertiesForm;
 import com.imagelab.view.forms.PyramidUpFilterPropertiesForm;
@@ -165,6 +167,26 @@ public class FilterOperatorController {
         morphologicalOperator.elementStyleId = "applyMorphological";
         morphologicalOperator.buildElement();
         return morphologicalOperator;
+    }
+    public static OperatorUIElement filter2DOperatorEffectElement() {
+    	//applyFilter2D Filter UI element
+        OperatorUIElement filter2DOperator = new OperatorUIElement() {
+        	@Override
+        	public AbstractInformationUI buildInformationUI() {
+        		return new InformationContainerView(ApplyFilter2D
+                        .Information.OPERATOR_INFO.toString());
+        	}
+        	@Override
+            public AbstractPropertiesForm buildPropertiesFormUI() {
+                return new Filter2DPropertiesForm((ApplyFilter2D) this.operator);
+            }
+        };
+        filter2DOperator.operator = new ApplyFilter2D();
+        filter2DOperator.operatorId = ApplyFilter2D.class.getCanonicalName();
+        filter2DOperator.operatorName = "FILTER2D";
+        filter2DOperator.elementStyleId = "applyFilter2D";
+        filter2DOperator.buildElement();
+        return filter2DOperator;
     }
 
 }
