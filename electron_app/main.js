@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 "use strict";
 =======
 'use strict';
@@ -7,12 +8,16 @@
 =======
 "use strict";
 >>>>>>> light mode - dark mode - splash screen
+=======
+"use strict";
+>>>>>>> added all operation blocks
 
 console.log("main process working");
 
 const electron = require("electron");
 const { app, BrowserWindow } = electron;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 let splash;
@@ -56,6 +61,10 @@ app.on("ready", () => {
 let splash;
 
 >>>>>>> light mode - dark mode - splash screen
+=======
+let splash;
+
+>>>>>>> added all operation blocks
 app.on("ready", () => {
   let mainWindow = new BrowserWindow({
     webPreferences: {
@@ -87,6 +96,7 @@ app.on("ready", () => {
     }, 3000);
   });
 
+<<<<<<< HEAD
 <<<<<<< HEAD
         mainWindow = null;
     })
@@ -96,4 +106,9 @@ app.on("ready", () => {
     mainWindow = null;
   });
 >>>>>>> light mode - dark mode - splash screen
+=======
+  mainWindow.on("closed", function () {
+    mainWindow = null;
+  });
+>>>>>>> added all operation blocks
 });
