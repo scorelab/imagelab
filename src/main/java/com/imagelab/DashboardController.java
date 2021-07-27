@@ -139,7 +139,11 @@ public class DashboardController implements Initializable {
      */
     @FXML
     private VBox miscellaneousOperatorsContainer;
-    
+    /**
+     * Histogram Calculation
+     */
+    @FXML
+    private VBox histogramOperationContainer;
     
     /**
      * previewPane which outputs the
@@ -519,6 +523,13 @@ public class DashboardController implements Initializable {
         		MiscellaneousOperatorController.cannyEdgeDetectionElement().element,
         		MiscellaneousOperatorController.houghLineTransformElement().element,
         		MiscellaneousOperatorController.histogramEqualizationElement().element
+        );
+        histogramOperationContainer.setSpacing(15d);
+        histogramOperationContainer.setAlignment(Pos.TOP_CENTER);
+        histogramOperationContainer.setLayoutY(20d);
+        histogramOperationContainer.getChildren().addAll(
+        	    // Populating Histogram operators
+        		HistogramController.histogramCalculationElement().element
         );
         setDashboardToInitialState();
     }
