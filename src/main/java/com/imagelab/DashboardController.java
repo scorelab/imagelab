@@ -540,6 +540,13 @@ public class DashboardController implements Initializable {
         		MiscellaneousOperatorController.histogramEqualizationElement().element
 >>>>>>> Add: Histogram Equalization + apply rules + dashboard sync + styles
         );
+        histogramOperationContainer.setSpacing(15d);
+        histogramOperationContainer.setAlignment(Pos.TOP_CENTER);
+        histogramOperationContainer.setLayoutY(20d);
+        histogramOperationContainer.getChildren().addAll(
+        	    // Populating Histogram operators
+        		HistogramController.histogramCalculationElement().element
+        );
         setDashboardToInitialState();
     }
 

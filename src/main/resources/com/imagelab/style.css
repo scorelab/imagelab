@@ -290,3 +290,9 @@
     -fx-background-color: #432775;
     -fx-text-fill: white;
 }
+/**
+ * Histogram calculation */
+ #calHist{
+ 	-fx-text-fill: white;
+ 	-fx-background-color:  linear-gradient(#3e6fdd 21%, #3ddb42 52%, #d61b31 84%);
+}
