@@ -238,6 +238,23 @@
                                                 </AnchorPane>
                                             </content>
                                         </TitledPane>
+                                        <TitledPane animated="false" layoutX="10.0" layoutY="226.0" text="Histogram Operations">
+                                            <content>
+                                                <AnchorPane fx:id="operationsPane3111111" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                    <children>
+                                                        <ScrollPane prefHeight="597.0" prefWidth="246.0">
+                                                            <content>
+                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="741.0" prefWidth="222.0">
+                                                                    <children>
+                                                                        <VBox fx:id="histogramOperationContainer" prefHeight="571.0" prefWidth="222.0" />
+                                                                    </children>
+                                                                </AnchorPane>
+                                                            </content>
+                                                        </ScrollPane>
+                                                    </children>
+                                                </AnchorPane>
+                                            </content>
+                                        </TitledPane>
                                     </panes>
                                 </Accordion>
                                 <Label alignment="CENTER" prefHeight="24.0" prefWidth="278.0"
