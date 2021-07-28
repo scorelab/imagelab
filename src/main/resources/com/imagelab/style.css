@@ -246,6 +246,13 @@
     -fx-text-fill: white;
 }
 /**
+ * Find Contours UI element styles
+ */
+ #findImageContours{
+ 	-fx-background-color: #0994b3;
+    -fx-text-fill: white;
+ }
+/**
  * Histogram calculation */
  #calHist{
  	-fx-text-fill: white;
