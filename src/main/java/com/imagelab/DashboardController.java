@@ -140,6 +140,12 @@ public class DashboardController implements Initializable {
     @FXML
     private VBox miscellaneousOperatorsContainer;
     /**
+     * Find and Draw Contours
+     * Draw Bounding Boxes for contours
+     */
+    @FXML
+    private VBox contourOperationContainer;
+    /**
      * Histogram Calculation
      */
     @FXML
@@ -523,6 +529,13 @@ public class DashboardController implements Initializable {
         		MiscellaneousOperatorController.cannyEdgeDetectionElement().element,
         		MiscellaneousOperatorController.houghLineTransformElement().element,
         		MiscellaneousOperatorController.histogramEqualizationElement().element
+        );
+        contourOperationContainer.setSpacing(15d);
+        contourOperationContainer.setAlignment(Pos.TOP_CENTER);
+        contourOperationContainer.setLayoutY(20d);
+        contourOperationContainer.getChildren().addAll(
+        	   // Populating contourOperationsContainer
+        	   ImageContoursController.findContoursElement().element	
         );
         histogramOperationContainer.setSpacing(15d);
         histogramOperationContainer.setAlignment(Pos.TOP_CENTER);

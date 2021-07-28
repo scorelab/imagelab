@@ -24,8 +24,8 @@ public class ImageContoursController {
                 return new FindContoursPropertiesForm((FindContours) this.operator);
             }
         };
-        findContours.operator = new HistogramCalculation();
-        findContours.operatorId = HistogramCalculation.class.getCanonicalName();
+        findContours.operator = new FindContours();
+        findContours.operatorId = FindContours.class.getCanonicalName();
         findContours.operatorName = "FIND-CONTOURS";
         findContours.elementStyleId = "findImageContours";
         findContours.buildElement();
