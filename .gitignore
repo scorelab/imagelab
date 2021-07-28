@@ -12,7 +12,4 @@
 *.war
 
 # Maven
-<<<<<<< HEAD
-target/
-=======
 target/
