@@ -252,6 +252,13 @@
  	-fx-background-color: #0994b3;
     -fx-text-fill: white;
  }
+ /**
+  * Bounding Box For Contours 
+  UI element styles */
+ #boundBoxContours{
+  	-fx-background-color: #056378;
+    -fx-text-fill: white;
+ }
 /**
  * Histogram calculation */
  #calHist{
