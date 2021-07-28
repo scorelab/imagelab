@@ -4,6 +4,8 @@ import com.imagelab.operator.OpenCVOperator;
 import com.imagelab.operator.basic.ReadImage;
 import com.imagelab.operator.basic.WriteImage;
 import com.imagelab.operator.geotransformation.RotateImage;
+import com.imagelab.operator.geotransformation.ScaleImage;
+
 import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
 
@@ -57,6 +59,7 @@ public class ConvertToGrayscale extends OpenCVOperator {
         allowed.add(RotateImage.class);
         allowed.add(WriteImage.class);
         allowed.add(ConvertToGrayscale.class);
+        allowed.add(ScaleImage.class);
         return allowed;
     }
 
