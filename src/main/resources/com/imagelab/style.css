@@ -265,3 +265,15 @@
  	-fx-text-fill: white;
  	-fx-background-color:  linear-gradient(#3e6fdd 21%, #3ddb42 52%, #d61b31 84%);
 }
+/**
+ * Image Moments UI element styles */
+ #imageMoments{
+ 	-fx-background-color: #0C4956;
+    -fx-text-fill: white;
+ }
+ /**
+  * Convex Hull UI element styles */
+  #convexHull{
+  	-fx-background-color: #0D5C84;
+    -fx-text-fill: white;
+  }
