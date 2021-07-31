@@ -536,7 +536,9 @@ public class DashboardController implements Initializable {
         contourOperationContainer.getChildren().addAll(
         	   // Populating contourOperationsContainer
         	   ImageContoursController.findContoursElement().element,
-        	   ImageContoursController.boundingBoxesForContoursElement().element
+        	   ImageContoursController.boundingBoxesForContoursElement().element,
+        	   ImageContoursController.imageMomentsElement().element,
+        	   ImageContoursController.convexHullElement().element
         );
         histogramOperationContainer.setSpacing(15d);
         histogramOperationContainer.setAlignment(Pos.TOP_CENTER);
