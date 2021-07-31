@@ -21,7 +21,7 @@ public class FindContoursPropertiesForm extends AbstractPropertiesForm{
        thresholdSliderContainer.setPrefWidth(205.0);
        thresholdSliderContainer.setSpacing(10);
        Label lblthresholdSlider = new Label("Canny Threshold :");
-       TextField boxthresholdTextField = new TextField(String.valueOf(1));
+       TextField boxthresholdTextField = new TextField(String.valueOf(100));
        boxthresholdTextField.setPrefSize(205.0, 27.0);
        
        Slider thresholdSlider = new Slider();
