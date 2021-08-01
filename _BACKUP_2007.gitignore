@@ -1,0 +1,19 @@
+# MacOS
+.DS_Store
+
+# IntelliJ
+.idea
+*.iml
+
+# Java
+*.class
+*.log
+*.jar
+*.war
+
+# Maven
+<<<<<<< HEAD
+target/
+=======
+target/
+>>>>>>> update .gitignore
