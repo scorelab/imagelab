@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Lab</title>
+  <!-- blockly package -->
+  <script src="./node_modules/blockly/blockly_compressed.js"></script>
+  <script src="./node_modules/blockly/blocks_compressed.js"></script>
+  <script src="./node_modules/blockly/msg/js/en.js"></script>
+  <!-- plugins used -->
+  <script src="./node_modules/@blockly/continuous-toolbox/dist/index.js"></script>
+  <script src="./node_modules/@blockly/field-slider/dist/index.js"></script>
+  <script src="./node_modules/@blockly/plugin-workspace-search/dist/index.js"></script>
+  <script src="./node_modules/intro.js/intro.js"></script>
+  <!-- responsible for changing colors of selected category -->
+  <script src="category-selection-style.js"></script>
+  <!-- color palette -->
+  <script>
+    Blockly.HSV_SATURATION = 0.8// 0 (inclusive) to 1 (exclusive), defaulting to 0.45
+    Blockly.HSV_VALUE = 0.8// 0 (inclusive) to 1 (exclusive), defaulting to 0.65
+  </script>
+  <!-- icons library and styles of html elements-->
+  <link rel="stylesheet" href="./node_modules/@mdi/font/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="./styles/style.css">
+  <link rel="stylesheet" href="./node_modules/intro.js/introjs.css">
+  <link rel="stylesheet" href="./node_modules/intro.js/themes/introjs-modern.css">
+
+</head>
+
+
+<body class="body">
+  <table>
+    <tr>
+      <td>
+        <img class="logo" src="./assets/logos/Image Lab icon.png" style="height:40px; vertical-align:sub;">
+        <img class="logo" src="./assets/logos/Image Lab word.png" style=" height:30px;">
+        <span class="mdi mdi-information" style="font-size:20px; vertical-align:top; color: #bb1010;"></span>
+        <span class="mdi mdi-file-plus-outline"></span>
+        <span class="mdi mdi-folder-open-outline"></span>
+        <span class="toggle"></span>
+        <span class="wave"></span>
+      </td>
+      <!-- <td style="width: 450px;">
+        <span class="mdi mdi-play-circle-outline"
+          style=" margin-left: 32%; font-size:30px; color: #367930; vertical-align: super;"></span>
+        <span class="mdi mdi-replay"
+          style="margin-left: 50%; font-size:30px; color: #bb1010; vertical-align: super;"></span>
+      </td> -->
+      <td style="text-align: end; vertical-align: top; width: 20px;">
+        <span class="mdi mdi-help-circle" style="font-size:20px; color: #bb1010; "></span>
+      </td>
+    </tr>
+  </table>
+
+  <table>
+    <tr>
+      <td style="width:1200px; vertical-align: top;">
+        <div class="playground-pane">
+          <div id="blocklyDiv" style="height:600px; width:auto; min-width: 700px;">
+            <!--div indicates workspace that blocks will be dropped in -->
+
+            <xml id="toolbox" style="display: none">
+              <category css-icon="customIcon mdi mdi-cog" name="Basic" colour="#5ba58c">
+                <block type="basic_readimage"></block>
+                <block type="basic_writeimage"></block>
+                <block type="browse_file"></block>
+                <block type="browse_folder"></block>
+              </category>
+              <category css-icon="customIcon mdi mdi-format-rotate-90" name="Geometric" colour="#a5745b">
+                <block type="geometric_reflectimage"></block>
+                <block type="geometric_rotateimage"></block>
+                <block type="geometric_colormaps"></block>
+                <block type="geometric_affineimage"></block>
+                <block type="geometric_scaleimage"></block>
+              </category>
+              <category css-icon="customIcon mdi mdi-palette" name="Convertions" colour="#a55b80">
+                <block type="imageconvertions_grayimage"></block>
+                <block type="imageconvertions_graytobinary"></block>
+                <block type="imageconvertions_colortobinary"></block>
+              </category>
+              <category css-icon="customIcon mdi mdi-shape" name="Drawing" colour="#5b67a5">
+                <block type="drawingoperations_drawline"></block>
+                <block type="drawingoperations_drawellipse"></block>
+                <block type="drawingoperations_drawarrowline"></block>
+                <block type="drawingoperations_drawtext"></block>
+                <block type="rgb_block"></block>
+                <block type="drawingoperations_drawcircle"></block>
+                <block type="drawingoperations_drawrectangle"></block>
+                <block type="point_block"></block>
+              </category>
+              <category css-icon="customIcon mdi mdi-blur" name="Blurring" colour="#9fa55b">
+                <block type="blurring_applyblur"></block>
+                <block type="blurring_applygaussianblur"></block>
+                <block type="blurring_applymedianblur"></block>
+              </category>
+              <category css-icon="customIcon mdi mdi-filter" name="Filtering" colour="#5ba55b">
+                <block type="filtering_bilateral"></block>
+                <block type="filtering_pyramidup"></block>
+                <block type="filtering_boxfilter"></block>
+                <block type="filtering_pyramiddown"></block>
+                <block type="filtering_erosion"></block>
+                <block type="filtering_dilation"></block>
+                <block type="filtering_morphological"></block>
+              </category>
+              <category css-icon="customIcon mdi mdi-border-none" name="Thresholding" colour="#745ba5">
+                <block type="thresholding_applyborders"></block>
+                <block type="border_for_all"></block>
+                <block type="border_each_side"></block>
+                <block type="thresholding_adaptivethreshold"></block>
+                <block type="thresholding_applythreshold"></block>
+              </category>
+              <category css-icon="customIcon mdi mdi-image-auto-adjust" name="Sobel Derivatives" colour="#a55b80">
+                <block type="sobelderivatives_soblederivate"></block>
+                <block type="sobelderivatives_scharrderivate"></block>
+              </category>
+              <category css-icon="customIcon mdi mdi-image-move" name="Transformation" colour="#5b80a5">
+                <block type="transformation_distance"></block>
+                <block type="transformation_laplacian"></block>
+              </category>
+            </xml>
+          </div>
+        </div>
+        <div class="information-pane">
+          <p style="font-size: 15px;">Operation name</p>
+          <p style="font-size: 13px; line-height: 5px;">here is the operation description</p>
+        </div>
+      </td>
+      <td style="vertical-align: top;">
+        <div class="preview-pane" style="padding-top: 2px;">
+          <table>
+            <tr>
+              <td style="display: flex; flex-direction: row; justify-content: space-around; align-items: center;">
+                <span class="mdi mdi-play-circle-outline"
+                  style=" font-size:30px; color: #367930; vertical-align: super;"></span>
+                <p>Preview</p>
+                <span class="mdi mdi-replay" style="font-size:30px; color: #bb1010; vertical-align: super;"></span>
+              </td>
+            </tr>
+          </table>
+          <hr class="hr" style="margin-top: 0px;">
+        </div>
+        <div class="properties-pane">
+          <p>Properties</p>
+          <hr class="hr">
+        </div>
+      </td>
+    </tr>
+  </table>
+
+  <!-- <script src="guide.js"></script> -->
+  <script src='imagelab-blocks.js'></script>
+  <script src="browse-blocks-functions.js"></script>
+  <script src="workspace.js"></script>
+  <script src="themes-toggle.js"></script>
+
+
+
+  <!-- file selector for browse blocks -->
+  <input type="file" id="inputImage" name="avatar" accept=".jpg , .png" style="display:none">
+  <input style="display:none" id="outputDirectory" type="file" webkitdirectory directory multiple />
+
+
+</body>
+
+</html>
