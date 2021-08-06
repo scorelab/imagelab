@@ -18,7 +18,7 @@ app.on("ready", () => {
     minWidth: 1100,
     minHeight: 800,
     show: false,
-    icon: __dirname + '/assets/logos/Image Lab.png',
+    icon: __dirname + '/assets/logos/Image Lab Icon.png',
   });
 
   splash = new BrowserWindow({
@@ -27,6 +27,7 @@ app.on("ready", () => {
     transparent: true,
     frame: false,
     alwaysOnTop: true,
+    icon: __dirname + '/assets/logos/Image Lab Icon.png',
   });
   splash.loadURL(`file://${__dirname}/splash.html`);
   mainWindow.loadURL(`file://${__dirname}/index.html`);
