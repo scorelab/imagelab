@@ -6,10 +6,14 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Image Lab</title>
+
   <!-- blockly package -->
+  <script src="https://unpkg.com/blockly/blockly.min.js"></script>
+  <!-- or -->
   <script src="./node_modules/blockly/blockly_compressed.js"></script>
   <script src="./node_modules/blockly/blocks_compressed.js"></script>
   <script src="./node_modules/blockly/msg/js/en.js"></script>
+
   <!-- plugins used -->
   <script src="./node_modules/@blockly/continuous-toolbox/dist/index.js"></script>
   <script src="./node_modules/@blockly/field-slider/dist/index.js"></script>
@@ -125,7 +129,7 @@
         </div>
         <div class="information-pane">
           <p style="font-size: 15px;">Operation name</p>
-          <p style="font-size: 13px; line-height: 5px;">here is the operation description</p>
+          <p style="font-size: 13px; line-height: 4px;">here is the operation description</p>
         </div>
       </td>
       <td style="vertical-align: top;">
@@ -150,11 +154,16 @@
     </tr>
   </table>
 
-  <!-- <script src="guide.js"></script> -->
+  <!-- <script>
+   introJs().addHints();
+</script> -->
+
+
   <script src='imagelab-blocks.js'></script>
   <script src="browse-blocks-functions.js"></script>
   <script src="workspace.js"></script>
   <script src="themes-toggle.js"></script>
+  <script src="guide.js"></script>
 
 
 
