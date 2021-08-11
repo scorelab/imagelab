@@ -9,6 +9,12 @@ import org.opencv.imgproc.Imgproc;
 import com.imagelab.operator.OpenCVOperator;
 import com.imagelab.operator.basic.ReadImage;
 import com.imagelab.operator.basic.WriteImage;
+import com.imagelab.operator.drawing.DrawArrowLine;
+import com.imagelab.operator.drawing.DrawCircle;
+import com.imagelab.operator.drawing.DrawEllipse;
+import com.imagelab.operator.drawing.DrawLine;
+import com.imagelab.operator.drawing.DrawRectangle;
+import com.imagelab.operator.drawing.DrawText;
 import com.imagelab.operator.filtering.ApplyBoxFilter;
 import com.imagelab.operator.filtering.ApplyDilation;
 import com.imagelab.operator.filtering.ApplyErosion;
@@ -53,8 +59,16 @@ public class ColorMaps extends OpenCVOperator{
 		case 3 : Imgproc.applyColorMap(image, dst, Imgproc.COLORMAP_BONE);break;
 		case 4 : Imgproc.applyColorMap(image, dst, Imgproc.COLORMAP_COOL);break;
 		case 5 : Imgproc.applyColorMap(image, dst, Imgproc.COLORMAP_RAINBOW);break;
+		case 6 : Imgproc.applyColorMap(image, dst, Imgproc.COLORMAP_HSV);break;
+		case 7 : Imgproc.applyColorMap(image, dst, Imgproc.COLORMAP_JET);break;
+		case 8 : Imgproc.applyColorMap(image, dst, Imgproc.COLORMAP_OCEAN);break;
+		case 9 : Imgproc.applyColorMap(image, dst, Imgproc.COLORMAP_PARULA);break;
+		case 10 :Imgproc.applyColorMap(image, dst, Imgproc.COLORMAP_PINK);break;
+		case 11 :Imgproc.applyColorMap(image, dst, Imgproc.COLORMAP_SPRING);break;
+		case 12 :Imgproc.applyColorMap(image, dst, Imgproc.COLORMAP_SUMMER);break;
+		case 13 :Imgproc.applyColorMap(image, dst, Imgproc.COLORMAP_WINTER);break;
 		}
-//		Imgproc.applyColorMap(image, dst, Imgproc.COLORMAP_BONE);
+		//return the return image
 		return dst;
 	}
 
@@ -75,7 +89,12 @@ public class ColorMaps extends OpenCVOperator{
         allowed.add(ApplyBoxFilter.class);
         allowed.add(ApplyDilation.class);
         allowed.add(ApplyErosion.class);
-        allowed.add(ColorMaps.class);
+        allowed.add(DrawArrowLine.class);
+        allowed.add(DrawLine.class);
+        allowed.add(DrawCircle.class);
+        allowed.add(DrawEllipse.class);
+        allowed.add(DrawRectangle.class);
+        allowed.add(DrawText.class);
         return allowed;
 		
 	}

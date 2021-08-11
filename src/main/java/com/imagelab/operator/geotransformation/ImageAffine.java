@@ -12,6 +12,12 @@ import org.opencv.imgproc.Imgproc;
 import com.imagelab.operator.OpenCVOperator;
 import com.imagelab.operator.basic.ReadImage;
 import com.imagelab.operator.basic.WriteImage;
+import com.imagelab.operator.drawing.DrawArrowLine;
+import com.imagelab.operator.drawing.DrawCircle;
+import com.imagelab.operator.drawing.DrawEllipse;
+import com.imagelab.operator.drawing.DrawLine;
+import com.imagelab.operator.drawing.DrawRectangle;
+import com.imagelab.operator.drawing.DrawText;
 import com.imagelab.operator.filtering.ApplyBoxFilter;
 import com.imagelab.operator.filtering.ApplyErosion;
 import com.imagelab.operator.filtering.ApplyImagePyramid;
@@ -84,7 +90,12 @@ public class ImageAffine extends OpenCVOperator{
         allowed.add(ApplyImagePyramidDown.class);
         allowed.add(ApplyImagePyramid.class);
         allowed.add(ApplyErosion.class);
-        allowed.add(ScaleImage.class);
+        allowed.add(DrawArrowLine.class);
+        allowed.add(DrawLine.class);
+        allowed.add(DrawCircle.class);
+        allowed.add(DrawEllipse.class);
+        allowed.add(DrawRectangle.class);
+        allowed.add(DrawText.class);
         return allowed;
 	}
 	public enum Information{
