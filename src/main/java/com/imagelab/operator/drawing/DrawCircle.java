@@ -13,9 +13,16 @@ import org.opencv.imgproc.Imgproc;
 import com.imagelab.operator.OpenCVOperator;
 import com.imagelab.operator.basic.ReadImage;
 import com.imagelab.operator.basic.WriteImage;
+import com.imagelab.operator.filtering.ApplyBilateralFilter;
 import com.imagelab.operator.filtering.ApplyBoxFilter;
 import com.imagelab.operator.filtering.ApplyDilation;
+import com.imagelab.operator.filtering.ApplyErosion;
+import com.imagelab.operator.filtering.ApplyFilter2D;
 import com.imagelab.operator.filtering.ApplyImagePyramid;
+import com.imagelab.operator.filtering.ApplyImagePyramidDown;
+import com.imagelab.operator.filtering.ApplySQRBoxFilter;
+import com.imagelab.operator.geotransformation.ColorMaps;
+import com.imagelab.operator.geotransformation.ImageAffine;
 import com.imagelab.operator.geotransformation.ImageReflection;
 import com.imagelab.operator.geotransformation.RotateImage;
 import com.imagelab.operator.geotransformation.ScaleImage;
@@ -24,6 +31,10 @@ import com.imagelab.operator.imagebluring.ApplyGaussianBlurEffect;
 import com.imagelab.operator.imagebluring.ApplyMedianBlurEffect;
 import com.imagelab.operator.imageconversion.ColoredImageToBinary;
 import com.imagelab.operator.imageconversion.ConvertToGrayscale;
+import com.imagelab.operator.sobelderivation.ScharrOperator;
+import com.imagelab.operator.sobelderivation.SobelOperator;
+import com.imagelab.operator.transformation.DistanceTransformation;
+import com.imagelab.operator.transformation.LaplacianTransformation;
 import com.imagelab.view.forms.DilationFilterPropertiesForm;
 
 public class DrawCircle extends OpenCVOperator{
@@ -152,20 +163,36 @@ public class DrawCircle extends OpenCVOperator{
 	@Override
 	public Set<Class<?>> allowedOperators() {
 		Set<Class<?>> allowed = new HashSet<>();
-        allowed.add(ReadImage.class);
-        allowed.add(RotateImage.class);
+		allowed.add(ReadImage.class);
         allowed.add(WriteImage.class);
+        allowed.add(ImageReflection.class);
+        allowed.add(RotateImage.class);
+        allowed.add(ColorMaps.class);
+        allowed.add(ImageAffine.class);
+        allowed.add(ScaleImage.class);
         allowed.add(ColoredImageToBinary.class);
         allowed.add(ConvertToGrayscale.class);
         allowed.add(ApplyBlurEffect.class);
         allowed.add(ApplyGaussianBlurEffect.class);
         allowed.add(ApplyMedianBlurEffect.class);
+        allowed.add(ApplyBilateralFilter.class);
         allowed.add(ApplyBoxFilter.class);
-        allowed.add(ApplyImagePyramid.class);
         allowed.add(ApplyDilation.class);
+        allowed.add(ApplyErosion.class);
+        allowed.add(ApplyFilter2D.class);
+        allowed.add(ApplyImagePyramidDown.class);
+        allowed.add(ApplyImagePyramid.class);
+        allowed.add(ApplySQRBoxFilter.class);
+        allowed.add(DrawArrowLine.class);
+        allowed.add(DrawLine.class);
         allowed.add(DrawCircle.class);
-        allowed.add(ScaleImage.class);
-        allowed.add(ImageReflection.class);
+        allowed.add(DrawEllipse.class);
+        allowed.add(DrawRectangle.class);
+        allowed.add(DrawText.class);
+        allowed.add(ScharrOperator.class);
+        allowed.add(SobelOperator.class);
+        allowed.add(DistanceTransformation.class);
+        allowed.add(LaplacianTransformation.class);
         return allowed;
 	}
 	/* 
