@@ -11,7 +11,11 @@ import org.opencv.imgproc.Imgproc;
 import com.imagelab.operator.OpenCVOperator;
 import com.imagelab.operator.basic.ReadImage;
 import com.imagelab.operator.basic.WriteImage;
+import com.imagelab.operator.geotransformation.ColorMaps;
+import com.imagelab.operator.geotransformation.ImageAffine;
+import com.imagelab.operator.geotransformation.ImageReflection;
 import com.imagelab.operator.geotransformation.RotateImage;
+import com.imagelab.operator.geotransformation.ScaleImage;
 import com.imagelab.operator.imagebluring.ApplyBlurEffect;
 import com.imagelab.operator.imagebluring.ApplyGaussianBlurEffect;
 import com.imagelab.operator.imagebluring.ApplyMedianBlurEffect;
@@ -89,8 +93,12 @@ public class ApplyBilateralFilter extends OpenCVOperator{
 	public Set<Class<?>> allowedOperators() {
 		Set<Class<?>> allowed = new HashSet<>();
         allowed.add(ReadImage.class);
-        allowed.add(RotateImage.class);
         allowed.add(WriteImage.class);
+        allowed.add(ImageReflection.class);
+        allowed.add(RotateImage.class);
+        allowed.add(ColorMaps.class);
+        allowed.add(ImageAffine.class);
+        allowed.add(ScaleImage.class);
         allowed.add(ColoredImageToBinary.class);
         allowed.add(ConvertToGrayscale.class);
         allowed.add(ApplyBlurEffect.class);
@@ -101,7 +109,9 @@ public class ApplyBilateralFilter extends OpenCVOperator{
         allowed.add(ApplyImagePyramid.class);
         allowed.add(ApplyDilation.class);
         allowed.add(ApplyErosion.class);
-        allowed.add(ApplyBilateralFilter.class);
+        allowed.add(ApplyFilter2D.class);
+        allowed.add(ApplySQRBoxFilter.class);
+        allowed.add(ApplyMorphological.class);
         return allowed;
 	}
 	public enum Information{
