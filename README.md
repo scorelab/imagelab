@@ -13,7 +13,21 @@ ImageLab is a standalone tool which supports anyone to get started with image pr
 
 See the [LICENSE](https://github.com/scorelab) file for details.
 
-![demo](docs/assets/Demo.gif)
+![demo](docs/assets/Demov2.gif)
+
+## Supported Image Processing Operations
+
+- Basic Read/Write operation
+- Image Conversion
+- Image Smoothing
+- Geometric Transformation operation
+- Drawing operation
+- Filtering operation
+- Thresholding operation
+- Transformation operations
+- Contour operation
+- Miscellaneous operation
+- Histogram operation
 
 ## Project Documentation
 
