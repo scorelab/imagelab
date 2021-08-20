@@ -9,9 +9,9 @@
 
 ## 🧐 About <a name = "about"></a>
 
-Here, you can find a new style of ImageLab by using Blockly library and other different technologies.
+Here, you can see the new design of ImageLab by using Blockly library and other different technologies.
 
-https://user-images.githubusercontent.com/43797542/128559673-b3e976f9-8c6a-4441-9b0b-4df5b3eec49d.mp4
+https://user-images.githubusercontent.com/43797542/130302770-b43a8ee4-fb59-4af2-b804-20e1847866f4.mp4
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
 
