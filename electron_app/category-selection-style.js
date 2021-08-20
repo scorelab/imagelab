@@ -9,6 +9,8 @@
  * @author aschmiedt@google.com (Abby Schmiedt)
  */
 
+/* with some modifications */
+
 class CategorySelection extends Blockly.ToolboxCategory {
   /**
    * Constructor for a custom category.
@@ -26,7 +28,7 @@ class CategorySelection extends Blockly.ToolboxCategory {
   addColourBorder_() {
     if (true) {
       this.rowDiv_.style.backgroundColor = '';
-    } 
+    }
   }
 
   /**
@@ -48,7 +50,7 @@ class CategorySelection extends Blockly.ToolboxCategory {
       if (true) {
         this.rowDiv_.style.backgroundColor = '';
       }
-      // Set the text back to white.
+      // Set the text and icon back to white.
       labelDom.style.color = 'white';
       this.iconDom_.style.color = 'white';
     }

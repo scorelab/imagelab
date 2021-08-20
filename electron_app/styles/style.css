@@ -1,243 +1,335 @@
- :root {
-   --primary-color: white;
-   --secondary-color: #0054a6;
-   --toolbox-bg: #0054a6;
-   --bg-color: #e8f2fc;
-   --icon-filter: sepia(1) hue-rotate(169deg) saturate(3) brightness(0.6);
-   --thin-lines-color: rgb(160, 160, 160);
-   --label-color: white;
-   --category-color: #035fbb;
-   --wave-color: #1b2440;
- }
+/* =================================================================*/
+/* Light and Dark modes color definitions: */
+/* =================================================================*/
 
+/* Light mode colors used in building UI*/
+:root {
+  --primary-color: white;
+  --secondary-color: #0054a6;
+  --toolbox-bg: #0054a6;
+  --bg-color: #e8f2fc;
+  --icon-filter: sepia(1) hue-rotate(169deg) saturate(3) brightness(0.6);
+  --thin-lines-color: rgb(160, 160, 160);
+  --label-color: white;
+  --category-color: #035fbb;
+  --wave-color: #1b2440;
+}
 
- .dark-mode {
-   --primary-color: #2a3556;
-   --secondary-color: white;
-   --toolbox-bg: #0e162c;
-   --bg-color: #1b2440;
-   --icon-filter: brightness(0) invert(1);
-   --thin-lines-color: #3a4977;
-   --label-color: white;
-   --category-color: #1f2b4b;
-   --wave-color: #e8f2fc;
- }
+/* Dark mode colors used in building UI*/
+.dark-mode {
+  --primary-color: #2a3556;
+  --secondary-color: white;
+  --toolbox-bg: #0e162c;
+  --bg-color: #1b2440;
+  --icon-filter: brightness(0) invert(1);
+  --thin-lines-color: #3a4977;
+  --label-color: white;
+  --category-color: #1f2b4b;
+  --wave-color: #e8f2fc;
+}
 
- .body {
-   background-color: #e8f2fc;
- }
+/* =================================================================*/
+/* styling panes except blockly workspace*/
+/* =================================================================*/
 
- .preview-pane {
-   width: 350px;
-   min-width: 300px;
-   height: 330px;
-   padding-top: 7px;
-   /* margin-left: 20px; */
-   text-align: center;
-   background-color: var(--primary-color);
-   border-radius: 0.5rem;
-   color: var(--secondary-color);
-   font-size: 15px;
-   font-family: sans-serif;
-   font-weight: bold;
+body {
+  background-color: #e8f2fc;
+}
 
-   /* box-shadow: 0px 0px 5px 1px rgb(255, 255, 255); */
- }
+.preview-pane {
+  width: 350px;
+  min-width: 300px;
+  height: 330px;
+  padding-top: 7px;
+  text-align: center;
+  background-color: var(--primary-color);
+  border-radius: 0.5rem;
+  color: var(--secondary-color);
+  font-size: 15px;
+  font-family: sans-serif;
+  font-weight: bold;
+}
 
- .properties-pane {
-   width: 350px;
-   min-width: 300px;
-   height: 250px;
-   padding-top: 7px;
-   margin-top: 2px;
-   /* margin-left: 20px; */
-   text-align: center;
-   background-color: var(--primary-color);
-   border-radius: 0.5rem;
-   color: var(--secondary-color);
-   font-size: 15px;
-   font-family: sans-serif;
-   font-weight: bold;
-   /* box-shadow: 0px 0px 5px 1px rgb(255, 255, 255); */
- }
+.properties-pane {
+  width: 350px;
+  min-width: 300px;
+  height: 250px;
+  padding-top: 7px;
+  margin-top: 2px;
+  text-align: center;
+  background-color: var(--primary-color);
+  border-radius: 0.5rem;
+  color: var(--secondary-color);
+  font-size: 15px;
+  font-family: sans-serif;
+  font-weight: bold;
+}
 
- .information-pane {
-   width: auto;
-   min-width: 700px;
-   height: 65px;
-   margin-top: 2px;
-   padding-left: 15px;
-   padding-top: 3px;
-   padding-right: 3px;
-   padding-bottom: 3px;
-   text-align: left;
-   background-color: mediumseagreen;
-   border-radius: 0.5rem;
-   font-family: sans-serif;
-   font-weight: bold;
-   color: var(--primary-color);
-   /* box-shadow: 0px 0px 5px 1px mediumseagreen; */
- }
+.information-pane {
+  width: auto;
+  min-width: 700px;
+  height: auto;
+  margin-top: 2px;
+  padding-left: 15px;
+  padding-top: 3px;
+  padding-right: 3px;
+  padding-bottom: 3px;
+  text-align: left;
+  background-color: #ccc;
+  border-radius: 0.5rem;
+  font-family: sans-serif;
+  font-weight: bold;
+  color: var(--primary-color);
+}
 
- .hr {
-   width: 90%;
-   color: var(--thin-lines-color);
- }
+/* the separators in preview andproperties panes */
+.hr {
+  width: 90%;
+  color: var(--thin-lines-color);
+}
 
+/* =================================================================*/
+/* styling blockly components like toolbox, flyout, workspace and blocks*/
+/* =================================================================*/
 
- .blocklyZoom>image,
- .blocklyZoom>svg>image,
- .blocklyTrash {
-   filter: var(--icon-filter);
-   opacity: 1;
- }
+/* these lines are changing colors of zooming and trash in workspace*/
+.blocklyZoom>image,
+.blocklyZoom>svg>image,
+.blocklyTrash {
+  filter: var(--icon-filter);
+  opacity: 1;
+}
 
+/* that colors flyout that contains blocks */
+.blocklyFlyoutBackground {
+  fill: var(--primary-color);
+  stroke: var(--thin-lines-color);
+}
 
+/* this is the div that is the parent for all workspace components */
+.injectionDiv {
+  border-radius: 0.5rem;
+}
 
- .blocklyFlyoutBackground {
-   fill: var(--primary-color);
-   stroke: var(--thin-lines-color);
- }
-
- .injectionDiv {
-   border-radius: 0.5rem;
- }
-
+/*that part adds very small stroke to workspace to beautify it*/
  .blocklyMainBackground {
-   stroke-width: 1;
-   stroke: var(--primary-color);
- }
+  stroke-width: 1;
+  stroke: var(--primary-color);
+} 
 
- .zelos-renderer.classic-theme .blocklyText {
+/*style of text in blocks */
+.zelos-renderer.classic-theme .blocklyText {
    fill: white;
    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
    font-size: 22px;
  }
 
- .zelos-renderer.classic-theme .blocklyFlyoutLabelText {
-   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-   font-size: 22px;
-   fill: var(--secondary-color);
- }
+/* style of title of category in its flyout and that works only on using continuous toolbox plugin*/
+/*.zelos-renderer.classic-theme .blocklyFlyoutLabelText {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-size: 22px;
+  fill: var(--secondary-color);
+}*/
 
- .blocklyToolboxDiv {
-   padding-top: 15px;
-   background-color: var(--toolbox-bg);
-   height: 96.5%;
- }
-
- .blocklyTreeLabel {
-   /*display: none;  if we need no text to appear*/
-   color: var(--label-color);
-   font-size: 10px;
-   font-weight: bold;
- }
-
- table {
-   width: 100%;
-
-   /* border-spacing: 0px; */
- }
-
- /* Adds padding around the group of categories and separators. */
- .blocklyToolboxContents {
-   padding: 1em;
- }
-
- /* Adds space between the categories, rounds the corners and adds space around the label. */
- .blocklyTreeRow {
-   /* height: 30px;
-  width: 30px; // when using icons without text
-  display: inline-block; */
-   padding: 3px;
-   margin-bottom: 12px;
-   border-radius: 10px;
-   box-shadow: 0px 0px 3px white;
-   background-color: var(--category-color);
- }
-
- /* Changes color of the icon to var(--primary-color). */
- .customIcon {
-   color: var(--label-color);
- }
-
- /* Stacks the icon on top of the label. */
- .blocklyTreeRowContentContainer {
-   /* display: flex;
-  flex-direction: column; */
-   align-items: center;
-   padding-top: 4px;
-   padding-left: 2px;
-
- }
-
- .blocklySvg {
-   background-color: var(--primary-color);
- }
-
- .mdi-file-plus-outline,
- .mdi-folder-open-outline,
- .mdi-theme-light-dark {
-   color: var(--secondary-color);
-   margin-left: 1%;
-   font-size: 30px;
-   vertical-align: super;
- }
-
-
-
- /* test for toggling dark & light with animations*/
- .toggle {
-   cursor: pointer;
-   color: var(--secondary-color);
-   margin-left: 1%;
-   font-size: 30px;
-   vertical-align: super;
- }
-
- .toggle:before {
-   /* content: '🌒'; */
-   font-family: 'Material Design Icons';
-   content: '\F0594';
- }
-
- .toggle.active:before {
-   /* content: '☀️'; */
-   font-family: 'Material Design Icons';
-   content: '\F0599';
- }
-
- /*animation of the 2 icons of dark and light modes*/
- /* .toggle.animate {
-  animation: animate .3s cubic-bezier(0.4, 0.0, 0.2, 1);
+/* style of toolbox that contains categories in it */
+.blocklyToolboxDiv {
+  padding-top: 15px;
+  background-color: var(--toolbox-bg);
+  height: 96.5%;
 }
 
-@keyframes animate {
-  0%   { transform: scale(1); }
-  50%  { transform: scale(0); }
-  100% { transform: scale(1); }
-}  */
- /************************************/
- .wave {
-   position: absolute;
-   top: 5%;
-   left: 2%;
-   border-radius: 100%;
-   width: 2px;
-   height: 2px;
-   display: block;
-   z-index: -1;
-   box-shadow: 0 0 0 0 #1b2440;
-   transition: box-shadow 0.3s cubic-bezier(1, 0.04, 0, 1)
- }
+/* style of titles of categories */
+.blocklyTreeLabel {
+  /*display: none;  if we need no titles in categories buttons*/
+  color: var(--label-color);
+  font-size: 10px;
+  font-weight: bold;
+}
 
- .wave.active {
-   background: #1b2440;
-   box-shadow: 0 0 0 9999px #1b2440;
- }
+table {
+  width: 100%;
+  /* border-spacing: 0px; */
+}
+
+/* Adds padding around the categories buttons */
+.blocklyToolboxContents {
+  padding: 1em;
+}
+
+/* Adds space between the categories, rounds the corners and adds space around the label. */
+.blocklyTreeRow {
+  /*width: 30px; // when using icons without text*/
+  padding: 3px;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 3px white;
+  background-color: var(--category-color);
+}
+
+/* Changes color of the icons in categories buttons to suit light/dark modes. */
+.customIcon {
+  color: var(--label-color);
+}
+
+/* Stacks the icon on top of the label. */
+.blocklyTreeRowContentContainer {
+  align-items: center;
+  padding-top: 4px;
+  padding-left: 2px;
+
+}
+
+/* the background of the whole workspace that user drop blocks into*/
+.blocklySvg {
+  background-color: var(--primary-color);
+}
+
+/* =================================================================*/
+/* styling all icons in the interface except those in blockly toolbox*/
+/* =================================================================*/
+
+.mdi-file-plus-outline,
+.mdi-folder-open-outline,
+.mdi-theme-light-dark {
+  color: var(--secondary-color);
+  margin-left: 1%;
+  font-size: 30px;
+  vertical-align: super;
+  cursor: pointer;
+}
+
+.mdi-play-circle-outline,
+.mdi-replay {
+  cursor: pointer;
+}
+
+.mdi-plus-circle-outline,
+.mdi-minus-circle-outline {
+  text-shadow: 0px 0px 5px var(--primary-color) !important;
+}
+
+.mdi:hover {
+  text-shadow: 0px 0px 3px rgb(155, 155, 155) !important;
+}
+
+/* =================================================================*/
+/* toggling light/dark themes animations */
+/* =================================================================*/
+
+.toggle {
+  cursor: pointer;
+  color: var(--secondary-color);
+  margin-left: 1%;
+  font-size: 30px;
+  vertical-align: super;
+}
+
+.toggle:before {
+  font-family: 'Material Design Icons';
+  content: '\F0594';
+}
+
+.toggle.active:before {
+  font-family: 'Material Design Icons';
+  content: '\F0599';
+}
+
+.wave {
+  position: absolute;
+  top: 5%;
+  left: 2%;
+  border-radius: 100%;
+  width: 2px;
+  height: 2px;
+  display: block;
+  z-index: -1;
+  box-shadow: 0 0 0 0 #1b2440;
+  transition: box-shadow 0.3s cubic-bezier(1, 0.04, 0, 1)
+}
+
+.wave.active {
+  background: #1b2440;
+  box-shadow: 0 0 0 9999px #1b2440;
+}
+
+/* =================================================================*/
+/* styling guide appears to introduce interface to user*/
+/* =================================================================*/
+
+.introjs-tooltiptext {
+  text-align: center;
+}
+
+/* =================================================================*/
+/* Customizing titlebar and menubar using library (custom-electron-titlebar) and overriding it*/
+/* =================================================================*/
+
+.titlebar {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.titlebar.cet-windows,
+.titlebar.cet-linux,
+.menubar-menu-container {
+  background-color: var(--toolbox-bg) !important;
+}
+
+.action-item {
+  background-color: var(--toolbox-bg) !important;
+}
+
+a.action-menu-item {
+  background-color: rgba(0, 0, 0, 0) !important;
+}
+
+.action-item.focused {
+  background-color: rgba(255, 255, 255, 0.14) !important;
+}
+
+.container-after-titlebar {
+  padding: 6px;
+}
 
 
+/* =================================================================*/
+/* setting image-preview specifications */
+/* =================================================================*/
 
- .introjs-tooltiptext {
-   text-align: center;
- }
+.image-preview-div {
+  padding: 16px;
+  overflow: auto;
+  overflow: auto;
+  height: 240px;
+  width: 300px;
+  margin-left: 10px;
+}
+
+.image-preview-div img {
+  height: auto;
+  width: 100%;
+}
+
+/* =================================================================*/
+/* Customizing scrollbars of image preview div */
+/* =================================================================*/
+
+.image-preview-div::-webkit-scrollbar {
+  width: 20px;
+}
+
+.image-preview-div::-webkit-scrollbar-corner {
+  background: rgba(0, 0, 0, 0);
+}
+
+.image-preview-div::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 70px;
+  border: 4px solid rgba(0, 0, 0, 0);
+  background-clip: content-box;
+  min-width: 32px;
+  min-height: 32px;
+}
+
+.image-preview-div::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, 0);
+}
