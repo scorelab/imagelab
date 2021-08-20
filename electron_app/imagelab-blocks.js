@@ -1,35 +1,7 @@
+/* Configuration of all blocks included in our application in JSON format. */
 
 Blockly.defineBlocksWithJsonArray([
   //Basic
-  {
-    "type": "geometric_reflectimage",
-    "message0": "Reflect image in %1 direction",
-    "args0": [
-      {
-        "type": "field_dropdown",
-        "name": "type",
-        "options": [
-          [
-            "X",
-            "X"
-          ],
-          [
-            "Y",
-            "Y"
-          ],
-          [
-            "Both",
-            "Both"
-          ]
-        ]
-      }
-    ],
-    "previousStatement": null,
-    "nextStatement": null,
-    "colour": 20,
-    "tooltip": "Refelction produces a missror image like about and an axis of reflection. There are two type of reflection. One is x direction reflection and other is y direction reflection",
-    "helpUrl": ""
-  },
   {
     "type": "browse_file",
     "message0": " %1",
@@ -953,35 +925,6 @@ Blockly.defineBlocksWithJsonArray([
   },
 
   //Thresholding
-  {
-    "type": "geometric_reflectimage",
-    "message0": "Reflect image in %1 direction",
-    "args0": [
-      {
-        "type": "field_dropdown",
-        "name": "type",
-        "options": [
-          [
-            "X",
-            "X"
-          ],
-          [
-            "Y",
-            "Y"
-          ],
-          [
-            "Both",
-            "Both"
-          ]
-        ]
-      }
-    ],
-    "previousStatement": null,
-    "nextStatement": null,
-    "colour": 20,
-    "tooltip": "Refelction produces a missror image like about and an axis of reflection. There are two type of reflection. One is x direction reflection and other is y direction reflection",
-    "helpUrl": ""
-  },
   {
     "type": "thresholding_applyborders",
     "message0": "Apply borders  %1",
