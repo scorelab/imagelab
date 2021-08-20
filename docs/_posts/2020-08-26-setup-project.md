@@ -10,6 +10,7 @@ related to the project.
 [![Gitter](https://badges.gitter.im/scorelab/ImageLab.svg)](https://gitter.im/scorelab/ImageLab?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 <br>
 
+## Outline
 
 1. Setting up the environment.
 2. Setting up the project.
@@ -177,6 +178,7 @@ In the ```main/java/com/imagelab``` we have
 - ```operators``` - openCV operators related classes.
 - ```utills``` - utility classes which has been reused in the other classes.
 - ```views``` - application views related to the app.
+- ```views.forms``` - application views related to properties pane of a particular operator
 
 and 
 
@@ -190,9 +192,12 @@ functionalities as well.
 
 ## 4. Adding new OpenCV operations
 
-This section contains the steps to add new openCV operations to the project.
+This section contains the steps to add new openCV operations to the project. Developer has to follow four step procedure 
+in order to add a new operator to the appliation.
 
 ### 4.1 Add operation to ```imagelab/operators/``` as a java class.
+
+Make sure that your OpenCV operator has clear boundaries and has clear usecases.Decide how the operator should integrate with the pipeline and required opencv packages are included in the dependencies. For more information refer the official OpenCV documentation [OpenCV operations](https://docs.opencv.org/4.5.2/d7/da8/tutorial_table_of_content_imgproc.html).
 
 ### 4.2 Extend ```OpenCVOperator``` abstract class. 
 
@@ -227,47 +232,161 @@ public class OperatorName extends OpenCVOperator{
 In addition to above this operator can hold anything related to the openCV operator
 such as information related to the operation or any additional logic.
 
-### 4.3 Register your newly developed operator.
+### 4.3 Add a breif description about the operator to the public enum```Information ```
 
-For this you need to navigation to ```imagelab/DashboardController.java``` and register your
-newly developed operator in the initialize method.
+Use the public enum Information has a ```OPERATOR_INFO``` variable to add the operator desctiption.It will automatically loaded to the information pane when the operator dropped to the pipeline.
+
+Following code snippet code shows the information enum where you need to add the operator description.
+
+```
+public enum Information{
+	OPERATOR_INFO{
+		public String toString() {
+			return "Color Maps\n\n" 
+                +" Colormaps can apply different color maps to an image using this method.OpenCV caters various other types of colormaps methods where you can find in the properties pane.All these types are represents by predefined static fields(fixed values).";
+						
+		}
+	}
+}
+```
+
+Now the final code will look like this,
+
+```
+public class OperatorName extends OpenCVOperator{
+  
+    //To have the logic realted to prevoious operator validation.
+     @Override
+        public boolean validate(OpenCVOperator previous) {
+            return false;
+     }
+
+    //To have the openCV processing logic. 
+     @Override
+         public Mat compute(Mat image) {
+             return null;
+     }
+    
+    //To have the allowed operators for this operator.
+    @Override
+        public Set<Class<?>> allowedOperators() {
+            return null;
+    }
+
+    //Operator description to be display at the information pane
+    public enum Information{
+        OPERATOR_INFO{
+            public String toString() {
+                return "Operator desciption";
+                            
+            }
+        }
+    }
+}
+
+```
+
+### 4.4 Add your operator properties to a separate view form to display at ``PropertiesPane``
+
+In this step, you can define the required properties in order to calibrate your operator. The more properties you provide, it will beneficial for the end user to use the operator in a robust manner. Most importantly, implement the properties with preserving UI/UX aspects. 
+
+As the first step create a java class inside the ``com.imagelab.view.forms`` with a meaningful name and extend that class with ``AbstractPropertiesForm``.
+
+Then include your properties using javafx scene elements and return all the scene elements to the anchorpane using a return function.
+To safguard the code quality make sure to comment all your workings.
+
+### 4.5 Add your implemented operator to the controller class
+
+After implementing your OpenCV operation it needs to include to the relevant controller class in order to proceed for the next steps.
+When adding to the controllers make sure that to include it for the most suitable operator class. You can investigate the image lab dashboard side bar and decide to which operation category and for what you should insert your newly developed operation.  As an example ```DrawCircle.java``` operator to the ```DrawingOperatorController.java```. 
+
+These are already provided controller classes in the application.
+
+![controller_classes](assets/controllers.png)
+
+If your operator doesn't align with the above controller classes, You can create a new controller class.
+
+Inside a particular controller, create a new function with a proper and meaningful name to register your operator under the desired
+controller class.
 
 Following is sample code snippet related to operator registration.
 
 ```
-//newOperatorName UI element.
+//newOperatorName UI element function.
+public static OperatorUIElement operatorElementName() {
 OperatorUIElement newOperatorName = new OperatorUIElement() {
 
-@Override
-public AbstractInformationUI buildInformationUI() {
-// return the information pane.
-    return null;
-}
+    @Override
+    public AbstractInformationUI buildInformationUI() {
+    // return the information pane.
+        return null;
+    }
 
-@Override
-public AbstractPropertiesFormUI buildPropertiesFormUI() {
-// return the properties pane.
-    return null;
-}
-};
+    @Override
+    public AbstractPropertiesFormUI buildPropertiesFormUI() {
+    // return the properties pane.
+        return null;
+    }
+    };
 newOperatorName.operator = new OperatorName();
 newOperatorName.operatorId = OperatorName.class.getCanonicalName();
 newOperatorName.operatorName = "OPERATOR-NAME";
 newOperatorName.elementStyleId = "newOperatorName";
 newOperatorName.buildElement();
+}
+// ... other controller functions
+}
 ```
 
-### 4.4 Add it to the relevant UI container.
+below code snippet despite a usecase of how ```DrawCircle``` OpenCV operator has been added to ```DrawingOperatorController```controller class.
 
-In this step you can investigate the image lab dashboard side bar and decide to which operation category
-you should insert your newly developed operation. Based on that create a FXML binding in the
- ```DashboardController.java``` and insert the operator to that container to populate it in the dashboard.
+```
+public class DrawingOperatorController {
+    // controller function for DrawCircle operator
+	public static OperatorUIElement drawCircleEffectElement() {
+		//drawCircle UI element.
+        OperatorUIElement drawCircleEffect = new OperatorUIElement() {
+            @Override
+            public AbstractInformationUI buildInformationUI() {
+                return new InformationContainerView(DrawCircle
+                        .Information.OPERATOR_INFO.toString());
+            }
 
-### 4.5 Add styles to operator.
+            @Override
+            public AbstractPropertiesForm buildPropertiesFormUI() {
+                return new DrawCirclePropertiesForm((DrawCircle) this.operator);
+            }
+        };
+        drawCircleEffect.operator = new DrawCircle();
+        drawCircleEffect.operatorId = DrawCircle.class.getCanonicalName();
+        drawCircleEffect.operatorName = "DRAW-CIRCLE";
+        drawCircleEffect.elementStyleId = "drawCircle";
+        drawCircleEffect.buildElement();
+        return drawCircleEffect;
+	}
+    // other functions
+
+}
+```
+
+### 4.6 Register your newly developed operator.
+
+For this you need to navigation to ```imagelab/DashboardController.java``` and register your
+newly developed operator under the relevant controller initialize method.
+
+![controller_dashboard_include](assets/controller_dashboard_include.png)
+
+So at the runtime, it will populate at the dashboard side bar under desired operation category.Based on that create a FXML binding in the```DashboardController.java``` and insert the operator to that container to populate it in the dashboard.
+
+
+### 4.7 Add styles to operator.
 
 Navigate to the ```resources/styles.css``` and add styles with the style ID you assigned when you register
 the operator.
 
+### 4.8 Run and play with the newly created operator
+
+Run the ```App.java``` file and see whether your newly created operator is working as expected.
 
 <br>
 <br>
@@ -310,5 +429,3 @@ bundle exec jekyll serve --livereload
 This site will run on your browser at ```localhost:4000```
 
 <br>
-
-

@@ -277,3 +277,9 @@
   	-fx-background-color: #0D5C84;
     -fx-text-fill: white;
   }
+  /*
+   * Template Matching element styles */
+  #templateMatch{
+   	-fx-background-color: #1C5AB9;
+    -fx-text-fill: white;
+   }
