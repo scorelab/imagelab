@@ -57,6 +57,8 @@ npm install blockly
 npm install intro.js --save
 npm install @mdi/font
 npm install @blockly/plugin-workspace-search --save
+npm install @blockly/continuous-toolbox --save
+npm install custom-electron-titlebar
 ```
 
 ## 🎈 Usage <a name="usage"></a>
