@@ -545,7 +545,8 @@ public class DashboardController implements Initializable {
         histogramOperationContainer.setLayoutY(20d);
         histogramOperationContainer.getChildren().addAll(
         	    // Populating Histogram operators
-        		HistogramController.histogramCalculationElement().element
+        		HistogramController.histogramCalculationElement().element,
+        		HistogramController.templateMatchingElement().element
         );
         setDashboardToInitialState();
     }

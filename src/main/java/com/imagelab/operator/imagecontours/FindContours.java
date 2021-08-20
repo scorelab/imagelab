@@ -45,15 +45,20 @@ public class FindContours extends OpenCVOperator {
 	 * Contour list
 	 */
 	private static ArrayList<MatOfPoint> contourList;
-	
+	/**
+	 * Apply validation for the finding contours
+	 * Before applying the contours operator pipeline should follow
+	 * image conversion with BGR to Gray
+	 * image smoothing with blurring
+	 */
 	@Override
 	public boolean validate(OpenCVOperator previous) {
 		if (previous == null) {
             return false;
         }else if(previous.getClass() == ApplyBlurEffect.class) {
-			System.out.println("Applied Blurred for Contoured");
+			System.out.println("Applied Blur for Contours");
 		}else if(previous.getClass() == ConvertToGrayscale.class) {
-			System.out.println("Applied Gray image");
+			System.out.println("Applied image conversion for contours");
 		}
         return allowedOperators().contains(previous.getClass());
 	}

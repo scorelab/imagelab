@@ -95,7 +95,9 @@ public class BoundingBoxesForContours extends OpenCVOperator {
         
 		return drawing;
 	}
-
+	/**
+	 * allowed operators can only have before applying the bounding boxes 
+	 */
 	@Override
 	public Set<Class<?>> allowedOperators() {
 		Set<Class<?>> allowed = new HashSet<>();
@@ -120,6 +122,8 @@ public class BoundingBoxesForContours extends OpenCVOperator {
              */
             public String toString() {
                 return "Bounding Boxes for Contours\n\n"
+                		+ "This operation will bound the identified contours for the given image. It uses cv.rectangle()"
+                		+ "to draw the boxes."
                 		;
             }
         }

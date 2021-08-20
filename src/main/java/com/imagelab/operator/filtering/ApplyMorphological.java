@@ -15,6 +15,9 @@ import com.imagelab.operator.filtering.ApplyDilation;
 import com.imagelab.operator.filtering.ApplyErosion;
 import com.imagelab.operator.filtering.ApplyImagePyramid;
 import com.imagelab.operator.filtering.ApplyImagePyramidDown;
+import com.imagelab.operator.geotransformation.ColorMaps;
+import com.imagelab.operator.geotransformation.ImageAffine;
+import com.imagelab.operator.geotransformation.ImageReflection;
 import com.imagelab.operator.geotransformation.RotateImage;
 import com.imagelab.operator.geotransformation.ScaleImage;
 import com.imagelab.operator.imagebluring.ApplyBlurEffect;
@@ -67,8 +70,11 @@ public class ApplyMorphological extends OpenCVOperator {
 	public Set<Class<?>> allowedOperators() {
 		Set<Class<?>> allowed = new HashSet<>();
 		allowed.add(ReadImage.class);
-        allowed.add(RotateImage.class);
         allowed.add(WriteImage.class);
+        allowed.add(ImageReflection.class);
+        allowed.add(RotateImage.class);
+        allowed.add(ColorMaps.class);
+        allowed.add(ImageAffine.class);
         allowed.add(ScaleImage.class);
         allowed.add(ColoredImageToBinary.class);
         allowed.add(ConvertToGrayscale.class);
@@ -76,10 +82,13 @@ public class ApplyMorphological extends OpenCVOperator {
         allowed.add(ApplyGaussianBlurEffect.class);
         allowed.add(ApplyMedianBlurEffect.class);
         allowed.add(ApplyBoxFilter.class);
-        allowed.add(ApplyImagePyramidDown.class);
+        allowed.add(ApplyBilateralFilter.class);
         allowed.add(ApplyImagePyramid.class);
+        allowed.add(ApplyImagePyramidDown.class);
         allowed.add(ApplyDilation.class);
         allowed.add(ApplyErosion.class);
+        allowed.add(ApplyFilter2D.class);
+        allowed.add(ApplySQRBoxFilter.class);
         return allowed;
 	}
 	/**

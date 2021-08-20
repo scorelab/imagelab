@@ -22,7 +22,7 @@ description: 'ImageLab is a standalone tool which supports anyone to get started
 # For testing enable gh-page for your forked repo (point the /docs folder)
 # and use that URL instead.
 url: https://scorelab.github.io/ImageLab
-baseurl: /ImageLab
+baseurl: /imagelab
 
 author:
   name: 'SCoRE Lab'
@@ -31,7 +31,7 @@ author:
 paginate: 5
 
 # Custom vars
-version: 1.0.0
+version: 2.0.0
 
 github:
   repo: https://github.com/scorelab/ImageLab

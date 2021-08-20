@@ -3,6 +3,19 @@ package com.imagelab.operator.geotransformation;
 import com.imagelab.operator.OpenCVOperator;
 import com.imagelab.operator.basic.ReadImage;
 import com.imagelab.operator.basic.WriteImage;
+import com.imagelab.operator.drawing.DrawArrowLine;
+import com.imagelab.operator.drawing.DrawCircle;
+import com.imagelab.operator.drawing.DrawEllipse;
+import com.imagelab.operator.drawing.DrawLine;
+import com.imagelab.operator.drawing.DrawRectangle;
+import com.imagelab.operator.drawing.DrawText;
+import com.imagelab.operator.filtering.ApplyBoxFilter;
+import com.imagelab.operator.filtering.ApplyDilation;
+import com.imagelab.operator.filtering.ApplyErosion;
+import com.imagelab.operator.imagebluring.ApplyBlurEffect;
+import com.imagelab.operator.imagebluring.ApplyGaussianBlurEffect;
+import com.imagelab.operator.imagebluring.ApplyMedianBlurEffect;
+import com.imagelab.operator.imageconversion.ColoredImageToBinary;
 import com.imagelab.operator.imageconversion.ConvertToGrayscale;
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
@@ -57,9 +70,26 @@ public class RotateImage extends OpenCVOperator {
     public Set<Class<?>> allowedOperators() {
         Set<Class<?>> allowed = new HashSet<>();
         allowed.add(ReadImage.class);
-        allowed.add(RotateImage.class);
         allowed.add(WriteImage.class);
+        allowed.add(ColorMaps.class);
+        allowed.add(ScaleImage.class);
+        allowed.add(ImageAffine.class);
+        allowed.add(ImageReflection.class);
+        allowed.add(ColoredImageToBinary.class);
         allowed.add(ConvertToGrayscale.class);
+        allowed.add(ApplyBlurEffect.class);
+        allowed.add(ApplyGaussianBlurEffect.class);
+        allowed.add(ApplyMedianBlurEffect.class);
+        allowed.add(ApplyBoxFilter.class);
+        allowed.add(ApplyDilation.class);
+        allowed.add(ApplyErosion.class);
+        allowed.add(ColorMaps.class);
+        allowed.add(DrawArrowLine.class);
+        allowed.add(DrawLine.class);
+        allowed.add(DrawCircle.class);
+        allowed.add(DrawEllipse.class);
+        allowed.add(DrawRectangle.class);
+        allowed.add(DrawText.class);
         return allowed;
     }
 

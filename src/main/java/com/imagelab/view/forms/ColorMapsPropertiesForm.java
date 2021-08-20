@@ -32,6 +32,9 @@ public class ColorMapsPropertiesForm extends AbstractPropertiesForm{
         RadioButton r8 = new RadioButton("PARULA");
         RadioButton r9 = new RadioButton("PINK");
         RadioButton r10 = new RadioButton("RAINBOW");
+        RadioButton r11 = new RadioButton("SPRING");
+        RadioButton r12 = new RadioButton("SUMMER");
+        RadioButton r13 = new RadioButton("WINTER");
         
         r1.setToggleGroup(color_maps);
         r2.setToggleGroup(color_maps);
@@ -43,16 +46,20 @@ public class ColorMapsPropertiesForm extends AbstractPropertiesForm{
         r8.setToggleGroup(color_maps);
         r9.setToggleGroup(color_maps);
         r10.setToggleGroup(color_maps);
+        r11.setToggleGroup(color_maps);
+        r12.setToggleGroup(color_maps);
+        r13.setToggleGroup(color_maps);
         
         // color map container1
-        VBox colorContainer1 = new VBox(r1,r2,r3,r4,r5,r6,r7,r8,r9,r10);
+        VBox colorContainer1 = new VBox(r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13);
         colorContainer1.setPrefWidth(205.0);
         colorContainer1.setSpacing(7);
         
         r3.setSelected(true);
         
-        
-        
+        /*
+         * switch for the selection of the color maps operation
+        */
         color_maps.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
         	RadioButton selectedRadioButton =
                     (RadioButton) newValue;
@@ -66,6 +73,14 @@ public class ColorMapsPropertiesForm extends AbstractPropertiesForm{
             	case "BONE" : operator.setType(3);break;
             	case "COOL" : operator.setType(4);break;
             	case "RAINBOW" : operator.setType(5);break;
+            	case "HSV" : operator.setType(6);break;
+            	case "JET" : operator.setType(7);break;
+            	case "OCEAN" : operator.setType(8);break;
+            	case "PARULA" : operator.setType(9);break;
+            	case "PINK" : operator.setType(10);break;
+            	case "SPRING" : operator.setType(11);break;
+            	case "SUMMER" : operator.setType(12);break;
+            	case "WINTER" : operator.setType(13);break;
             }
         });
                 
