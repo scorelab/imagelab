@@ -44,7 +44,7 @@ public class DashboardController implements Initializable {
     private final Stack<OperatorUIElement> appliedOperators;
 
     /**
-     * Queue which holds UI elements which are undone after adding to the playground
+     * Stack which holds UI elements which are undone after adding to the playground
      * dragged and dropped into the playground.
      */
     private final Stack<OperatorUIElement> undoOperators;
