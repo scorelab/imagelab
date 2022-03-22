@@ -12,7 +12,7 @@ tour.setOptions({
         {
             element: document.querySelector('.playground-pane'),
             title: 'Playground',
-            intro: 'This  is the workspace where you can use blocksto do the process youu want to do on your picture. \n use (ctrl+f) to find specific block.',
+            intro: 'This  is the workspace where you can use blocks to do the process you want to do on your picture. \n use (ctrl+f) to find a specific block.',
             position: 'right',
         },
         {
@@ -31,7 +31,7 @@ tour.setOptions({
         {
             element: document.querySelector('.properties-pane'),
             title: 'Properties area',
-            intro: 'Here, you can modify properies of the block of operation you choose.',
+            intro: 'Here, you can modify properties of the block of operation you choose.',
             position: 'top',
         },
         {
