@@ -289,6 +289,18 @@
                         <HBox fx:id="topToolbarContainer" alignment="CENTER_RIGHT" prefHeight="44.0" prefWidth="1005.0"
                               spacing="20.0" styleClass="topNavBar">
                             <children>
+                                <Button mnemonicParsing="false" onAction="#onUndoClicked" prefHeight="32.0"
+                                        prefWidth="117.0" text="Undo">
+                                    <opaqueInsets>
+                                        <Insets/>
+                                    </opaqueInsets>
+                                </Button>
+                                <Button mnemonicParsing="false" onAction="#onRedoClicked" prefHeight="32.0"
+                                        prefWidth="117.0" text="Redo">
+                                    <opaqueInsets>
+                                        <Insets/>
+                                    </opaqueInsets>
+                                </Button>
                                 <Button mnemonicParsing="false" onAction="#onResetClicked" prefHeight="32.0"
                                         prefWidth="117.0" text="Reset">
                                     <opaqueInsets>
