@@ -44,6 +44,12 @@ public class DashboardController implements Initializable {
     private final Stack<OperatorUIElement> appliedOperators;
 
     /**
+     * Stack which holds UI elements which are undone after adding to the playground
+     * dragged and dropped into the playground.
+     */
+    private final Stack<OperatorUIElement> undoOperators;
+
+    /**
      * To capture the latest applied operator
      * to the playground.
      */
@@ -178,6 +184,7 @@ public class DashboardController implements Initializable {
      */
     public DashboardController() {
         this.appliedOperators = new Stack<>();
+        this.undoOperators = new Stack<>();
     }
 
     /**
@@ -246,6 +253,53 @@ public class DashboardController implements Initializable {
     }
 
     /**
+     * Method which undo the playground event
+     *
+     * @param actionEvent - onClick Mouse Event.
+     * @throws IOException - if the event was not captured.
+     */
+    @FXML
+    public void onUndoClicked(ActionEvent actionEvent) throws IOException {
+        if(!appliedOperators.empty()){
+            OperatorUIElement lastElem = this.appliedOperators.pop();
+            this.playgroundOpContainer.getChildren().remove(lastElem.element);
+            this.undoOperators.add(lastElem);
+            if(appliedOperators.isEmpty()){
+                this.playgroundAreaLabel.setVisible(true);
+                this.previewPane.getChildren().clear();
+                this.uiElementPropertiesPane.setContent(null);
+            }else{
+                OperatorUIElement lastOperation = this.appliedOperators.lastElement();
+                this.uiElementPropertiesPane.setContent(lastOperation.propertiesFormUI);
+                this.informationScrollPane.setContent(lastOperation.informationUI);
+
+            }
+
+        }
+    }
+
+
+    /**
+     * Method which undo the playground event
+     *
+     * @param actionEvent - onClick Mouse Event.
+     * @throws IOException - if the event was not captured.
+     */
+    @FXML
+    public void onRedoClicked(ActionEvent actionEvent) throws IOException {
+        if(!undoOperators.isEmpty()){
+            OperatorUIElement lastElem = undoOperators.pop();
+            if(appliedOperators.isEmpty()){
+                this.playgroundAreaLabel.setVisible(false);
+            }
+            this.appliedOperators.add(lastElem);
+            this.playgroundOpContainer.getChildren().add(lastElem.element);
+            this.uiElementPropertiesPane.setContent(lastElem.propertiesFormUI);
+            this.informationScrollPane.setContent(lastElem.informationUI);
+        }
+    }
+
+    /**
      * Method which reset the playground ones user
      * pressed on the refresh.
      *
@@ -264,6 +318,8 @@ public class DashboardController implements Initializable {
             if (reply.equals("OK")) {
                 // Removing all the elements from appliedOperators.
                 this.appliedOperators.clear();
+                // Removing all the elements from the undoOperators.
+                this.undoOperators.clear();
                 // Removing rendered output images.
                 this.previewPane.getChildren().clear();
                 // Removing elements from the operators container.
@@ -288,9 +344,14 @@ public class DashboardController implements Initializable {
                             + " pipeline",
                     Alert.AlertType.WARNING
             );
+            // Clearing the unoOperators stack
+            this.undoOperators.clear();
+
             System.err.println("ERROR: empty pipeline,"
                     + " nothing to be cleared.");
         }
+
+
     }
 
     /**
@@ -586,4 +647,6 @@ public class DashboardController implements Initializable {
          */
         playgroundAreaLabel.setVisible(true);
     }
+
+
 }
