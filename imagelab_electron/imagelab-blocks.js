@@ -121,34 +121,7 @@ Blockly.defineBlocksWithJsonArray([
       "This operator allows you to rotate an image to a specific angle. Moreover you can change angle and scale related to the rotation.",
     helpUrl: "",
   },
-  {
-    type: "geometric_colormaps",
-    message0: "Color map image with %1 filter",
-    args0: [
-      {
-        type: "field_dropdown",
-        name: "type",
-        options: [
-          ["Hot", "HOT"],
-          ["Autumn", "AUTUMN"],
-          ["Bone", "BONE"],
-          ["Cool", "COOL"],
-          ["HSV", "HSV"],
-          ["JET", "JET"],
-          ["Ocean", "OCEAN"],
-          ["Parula", "PARULA"],
-          ["Piink", "PINK"],
-          ["Rainbow", "RAINBOW"],
-        ],
-      },
-    ],
-    previousStatement: null,
-    nextStatement: null,
-    colour: 20,
-    tooltip:
-      "Color maps can apply different color maps to an image using this method. OpenCV caters various other types All these types are represents by predefined static fields(fixed values).",
-    helpUrl: "",
-  },
+
   {
     type: "geometric_affineimage",
     message0: "Affine Image",
@@ -193,6 +166,34 @@ Blockly.defineBlocksWithJsonArray([
     colour: 315,
     tooltip:
       "This operations allows you to convert your image into a gray image.",
+    helpUrl: "",
+  },
+  {
+    type: "imageconvertions_colormaps",
+    message0: "Color map image with %1 filter",
+    args0: [
+      {
+        type: "field_dropdown",
+        name: "type",
+        options: [
+          ["Hot", "HOT"],
+          ["Autumn", "AUTUMN"],
+          ["Bone", "BONE"],
+          ["Cool", "COOL"],
+          ["HSV", "HSV"],
+          ["JET", "JET"],
+          ["Ocean", "OCEAN"],
+          ["Parula", "PARULA"],
+          ["Piink", "PINK"],
+          ["Rainbow", "RAINBOW"],
+        ],
+      },
+    ],
+    previousStatement: null,
+    nextStatement: null,
+    colour: 315,
+    tooltip:
+      "Color maps can apply different color maps to an image using this method. OpenCV caters various other types All these types are represents by predefined static fields(fixed values).",
     helpUrl: "",
   },
   {
