@@ -1,6 +1,10 @@
 const PROCESS_OPERATIONS = require("../../operations");
 const ReadImage = require("../operator/basic/ReadImage");
 const WriteImage = require("../operator/basic/WriteImage");
+const AffineImage = require("../operator/geometric/AffineImage");
+const ReflectImage = require("../operator/geometric/ReflectImage");
+const RotateImage = require("../operator/geometric/RotateImage");
+const ScaleImage = require("../operator/geometric/ScaleImage");
 
 class MainController {
   // This private field is used to store the applied operators in the workspace
@@ -99,6 +103,38 @@ class MainController {
           )
         );
         break;
+      case PROCESS_OPERATIONS.REFLECTIMAGE:
+        this.#appliedOperators.push(
+          this.#generateOperator(
+            new ReflectImage(),
+            PROCESS_OPERATIONS.REFLECTIMAGE
+          )
+        );
+        break;
+      case PROCESS_OPERATIONS.ROTATEIMAGE:
+        this.#appliedOperators.push(
+          this.#generateOperator(
+            new RotateImage(),
+            PROCESS_OPERATIONS.ROTATEIMAGE
+          )
+        );
+        break;
+      case PROCESS_OPERATIONS.AFFINEIMAGE:
+        this.#appliedOperators.push(
+          this.#generateOperator(
+            new AffineImage(),
+            PROCESS_OPERATIONS.AFFINEIMAGE
+          )
+        );
+        break;
+      case PROCESS_OPERATIONS.SCALEIMAGE:
+        this.#appliedOperators.push(
+          this.#generateOperator(
+            new ScaleImage(),
+            PROCESS_OPERATIONS.SCALEIMAGE
+          )
+        );
+        break;
       default:
         break;
     }
@@ -108,7 +144,6 @@ class MainController {
    * This method compute and generate the output of the selected operators
    */
   computeAll() {
-    console.log("Operators are: ", this.#appliedOperators);
     if (this.#appliedOperators.length === 0) {
       throw Error("No operators are added to the workspace");
     }
@@ -122,9 +157,20 @@ class MainController {
     }
     var image = this.#originalImage;
     this.#appliedOperators.forEach((item) => {
-      image = item.operator.compute(image);
-      this.#processedImage = image;
+      if (image) {
+        image = item.operator.compute(image);
+        this.#processedImage = image;
+      }
     });
+  }
+
+  changeValuesOfBlocks(blockType, paramType, value) {
+    const block = this.#appliedOperators.find(
+      (item) => item.type === blockType
+    );
+    if (block) {
+      block.operator.setParams(paramType, value);
+    }
   }
 }
 

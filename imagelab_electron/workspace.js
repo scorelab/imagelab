@@ -53,6 +53,11 @@ workspace.addChangeListener(function (event) {
         workspace.getBlockById(event?.blockId).type
       );
     }
+  } else if (event.type === Blockly.Events.BLOCK_CHANGE) {
+    const blockType = workspace.getBlockById(event.blockId).type;
+    const paramType = event.name;
+    const value = event.newValue;
+    mainController.changeValuesOfBlocks(blockType, paramType, value);
   }
   if (event.type === Blockly.Events.SELECTED) {
     if (Blockly.selected === null) {
