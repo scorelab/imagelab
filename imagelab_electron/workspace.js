@@ -122,7 +122,6 @@ function executeProcess() {
   try {
     mainController.computeAll(preview);
   } catch (error) {
-    console.log(error);
     showDialog("Error Occured", error.message, "error");
   }
 }
@@ -154,32 +153,6 @@ function loadFile() {
       // convert image file to base64 string
       url = URL.createObjectURL(file);
 
-      preview.src = url;
-    },
-    false
-  );
-
-  preview.onload = () => {
-    // Here preview is the main image
-    mainController.setOriginalImage(preview);
-  };
-
-  if (file) {
-    reader.readAsDataURL(file);
-  }
-}
-
-/* This function is responsible for previewing selected image on the preview pane */
-function previewFile() {
-  const preview = document.getElementById("image-preview"); // image-preview is the element of image will displayed on the preview pane.
-  const file = document.querySelector("input[type=file]").files[0];
-  const reader = new FileReader();
-
-  reader.addEventListener(
-    "load",
-    function () {
-      // convert image file to base64 string
-      const url = URL.createObjectURL(file);
       preview.src = url;
     },
     false
