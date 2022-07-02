@@ -3,8 +3,8 @@ const OpenCvOperator = require("../OpenCvOperator");
 class RotateImage extends OpenCvOperator {
   #angle = 90;
   #scale = 1;
-  constructor() {
-    super();
+  constructor(type) {
+    super(type);
   }
 
   /**

@@ -3,8 +3,8 @@ const OpenCvOperator = require("../OpenCvOperator");
 class ScaleImage extends OpenCvOperator {
   #xaxis = 1;
   #yaxis = 1;
-  constructor() {
-    super();
+  constructor(type) {
+    super(type);
   }
 
   /**

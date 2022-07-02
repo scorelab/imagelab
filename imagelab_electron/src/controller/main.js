@@ -55,7 +55,7 @@ class MainController {
 
   /**
    * This method set the original image
-   * @param {Image} image
+   * @param {Mat Image} image
    */
   setOriginalImage(image) {
     this.#originalImage = image;
@@ -70,69 +70,40 @@ class MainController {
   }
 
   /**
-   * This private method returns an object which consits of selected
-   * opencv operator and its string type
-   * @param {Object of selected operator} operator
-   * @param {String type of the selected operator} type
-   * @returns
-   */
-  #generateOperator(operator, type) {
-    return {
-      operator,
-      type,
-    };
-  }
-
-  /**
    * This function generates the operator object accroding to the string passed
-   * @param {String name of the operator type} operatorType
+   * @param {String} operatorType
    * @returns
    */
   addOperator(operatorType) {
     switch (operatorType) {
       case PROCESS_OPERATIONS.READIMAGE:
         this.#appliedOperators.push(
-          this.#generateOperator(new ReadImage(), PROCESS_OPERATIONS.READIMAGE)
+          new ReadImage(PROCESS_OPERATIONS.READIMAGE)
         );
         break;
       case PROCESS_OPERATIONS.WRITEIMAGE:
         this.#appliedOperators.push(
-          this.#generateOperator(
-            new WriteImage(),
-            PROCESS_OPERATIONS.WRITEIMAGE
-          )
+          new WriteImage(PROCESS_OPERATIONS.WRITEIMAGE)
         );
         break;
       case PROCESS_OPERATIONS.REFLECTIMAGE:
         this.#appliedOperators.push(
-          this.#generateOperator(
-            new ReflectImage(),
-            PROCESS_OPERATIONS.REFLECTIMAGE
-          )
+          new ReflectImage(PROCESS_OPERATIONS.REFLECTIMAGE)
         );
         break;
       case PROCESS_OPERATIONS.ROTATEIMAGE:
         this.#appliedOperators.push(
-          this.#generateOperator(
-            new RotateImage(),
-            PROCESS_OPERATIONS.ROTATEIMAGE
-          )
+          new RotateImage(PROCESS_OPERATIONS.ROTATEIMAGE)
         );
         break;
       case PROCESS_OPERATIONS.AFFINEIMAGE:
         this.#appliedOperators.push(
-          this.#generateOperator(
-            new AffineImage(),
-            PROCESS_OPERATIONS.AFFINEIMAGE
-          )
+          new AffineImage(PROCESS_OPERATIONS.AFFINEIMAGE)
         );
         break;
       case PROCESS_OPERATIONS.SCALEIMAGE:
         this.#appliedOperators.push(
-          this.#generateOperator(
-            new ScaleImage(),
-            PROCESS_OPERATIONS.SCALEIMAGE
-          )
+          new ScaleImage(PROCESS_OPERATIONS.SCALEIMAGE)
         );
         break;
       default:
@@ -158,12 +129,19 @@ class MainController {
     var image = this.#originalImage;
     this.#appliedOperators.forEach((item) => {
       if (image) {
-        image = item.operator.compute(image);
+        image = item.compute(image);
         this.#processedImage = image;
       }
     });
   }
 
+  /**
+   * This function changes the attributes of the
+   * Operator type
+   * @param {String} blockType
+   * @param {String} paramType
+   * @param {String} value
+   */
   changeValuesOfBlocks(blockType, paramType, value) {
     const block = this.#appliedOperators.find(
       (item) => item.type === blockType

@@ -4,8 +4,8 @@ const OpenCvOperator = require("../OpenCvOperator");
  * This class contains the main logic to read the image
  */
 class ReadImage extends OpenCvOperator {
-  constructor() {
-    super();
+  constructor(type) {
+    super(type);
   }
 
   /**

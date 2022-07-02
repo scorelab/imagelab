@@ -2,8 +2,8 @@ const OpenCvOperator = require("../OpenCvOperator");
 
 class ReflectImage extends OpenCvOperator {
   #direction = "X";
-  constructor() {
-    super();
+  constructor(type) {
+    super(type);
   }
 
   setParams(type, value) {

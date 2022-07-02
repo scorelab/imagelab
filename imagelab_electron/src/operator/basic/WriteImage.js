@@ -7,8 +7,8 @@ const OpenCvOperator = require("../OpenCvOperator");
 class WriteImage extends OpenCvOperator {
   #outImageUrl = __dirname + "/proccesedimage.jpg";
 
-  constructor() {
-    super();
+  constructor(type) {
+    super(type);
   }
 
   /**
