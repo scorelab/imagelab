@@ -270,7 +270,7 @@ Blockly.defineBlocksWithJsonArray([
   {
     type: "drawingoperations_drawline",
     message0:
-      "Draw a line %1 with thickness of %2 %3 and color %4 from point %5 to point %6",
+      "Draw a line %1 with thickness of %2 %3 and color %4 from point1 x1 %5 y1 %6 to point2 x2 %7 y2%8",
     args0: [
       {
         type: "input_dummy",
@@ -286,18 +286,30 @@ Blockly.defineBlocksWithJsonArray([
         type: "input_dummy",
       },
       {
-        type: "input_value",
+        type: "field_colour",
         name: "rgbcolors_input",
         check: "rgb_block",
+        colour: "#2828cc",
+        columns: 5,
       },
       {
-        type: "input_value",
-        name: "starting_point",
+        type: "field_number",
+        name: "starting_point_x1",
         check: "point_block",
       },
       {
-        type: "input_value",
-        name: "ending_point",
+        type: "field_number",
+        name: "starting_point_y1",
+        check: "point_block",
+      },
+      {
+        type: "field_number",
+        name: "ending_point_x1",
+        check: "point_block",
+      },
+      {
+        type: "field_number",
+        name: "ending_point_y2",
         check: "point_block",
       },
     ],
@@ -311,24 +323,43 @@ Blockly.defineBlocksWithJsonArray([
   },
   {
     type: "drawingoperations_drawarrowline",
-    message0: "Draw an arrow line %1 with color %2 from point %3 to point %4",
+    message0:
+      "Draw an arrow line %1 with color %2 with thickness %3 from starting point x %4 and y %5 to point ending point x %6 and y %7",
     args0: [
       {
         type: "input_dummy",
       },
       {
-        type: "input_value",
+        type: "field_colour",
         name: "rgbcolors_input",
         check: "rgb_block",
+        colour: "#2828cc",
+        columns: 5,
       },
       {
-        type: "input_value",
-        name: "starting_point",
+        type: "field_number",
+        name: "thickness",
+        value: 2,
         check: "point_block",
       },
       {
-        type: "input_value",
-        name: "ending_point",
+        type: "field_number",
+        name: "starting_point_x",
+        check: "point_block",
+      },
+      {
+        type: "field_number",
+        name: "starting_point_y",
+        check: "point_block",
+      },
+      {
+        type: "field_number",
+        name: "ending_point_x",
+        check: "point_block",
+      },
+      {
+        type: "field_number",
+        name: "ending_point_y",
         check: "point_block",
       },
     ],
@@ -343,7 +374,7 @@ Blockly.defineBlocksWithJsonArray([
   {
     type: "drawingoperations_drawcircle",
     message0:
-      "Draw a circle %1 with thickness of %2 , %3  radius of %4 %5 color %6 center point %7",
+      "Draw a circle %1 with thickness of %2 , %3  radius of %4 %5 color %6 center point x %7 and y %8",
     args0: [
       {
         type: "input_dummy",
@@ -369,13 +400,20 @@ Blockly.defineBlocksWithJsonArray([
         type: "input_dummy",
       },
       {
-        type: "input_value",
+        type: "field_colour",
         name: "rgbcolors_input",
         check: "rgb_block",
+        colour: "#2828cc",
+        columns: 5,
       },
       {
-        type: "input_value",
-        name: "center_point",
+        type: "field_number",
+        name: "center_point_x",
+        check: "point_block",
+      },
+      {
+        type: "field_number",
+        name: "center_point_y",
         check: "point_block",
       },
     ],
@@ -390,7 +428,7 @@ Blockly.defineBlocksWithJsonArray([
   {
     type: "drawingoperations_drawellipse",
     message0:
-      "Draw an ellipse with thickness of %1 %2 , height %3 , width %4 , rotate by %5 %6 color %7 center point %8",
+      "Draw an ellipse with thickness of %1 %2 , height %3 , width %4 , rotate by %5 %6 color %7 center point x %8 and y %9",
     args0: [
       {
         type: "field_number",
@@ -418,20 +456,27 @@ Blockly.defineBlocksWithJsonArray([
       },
       {
         type: "field_angle",
-        name: "a",
+        name: "angle",
         angle: 90,
       },
       {
         type: "input_dummy",
       },
       {
-        type: "input_value",
+        type: "field_colour",
         name: "rgbcolors_input",
         check: "rgb_block",
+        colour: "#2828cc",
+        columns: 5,
       },
       {
-        type: "input_value",
-        name: "center_point",
+        type: "field_number",
+        name: "center_point_x",
+        check: "point_block",
+      },
+      {
+        type: "field_number",
+        name: "center_point_y",
         check: "point_block",
       },
     ],
@@ -446,7 +491,7 @@ Blockly.defineBlocksWithJsonArray([
   {
     type: "drawingoperations_drawrectangle",
     message0:
-      "Draw a rectangle %1 with thickness of %2 %3 , color %4 , diameter point 1 %5 , diameter point 2 %6",
+      "Draw a rectangle %1 with thickness of %2 %3 , color %4 ,  starting point x 1 %5 and y %6, ending point x %7 and y %8",
     args0: [
       {
         type: "input_dummy",
@@ -462,18 +507,30 @@ Blockly.defineBlocksWithJsonArray([
         type: "input_dummy",
       },
       {
-        type: "input_value",
+        type: "field_colour",
         name: "rgbcolors_input",
         check: "rgb_block",
+        colour: "#2828cc",
+        columns: 5,
       },
       {
-        type: "input_value",
-        name: "starting_point",
+        type: "field_number",
+        name: "starting_point_x",
         check: "point_block",
       },
       {
-        type: "input_value",
-        name: "ending_point",
+        type: "field_number",
+        name: "starting_point_y",
+        check: "point_block",
+      },
+      {
+        type: "field_number",
+        name: "ending_point_x",
+        check: "point_block",
+      },
+      {
+        type: "field_number",
+        name: "ending_point_y",
         check: "point_block",
       },
     ],
@@ -488,11 +545,11 @@ Blockly.defineBlocksWithJsonArray([
   {
     type: "drawingoperations_drawtext",
     message0:
-      "Draw text %1 %2 with thickness of %3 %4 , by scale of %5 %6 , color %7 at point %8",
+      "Draw text %1 %2 with thickness of %3 %4 , by scale of %5 %6 , color %7 at point x %8 and y %9",
     args0: [
       {
         type: "field_input",
-        name: "text",
+        name: "draw_text",
         text: "Image Lab",
       },
       {
@@ -519,13 +576,20 @@ Blockly.defineBlocksWithJsonArray([
         type: "input_dummy",
       },
       {
-        type: "input_value",
+        type: "field_colour",
         name: "rgbcolors_input",
         check: "rgb_block",
+        colour: "#2828cc",
+        columns: 5,
       },
       {
-        type: "input_value",
-        name: "starting_point",
+        type: "field_number",
+        name: "starting_point_x",
+        check: "point_block",
+      },
+      {
+        type: "field_number",
+        name: "starting_point_y",
         check: "point_block",
       },
     ],

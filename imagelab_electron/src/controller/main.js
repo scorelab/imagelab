@@ -1,6 +1,12 @@
 const PROCESS_OPERATIONS = require("../../operations");
 const ReadImage = require("../operator/basic/ReadImage");
 const WriteImage = require("../operator/basic/WriteImage");
+const DrawArrowLine = require("../operator/drawing/DrawArrowLine");
+const DrawCircle = require("../operator/drawing/DrawCircle");
+const DrawEllipse = require("../operator/drawing/DrawEllipse");
+const DrawLine = require("../operator/drawing/DrawLine");
+const DrawRectangle = require("../operator/drawing/DrawRectangle");
+const DrawText = require("../operator/drawing/DrawText");
 const AffineImage = require("../operator/geometric/AffineImage");
 const ReflectImage = require("../operator/geometric/ReflectImage");
 const RotateImage = require("../operator/geometric/RotateImage");
@@ -106,6 +112,32 @@ class MainController {
           new ScaleImage(PROCESS_OPERATIONS.SCALEIMAGE)
         );
         break;
+      case PROCESS_OPERATIONS.DRAWLINE:
+        this.#appliedOperators.push(new DrawLine(PROCESS_OPERATIONS.DRAWLINE));
+        break;
+      case PROCESS_OPERATIONS.DRAWELLIPSE:
+        this.#appliedOperators.push(
+          new DrawEllipse(PROCESS_OPERATIONS.DRAWELLIPSE)
+        );
+        break;
+      case PROCESS_OPERATIONS.DRAWARROWLINE:
+        this.#appliedOperators.push(
+          new DrawArrowLine(PROCESS_OPERATIONS.DRAWARROWLINE)
+        );
+        break;
+      case PROCESS_OPERATIONS.DRAWTEXT:
+        this.#appliedOperators.push(new DrawText(PROCESS_OPERATIONS.DRAWTEXT));
+        break;
+      case PROCESS_OPERATIONS.DRAWCIRCLE:
+        this.#appliedOperators.push(
+          new DrawCircle(PROCESS_OPERATIONS.DRAWCIRCLE)
+        );
+        break;
+      case PROCESS_OPERATIONS.DRAWRECTANGLE:
+        this.#appliedOperators.push(
+          new DrawRectangle(PROCESS_OPERATIONS.DRAWRECTANGLE)
+        );
+        break;
       default:
         break;
     }
@@ -147,7 +179,7 @@ class MainController {
       (item) => item.type === blockType
     );
     if (block) {
-      block.operator.setParams(paramType, value);
+      block.setParams(paramType, value);
     }
   }
 }
