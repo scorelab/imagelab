@@ -122,6 +122,7 @@ function executeProcess() {
   try {
     mainController.computeAll(preview);
   } catch (error) {
+    console.log(error);
     showDialog("Error Occured", error.message, "error");
   }
 }
