@@ -1,6 +1,10 @@
-const { hexToRgb } = require("../../helpers/convertColor");
 const OpenCvOperator = require("../OpenCvOperator");
+const { hexToRgb } = require("../../helpers/convertColor");
 
+/**
+ * This class contains the main logic to draw an ellipse
+ * On the input image
+ */
 class DrawEllipse extends OpenCvOperator {
   #thickness = 2;
   #height = 5;
@@ -9,11 +13,12 @@ class DrawEllipse extends OpenCvOperator {
   #centerPointY = 0;
   #ellipseColor = { r: 40, g: 40, b: 240 };
   #angle = 90;
+
   constructor(type) {
     super(type);
   }
 
-  setTypes(param, value) {
+  setParams(param, value) {
     if (param === "thickness") {
       this.#thickness = value;
     } else if (param === "height") {
@@ -31,12 +36,19 @@ class DrawEllipse extends OpenCvOperator {
     }
   }
 
+  /**
+   * This function get the mat image and
+   * draw an ellipse according to the given inputs
+   * @param {Mat} image
+   * @returns {Mat}
+   */
   compute(image) {
     let p1 = new this.cv2.Point(this.#centerPointX, this.#centerPointY);
+    let s1 = new this.cv2.Size(this.#height, this.#width);
     this.cv2.ellipse(
       image,
       p1,
-      [this.#height, this.#width],
+      s1,
       this.#angle,
       0,
       360,

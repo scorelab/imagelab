@@ -280,7 +280,6 @@ Blockly.defineBlocksWithJsonArray([
         name: "thickness",
         value: 2,
         min: 1,
-        max: 100,
       },
       {
         type: "input_dummy",
@@ -341,6 +340,7 @@ Blockly.defineBlocksWithJsonArray([
         name: "thickness",
         value: 2,
         check: "point_block",
+        min: 1,
       },
       {
         type: "field_number",
@@ -384,7 +384,6 @@ Blockly.defineBlocksWithJsonArray([
         name: "thickness",
         value: 2,
         min: 1,
-        max: 100,
       },
       {
         type: "input_dummy",
@@ -394,7 +393,6 @@ Blockly.defineBlocksWithJsonArray([
         name: "radius",
         value: 5,
         min: 1,
-        max: 300,
       },
       {
         type: "input_dummy",
@@ -435,7 +433,6 @@ Blockly.defineBlocksWithJsonArray([
         name: "thickness",
         value: 2,
         min: 1,
-        max: 100,
       },
       {
         type: "input_dummy",
@@ -445,14 +442,12 @@ Blockly.defineBlocksWithJsonArray([
         name: "height",
         value: 0,
         min: 0,
-        max: 400,
       },
       {
         type: "field_number",
         name: "width",
         value: 0,
         min: 0,
-        max: 400,
       },
       {
         type: "field_angle",
@@ -501,7 +496,6 @@ Blockly.defineBlocksWithJsonArray([
         name: "thickness",
         value: 2,
         min: 1,
-        max: 100,
       },
       {
         type: "input_dummy",
@@ -560,7 +554,6 @@ Blockly.defineBlocksWithJsonArray([
         name: "thickness",
         value: 2,
         min: 1,
-        max: 100,
       },
       {
         type: "input_dummy",
@@ -570,7 +563,6 @@ Blockly.defineBlocksWithJsonArray([
         name: "scale",
         value: 1,
         min: 1,
-        max: 100,
       },
       {
         type: "input_dummy",
@@ -599,96 +591,6 @@ Blockly.defineBlocksWithJsonArray([
     colour: 240,
     tooltip:
       "You can write a text on the image and dedicate its thickness, scale, color and start point.",
-    helpUrl: "",
-  },
-  {
-    type: "rgb_block",
-    message0: "%1 Red %2 %3 %4 Green %5 %6 %7 Blue %8",
-    args0: [
-      {
-        type: "field_image",
-        src: "https://github.com/polahano/Git_Test/blob/main/icons8-filled-circle-30.png?raw=true",
-        width: 20,
-        height: 20,
-        alt: "*",
-        flipRtl: false,
-      },
-      {
-        type: "field_number",
-        name: "R",
-        value: 50,
-        min: 0,
-        max: 250,
-      },
-      {
-        type: "input_dummy",
-      },
-      {
-        type: "field_image",
-        src: "https://github.com/polahano/Git_Test/blob/main/icons8-filled-circle-30%20(2).png?raw=true",
-        width: 20,
-        height: 20,
-        alt: "*",
-        flipRtl: false,
-      },
-      {
-        type: "field_number",
-        name: "G",
-        value: 50,
-        min: 0,
-        max: 250,
-      },
-      {
-        type: "input_dummy",
-      },
-      {
-        type: "field_image",
-        src: "https://github.com/polahano/Git_Test/blob/main/icons8-filled-circle-30%20(1).png?raw=true",
-        width: 20,
-        height: 20,
-        alt: "*",
-        flipRtl: false,
-      },
-      {
-        type: "field_number",
-        name: "B",
-        value: 50,
-        min: 0,
-        max: 250,
-      },
-    ],
-    inputsInline: false,
-    output: "rgb_block",
-    colour: 240,
-    tooltip: "",
-    helpUrl: "",
-  },
-  {
-    type: "point_block",
-    message0: "Point ( %1 %2 , %3 )",
-    args0: [
-      {
-        type: "field_number",
-        name: "pointX",
-        value: 0,
-        min: -400,
-        max: 350,
-      },
-      {
-        type: "input_dummy",
-      },
-      {
-        type: "field_number",
-        name: "pointY",
-        value: 0,
-        min: -400,
-        max: 350,
-      },
-    ],
-    inputsInline: true,
-    output: "point_block",
-    colour: 240,
-    tooltip: "",
     helpUrl: "",
   },
 

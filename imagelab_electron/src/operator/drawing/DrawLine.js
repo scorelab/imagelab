@@ -1,6 +1,10 @@
 const { hexToRgb } = require("../../helpers/convertColor");
 const OpenCvOperator = require("../OpenCvOperator");
 
+/**
+ * This class contains all the logic regarding with
+ * drawing a line in the input image
+ */
 class DrawLine extends OpenCvOperator {
   #thickNess = 2;
   #lineColor = { r: 40, g: 40, b: 240 };
@@ -28,6 +32,12 @@ class DrawLine extends OpenCvOperator {
     }
   }
 
+  /**
+   * This function draw line on the input image
+   * according to the inputs given by the user
+   * @param {Mat} image
+   * @returns
+   */
   compute(image) {
     let p1 = new this.cv2.Point(this.#point_x1, this.#point_y1);
     let p2 = new this.cv2.Point(this.#point_x2, this.#point_y2);

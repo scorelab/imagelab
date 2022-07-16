@@ -1,6 +1,10 @@
-const { hexToRgb } = require("../../helpers/convertColor");
 const OpenCvOperator = require("../OpenCvOperator");
+const { hexToRgb } = require("../../helpers/convertColor");
 
+/**
+ * This functions contains the main logic of
+ * drawing a circle inside the input image
+ */
 class DrawCircle extends OpenCvOperator {
   #thickness = 2;
   #radius = 5;
@@ -25,9 +29,15 @@ class DrawCircle extends OpenCvOperator {
     }
   }
 
+  /**
+   * This function is responsible for drawing a circle
+   * in the input image according to the given inputs
+   * @param {Mat} image
+   * @returns {Mat}
+   */
   compute(image) {
     let p1 = new this.cv2.Point(this.#centerPointX, this.#centerPointY);
-    image = this.cv2.circle(
+    this.cv2.circle(
       image,
       p1,
       this.#radius,
