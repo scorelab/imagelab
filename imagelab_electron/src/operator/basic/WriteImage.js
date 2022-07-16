@@ -5,8 +5,6 @@ const OpenCvOperator = require("../OpenCvOperator");
  * processed image.
  */
 class WriteImage extends OpenCvOperator {
-  #outImageUrl = __dirname + "/proccesedimage.jpg";
-
   constructor(type) {
     super(type);
   }
@@ -14,7 +12,7 @@ class WriteImage extends OpenCvOperator {
   /**
    * This function writes a processed image to the path given
    * And save the image in the location that the user specified
-   * @param {Processed image to write} processedImage
+   * @param {Mat} processedImage
    */
   compute(processedImage) {
     const preview = document.getElementById("image-preview");

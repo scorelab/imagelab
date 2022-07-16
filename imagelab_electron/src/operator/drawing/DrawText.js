@@ -1,6 +1,10 @@
-const { hexToRgb } = require("../../helpers/convertColor");
 const OpenCvOperator = require("../OpenCvOperator");
+const { hexToRgb } = require("../../helpers/convertColor");
 
+/**
+ * This class includes the main logic of
+ * putting the text over an input image
+ */
 class DrawText extends OpenCvOperator {
   #text = "Image Lab";
   #thickness = 2;
@@ -8,10 +12,10 @@ class DrawText extends OpenCvOperator {
   #textColor = { r: 40, g: 40, b: 240 };
   #pointX = 0;
   #pointY = 0;
+
   constructor(type) {
     super(type);
   }
-
   setParams(param, value) {
     if (param === "draw_text") {
       this.#text = value;
@@ -28,15 +32,22 @@ class DrawText extends OpenCvOperator {
     }
   }
 
+  /**
+   * This function draws the text over the input
+   * image according to the inputted values
+   * @param {Mat} image
+   * @returns {Mat}
+   */
   compute(image) {
     let p1 = new this.cv2.Point(this.#pointX, this.#pointY);
-    font = this.cv2.FONT_HERSHEY_SIMPLEX;
-    image = this.cv2.putText(
+    const font = this.cv2.FONT_HERSHEY_SIMPLEX;
+    this.cv2.putText(
       image,
       this.#text,
+      p1,
       font,
       this.#scale,
-      [this.#textColor.r, this.#textColor.g, this.#textColor.b, 0],
+      [this.#textColor.r, this.#textColor.g, this.#textColor.b, 255],
       this.#thickness,
       this.cv2.LINE_AA
     );

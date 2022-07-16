@@ -1,6 +1,10 @@
-const { hexToRgb } = require("../../helpers/convertColor");
 const OpenCvOperator = require("../OpenCvOperator");
+const { hexToRgb } = require("../../helpers/convertColor");
 
+/**
+ * This function contains the main logic
+ * to draw an arrowed line on the image
+ */
 class DrawArrowLine extends OpenCvOperator {
   #lineColor = { r: 40, g: 40, b: 240 };
   #thickness = 2;
@@ -29,15 +33,7 @@ class DrawArrowLine extends OpenCvOperator {
   }
 
   compute(image) {
-    let p1 = new this.cv2.Point(this.#startingPointX, this.#startingPointY);
-    let p2 = new this.cv2.Point(this.#endingPointX, this.#endingPointY);
-    this.cv2.arrowedLine(
-      image,
-      p1,
-      p2,
-      [this.#lineColor.r, this.#lineColor.g, this.#lineColor.b, 255],
-      this.#thickness
-    );
+    // There is no function in opencv.js to draw an arrowed line
     return image;
   }
 }

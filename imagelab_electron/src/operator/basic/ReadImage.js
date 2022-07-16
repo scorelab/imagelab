@@ -10,7 +10,7 @@ class ReadImage extends OpenCvOperator {
 
   /**
    * This function reads the given image
-   * @param {Location of the image which need to read} imageURL
+   * @param {string} imageURL
    * @returns processed image
    */
   compute(image) {

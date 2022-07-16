@@ -1,6 +1,10 @@
-const { hexToRgb } = require("../../helpers/convertColor");
 const OpenCvOperator = require("../OpenCvOperator");
+const { hexToRgb } = require("../../helpers/convertColor");
 
+/**
+ * This function contains the main logic of
+ * drawing a rectangle inside the input image
+ */
 class DrawRectangle extends OpenCvOperator {
   #startPointX = 0;
   #startPointY = 0;
@@ -29,10 +33,16 @@ class DrawRectangle extends OpenCvOperator {
     }
   }
 
+  /**
+   * This function draws a rectangle in the input image
+   * according to the inputs given by the user
+   * @param {Mat} image
+   * @returns
+   */
   compute(image) {
     let p1 = new this.cv2.Point(this.#startPointX, this.#startPointY);
     let p2 = new this.cv2.Point(this.#endPointX, this.#endPointY);
-    image = this.cv2.rectangle(
+    this.cv2.rectangle(
       image,
       p1,
       p2,
