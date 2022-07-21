@@ -1,6 +1,9 @@
 const PROCESS_OPERATIONS = require("../../operations");
 const ReadImage = require("../operator/basic/ReadImage");
 const WriteImage = require("../operator/basic/WriteImage");
+const Blur = require("../operator/blurring/Blur");
+const GaussianBlur = require("../operator/blurring/GaussianBlur");
+const MedianBlur = require("../operator/blurring/MedianBlur");
 const DrawArrowLine = require("../operator/drawing/DrawArrowLine");
 const DrawCircle = require("../operator/drawing/DrawCircle");
 const DrawEllipse = require("../operator/drawing/DrawEllipse");
@@ -138,6 +141,19 @@ class MainController {
           new DrawRectangle(PROCESS_OPERATIONS.DRAWRECTANGLE)
         );
         break;
+      case PROCESS_OPERATIONS.BLURIMAGE:
+        this.#appliedOperators.push(new Blur(PROCESS_OPERATIONS.BLURIMAGE));
+        break;
+      case PROCESS_OPERATIONS.GAUSSIANBLUR:
+        this.#appliedOperators.push(
+          new GaussianBlur(PROCESS_OPERATIONS.GAUSSIANBLUR)
+        );
+        break;
+      case PROCESS_OPERATIONS.MEDIANBLUR:
+        this.#appliedOperators.push(
+          new MedianBlur(PROCESS_OPERATIONS.MEDIANBLUR)
+        );
+        break;
       default:
         break;
     }
@@ -179,7 +195,11 @@ class MainController {
       (item) => item.type === blockType
     );
     if (block) {
-      block.setParams(paramType, value);
+      try {
+        block.setParams(paramType, value);
+      } catch (error) {
+        throw error;
+      }
     }
   }
 }
