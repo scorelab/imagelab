@@ -11,6 +11,9 @@ const PROCESS_OPERATIONS = {
   DRAWTEXT: "drawingoperations_drawtext",
   DRAWCIRCLE: "drawingoperations_drawcircle",
   DRAWRECTANGLE: "drawingoperations_drawrectangle",
+  BLURIMAGE: "blurring_applyblur",
+  GAUSSIANBLUR: "blurring_applygaussianblur",
+  MEDIANBLUR: "blurring_applymedianblur",
 };
 
 module.exports = PROCESS_OPERATIONS;

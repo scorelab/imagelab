@@ -597,27 +597,33 @@ Blockly.defineBlocksWithJsonArray([
   //Blurring
   {
     type: "blurring_applyblur",
-    message0: "Apply Blur with width %1 , height %2 %3 from point %4",
+    message0:
+      "Apply Blur with width %1 , height %2 %3 from point x %4 and y %5",
     args0: [
       {
         type: "field_number",
         name: "widthSize",
-        value: 0,
+        value: 3,
         min: 0,
       },
       {
         type: "field_number",
         name: "heightSize",
-        value: 0,
+        value: 3,
         min: 0,
       },
       {
         type: "input_dummy",
       },
       {
-        type: "input_value",
-        name: "point_applyblur",
-        check: "point_block",
+        type: "field_number",
+        name: "pointX",
+        value: -1,
+      },
+      {
+        type: "field_number",
+        name: "pointY",
+        value: -1,
       },
     ],
     inputsInline: true,
@@ -635,14 +641,14 @@ Blockly.defineBlocksWithJsonArray([
       {
         type: "field_number",
         name: "widthSize",
-        value: 0,
-        min: 0,
+        value: 1,
+        min: 1,
       },
       {
         type: "field_number",
         name: "heightSize",
-        value: 0,
-        min: 0,
+        value: 1,
+        min: 1,
       },
     ],
     inputsInline: true,
@@ -660,8 +666,8 @@ Blockly.defineBlocksWithJsonArray([
       {
         type: "field_number",
         name: "kernelSize",
-        value: 0,
-        min: 0,
+        value: 5,
+        min: 1,
       },
     ],
     inputsInline: true,

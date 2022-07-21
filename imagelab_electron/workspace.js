@@ -57,7 +57,11 @@ workspace.addChangeListener(function (event) {
     const blockType = workspace.getBlockById(event.blockId).type;
     const paramType = event.name;
     const value = event.newValue;
-    mainController.changeValuesOfBlocks(blockType, paramType, value);
+    try {
+      mainController.changeValuesOfBlocks(blockType, paramType, value);
+    } catch (error) {
+      showDialog("Error Occured", error.message, "error");
+    }
   }
   if (event.type === Blockly.Events.SELECTED) {
     if (Blockly.selected === null) {
