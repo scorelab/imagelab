@@ -6,6 +6,7 @@ const OpenCvOperator = require("../OpenCvOperator");
 class ReadImage extends OpenCvOperator {
   constructor(type) {
     super(type);
+    console.log(this.cv2);
   }
 
   /**

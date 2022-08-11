@@ -10,6 +10,13 @@ const DrawEllipse = require("../operator/drawing/DrawEllipse");
 const DrawLine = require("../operator/drawing/DrawLine");
 const DrawRectangle = require("../operator/drawing/DrawRectangle");
 const DrawText = require("../operator/drawing/DrawText");
+const BilateralFilter = require("../operator/filtering/BilateralFilter");
+const BoxFilter = require("../operator/filtering/BoxFilter");
+const Dilation = require("../operator/filtering/Dilation");
+const Erosion = require("../operator/filtering/Erosion");
+const Morphological = require("../operator/filtering/Morphological");
+const PyramidDown = require("../operator/filtering/PyramidDown");
+const PyramidUp = require("../operator/filtering/PyramidUp");
 const AffineImage = require("../operator/geometric/AffineImage");
 const ReflectImage = require("../operator/geometric/ReflectImage");
 const RotateImage = require("../operator/geometric/RotateImage");
@@ -152,6 +159,37 @@ class MainController {
       case PROCESS_OPERATIONS.MEDIANBLUR:
         this.#appliedOperators.push(
           new MedianBlur(PROCESS_OPERATIONS.MEDIANBLUR)
+        );
+        break;
+      case PROCESS_OPERATIONS.BILATERALFILTER:
+        this.#appliedOperators.push(
+          new BilateralFilter(PROCESS_OPERATIONS.BILATERALFILTER)
+        );
+        break;
+      case PROCESS_OPERATIONS.BOXFILTER:
+        this.#appliedOperators.push(
+          new BoxFilter(PROCESS_OPERATIONS.BOXFILTER)
+        );
+        break;
+      case PROCESS_OPERATIONS.PYRAMIDUP:
+        this.#appliedOperators.push(
+          new PyramidUp(PROCESS_OPERATIONS.PYRAMIDUP)
+        );
+        break;
+      case PROCESS_OPERATIONS.PYRAMIDDOWN:
+        this.#appliedOperators.push(
+          new PyramidDown(PROCESS_OPERATIONS.PYRAMIDDOWN)
+        );
+        break;
+      case PROCESS_OPERATIONS.EROSION:
+        this.#appliedOperators.push(new Erosion(PROCESS_OPERATIONS.EROSION));
+        break;
+      case PROCESS_OPERATIONS.DILATION:
+        this.#appliedOperators.push(new Dilation(PROCESS_OPERATIONS.DILATION));
+        break;
+      case PROCESS_OPERATIONS.MORPHOLOGICAL:
+        this.#appliedOperators.push(
+          new Morphological(PROCESS_OPERATIONS.MORPHOLOGICAL)
         );
         break;
       default:

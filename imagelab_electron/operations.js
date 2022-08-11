@@ -14,6 +14,13 @@ const PROCESS_OPERATIONS = {
   BLURIMAGE: "blurring_applyblur",
   GAUSSIANBLUR: "blurring_applygaussianblur",
   MEDIANBLUR: "blurring_applymedianblur",
+  BILATERALFILTER: "filtering_bilateral",
+  BOXFILTER: "filtering_boxfilter",
+  PYRAMIDUP: "filtering_pyramidup",
+  PYRAMIDDOWN: "filtering_pyramiddown",
+  EROSION: "filtering_erosion",
+  DILATION: "filtering_dilation",
+  MORPHOLOGICAL: "filtering_morphological",
 };
 
 module.exports = PROCESS_OPERATIONS;
