@@ -683,14 +683,13 @@ Blockly.defineBlocksWithJsonArray([
   {
     type: "filtering_boxfilter",
     message0:
-      "Apply box filter with width %1 %2 , height %3 , depth %4 , point %5",
+      "Apply box filter with width %1 %2 , height %3 , depth %4 , pointX %5 , pointY %6",
     args0: [
       {
         type: "field_number",
         name: "width",
-        value: 0,
+        value: 50,
         min: 0,
-        max: 100,
       },
       {
         type: "input_dummy",
@@ -698,21 +697,24 @@ Blockly.defineBlocksWithJsonArray([
       {
         type: "field_number",
         name: "height",
-        value: 0,
+        value: 50,
         min: 0,
-        max: 100,
       },
       {
         type: "field_number",
         name: "depth",
-        value: 0,
+        value: 5,
         min: 0,
-        max: 100,
       },
       {
-        type: "input_value",
-        name: "point_boxfilter",
-        check: "point_block",
+        type: "field_number",
+        name: "point_x",
+        value: -1,
+      },
+      {
+        type: "field_number",
+        name: "point_y",
+        value: -1,
       },
     ],
     inputsInline: false,
@@ -725,21 +727,25 @@ Blockly.defineBlocksWithJsonArray([
   },
   {
     type: "filtering_dilation",
-    message0: "Apply dilation with %1 iterations %2 , point %3",
+    message0: "Apply dilation with %1 iterations %2 , pointX %3, pointY %4",
     args0: [
       {
         type: "field_number",
         name: "iteration",
-        value: 0,
-        min: 0,
+        value: 1,
       },
       {
         type: "input_dummy",
       },
       {
-        type: "input_value",
-        name: "point_dilation",
-        check: "point_block",
+        type: "field_number",
+        name: "pointX",
+        value: -1,
+      },
+      {
+        type: "field_number",
+        name: "pointY",
+        value: -1,
       },
     ],
     inputsInline: true,
@@ -752,21 +758,26 @@ Blockly.defineBlocksWithJsonArray([
   },
   {
     type: "filtering_erosion",
-    message0: "Apply erosion with %1 iterations %2 , point %3",
+    message0: "Apply erosion with %1 iterations %2 , pointX %3, pointY %4",
     args0: [
       {
         type: "field_number",
         name: "iteration",
-        value: 0,
+        value: 1,
         min: 0,
       },
       {
         type: "input_dummy",
       },
       {
-        type: "input_value",
-        name: "point_erosion",
-        check: "point_block",
+        type: "field_number",
+        name: "point_x",
+        value: -1,
+      },
+      {
+        type: "field_number",
+        name: "point_y",
+        value: -1,
       },
     ],
     inputsInline: true,
