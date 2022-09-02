@@ -18,6 +18,15 @@ class MedianBlur extends OpenCvOperator {
       this.#kernalSize = value;
     }
   }
+
+  /**
+   *
+   * @param {Mat} image
+   * @returns
+   *
+   * This function processed the median blur
+   * to the mat image
+   */
   compute(image) {
     const dst = new this.cv2.Mat();
     this.cv2.medianBlur(image, dst, this.#kernalSize);

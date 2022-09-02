@@ -62,14 +62,7 @@ Blockly.defineBlocksWithJsonArray([
   },
   {
     type: "basic_writeimage",
-    message0: "Write image to %1",
-    args0: [
-      {
-        type: "input_value",
-        name: "destinationURL",
-        check: "browse_folder",
-      },
-    ],
+    message0: "Write image",
     previousStatement: null,
     colour: 160,
     tooltip: "This operator allows you to save your processed image as a file.",

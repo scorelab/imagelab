@@ -1,5 +1,10 @@
 const OpenCvOperator = require("../OpenCvOperator");
 
+/**
+ * This class contains the main logic
+ * of adding reflex image transformation
+ * to the image
+ */
 class ReflectImage extends OpenCvOperator {
   #direction = "X";
   constructor(type) {
@@ -10,10 +15,18 @@ class ReflectImage extends OpenCvOperator {
     this.#direction = value;
   }
 
+  /**
+   *
+   * @param {Mat} image
+   * @returns
+   * This function reflects the image
+   */
   compute(image) {
-    // const dst = new this.cv2.Mat();
-    // const mapX = new this.cv2.Mat(image.size(), this.cv2.CV_32F);
-    // const mapY = new this.cv2.Mat(image.size(), this.cv2.CV_32F);
+    const dst = new this.cv2.Mat();
+
+    const mapX = new this.cv2.Mat(image.size(), this.cv2.CV_32F);
+    const mapY = new this.cv2.Mat(image.size(), this.cv2.CV_32F);
+
     // const bufferX = [int(mapX.total() * mapX.channels())];
     // mapX.get(0, 0, bufferX);
     // const bufferY = [int(mapY.total() * mapY.channels())];

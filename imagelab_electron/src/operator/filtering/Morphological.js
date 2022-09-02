@@ -17,6 +17,13 @@ class Morphological extends OpenCvOperator {
     }
   }
 
+  /**
+   *
+   * @param {Mat} image
+   * @returns
+   * Computes the Morphological filter to the processed
+   * Mat image
+   */
   compute(image) {
     let dst = new this.cv2.Mat();
     let M = this.cv2.Mat.ones(5, 5, this.cv2.CV_8U);

@@ -1,5 +1,9 @@
 const OpenCvOperator = require("../OpenCvOperator");
 
+/**
+ * This class contains the main logic
+ * of affinetransoforming the image
+ */
 class AffineImage extends OpenCvOperator {
   constructor(type) {
     super(type);
@@ -9,6 +13,8 @@ class AffineImage extends OpenCvOperator {
    *
    * @param {Mat Image} image
    * @returns
+   * Computes the AffineImage transformation
+   * to the Processed Mat image
    */
   compute(image) {
     let dst = new this.cv2.Mat();

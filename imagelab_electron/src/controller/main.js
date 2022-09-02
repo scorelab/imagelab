@@ -29,13 +29,9 @@ class MainController {
   // This holds the original image added by the user
   #originalImage;
 
-  // This holds the proccessed image by the opencv operators
-  #processedImage;
-
   constructor() {
     this.#appliedOperators = [];
     this.#originalImage = null;
-    this.#processedImage = null;
   }
 
   /**
@@ -216,7 +212,6 @@ class MainController {
     this.#appliedOperators.forEach((item) => {
       if (image) {
         image = item.compute(image);
-        this.#processedImage = image;
       }
     });
   }

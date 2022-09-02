@@ -11,6 +11,13 @@ class PyramidUp extends OpenCvOperator {
 
   setParams(param, value) {}
 
+  /**
+   *
+   * @param {Mat} image
+   * @returns
+   * Computes the PyramidUp filter to the
+   * processed mat image
+   */
   compute(image) {
     let dst = new this.cv2.Mat();
     let size = new this.cv2.Size(image.cols * 2, image.rows * 2);
