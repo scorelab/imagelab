@@ -14,8 +14,8 @@ class DrawEllipse extends OpenCvOperator {
   #ellipseColor = { r: 40, g: 40, b: 240 };
   #angle = 90;
 
-  constructor(type) {
-    super(type);
+  constructor(type, id) {
+    super(type, id);
   }
 
   setParams(param, value) {

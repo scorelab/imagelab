@@ -5,8 +5,8 @@ const OpenCvOperator = require("../OpenCvOperator");
  * processed image.
  */
 class WriteImage extends OpenCvOperator {
-  constructor(type) {
-    super(type);
+  constructor(type, id) {
+    super(type, id);
   }
 
   /**

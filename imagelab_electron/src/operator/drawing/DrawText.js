@@ -13,8 +13,8 @@ class DrawText extends OpenCvOperator {
   #pointX = 0;
   #pointY = 0;
 
-  constructor(type) {
-    super(type);
+  constructor(type, id) {
+    super(type, id);
   }
   setParams(param, value) {
     if (param === "draw_text") {

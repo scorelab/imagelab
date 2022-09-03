@@ -1,8 +1,8 @@
 const OpenCvOperator = require("../OpenCvOperator");
 
 class AffineImage extends OpenCvOperator {
-  constructor(type) {
-    super(type);
+  constructor(type, id) {
+    super(type, id);
   }
 
   /**

@@ -11,10 +11,9 @@ class DrawCircle extends OpenCvOperator {
   #circleColor = { r: 40, g: 40, b: 240 };
   #centerPointX = 0;
   #centerPointY = 0;
-  constructor(type) {
-    super(type);
+  constructor(type, id) {
+    super(type, id);
   }
-
   setParams(param, value) {
     if (param === "rgbcolors_input") {
       this.#circleColor = hexToRgb(value);

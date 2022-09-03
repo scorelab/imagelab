@@ -12,8 +12,8 @@ class DrawArrowLine extends OpenCvOperator {
   #startingPointY = 0;
   #endingPointX = 0;
   #endingPointY = 0;
-  constructor(type) {
-    super(type);
+  constructor(type, id) {
+    super(type, id);
   }
 
   setParams(param, value) {

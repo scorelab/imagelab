@@ -26,7 +26,6 @@ var workspace = Blockly.inject(blocklyDiv, {
   },
   renderer: "zelos",
 });
-
 // enable searching on workspace by using ctrl +f
 const workspaceSearch = new WorkspaceSearch(workspace);
 workspaceSearch.init();
@@ -41,8 +40,18 @@ Blockly.VerticalFlyout.prototype.getFlyoutScale = function () {
 
 // Coloring the information-pane when you select a block.
 workspace.addChangeListener(function (event) {
+  if (event.type === Blockly.Events.SELECTED) {
+    document.getElementById("operator_name").innerText = workspace.getBlockById(
+      event.newElementId
+    )?.type;
+    document.getElementById("operator_description").innerText =
+      workspace.getBlockById(event.newElementId)?.tooltip;
+  }
   if (event.type === Blockly.Events.BLOCK_CREATE) {
-    mainController.addOperator(workspace.getBlockById(event.blockId).type);
+    mainController.addOperator(
+      workspace.getBlockById(event.blockId).type,
+      event.blockId
+    );
   } else if (
     event.type === Blockly.Events.BLOCK_DRAG ||
     event.type === Blockly.Events.BLOCK_MOVE
@@ -62,6 +71,8 @@ workspace.addChangeListener(function (event) {
     } catch (error) {
       showDialog("Error Occured", error.message, "error");
     }
+  } else if (event.type === Blockly.Events.DELETE) {
+    mainController.deleteBlock(event.blockId);
   }
   if (event.type === Blockly.Events.SELECTED) {
     if (Blockly.selected === null) {
@@ -140,6 +151,11 @@ function setDirectory() {
   location.addEventListener("load", (e) => {
     console.log("Output location is: ", e);
   });
+}
+
+function resetWorkspace() {
+  workspace.clear();
+  mainController.resetTheWorkpace();
 }
 
 /**

@@ -6,8 +6,8 @@ const OpenCvOperator = require("../OpenCvOperator");
  * to an image
  */
 class PyramidDown extends OpenCvOperator {
-  constructor(type) {
-    super(type);
+  constructor(type, id) {
+    super(type, id);
   }
 
   setParams(param, value) {}

@@ -10,8 +10,8 @@ class BoxFilter extends OpenCvOperator {
   #width = 50;
   #pointX = -1;
   #pointY = -1;
-  constructor(type) {
-    super(type);
+  constructor(type, id) {
+    super(type, id);
   }
 
   setParams(param, value) {

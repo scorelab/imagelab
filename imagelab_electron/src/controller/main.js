@@ -39,6 +39,19 @@ class MainController {
   }
 
   /**
+   *
+   * @param {String} blockId
+   * This function takes the ID of the block and deletes
+   * it from the array
+   */
+  deleteBlock(blockId) {
+    const index = this.#appliedOperators.findIndex(
+      (item) => item.blockId === blockId
+    );
+    this.#appliedOperators.splice(index, 1);
+  }
+
+  /**
    * This function is responsible for making the blocks in order
    * according to the order in the workspace
    * @param {String} parent
@@ -90,106 +103,114 @@ class MainController {
    * @param {String} operatorType
    * @returns
    */
-  addOperator(operatorType) {
+  addOperator(operatorType, id) {
     switch (operatorType) {
       case PROCESS_OPERATIONS.READIMAGE:
         this.#appliedOperators.push(
-          new ReadImage(PROCESS_OPERATIONS.READIMAGE)
+          new ReadImage(PROCESS_OPERATIONS.READIMAGE, id)
         );
         break;
       case PROCESS_OPERATIONS.WRITEIMAGE:
         this.#appliedOperators.push(
-          new WriteImage(PROCESS_OPERATIONS.WRITEIMAGE)
+          new WriteImage(PROCESS_OPERATIONS.WRITEIMAGE, id)
         );
         break;
       case PROCESS_OPERATIONS.REFLECTIMAGE:
         this.#appliedOperators.push(
-          new ReflectImage(PROCESS_OPERATIONS.REFLECTIMAGE)
+          new ReflectImage(PROCESS_OPERATIONS.REFLECTIMAGE, id)
         );
         break;
       case PROCESS_OPERATIONS.ROTATEIMAGE:
         this.#appliedOperators.push(
-          new RotateImage(PROCESS_OPERATIONS.ROTATEIMAGE)
+          new RotateImage(PROCESS_OPERATIONS.ROTATEIMAGE, id)
         );
         break;
       case PROCESS_OPERATIONS.AFFINEIMAGE:
         this.#appliedOperators.push(
-          new AffineImage(PROCESS_OPERATIONS.AFFINEIMAGE)
+          new AffineImage(PROCESS_OPERATIONS.AFFINEIMAGE, id)
         );
         break;
       case PROCESS_OPERATIONS.SCALEIMAGE:
         this.#appliedOperators.push(
-          new ScaleImage(PROCESS_OPERATIONS.SCALEIMAGE)
+          new ScaleImage(PROCESS_OPERATIONS.SCALEIMAGE, id)
         );
         break;
       case PROCESS_OPERATIONS.DRAWLINE:
-        this.#appliedOperators.push(new DrawLine(PROCESS_OPERATIONS.DRAWLINE));
+        this.#appliedOperators.push(
+          new DrawLine(PROCESS_OPERATIONS.DRAWLINE, id)
+        );
         break;
       case PROCESS_OPERATIONS.DRAWELLIPSE:
         this.#appliedOperators.push(
-          new DrawEllipse(PROCESS_OPERATIONS.DRAWELLIPSE)
+          new DrawEllipse(PROCESS_OPERATIONS.DRAWELLIPSE, id)
         );
         break;
       case PROCESS_OPERATIONS.DRAWARROWLINE:
         this.#appliedOperators.push(
-          new DrawArrowLine(PROCESS_OPERATIONS.DRAWARROWLINE)
+          new DrawArrowLine(PROCESS_OPERATIONS.DRAWARROWLINE, id)
         );
         break;
       case PROCESS_OPERATIONS.DRAWTEXT:
-        this.#appliedOperators.push(new DrawText(PROCESS_OPERATIONS.DRAWTEXT));
+        this.#appliedOperators.push(
+          new DrawText(PROCESS_OPERATIONS.DRAWTEXT, id)
+        );
         break;
       case PROCESS_OPERATIONS.DRAWCIRCLE:
         this.#appliedOperators.push(
-          new DrawCircle(PROCESS_OPERATIONS.DRAWCIRCLE)
+          new DrawCircle(PROCESS_OPERATIONS.DRAWCIRCLE, id)
         );
         break;
       case PROCESS_OPERATIONS.DRAWRECTANGLE:
         this.#appliedOperators.push(
-          new DrawRectangle(PROCESS_OPERATIONS.DRAWRECTANGLE)
+          new DrawRectangle(PROCESS_OPERATIONS.DRAWRECTANGLE, id)
         );
         break;
       case PROCESS_OPERATIONS.BLURIMAGE:
-        this.#appliedOperators.push(new Blur(PROCESS_OPERATIONS.BLURIMAGE));
+        this.#appliedOperators.push(new Blur(PROCESS_OPERATIONS.BLURIMAGE, id));
         break;
       case PROCESS_OPERATIONS.GAUSSIANBLUR:
         this.#appliedOperators.push(
-          new GaussianBlur(PROCESS_OPERATIONS.GAUSSIANBLUR)
+          new GaussianBlur(PROCESS_OPERATIONS.GAUSSIANBLUR, id)
         );
         break;
       case PROCESS_OPERATIONS.MEDIANBLUR:
         this.#appliedOperators.push(
-          new MedianBlur(PROCESS_OPERATIONS.MEDIANBLUR)
+          new MedianBlur(PROCESS_OPERATIONS.MEDIANBLUR, id)
         );
         break;
       case PROCESS_OPERATIONS.BILATERALFILTER:
         this.#appliedOperators.push(
-          new BilateralFilter(PROCESS_OPERATIONS.BILATERALFILTER)
+          new BilateralFilter(PROCESS_OPERATIONS.BILATERALFILTER, id)
         );
         break;
       case PROCESS_OPERATIONS.BOXFILTER:
         this.#appliedOperators.push(
-          new BoxFilter(PROCESS_OPERATIONS.BOXFILTER)
+          new BoxFilter(PROCESS_OPERATIONS.BOXFILTER, id)
         );
         break;
       case PROCESS_OPERATIONS.PYRAMIDUP:
         this.#appliedOperators.push(
-          new PyramidUp(PROCESS_OPERATIONS.PYRAMIDUP)
+          new PyramidUp(PROCESS_OPERATIONS.PYRAMIDUP, id)
         );
         break;
       case PROCESS_OPERATIONS.PYRAMIDDOWN:
         this.#appliedOperators.push(
-          new PyramidDown(PROCESS_OPERATIONS.PYRAMIDDOWN)
+          new PyramidDown(PROCESS_OPERATIONS.PYRAMIDDOWN, id)
         );
         break;
       case PROCESS_OPERATIONS.EROSION:
-        this.#appliedOperators.push(new Erosion(PROCESS_OPERATIONS.EROSION));
+        this.#appliedOperators.push(
+          new Erosion(PROCESS_OPERATIONS.EROSION, id)
+        );
         break;
       case PROCESS_OPERATIONS.DILATION:
-        this.#appliedOperators.push(new Dilation(PROCESS_OPERATIONS.DILATION));
+        this.#appliedOperators.push(
+          new Dilation(PROCESS_OPERATIONS.DILATION, id)
+        );
         break;
       case PROCESS_OPERATIONS.MORPHOLOGICAL:
         this.#appliedOperators.push(
-          new Morphological(PROCESS_OPERATIONS.MORPHOLOGICAL)
+          new Morphological(PROCESS_OPERATIONS.MORPHOLOGICAL, id)
         );
         break;
       default:
@@ -239,6 +260,11 @@ class MainController {
         throw error;
       }
     }
+  }
+
+  resetTheWorkpace() {
+    this.#appliedOperators = [];
+    this.#originalImage = null;
   }
 }
 

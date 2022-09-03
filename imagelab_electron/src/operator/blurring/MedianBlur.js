@@ -6,10 +6,9 @@ const OpenCvOperator = require("../OpenCvOperator");
  */
 class MedianBlur extends OpenCvOperator {
   #kernalSize = 5; // This value should be an odd number
-  constructor(type) {
-    super(type);
+  constructor(type, id) {
+    super(type, id);
   }
-
   setParams(param, value) {
     if (param === "kernelSize") {
       if (value % 2 === 0) {

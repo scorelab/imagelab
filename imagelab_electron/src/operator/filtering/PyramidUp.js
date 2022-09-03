@@ -5,8 +5,8 @@ const OpenCvOperator = require("../OpenCvOperator");
  * of adding pyramid up filter to an image
  */
 class PyramidUp extends OpenCvOperator {
-  constructor(type) {
-    super(type);
+  constructor(type, id) {
+    super(type, id);
   }
 
   setParams(param, value) {}
