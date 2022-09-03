@@ -13,8 +13,8 @@ class DrawRectangle extends OpenCvOperator {
   #rectangleColor = { r: 40, g: 40, b: 240 };
   #thickness = 2;
 
-  constructor(type) {
-    super(type);
+  constructor(type, id) {
+    super(type, id);
   }
 
   setParams(param, value) {

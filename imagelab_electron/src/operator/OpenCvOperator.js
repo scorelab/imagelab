@@ -6,9 +6,11 @@ const cv2 = require("../opencv");
  */
 class OpenCvOperator {
   type = "";
-  constructor(type) {
+  blockId = "";
+  constructor(type, id) {
     this.cv2 = cv2;
     this.type = type;
+    this.blockId = id;
   }
 
   /**

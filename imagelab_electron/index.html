@@ -179,8 +179,13 @@
             </div>
           </div>
           <div class="information-pane" id="information-pane">
-            <p style="font-size: 15px; margin-top: 5px">Operation name</p>
-            <p style="font-size: 13px; line-height: 2px">
+            <p style="font-size: 15px; margin-top: 5px" id="operator_name">
+              Operation name
+            </p>
+            <p
+              style="font-size: 13px; line-height: 2px"
+              id="operator_description"
+            >
               here is the operation description
             </p>
           </div>
@@ -211,6 +216,7 @@
                   <p style="margin-bottom: 0px; margin-top: 8px">Preview</p>
                   <span
                     class="mdi mdi-replay"
+                    onclick="resetWorkspace()"
                     style="
                       font-size: 30px;
                       color: #bb1010;

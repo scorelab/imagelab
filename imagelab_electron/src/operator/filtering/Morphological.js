@@ -7,8 +7,8 @@ const OpenCvOperator = require("../OpenCvOperator");
  */
 class Morphological extends OpenCvOperator {
   #type = "TOPHAT";
-  constructor(type) {
-    super(type);
+  constructor(type, id) {
+    super(type, id);
   }
 
   setParams(param, value) {

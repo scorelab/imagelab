@@ -9,8 +9,8 @@ class Blur extends OpenCvOperator {
   #width = 3;
   #pointX = -1;
   #pointY = -1;
-  constructor(type) {
-    super(type);
+  constructor(type, id) {
+    super(type, id);
   }
 
   /**

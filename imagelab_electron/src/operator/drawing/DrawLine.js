@@ -12,8 +12,8 @@ class DrawLine extends OpenCvOperator {
   #point_y1 = 0;
   #point_x2 = 0;
   #point_y2 = 0;
-  constructor(type) {
-    super(type);
+  constructor(type, id) {
+    super(type, id);
   }
 
   setParams(type, value) {

@@ -7,8 +7,8 @@ const OpenCvOperator = require("../OpenCvOperator");
 class GaussianBlur extends OpenCvOperator {
   #width = 1; // This value should be an odd number
   #height = 1; // This values should be an odd number
-  constructor(type) {
-    super(type);
+  constructor(type, id) {
+    super(type, id);
   }
 
   setParams(param, value) {

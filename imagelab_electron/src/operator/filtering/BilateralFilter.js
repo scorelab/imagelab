@@ -9,8 +9,8 @@ class BilateralFilter extends OpenCvOperator {
   #sigmaColor = 75;
   #sigmaSpace = 75;
 
-  constructor(type) {
-    super(type);
+  constructor(type, id) {
+    super(type, id);
   }
 
   setParams(type, value) {
