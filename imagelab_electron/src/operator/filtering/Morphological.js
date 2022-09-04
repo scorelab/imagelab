@@ -18,16 +18,16 @@ class Morphological extends OpenCvOperator {
   }
 
   /**
-   * This function checks the set param and do the
-   * filtering according to user selection type
+   *
    * @param {Mat} image
    * @returns
+   * Computes the Morphological filter to the processed
+   * Mat image
    */
   compute(image) {
     let dst = new this.cv2.Mat();
     let M = this.cv2.Mat.ones(5, 5, this.cv2.CV_8U);
     let anchor = new this.cv2.Point(-1, -1);
-    console.log("Type is: ", this.#type);
     switch (this.#type) {
       case "OPEN":
         this.cv2.morphologyEx(

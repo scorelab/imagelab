@@ -12,6 +12,8 @@ class WriteImage extends OpenCvOperator {
   /**
    * This function writes a processed image to the path given
    * And save the image in the location that the user specified
+   * cv2.imwrite is not avilable in JS therefore
+   * pure js method is used to save the method
    * @param {Mat} processedImage
    */
   compute(processedImage) {

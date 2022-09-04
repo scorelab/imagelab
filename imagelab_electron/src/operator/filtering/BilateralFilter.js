@@ -23,6 +23,12 @@ class BilateralFilter extends OpenCvOperator {
     }
   }
 
+  /**
+   *
+   * @param {Mat} image
+   * @returns
+   * computes the bilateral filter of the mat image
+   */
   compute(image) {
     let dst = new this.cv2.Mat();
     this.cv2.cvtColor(image, image, this.cv2.COLOR_RGBA2RGB, 0);

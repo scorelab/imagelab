@@ -13,6 +13,11 @@ class Blur extends OpenCvOperator {
     super(type);
   }
 
+  /**
+   *
+   * This function sets the parameter
+   * for the funtion
+   */
   setParams(param, value) {
     if (param === "widthSize") {
       this.#width = value;
@@ -25,6 +30,13 @@ class Blur extends OpenCvOperator {
     }
   }
 
+  /**
+   *
+   * @param {Mat} image
+   * @returns Mat image
+   * This function process the blur function to the
+   * input image
+   */
   compute(image) {
     const dst = new this.cv2.Mat();
     const ksize = new this.cv2.Size(this.#height, this.#width);

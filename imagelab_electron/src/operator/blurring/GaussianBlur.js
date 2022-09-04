@@ -13,20 +13,27 @@ class GaussianBlur extends OpenCvOperator {
 
   setParams(param, value) {
     if (param === "widthSize") {
-      if (value % 2 === 0) {
-        throw new Error("Width should be an odd number!");
-      }
       this.#width = value;
     } else if (param === "heightSize") {
-      if (value % 2 == 0) {
-        throw new Error("Height should be an odd number!");
-      }
       this.#height = value;
     }
   }
 
+  /**
+   *
+   * @param {Mat} image
+   * @returns
+   *
+   * This function proccessed the gausian blur
+   * of the Mat image
+   */
   compute(image) {
-    console.log("Image is: ", image);
+    if (this.#height % 2 == 0) {
+      throw new Error("Height should be an odd number!");
+    }
+    if (this.#width % 2 === 0) {
+      throw new Error("Width should be an odd number!");
+    }
     const dst = new this.cv2.Mat();
     const ksize = new this.cv2.Size(this.#width, this.#height);
     this.cv2.GaussianBlur(image, dst, ksize, 0, 0, this.cv2.BORDER_DEFAULT);

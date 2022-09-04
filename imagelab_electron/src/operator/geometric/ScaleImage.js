@@ -20,6 +20,12 @@ class ScaleImage extends OpenCvOperator {
     }
   }
 
+  /**
+   *
+   * @param {Mat} image
+   * @returns
+   * This function scale up the image
+   */
   compute(image) {
     let dst = new this.cv2.Mat();
     let dsize = new this.cv2.Size(
