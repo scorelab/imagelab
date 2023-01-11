@@ -90,6 +90,16 @@ workspace.addChangeListener(function (event) {
 });
 
 /**
+ * This method handles the undo function
+ */
+function undo() {
+  workspace.undo(false);
+}
+
+function redo() {
+  workspace.undo(true);
+}
+/**
  *
  * @param {String} title
  * @param {String} message
