@@ -50,7 +50,7 @@ You need to setup following technologies in order to run this project and start 
 
 ### Setup Guidelines
 
-Cone the repository by pasting following command in your terminal.
+Clone the repository by pasting following command in your terminal.
 
 ```
 git clone https://github.com/scorelab/ImageLab.git
