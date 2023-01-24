@@ -7,6 +7,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import org.opencv.core.Core;
 
@@ -75,6 +76,7 @@ public class App extends Application {
         System.out.println("\n" + Constants.IMAGELAB_VERSION);
         System.out.println("A project by " + Constants.ORG_INFO);
         System.out.println("OpenCV configured version " + Core.VERSION);
+        System.out.println("ScoreLab ImageLab " + Constants.YEAR_INFO +" © All Rights Reserved");
     }
 
     /**
@@ -90,6 +92,8 @@ public class App extends Application {
                 .getResource(Constants.STYLESHEET_PATH).toExternalForm());
         stage.setScene(scene);
         stage.setResizable(false);
+        stage.setTitle("ImageLab");
+        stage.getIcons().add(new Image("file:src/main/resources/com/imagelab/images/ImageLab.png"));
         stage.show();
     }
 }

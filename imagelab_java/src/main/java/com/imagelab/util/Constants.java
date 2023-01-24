@@ -10,11 +10,15 @@ public final class Constants {
     /**
      * Application version.
      */
-    public static final String IMAGELAB_VERSION = "v1.0.0";
+    public static final String IMAGELAB_VERSION = "v2.0.0";
     /**
      * Organization details.
      */
     public static final String ORG_INFO = "SCoRE Labs";
+    /**
+     * Product year
+     */
+    public static final String YEAR_INFO = "2023";
     /**
      * DataFormats related to the app.
      */
