@@ -76,7 +76,7 @@ public class App extends Application {
         System.out.println("\n" + Constants.IMAGELAB_VERSION);
         System.out.println("A project by " + Constants.ORG_INFO);
         System.out.println("OpenCV configured version " + Core.VERSION);
-        System.out.println("ScoreLab ImageLab " + Constants.YEAR_INFO +" © All Rights Reserved");
+        System.out.println("SCoRE Labs ImageLab " + Constants.YEAR_INFO +" © All Rights Reserved");
     }
 
     /**
