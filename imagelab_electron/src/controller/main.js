@@ -29,9 +29,13 @@ class MainController {
   // This holds the original image added by the user
   #originalImage;
 
+  //Instead of directly exporting the image, the processed image is stored
+  #processedImage;
+
   constructor() {
     this.#appliedOperators = [];
     this.#originalImage = null;
+    this.#processedImage = null;
   }
 
   /**
@@ -92,6 +96,13 @@ class MainController {
    */
   getOriginalImage() {
     return this.#originalImage;
+  }
+
+  /**
+   * 
+   */
+  getProcessedImage() {
+    return this.#processedImage;
   }
 
   /**
@@ -233,6 +244,9 @@ class MainController {
     this.#appliedOperators.forEach((item) => {
       if (image) {
         image = item.compute(image);
+        if(image) {
+          this.#processedImage = image;
+        }
       }
     });
   }
