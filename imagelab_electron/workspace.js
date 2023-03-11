@@ -153,6 +153,18 @@ function executeProcess() {
 }
 
 /**
+ * This function is responsible for downloading the output image
+ * to the user's local machine
+ */
+function downloadImage() {
+  const preview = document.getElementById("image-preview");
+  var link = document.createElement("a");
+  link.download = "Processed_image.jpg";
+  link.href = preview.toDataURL();
+  link.click();
+}
+
+/**
  * This function is responsible for setting the location of the output image
  */
 function setDirectory() {
