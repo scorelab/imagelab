@@ -13,6 +13,9 @@
   --label-color: white;
   --category-color: #035fbb;
   --wave-color: #1b2440;
+  --icon-color: #000000;
+  --execute-button-color: #367930;
+  --reset-button-color: #bb1010;
 }
 
 /* Dark mode colors used in building UI*/
@@ -26,6 +29,9 @@
   --label-color: white;
   --category-color: #1f2b4b;
   --wave-color: #e8f2fc;
+  --icon-color: #f1f1f1;
+  --execute-button-color: #23e700;
+  --reset-button-color: #ff0000;
 }
 
 /* =================================================================*/
