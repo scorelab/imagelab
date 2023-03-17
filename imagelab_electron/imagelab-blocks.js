@@ -782,6 +782,29 @@ Blockly.defineBlocksWithJsonArray([
     helpUrl: "",
   },
   {
+    type: "filtering_filter2d",
+    message0: "Apply filter2d with ddepth %1 and kernel %2",
+    args0: [
+      {
+        type: "field_number",
+        name: "ddepth",
+        value: -1,
+      },
+      {
+        type: "field_number",
+        name: "kernelSize",
+        value: 2,
+      },
+    ],
+    inputsInline: true,
+    previousStatement: null,
+    nextStatement: null,
+    colour: 135,
+    tooltip:
+      "Filter2D operation can be used to convolve an image with a kernel of a specific shape ",
+    helpUrl: "",
+  },
+  {
     type: "filtering_bilateral",
     message0:
       "Apply bilateral  %1 no. of iterations %2 %3 Sigma color %4 %5 Sigma space %6",

@@ -20,6 +20,7 @@ const PROCESS_OPERATIONS = {
   PYRAMIDDOWN: "filtering_pyramiddown",
   EROSION: "filtering_erosion",
   DILATION: "filtering_dilation",
+  FILTER2D: "filtering_filter2d",
   MORPHOLOGICAL: "filtering_morphological",
 };
 
