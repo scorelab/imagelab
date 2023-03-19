@@ -5,6 +5,7 @@ const PROCESS_OPERATIONS = {
   ROTATEIMAGE: "geometric_rotateimage",
   AFFINEIMAGE: "geometric_affineimage",
   SCALEIMAGE: "geometric_scaleimage",
+  GRAYIMAGE:"imageconvertions_grayimage",
   DRAWLINE: "drawingoperations_drawline",
   DRAWELLIPSE: "drawingoperations_drawellipse",
   DRAWARROWLINE: "drawingoperations_drawarrowline",

@@ -1,6 +1,7 @@
 const PROCESS_OPERATIONS = require("../../operations");
 const ReadImage = require("../operator/basic/ReadImage");
 const WriteImage = require("../operator/basic/WriteImage");
+const GrayImage = require("../operator/convertions/GrayImage");
 const Blur = require("../operator/blurring/Blur");
 const GaussianBlur = require("../operator/blurring/GaussianBlur");
 const MedianBlur = require("../operator/blurring/MedianBlur");
@@ -109,6 +110,11 @@ class MainController {
       case PROCESS_OPERATIONS.WRITEIMAGE:
         this.#appliedOperators.push(
           new WriteImage(PROCESS_OPERATIONS.WRITEIMAGE, id)
+        );
+        break;
+      case PROCESS_OPERATIONS.GRAYIMAGE:
+        this.#appliedOperators.push(
+          new GrayImage(PROCESS_OPERATIONS.GRAYIMAGE, id)
         );
         break;
       case PROCESS_OPERATIONS.REFLECTIMAGE:
