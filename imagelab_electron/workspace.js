@@ -20,13 +20,14 @@ var workspace = Blockly.inject(blocklyDiv, {
   zoom: {
     controls: true,
     wheel: false,
-    startScale: 0.6,
+    startScale: 0.7,
     maxScale: 2,
     minScale: 0.4,
     scaleSpeed: 1.2,
   },
-  renderer: "zelos",
+  renderer: "zelos"
 });
+
 // enable searching on workspace by using ctrl +f
 const workspaceSearch = new WorkspaceSearch(workspace);
 workspaceSearch.init();
