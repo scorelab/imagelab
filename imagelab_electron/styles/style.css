@@ -118,11 +118,11 @@ body {
 } 
 
 /*style of text in blocks */
-.zelos-renderer.classic-theme .blocklyText {
+/* .zelos-renderer.classic-theme .blocklyText {
    fill: white;
    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-   font-size: 22px;
- }
+   font-size: 16px;
+ } */
 
 /* style of title of category in its flyout and that works only on using continuous toolbox plugin*/
 /*.zelos-renderer.classic-theme .blocklyFlyoutLabelText {
