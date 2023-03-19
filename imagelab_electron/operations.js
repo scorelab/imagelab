@@ -20,7 +20,10 @@ const PROCESS_OPERATIONS = {
   PYRAMIDDOWN: "filtering_pyramiddown",
   EROSION: "filtering_erosion",
   DILATION: "filtering_dilation",
-  MORPHOLOGICAL: "filtering_morphological",
+  SOBLEDERIVATE: "edgedetection_soblederivate",
+  SCHARRDERIVATE: "edgedetection_scharrderivate",
+  LAPLACIAN: "edgedetection_laplacian",
+  CANNYEDGE: "edgedetection_cannyedge",
 };
 
 module.exports = PROCESS_OPERATIONS;
