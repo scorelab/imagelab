@@ -21,8 +21,7 @@ const AffineImage = require("../operator/geometric/AffineImage");
 const ReflectImage = require("../operator/geometric/ReflectImage");
 const RotateImage = require("../operator/geometric/RotateImage");
 const ScaleImage = require("../operator/geometric/ScaleImage");
-const ScharrDerivate = require("../operator/sobelderivatives/ScharrDerivate")
-const SobleDerivate = require("../operator/sobelderivatives/SobleDerivate")
+const ColorMaps = require("../operator/convertions/ColorMaps")
 
 class MainController {
   // This private field is used to store the applied operators in the workspace
@@ -211,14 +210,9 @@ class MainController {
           new Morphological(PROCESS_OPERATIONS.MORPHOLOGICAL, id)
         );
         break;
-      case PROCESS_OPERATIONS.SOBEL:
+      case PROCESS_OPERATIONS.COLORMAPS:
         this.#appliedOperators.push(
-          new SobleDerivate(PROCESS_OPERATIONS.SOBEL, id)
-        );
-        break;
-    case PROCESS_OPERATIONS.SCHARR:
-        this.#appliedOperators.push(
-          new ScharrDerivate(PROCESS_OPERATIONS.SCHARR, id)
+          new ColorMaps(PROCESS_OPERATIONS.COLORMAPS, id)
         );
         break;
       default:
