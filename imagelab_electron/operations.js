@@ -23,6 +23,7 @@ const PROCESS_OPERATIONS = {
   EROSION: "filtering_erosion",
   DILATION: "filtering_dilation",
   MORPHOLOGICAL: "filtering_morphological",
+  SIMPLETHRESHOLDING: "thresholding_applythreshold",
 };
 
 module.exports = PROCESS_OPERATIONS;

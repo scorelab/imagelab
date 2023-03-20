@@ -909,19 +909,13 @@ Blockly.defineBlocksWithJsonArray([
   {
     type: "thresholding_applythreshold",
     message0:
-      "Apply simple threshold %1 with max value %2 %3 and threshold value %4",
+      "Apply simple threshold with max value %1 and threshold value %2",
     args0: [
-      {
-        type: "input_dummy",
-      },
       {
         type: "field_number",
         name: "maxValue",
         value: 0,
         min: 0,
-      },
-      {
-        type: "input_dummy",
       },
       {
         type: "field_number",
