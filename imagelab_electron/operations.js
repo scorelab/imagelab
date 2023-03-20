@@ -21,6 +21,8 @@ const PROCESS_OPERATIONS = {
   EROSION: "filtering_erosion",
   DILATION: "filtering_dilation",
   MORPHOLOGICAL: "filtering_morphological",
+  SOBEL: "sobelderivatives_soblederivate",
+  SCHARR: "sobelderivatives_scharrderivate"
 };
 
 module.exports = PROCESS_OPERATIONS;
