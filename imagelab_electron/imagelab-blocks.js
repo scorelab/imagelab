@@ -88,8 +88,8 @@ Blockly.defineBlocksWithJsonArray([
     nextStatement: null,
     colour: 20,
     tooltip:
-      "Refelction produces a missror image like about and an axis of reflection. There are two type of reflection. One is x direction reflection and other is y direction reflection",
-    helpUrl: "",
+      "Refelction produces a miror image about an axis of reflection. There are two type of reflection. One is x direction reflection and other is y direction reflection",
+    helpUrl: "https://docs.opencv.org/4.x/da/d6e/tutorial_py_geometric_transformations.html",
   },
   {
     type: "geometric_rotateimage",
@@ -112,7 +112,7 @@ Blockly.defineBlocksWithJsonArray([
     colour: 20,
     tooltip:
       "This operator allows you to rotate an image to a specific angle. Moreover you can change angle and scale related to the rotation.",
-    helpUrl: "",
+    helpUrl: "https://docs.opencv.org/4.x/da/d6e/tutorial_py_geometric_transformations.html",
   },
 
   {
@@ -122,8 +122,8 @@ Blockly.defineBlocksWithJsonArray([
     nextStatement: null,
     colour: 20,
     tooltip:
-      "Image Affine Translation or shearing express in a materix form. It's a combination of shearing and reflection",
-    helpUrl: "",
+      "Image Affine Translation applies linear transformation to an image, which is a combination of shearing and reflection",
+    helpUrl: "https://docs.opencv.org/4.x/da/d6e/tutorial_py_geometric_transformations.html",
   },
   {
     type: "geometric_scaleimage",
@@ -146,8 +146,8 @@ Blockly.defineBlocksWithJsonArray([
     nextStatement: null,
     colour: 20,
     tooltip:
-      "Image Affine Translation or shearing express in a materix form. It's a combination of shearing and reflection",
-    helpUrl: "",
+      "The scale image operator resizes an image to a specified scale of width and height",
+    helpUrl: "https://docs.opencv.org/4.x/da/d6e/tutorial_py_geometric_transformations.html",
   },
 
   //Convertions
@@ -187,7 +187,7 @@ Blockly.defineBlocksWithJsonArray([
     colour: 315,
     tooltip:
       "Color maps can apply different color maps to an image using this method. OpenCV caters various other types All these types are represents by predefined static fields(fixed values).",
-    helpUrl: "",
+    helpUrl: "https://docs.opencv.org/3.4/d3/d50/group__imgproc__colormap.html",
   },
   {
     type: "imageconvertions_colortobinary",
@@ -227,7 +227,7 @@ Blockly.defineBlocksWithJsonArray([
     colour: 315,
     tooltip:
       "This operations allows you to convert your colored (RGB) images into a binary image. Moreover, you can adjust the conversion threshold values and the threshold  type as well.",
-    helpUrl: "",
+    helpUrl: "https://docs.opencv.org/3.4/de/d25/imgproc_color_conversions.html",
   },
   {
     type: "imageconvertions_graytobinary",
@@ -256,7 +256,7 @@ Blockly.defineBlocksWithJsonArray([
     colour: 315,
     tooltip:
       "This operations allows you to convert your grayscale image into a binary image. Moreover, you can adjust the conversion threshold values as well.",
-    helpUrl: "",
+    helpUrl: "https://docs.opencv.org/3.4/de/d25/imgproc_color_conversions.html",
   },
 
   //Drawing
@@ -311,7 +311,7 @@ Blockly.defineBlocksWithJsonArray([
     colour: 240,
     tooltip:
       "You can draw a line on the image and dedicate its thickness, color and start and end points.",
-    helpUrl: "",
+    helpUrl: "https://docs.opencv.org/3.4/d6/d6e/group__imgproc__draw.html",
   },
   {
     type: "drawingoperations_drawarrowline",
@@ -362,7 +362,7 @@ Blockly.defineBlocksWithJsonArray([
     colour: 240,
     tooltip:
       "You can draw an arrow line on the image and dedicate its color and start and end points.",
-    helpUrl: "",
+    helpUrl: "https://docs.opencv.org/3.4/d6/d6e/group__imgproc__draw.html",
   },
   {
     type: "drawingoperations_drawcircle",
@@ -414,7 +414,7 @@ Blockly.defineBlocksWithJsonArray([
     colour: 240,
     tooltip:
       "You can draw a circle on the image and dedicate its thickness, radius, color and its center point.",
-    helpUrl: "",
+    helpUrl: "https://docs.opencv.org/3.4/d6/d6e/group__imgproc__draw.html",
   },
   {
     type: "drawingoperations_drawellipse",
@@ -474,7 +474,7 @@ Blockly.defineBlocksWithJsonArray([
     colour: 240,
     tooltip:
       "You can draw an ellipse on the image and dedicate its thickness, height and width, rotation angle, color and its center point.",
-    helpUrl: "",
+    helpUrl: "https://docs.opencv.org/3.4/d6/d6e/group__imgproc__draw.html",
   },
   {
     type: "drawingoperations_drawrectangle",
@@ -527,7 +527,7 @@ Blockly.defineBlocksWithJsonArray([
     colour: 240,
     tooltip:
       "You can draw a rectangle on the image and dedicate its thickness, color and its diameter points.",
-    helpUrl: "",
+    helpUrl: "https://docs.opencv.org/3.4/d6/d6e/group__imgproc__draw.html",
   },
   {
     type: "drawingoperations_drawtext",
@@ -584,7 +584,7 @@ Blockly.defineBlocksWithJsonArray([
     colour: 240,
     tooltip:
       "You can write a text on the image and dedicate its thickness, scale, color and start point.",
-    helpUrl: "",
+    helpUrl: "https://docs.opencv.org/3.4/d6/d6e/group__imgproc__draw.html",
   },
 
   //Blurring
@@ -625,7 +625,7 @@ Blockly.defineBlocksWithJsonArray([
     colour: 75,
     tooltip:
       "This operations allows you to apply simple blur effects to your image. You can change size and point properties to change the blur effect.",
-    helpUrl: "",
+    helpUrl: "https://docs.opencv.org/4.x/d4/d13/tutorial_py_filtering.html",
   },
   {
     type: "blurring_applygaussianblur",
@@ -649,8 +649,8 @@ Blockly.defineBlocksWithJsonArray([
     nextStatement: null,
     colour: 75,
     tooltip:
-      "This operations allows you to apply gaussian blur effects to your image.",
-    helpUrl: "",
+      "The Gaussian blur operator is a filter that applies a weighted average to each pixel's value, with the weights determined by a Gaussian kernel.",
+    helpUrl: "https://docs.opencv.org/4.x/d4/d13/tutorial_py_filtering.html",
   },
   {
     type: "blurring_applymedianblur",
@@ -668,8 +668,8 @@ Blockly.defineBlocksWithJsonArray([
     nextStatement: null,
     colour: 75,
     tooltip:
-      "This operations allows you to apply gaussian blur effects to your image.",
-    helpUrl: "",
+      "The median blur operator is a filter that replaces each pixel's value with the median of neighboring pixel values.",
+    helpUrl: "https://docs.opencv.org/4.x/d4/d13/tutorial_py_filtering.html",
   },
 
   //Filtering
@@ -715,8 +715,8 @@ Blockly.defineBlocksWithJsonArray([
     nextStatement: null,
     colour: 135,
     tooltip:
-      "This operations allows you to apply simple box filter effects to your image. You can change size and point properties to change the blur effect.",
-    helpUrl: "",
+      "The box filter operation replaces each pixel's value with the average of neighboring pixel values within a rectangular kernel,",
+    helpUrl: "https://docs.opencv.org/3.4/d4/d86/group__imgproc__filter.html#gad533230ebf2d42509547d514f7d3fbc3",
   },
   {
     type: "filtering_dilation",
@@ -746,8 +746,8 @@ Blockly.defineBlocksWithJsonArray([
     nextStatement: null,
     colour: 135,
     tooltip:
-      "}This Filter operation allows convolution with some kernel of a specific shape such as a square or a circle the size of an object in white shade or bright shade increases. while the size of an object in black shade or dark shade decreases",
-    helpUrl: "",
+      "This Filter operation allows convolution with some kernel of a specific shape such as a square or a circle the size of an object in white shade or bright shade increases. while the size of an object in black shade or dark shade decreases",
+    helpUrl: "https://docs.opencv.org/3.4/d4/d86/group__imgproc__filter.html#ga4ff0f3318642c4f469d0e11f242f3b6c",
   },
   {
     type: "filtering_erosion",
@@ -779,7 +779,7 @@ Blockly.defineBlocksWithJsonArray([
     colour: 135,
     tooltip:
       "Erosion is quite a similar process as dilation. With this procedure the areas of dark regions grow in size and bright regions reduce. The size of an object in white shade or bright shade increases. while it decreases in white shade or bright shade",
-    helpUrl: "",
+    helpUrl: "https://docs.opencv.org/3.4/d4/d86/group__imgproc__filter.html#gaeb1e0c1033e3f6b891a25d0511362aeb",
   },
   {
     type: "filtering_bilateral",
@@ -819,8 +819,8 @@ Blockly.defineBlocksWithJsonArray([
     nextStatement: null,
     colour: 135,
     tooltip:
-      "This Filter can reduce unwanted noise very well while keeping edges fairly sharpe ,It is very slow compared to most filters Sigma Values: If they are small(<10), filter will not have much effect. whereas if they are large(>150), they will have a very strong effect, making image look cartoonish.",
-    helpUrl: "",
+      "The bilateral filter smooths an image while preserving edges by applying a weighted average of neighboring pixel values.",
+    helpUrl: "https://docs.opencv.org/4.x/d4/d13/tutorial_py_filtering.html",
   },
   {
     type: "filtering_pyramidup",
@@ -830,8 +830,8 @@ Blockly.defineBlocksWithJsonArray([
     nextStatement: null,
     colour: 135,
     tooltip:
-      "This Filter operation allows Pyramid, or pyramid representation, is a type of multi scale signal reprsenatation in which a signal or an image is subject to repeated smooted and subsampling you to apply pyramid up effect to your image. image is initially up-sampled and then blurred from this filter. use scaler to up sampled the image.",
-    helpUrl: "",
+      "The pyramid up operator upsamples an image to a larger size and applies a filter to it to reduce artifacts, by smoothing the image and interpolating the missing pixel values using the neighboring pixels.",
+    helpUrl: "https://docs.opencv.org/3.4/d4/d86/group__imgproc__filter.html#gada75b59bdaaca411ed6fee10085eb784",
   },
   {
     type: "filtering_pyramiddown",
@@ -841,8 +841,8 @@ Blockly.defineBlocksWithJsonArray([
     nextStatement: null,
     colour: 135,
     tooltip:
-      "This Filter operation allows Pyramid, or pyramid representation, is a type of multi scale signal reprsenatation in which a signal or an image is subject to repeated smooted and subsampling you to apply pyramid up effect to your image. image is initially up-sampled and then blurred from this filter. use scaler to up sampled the image.",
-    helpUrl: "",
+      "The pyramid down operator downsamples an image to a smaller size and applies a filter to reduce aliasing artifacts, by smoothing the image and subsampling the pixel values using only every other pixel in each dimension.",
+    helpUrl: "https://docs.opencv.org/3.4/d4/d86/group__imgproc__filter.html#gaf9bba239dfca11654cb7f50f889fc2ff",
   },
   {
     type: "filtering_morphological",
@@ -866,8 +866,8 @@ Blockly.defineBlocksWithJsonArray([
     nextStatement: null,
     colour: 135,
     tooltip:
-      "This Filter operation allows convolution with some kernel of a specific shape such as a square or a circle the size of an object in white shade or bright shade increases. while the size of an object in black shade or dark shade decreases",
-    helpUrl: "",
+      "This filter operation allows convolution with some kernel of a specific shape such as a square or a circle the size of an object in white shade or bright shade increases. while the size of an object in black shade or dark shade decreases",
+    helpUrl: "https://docs.opencv.org/4.x/d4/d86/group__imgproc__filter.html#ga67493776e3ad1a3df63883829375201f",
   },
 
   //Thresholding
@@ -886,7 +886,7 @@ Blockly.defineBlocksWithJsonArray([
     colour: 270,
     tooltip:
       "This effect adds a border around the given image. You can set the top, bottom, left and right border sizes from the properties.",
-    helpUrl: "",
+    helpUrl: "https://docs.opencv.org/3.4/d2/de8/group__core__array.html#ga2ac1049c2c3dd25c2b41bffe17658a36",
   },
   {
     type: "thresholding_adaptivethreshold",
@@ -904,7 +904,7 @@ Blockly.defineBlocksWithJsonArray([
     colour: 270,
     tooltip:
       "Adaptive thresholding is the method where the threshold value is calculated for smaller regions and therefore, there will be different threshold values for different regions",
-    helpUrl: "",
+    helpUrl: "https://docs.opencv.org/4.x/d7/d1b/group__imgproc__misc.html#ga72b913f352e4a1b1b397736707afcde3",
   },
   {
     type: "thresholding_applythreshold",
@@ -935,7 +935,7 @@ Blockly.defineBlocksWithJsonArray([
     colour: 270,
     tooltip:
       "Thresholding is a method of image segmentation, in general it is used to create binary images. You can change the threshold value from the properties as well as you can assign a max value.",
-    helpUrl: "",
+    helpUrl: "https://docs.opencv.org/4.x/d7/d1b/group__imgproc__misc.html#gae8a4a146d1ca78c626a53577199e9c57",
   },
   {
     type: "border_for_all",
@@ -1056,7 +1056,7 @@ Blockly.defineBlocksWithJsonArray([
     colour: 345,
     tooltip:
       "This operator allows you to detect edges of an image in both horizontal and vertaical direction. Moreover it is a second order derivative.",
-    helpUrl: "",
+    helpUrl: "https://docs.opencv.org/3.4/d4/d86/group__imgproc__filter.html#gacea54f142e81b6758cb6f375ce782c8d",
   },
 
   //Transformation
@@ -1088,7 +1088,7 @@ Blockly.defineBlocksWithJsonArray([
     colour: 195,
     tooltip:
       "Distance Transformation generally takes binary images as inputs. In this operation,the gray level intensities of the points inside the foreground regions are chnaged to distance their respective distances from the closest 0 value.",
-    helpUrl: "",
+    helpUrl: "https://docs.opencv.org/3.4/d7/d1b/group__imgproc__misc.html#ga8a0b7fdfcb7a13dde018988ba3a43042",
   },
   {
     type: "transformation_laplacian",
@@ -1107,7 +1107,7 @@ Blockly.defineBlocksWithJsonArray([
     colour: 195,
     tooltip:
       "Laplacian Transformation is also a derivate which used to find edges in an image.It is a second order derivate mask Moreover in this mask two classifications one is Postive Laplacian and Negative Laplacian Unlike other opertors Laplacian didn't take out edges in any particular direction but it takes out edges in inward edges and outward edges.",
-    helpUrl: "",
+    helpUrl: "https://docs.opencv.org/3.4/d4/d86/group__imgproc__filter.html#gad78703e4c8fe703d479c1860d76429e6",
   },
 ]);
 
