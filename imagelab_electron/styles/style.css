@@ -65,6 +65,21 @@ body {
   font-weight: bold;
 }
 
+.download-button {
+  width: 350px;
+  min-width: 300px;
+  height: 40px;
+  padding-top: 7px;
+  margin-top: 2px;
+  text-align: center;
+  background-color: var(--primary-color);
+  border-radius: 0.5rem;
+  color: var(--secondary-color);
+  font-size: 15px;
+  font-family: sans-serif;
+  font-weight: bold;
+}
+
 .information-pane {
   width: auto;
   min-width: 700px;
