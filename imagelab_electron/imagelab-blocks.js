@@ -1087,7 +1087,7 @@ Blockly.defineBlocksWithJsonArray([
     nextStatement: null,
     colour: 195,
     tooltip:
-      "Distance Transformation generally takes binary images as inputs. In this operation,the gray level intensities of the points inside the foreground regions are chnaged to distance their respective distances from the closest 0 value.",
+      "Distance Transformation generally takes binary images as inputs. In this operation,the gray level intensities of the points inside the foreground regions are changed to distance their respective distances from the closest 0 value.",
     helpUrl: "",
   },
   {
@@ -1105,9 +1105,12 @@ Blockly.defineBlocksWithJsonArray([
     previousStatement: null,
     nextStatement: null,
     colour: 195,
-    tooltip:
-      "Laplacian Transformation is also a derivate which used to find edges in an image.It is a second order derivate mask Moreover in this mask two classifications one is Postive Laplacian and Negative Laplacian Unlike other opertors Laplacian didn't take out edges in any particular direction but it takes out edges in inward edges and outward edges.",
-    helpUrl: "",
+    tooltip: 
+    "Laplacian Transformation is also a derivative which is used to find edges in an image.It is a second order derivative mask.Moreover, there are two classifications: Positive Laplacian and Negative Laplacian.Unlike other operators, Laplacian doesn't take out edges in any particular direction, but it takes out edges in inward edges and outward edges.",
+
+    helpUrl: "",
+ 
+
   },
 ]);
 
