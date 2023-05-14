@@ -165,8 +165,20 @@ function setDirectory() {
 }
 
 function resetWorkspace() {
-  workspace.clear();
-  mainController.resetTheWorkpace();
+  //Prompt the user to confirm the action
+  dialog.showMessageBox(null, {
+    title: "Caution!",
+
+    buttons: ["Cancel", "Reset"],
+    type: "warning",
+    message: "Please note that resetting the workspace will result in the loss of all unsaved work.",
+  }).then(result => {
+    if (result.response === 1) {
+      //Reset the workspace
+      workspace.clear();
+      mainController.resetTheWorkpace();
+    }
+  });
 }
 
 /**
