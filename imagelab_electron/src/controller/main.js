@@ -232,6 +232,11 @@ class MainController {
           new Morphological(PROCESS_OPERATIONS.MORPHOLOGICAL, id)
         );
         break;
+      case PROCESS_OPERATIONS.COLORSPACE:
+        this.#appliedOperators.push(
+          new ColorSpace(PROCESS_OPERATIONS.COLORSPACE, id)
+        );
+        break;
       default:
         break;
     }
