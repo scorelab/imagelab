@@ -1,5 +1,6 @@
 const PROCESS_OPERATIONS = require("./operations");
 const MainController = require("./src/controller/main");
+const WriteImage = require("./src/operator/basic/WriteImage");
 
 var blocklyDiv = document.getElementById("blocklyDiv");
 var toolbox = document.getElementById("toolbox");
@@ -164,8 +165,35 @@ function setDirectory() {
 }
 
 function resetWorkspace() {
-  workspace.clear();
-  mainController.resetTheWorkpace();
+  //Prompt the user to confirm the action
+  dialog.showMessageBox(null, {
+    title: "Caution!",
+
+    buttons: ["Cancel", "Reset"],
+    type: "warning",
+    message: "Please note that resetting the workspace will result in the loss of all unsaved work.",
+  }).then(result => {
+    if (result.response === 1) {
+      //Reset the workspace
+      workspace.clear();
+      mainController.resetTheWorkpace();
+    }
+  });
+}
+
+/**
+ * This function is responsible for downloading the processed image
+ */
+function downloadImage() {
+  const downloadImage = mainController.getProcessedImage();
+  if(downloadImage != null) {
+    var link = document.createElement("a");
+    link.download = "Processed_image.jpg";
+    link.href = downloadImage;
+    link.click();
+  } else {
+    showDialog("Error", "No processed image found!", "error");
+  }
 }
 
 /**

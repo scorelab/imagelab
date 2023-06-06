@@ -19,10 +19,6 @@ class WriteImage extends OpenCvOperator {
   compute(processedImage) {
     const preview = document.getElementById("image-preview");
     this.cv2.imshow(preview, processedImage);
-    var link = document.createElement("a");
-    link.download = "Processed_image.jpg";
-    link.href = preview.toDataURL();
-    link.click();
   }
 }
 
