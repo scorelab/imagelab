@@ -1,0 +1,42 @@
+.blocklyToolboxDiv {
+  margin-top: 1px;
+  background-color: #EBF1F5;  
+  color: #182026;  
+  padding: 8px !important;
+  border: none;
+  height: 100%;
+  overflow: auto;
+  padding: 0;
+}
+
+.blocklyTreeRow {
+  height: 22px;
+  line-height: 22px;
+  margin-bottom: 3px;
+  padding-right: 8px;
+  white-space: nowrap;
+  border: none !important;
+  border-radius: 3px;
+}
+
+
+.blocklyTreeGroup {
+  padding-left: 16px;
+}
+
+
+.blocklyTreeLabel {
+  cursor: pointer;
+  font-family: "PT Sans", sans-serif; 
+  font-size: 13px;
+  padding: 1px 3px 1px 3px;
+  display: inline-block;
+}
+
+.blocklyFlyoutBackground {
+  fill: #EBF1F5;
+}
+
+.blocklyFlyout .blocklyBlockDark .blocklyPath {
+  fill: #A7B6C2;
+}
