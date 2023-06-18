@@ -22,7 +22,7 @@
 
 .panel {
   padding: 0 16px;
-  width: 300px;
+  width: 400px;
   height: calc(100vh - 50px);
   overflow: auto;  /* in case the content exceeds the available height */
 }
