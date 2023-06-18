@@ -1,29 +1,47 @@
 import './App.css';
 import './imagelab-block'
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { BlocklyWorkspace } from "react-blockly";
 import { MY_TOOLBOX } from './toolboxConfiguration';
 import { Navbar, Alignment, Button, Card, Elevation } from '@blueprintjs/core';
 import './CustomBlockly.css';
+import Blockly from "blockly";
+import ImageViewer from './components/ImageViewer';
+import { workspaceConfiguration } from './workspaceConfig';
 
 function App() {
   const [xml, setXml] = useState("");
+  const [imageUrl, setImageUrl] = useState(null);
 
-  const workspaceConfiguration = {
-    scrollbars: true,
-    trashcan: true,
-    sounds: true,
-    oneBasedIndex: true,
-    zoom: {
-      controls: true,
-      wheel: false,
-      startScale: 0.6,
-      maxScale: 2,
-      minScale: 0.4,
-      scaleSpeed: 1.2,
-    },
-    renderer: "zelos",
-}
+  const handleUndo = () => {
+    Blockly.mainWorkspace.undo(false);
+  }
+
+  const handleRedo = () => {
+    Blockly.mainWorkspace.undo(true);
+  }
+
+  const handleReset = () => {
+    Blockly.mainWorkspace.clear();
+  }
+
+  //Hook to handle updating the image
+  useEffect(() => {
+    // Add event listener for the message
+    window.addEventListener('message', handleMessage);
+
+    // Cleanup the event listener on unmount
+    return () => {
+      window.removeEventListener('message', handleMessage);
+    };
+  }, []);
+
+  const handleMessage = (event) => {
+    if (event.data.type === 'imageSelected') {
+      const imageUrl = event.data.imageUrl;
+      setImageUrl(imageUrl);
+    }
+  };
 
   return (
     <>
@@ -38,9 +56,9 @@ function App() {
           <Navbar.Group align={Alignment.RIGHT}>
               <Button className="bp4-minimal" icon="play" text="Run" />
               <Navbar.Divider />
-              <Button className="bp4-minimal" icon="undo" />
-              <Button className="bp4-minimal" icon="redo" />
-              <Button className="bp4-minimal" icon="reset" />
+              <Button onClick={handleUndo} className="bp4-minimal" icon="undo" />
+              <Button onClick={handleRedo} className="bp4-minimal" icon="redo" />
+              <Button onClick={handleReset} className="bp4-minimal" icon="reset" />
           </Navbar.Group>
       </Navbar>
       <div className='row'>
@@ -52,13 +70,15 @@ function App() {
           workspaceConfiguration={workspaceConfiguration}
         />
         <div className='panel'>
-          <h3>Preview <Button className="bp4-minimal" icon="download" /> </h3>
-          <Card interactive={true} elevation={Elevation.ONE}>
-            <p>Original Image</p>
+          <h3>Preview | <Button className="bp4-minimal" icon="download" /> </h3>
+          <Card elevation={Elevation.ONE}>
+            <p>Original Img</p>
+            <ImageViewer imageUrl={imageUrl} />
           </Card>
           <br />
-          <Card interactive={true} elevation={Elevation.ONE}>
+          <Card elevation={Elevation.ONE}>
             <p>Processed Image</p>
+            <ImageViewer />
           </Card>
         </div>
       </div>
