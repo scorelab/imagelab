@@ -1,6 +1,6 @@
 import './App.css';
 import './imagelab-block'
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { BlocklyWorkspace } from "react-blockly";
 import { MY_TOOLBOX } from './toolboxConfiguration';
 import { Navbar, Alignment, Button, Card, Elevation } from '@blueprintjs/core';
@@ -22,7 +22,10 @@ function App() {
   }
 
   const handleReset = () => {
-    Blockly.mainWorkspace.clear();
+    const shouldReset = window.confirm('Are you sure you want to reset the workspace?');
+    if (shouldReset) {
+      Blockly.mainWorkspace.clear();
+    }
   }
 
   //Hook to handle updating the image
