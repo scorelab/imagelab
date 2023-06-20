@@ -10,13 +10,20 @@
 }
 
 .blocklyTreeRow {
-  height: 22px;
+  height: 26px;
   line-height: 22px;
-  margin-bottom: 3px;
+  margin-bottom: 8px;
   padding-right: 8px;
   white-space: nowrap;
   border: none !important;
   border-radius: 3px;
+  background-color: rgb(255,255,255);
+  box-shadow: -2px 2px 2px rgba(16,22,26,0.1);
+  transition: all 0.3s ease;
+}
+
+.blocklyTreeRow:hover {
+  box-shadow: -5px 5px 5px rgba(16,22,26,0.1);
 }
 
 
@@ -28,8 +35,8 @@
 .blocklyTreeLabel {
   cursor: pointer;
   font-family: "PT Sans", sans-serif; 
-  font-size: 13px;
-  padding: 1px 3px 1px 3px;
+  font-size: 14px;
+  padding: 3px 5px;
   display: inline-block;
 }
 
