@@ -1,6 +1,8 @@
 const PROCESS_OPERATIONS = require("../../operations");
 const ReadImage = require("../operator/basic/ReadImage");
 const WriteImage = require("../operator/basic/WriteImage");
+const GrayImage = require("../operator/convertions/GrayImage");
+const GrayToBinary = require("../operator/convertions/GrayToBinary");
 const Blur = require("../operator/blurring/Blur");
 const GaussianBlur = require("../operator/blurring/GaussianBlur");
 const MedianBlur = require("../operator/blurring/MedianBlur");
@@ -29,9 +31,13 @@ class MainController {
   // This holds the original image added by the user
   #originalImage;
 
+  //Instead of directly exporting the image, the processed image is stored
+  #processedImage;
+
   constructor() {
     this.#appliedOperators = [];
     this.#originalImage = null;
+    this.#processedImage = null;
   }
 
   /**
@@ -95,6 +101,13 @@ class MainController {
   }
 
   /**
+   * 
+   */
+  getProcessedImage() {
+    return this.#processedImage;
+  }
+
+  /**
    * This function generates the operator object accroding to the string passed
    * @param {String} operatorType
    * @returns
@@ -109,6 +122,16 @@ class MainController {
       case PROCESS_OPERATIONS.WRITEIMAGE:
         this.#appliedOperators.push(
           new WriteImage(PROCESS_OPERATIONS.WRITEIMAGE, id)
+        );
+        break;
+      case PROCESS_OPERATIONS.GRAYIMAGE:
+        this.#appliedOperators.push(
+          new GrayImage(PROCESS_OPERATIONS.GRAYIMAGE, id)
+        );
+        break;
+      case PROCESS_OPERATIONS.GRAYTOBINARY:
+        this.#appliedOperators.push(
+          new GrayToBinary(PROCESS_OPERATIONS.GRAYTOBINARY, id)
         );
         break;
       case PROCESS_OPERATIONS.REFLECTIMAGE:
@@ -233,6 +256,9 @@ class MainController {
     this.#appliedOperators.forEach((item) => {
       if (image) {
         image = item.compute(image);
+        if(image) {
+          this.#processedImage = image;
+        }
       }
     });
   }
