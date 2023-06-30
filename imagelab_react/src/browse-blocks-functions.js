@@ -1,4 +1,7 @@
 import Blockly from "blockly";
+const electron = window.require('electron');
+const ipcRenderer  = electron.ipcRenderer;
+
 /*This function is responible for opening file selector window to choose the picture you will do operqations on 
 it works with (read image) block */
 const handleFileSelection = () => {
@@ -6,13 +9,22 @@ const handleFileSelection = () => {
   const input = document.createElement("input");
   input.type = "file";
   input.accept = "image/*";
-  input.onchange = (event) => {
+  input.onchange = async (event) => {
     const file = event.target.files[0];
     if (file) {
       const imageUrl = URL.createObjectURL(file);
       
       // Store the selected image in local storage
       localStorage.setItem("selectedImage", imageUrl);
+
+      //Set Original Image
+      try {
+        await ipcRenderer.invoke('setOriginalImage', imageUrl);
+        console.log("Image set");
+      } catch (error) {
+        console.error('Failed to load image:', error);
+      }
+
       // Send message to the parent window
       window.postMessage({ type: 'imageSelected', imageUrl }, '*');
     }
