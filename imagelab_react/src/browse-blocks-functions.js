@@ -18,12 +18,28 @@ const handleFileSelection = () => {
       localStorage.setItem("selectedImage", imageUrl);
 
       //Set Original Image
-      try {
-        await ipcRenderer.invoke('setOriginalImage', imageUrl);
-        console.log("Image set");
-      } catch (error) {
-        console.error('Failed to load image:', error);
+      const img = new Image();
+      img.onload = async function() {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = this.width;
+        canvas.height = this.height;
+        ctx.drawImage(this, 0, 0, this.width, this.height);
+
+        const dataUrl = canvas.toDataURL('image/png');
+
+        // Extract base64 data
+        const base64Image = dataUrl.replace(/^data:image\/\w+;base64,/, "");
+        console.log(base64Image);
+        try {
+          await ipcRenderer.invoke('setOriginalImage', base64Image);
+          console.log("Image set");
+        } catch (error) {
+          console.error('Failed to load image:', error);
+        }
       }
+      img.src = imageUrl;
+
 
       // Send message to the parent window
       window.postMessage({ type: 'imageSelected', imageUrl }, '*');

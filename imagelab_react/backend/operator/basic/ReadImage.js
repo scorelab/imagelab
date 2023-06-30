@@ -14,8 +14,7 @@ class ReadImage extends OpenCvOperator {
    * @returns processed image
    */
   compute(image) {
-    return "hello";
-    //return this.cv2.imread(image);
+    return this.cv2.imread(image);
   }
 }
 
