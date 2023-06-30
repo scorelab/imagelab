@@ -209,7 +209,7 @@ class MainController {
     var image = this.#originalImage;
     this.#appliedOperators.forEach((item) => {
       if (image) {
-        window.alert(item.compute(image));
+        image = item.compute(image);
         if(image) {
           this.#processedImage = image;
         }

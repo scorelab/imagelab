@@ -59,9 +59,11 @@ app.whenReady().then(() => {
   });
 
   // Handle the 'setOriginalImage' request from the renderer process
-  ipcMain.handle('setOriginalImage', async (event, imageUrl) => {
+  ipcMain.handle('setOriginalImage', async (event, base64Image) => {
     try {
-      mainController.setOriginalImage(imageUrl);
+      // Convert base64 string to buffer
+      let imageBuffer = Buffer.from(base64Image, 'base64');
+      mainController.setOriginalImage(imageBuffer);
     } catch (error) {
       throw new Error(`Failed to set image: ${error.message}`);
     }
