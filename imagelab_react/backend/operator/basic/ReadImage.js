@@ -13,8 +13,8 @@ class ReadImage extends OpenCvOperator {
    * @param {Mat} image
    * @returns processed image
    */
-  compute(image) {
-    return this.cv2.imread(image);
+  compute(bitmap) {
+    return this.cv2.matFromImageData(bitmap);
   }
 }
 

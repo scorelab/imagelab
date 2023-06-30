@@ -24,7 +24,7 @@ export async function run(block) {
     })
     try {
         await ipcRenderer.invoke('computeAll');
-        console.log('Computation completed successfully');
+        console.log("Computation successful");
     } catch (error) {
         console.error('Failed to compute:', error);
     }
