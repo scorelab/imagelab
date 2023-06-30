@@ -23,6 +23,7 @@ const AffineImage = require("../operator/geometric/AffineImage");
 const ReflectImage = require("../operator/geometric/ReflectImage");
 const RotateImage = require("../operator/geometric/RotateImage");
 const ScaleImage = require("../operator/geometric/ScaleImage");
+const Jimp = require('jimp');
 
 class MainController {
   // This private field is used to store the applied operators in the workspace
@@ -44,8 +45,9 @@ class MainController {
    * This method set the original image
    * @param {Mat Image} image
    */
-  setOriginalImage(image) {
-    this.#originalImage = image;
+  async setOriginalImage(image) {
+    var jimpSrc = await Jimp.read(image);
+    this.#originalImage = jimpSrc.bitmap;
   }
 
   /**
@@ -215,6 +217,14 @@ class MainController {
         }
       }
     });
+
+    new Jimp({
+      width: image.cols,
+      height: image.rows,
+      data: Buffer.from(image.data)
+      })
+      .write('output.png');
+
   }
 }
 

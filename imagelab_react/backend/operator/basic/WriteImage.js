@@ -17,11 +17,7 @@ class WriteImage extends OpenCvOperator {
    * @param {Mat} processedImage
    */
   compute(processedImage) {
-    // Store the selected image in local storage
-    localStorage.setItem("processedImage", processedImage);
-    // Send message to the parent window
-    window.alert("Hello");
-    window.postMessage({ type: 'imageProcessed', processedImage }, '*');
+    return processedImage;
   }
 }
 
