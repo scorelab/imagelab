@@ -208,7 +208,7 @@ class MainController {
     if (this.#originalImage === null) {
       throw Error("Image is not set");
     }
-    var image = this.#originalImage;
+    var image = this.getOriginalImage();
     this.#appliedOperators.forEach((item) => {
       if (image) {
         image = item.compute(image);
@@ -217,11 +217,10 @@ class MainController {
         }
       }
     });
-
     new Jimp({
-      width: image.cols,
-      height: image.rows,
-      data: Buffer.from(image.data)
+      width: this.#processedImage.cols,
+      height: this.#processedImage.rows,
+      data: Buffer.from(this.#processedImage.data)
       })
       .write('output.png');
 
