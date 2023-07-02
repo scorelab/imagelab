@@ -1,3 +1,4 @@
+const Jimp = require("jimp");
 const OpenCvOperator = require("../OpenCvOperator");
 
 /**
@@ -17,7 +18,12 @@ class WriteImage extends OpenCvOperator {
    * @param {Mat} processedImage
    */
   compute(processedImage) {
-    return processedImage;
+    new Jimp({
+      width: processedImage.cols,
+      height: processedImage.rows,
+      data: Buffer.from(processedImage.data)
+      })
+      .write('output.png');
   }
 }
 

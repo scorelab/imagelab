@@ -1,6 +1,5 @@
 import Blockly from "blockly";
 const electron = window.require('electron');
-const ipcRenderer  = electron.ipcRenderer;
 
 /*This function is responible for opening file selector window to choose the picture you will do operqations on 
 it works with (read image) block */
@@ -30,9 +29,10 @@ const handleFileSelection = () => {
 
         // Extract base64 data
         const base64Image = dataUrl.replace(/^data:image\/\w+;base64,/, "");
-        console.log(base64Image);
         try {
-          await ipcRenderer.invoke('setOriginalImage', base64Image);
+          // Store the selected image in local storage
+          localStorage.setItem("base64Image", base64Image);
+          console.log(base64Image)
           console.log("Image set");
         } catch (error) {
           console.error('Failed to load image:', error);
