@@ -49,23 +49,13 @@ app.whenReady().then(() => {
   });
 
   // Handle the 'computeAll' request from the renderer process
-  ipcMain.handle('computeAll', () => {
+  ipcMain.handle('computeAll', async (event, base64Image) => {
     try {
-      mainController.computeAll();
+      const buffer = Buffer.from(base64Image, 'base64')
+      await mainController.computeAll(buffer);
       return true;
     } catch (error) {
       throw new Error(`Failed to compute: ${error.message}`);
-    }
-  });
-
-  // Handle the 'setOriginalImage' request from the renderer process
-  ipcMain.handle('setOriginalImage', async (event, base64Image) => {
-    try {
-      // Convert base64 string to buffer
-      let imageBuffer = Buffer.from(base64Image, 'base64');
-      mainController.setOriginalImage(imageBuffer);
-    } catch (error) {
-      throw new Error(`Failed to set image: ${error.message}`);
     }
   });
 

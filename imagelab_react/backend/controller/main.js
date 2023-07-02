@@ -24,6 +24,7 @@ const ReflectImage = require("../operator/geometric/ReflectImage");
 const RotateImage = require("../operator/geometric/RotateImage");
 const ScaleImage = require("../operator/geometric/ScaleImage");
 const Jimp = require('jimp');
+const cv = require('../opencv')
 
 class MainController {
   // This private field is used to store the applied operators in the workspace
@@ -39,30 +40,6 @@ class MainController {
     this.#appliedOperators = [];
     this.#originalImage = null;
     this.#processedImage = null;
-  }
-
-  /**
-   * This method set the original image
-   * @param {Mat Image} image
-   */
-  async setOriginalImage(image) {
-    var jimpSrc = await Jimp.read(image);
-    this.#originalImage = jimpSrc.bitmap;
-  }
-
-  /**
-   * This methods returns the original image
-   * @returns Image
-   */
-  getOriginalImage() {
-    return this.#originalImage;
-  }
-
-  /**
-   * 
-   */
-  getProcessedImage() {
-    return this.#processedImage;
   }
 
   /**
@@ -198,17 +175,16 @@ class MainController {
   /**
    * This method compute and generate the output of the selected operators
    */
-  computeAll() {
+  async computeAll(buffer) {
     if (this.#appliedOperators.length === 0) {
       throw Error("No operators are added to the workspace");
     }
     if (this.#appliedOperators[0]?.type !== PROCESS_OPERATIONS.READIMAGE) {
       throw Error("Read Image block is not added");
     }
-    if (this.#originalImage === null) {
-      throw Error("Image is not set");
-    }
-    var image = this.getOriginalImage();
+    const jimpSrc = await Jimp.read(buffer);
+    var image = jimpSrc.bitmap;
+
     this.#appliedOperators.forEach((item) => {
       if (image) {
         image = item.compute(image);
@@ -217,13 +193,6 @@ class MainController {
         }
       }
     });
-    new Jimp({
-      width: this.#processedImage.cols,
-      height: this.#processedImage.rows,
-      data: Buffer.from(this.#processedImage.data)
-      })
-      .write('output.png');
-
   }
 }
 

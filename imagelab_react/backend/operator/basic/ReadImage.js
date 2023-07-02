@@ -14,7 +14,9 @@ class ReadImage extends OpenCvOperator {
    * @returns processed image
    */
   compute(bitmap) {
-    return this.cv2.matFromImageData(bitmap);
+    const mat = this.cv2.matFromImageData(bitmap);
+    console.log(mat);
+    return mat;
   }
 }
 

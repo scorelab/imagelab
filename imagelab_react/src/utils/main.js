@@ -22,8 +22,10 @@ export async function run(block) {
             console.error('Failed to add operator:', error);
         }
     })
+    const base64Image = localStorage.getItem("base64Image");
+    console.log(base64Image);
     try {
-        await ipcRenderer.invoke('computeAll');
+        await ipcRenderer.invoke('computeAll', base64Image);
         console.log("Computation successful");
     } catch (error) {
         console.error('Failed to compute:', error);
