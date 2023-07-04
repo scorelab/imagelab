@@ -37,8 +37,7 @@ function App() {
       setImageUrl(imageUrl);
     }
     if (event.data.type === 'imageProcessed') {
-      const processedImage = event.data.processedImage;
-      console.log(processedImage)
+      const processedImage = event.data.canvasImageData;
       setProcessedImage(processedImage);
     }
   };

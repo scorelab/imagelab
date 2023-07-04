@@ -11,7 +11,7 @@ Blockly.defineBlocksWithJsonArray([
         {
           name: "file_browse",
           type: "field_image",
-          src: "imagelab_demo/src/image-plus.png",
+          src: "./image-plus.png",
           width: 40,
           height: 40,
           alt: "*",
