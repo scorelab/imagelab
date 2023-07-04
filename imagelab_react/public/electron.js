@@ -39,15 +39,25 @@ app.whenReady().then(() => {
   const mainController = new MainController();
 
   // Handle the 'addOperator' request from the renderer process
-  ipcMain.handle('addOperator', (event, operatorType, id) => {
+  ipcMain.handle('addOperators', (event, pipeline) => {
     try {
-      mainController.addOperator(operatorType, id);
+      mainController.addOperators(pipeline);
       return true;
     } catch (error) {
       throw new Error(`Failed to add operator: ${error.message}`);
     }
   });
 
+  // Handle the 'getProcessedImage' request from the renderer process
+  ipcMain.handle('getProcessedImage', async (event) => {
+    try {
+      const base64Image = await mainController.getProcessedImage();
+      return base64Image;
+    } catch (error) {
+      throw new Error(`Failed to add operator: ${error.message}`);
+    }
+  });
+  
   // Handle the 'computeAll' request from the renderer process
   ipcMain.handle('computeAll', async (event, base64Image) => {
     try {
