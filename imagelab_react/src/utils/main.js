@@ -26,18 +26,17 @@ function processBlock(block, pipeline) {
 }
 
 export async function run(block) {
+    const isImageSelected = localStorage.getItem("selectedImage");
+    console.log(isImageSelected);
     const pipeline = [];
     processBlock(block, pipeline);
     try {
         await ipcRenderer.invoke('addOperators', pipeline);
-        console.log('Operators added successfully');
     } catch (error) {
         throw new Error(error);
     }
-    const base64Image = localStorage.getItem("base64Image");
     try {
-        await ipcRenderer.invoke('computeAll', base64Image);
-        console.log("Computation successful");
+        await ipcRenderer.invoke('computeAll');
     } catch (error) {
         console.error('Failed to compute:', error);
     }

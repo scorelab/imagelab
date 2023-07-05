@@ -45,8 +45,9 @@ class MainController {
    * This method set the original image
    * @param {Mat Image} image
    */
-  setOriginalImage(image) {
-    this.#originalImage = image;
+  async setOriginalImage(buffer) {
+    const jimpSrc = await Jimp.read(buffer);
+    this.#originalImage = jimpSrc.bitmap;
   }
 
   /**
@@ -209,15 +210,14 @@ class MainController {
   /**
    * This method compute and generate the output of the selected operators
    */
-  async computeAll(buffer) {
+  computeAll() {
     if (this.#appliedOperators.length === 0) {
       throw Error("No operators are added to the workspace");
     }
     if (this.#appliedOperators[0]?.type !== PROCESS_OPERATIONS.READIMAGE) {
       throw Error("Read Image block is not added");
     }
-    const jimpSrc = await Jimp.read(buffer);
-    var image = jimpSrc.bitmap;
+    var image = this.getOriginalImage();
 
     this.#appliedOperators.forEach((item) => {
       if (image) {

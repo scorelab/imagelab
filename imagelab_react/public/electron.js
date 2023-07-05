@@ -54,15 +54,25 @@ app.whenReady().then(() => {
       const base64Image = await mainController.getProcessedImage();
       return base64Image;
     } catch (error) {
-      throw new Error(`Failed to add operator: ${error.message}`);
+      throw new Error(`Failed to get processed image: ${error.message}`);
+    }
+  });
+
+  // Handle the 'setOriginalImage' request from the renderer process
+  ipcMain.handle('setOriginalImage', async (event, base64Image) => {
+    try {
+      const buffer = Buffer.from(base64Image, 'base64')
+      mainController.setOriginalImage(buffer);
+      return true;
+    } catch (error) {
+      throw new Error(`Failed to compute: ${error.message}`);
     }
   });
   
   // Handle the 'computeAll' request from the renderer process
-  ipcMain.handle('computeAll', async (event, base64Image) => {
+  ipcMain.handle('computeAll', (event) => {
     try {
-      const buffer = Buffer.from(base64Image, 'base64')
-      await mainController.computeAll(buffer);
+      mainController.computeAll();
       return true;
     } catch (error) {
       throw new Error(`Failed to compute: ${error.message}`);
