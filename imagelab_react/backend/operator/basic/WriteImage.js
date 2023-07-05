@@ -18,12 +18,13 @@ class WriteImage extends OpenCvOperator {
    * @param {Mat} processedImage
    */
   compute(processedImage) {
-    return new Jimp({
+    const ret = new Jimp({
       width: processedImage.cols,
       height: processedImage.rows,
       data: Buffer.from(processedImage.data)
       });
-   }
+    return ret;
+  }
 }
 
 module.exports = WriteImage;
