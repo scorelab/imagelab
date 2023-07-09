@@ -19,6 +19,7 @@
     "react-blockly": "^7.2.2",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
+    "react-zoom-pan-pinch": "^3.1.0",
     "sharp": "^0.32.1",
     "web-vitals": "^2.1.4"
   },
