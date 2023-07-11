@@ -31,6 +31,13 @@ function App() {
     };
   }, []);
 
+  useEffect(() => {
+    return () => {
+      localStorage.removeItem('base64Image'); 
+      localStorage.removeItem('storedImage');
+    };
+  }, []);
+
   const handleMessage = (event) => {
     if (event.data.type === 'imageSelected') {
       const imageUrl = event.data.imageUrl;
@@ -40,6 +47,21 @@ function App() {
       const processedImage = event.data.canvasImageData;
       setProcessedImage(processedImage);
     }
+  };
+
+  const handleDownload = () => {
+    const imageUrl = localStorage.getItem('storedImage'); 
+
+    if (!imageUrl) {
+      window.alert('No processed image found in storage!');
+      return;
+    }
+
+    const link = document.createElement('a');
+    link.href = imageUrl;
+    link.download = 'processed_image.jpg'; 
+    
+    link.click();
   };
 
   return (
@@ -63,13 +85,13 @@ function App() {
       <div className='row'>
         <BlocklyWorkspace
           className="fill-height"
-          toolboxConfiguration={MY_TOOLBOX} // this must be a JSON toolbox definition
+          toolboxConfiguration={MY_TOOLBOX}
           initialXml={xml}
           onXmlChange={setXml}
           workspaceConfiguration={workspaceConfiguration}
         />
         <div className='panel'>
-          <h3>Preview | <Button className="bp4-minimal" icon="download" /> </h3>
+          <h3>Preview | <Button className="bp4-minimal" icon="download" onClick={handleDownload} /> </h3>
           <Card elevation={Elevation.ONE}>
             <p>Original Img</p>
             <ImageViewer imageUrl={imageUrl} />
