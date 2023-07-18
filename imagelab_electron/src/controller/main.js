@@ -27,6 +27,7 @@ const AffineImage = require("../operator/geometric/AffineImage");
 const ReflectImage = require("../operator/geometric/ReflectImage");
 const RotateImage = require("../operator/geometric/RotateImage");
 const ScaleImage = require("../operator/geometric/ScaleImage");
+const ApplyThreshold = require("../operator/thresholding/ApplyThreshold");
 
 class MainController {
   // This private field is used to store the applied operators in the workspace
@@ -254,6 +255,9 @@ class MainController {
       case PROCESS_OPERATIONS.CANNYEDGE:
         this.#appliedOperators.push(
           new CannyEdge(PROCESS_OPERATIONS.CannyEdge, id)
+      case PROCESS_OPERATIONS.SIMPLETHRESHOLDING:
+        this.#appliedOperators.push(
+          new ApplyThreshold(PROCESS_OPERATIONS.SIMPLETHRESHOLDING, id)
         );
         break;
       default:

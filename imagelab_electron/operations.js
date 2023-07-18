@@ -26,6 +26,8 @@ const PROCESS_OPERATIONS = {
   SCHARRDERIVATE: "edgedetection_scharrderivate",
   LAPLACIAN: "edgedetection_laplacian",
   CANNYEDGE: "edgedetection_cannyedge",
+  MORPHOLOGICAL: "filtering_morphological",
+  SIMPLETHRESHOLDING: "thresholding_applythreshold",
 };
 
 module.exports = PROCESS_OPERATIONS;
