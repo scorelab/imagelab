@@ -233,7 +233,7 @@ class MainController {
         this.#appliedOperators.push(
           new Morphological(PROCESS_OPERATIONS.MORPHOLOGICAL, id)
         );
-        break;\
+        break;
       case PROCESS_OPERATIONS.ADAPTIVETHRESHOLDING:
         this.#appliedOperators.push(
           new AdaptiveThreshold(PROCESS_OPERATIONS.ADAPTIVETHRESHOLDING, id)
