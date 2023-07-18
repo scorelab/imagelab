@@ -1,0 +1,56 @@
+{
+  "name": "imagelab_demo",
+  "version": "0.1.0",
+  "private": true,
+  "main": "public/electron.js",
+  "homepage": "./",
+  "dependencies": {
+    "@blueprintjs/core": "^4.20.1",
+    "@mdi/js": "^7.2.96",
+    "@mdi/react": "^1.6.1",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "blockly": "^9.3.3",
+    "electron": "^25.0.1",
+    "electron-is-dev": "^2.0.0",
+    "jimp": "^0.22.8",
+    "react": "^18.2.0",
+    "react-blockly": "^7.2.2",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1",
+    "react-zoom-pan-pinch": "^3.1.0",
+    "sharp": "^0.32.1",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "dev": "concurrently -k \"BROWSER=none yarn start\" \"yarn:electron\"",
+    "electron": "electron ."
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "concurrently": "^8.1.0",
+    "wait-on": "^7.0.1"
+  }
+}

@@ -5,6 +5,8 @@ const PROCESS_OPERATIONS = {
   ROTATEIMAGE: "geometric_rotateimage",
   AFFINEIMAGE: "geometric_affineimage",
   SCALEIMAGE: "geometric_scaleimage",
+  GRAYIMAGE:"imageconvertions_grayimage",
+  GRAYTOBINARY:"imageconvertions_graytobinary",
   DRAWLINE: "drawingoperations_drawline",
   DRAWELLIPSE: "drawingoperations_drawellipse",
   DRAWARROWLINE: "drawingoperations_drawarrowline",
@@ -22,6 +24,7 @@ const PROCESS_OPERATIONS = {
   DILATION: "filtering_dilation",
   MORPHOLOGICAL: "filtering_morphological",
   ADAPTIVETHRESHOLDING: "thresholding_adaptivethreshold"
+  SIMPLETHRESHOLDING: "thresholding_applythreshold",
 };
 
 module.exports = PROCESS_OPERATIONS;

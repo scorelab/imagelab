@@ -39,7 +39,8 @@ body {
 .preview-pane {
   width: 350px;
   min-width: 300px;
-  height: 330px;
+  height: 35vh;
+  min-height: 330px;
   padding-top: 7px;
   text-align: center;
   background-color: var(--primary-color);
@@ -53,7 +54,23 @@ body {
 .properties-pane {
   width: 350px;
   min-width: 300px;
-  height: 250px;
+  height:30vh;
+  min-height: 250px;
+  padding-top: 7px;
+  margin-top: 7px;
+  text-align: center;
+  background-color: var(--primary-color);
+  border-radius: 0.5rem;
+  color: var(--secondary-color);
+  font-size: 15px;
+  font-family: sans-serif;
+  font-weight: bold;
+}
+
+.download-button {
+  width: 350px;
+  min-width: 300px;
+  height: 40px;
   padding-top: 7px;
   margin-top: 2px;
   text-align: center;
@@ -68,8 +85,8 @@ body {
 .information-pane {
   width: auto;
   min-width: 700px;
-  height: auto;
-  margin-top: 2px;
+  height: 7vh;
+  margin-top: 7px;
   padding-left: 15px;
   padding-top: 3px;
   padding-right: 3px;
@@ -118,11 +135,11 @@ body {
 } 
 
 /*style of text in blocks */
-.zelos-renderer.classic-theme .blocklyText {
+/* .zelos-renderer.classic-theme .blocklyText {
    fill: white;
    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-   font-size: 22px;
- }
+   font-size: 16px;
+ } */
 
 /* style of title of category in its flyout and that works only on using continuous toolbox plugin*/
 /*.zelos-renderer.classic-theme .blocklyFlyoutLabelText {
@@ -169,6 +186,7 @@ table {
 /* Changes color of the icons in categories buttons to suit light/dark modes. */
 .customIcon {
   color: var(--label-color);
+  font-size: x-large;
 }
 
 /* Stacks the icon on top of the label. */

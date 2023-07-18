@@ -1,0 +1,28 @@
+/* App.css */
+
+@import "normalize.css";
+@import "@blueprintjs/core/lib/css/blueprint.css";
+@import "@blueprintjs/icons/lib/css/blueprint-icons.css";
+
+/* Style for the row. Using flex can easily divide the row into proportions */
+
+.row {
+  display: flex;
+  height: calc(100vh - 50px);
+}
+
+/* Adjust the width of the Blockly workspace to 70% */
+
+.fill-height {
+  height: calc(100vh - 50px);
+  width: calc(100vw - 300px);
+}
+
+/* Add styling for the panel */
+
+.panel {
+  padding: 0 16px;
+  width: 400px;
+  height: calc(100vh - 50px);
+  overflow: auto;  /* in case the content exceeds the available height */
+}
