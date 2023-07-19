@@ -27,6 +27,7 @@ const PROCESS_OPERATIONS = {
   LAPLACIAN: "edgedetection_laplacian",
   CANNYEDGE: "edgedetection_cannyedge",
   MORPHOLOGICAL: "filtering_morphological",
+  ADAPTIVETHRESHOLDING: "thresholding_adaptivethreshold"
   SIMPLETHRESHOLDING: "thresholding_applythreshold",
 };
 
