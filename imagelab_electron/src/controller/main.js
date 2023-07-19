@@ -23,6 +23,7 @@ const AffineImage = require("../operator/geometric/AffineImage");
 const ReflectImage = require("../operator/geometric/ReflectImage");
 const RotateImage = require("../operator/geometric/RotateImage");
 const ScaleImage = require("../operator/geometric/ScaleImage");
+const AdaptiveThreshold = require("../operator/thresholding/AdaptiveThresholding");
 const ApplyThreshold = require("../operator/thresholding/ApplyThreshold");
 
 class MainController {
@@ -233,6 +234,9 @@ class MainController {
           new Morphological(PROCESS_OPERATIONS.MORPHOLOGICAL, id)
         );
         break;
+      case PROCESS_OPERATIONS.ADAPTIVETHRESHOLDING:
+        this.#appliedOperators.push(
+          new AdaptiveThreshold(PROCESS_OPERATIONS.ADAPTIVETHRESHOLDING, id)
       case PROCESS_OPERATIONS.SIMPLETHRESHOLDING:
         this.#appliedOperators.push(
           new ApplyThreshold(PROCESS_OPERATIONS.SIMPLETHRESHOLDING, id)
