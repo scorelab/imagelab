@@ -16,7 +16,6 @@ function App() {
   const [processedImage, setProcessedImage] = useState(null);
 
   const fileInputRef = useRef(null); // Ref for the hidden file input element
-  const workspaceRef = useRef(null); // Ref for the BlocklyWorkspace
 
   const start = () => {
     const topBlock = Blockly.getMainWorkspace().getTopBlocks()[0];
