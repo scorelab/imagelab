@@ -1,6 +1,6 @@
 import './App.css';
 import './imagelab-block'
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { BlocklyWorkspace } from "react-blockly";
 import Blockly from "blockly";
 import { MY_TOOLBOX } from './toolboxConfiguration';
@@ -14,6 +14,9 @@ function App() {
   const [xml, setXml] = useState("");
   const [imageUrl, setImageUrl] = useState(null);
   const [processedImage, setProcessedImage] = useState(null);
+
+  const fileInputRef = useRef(null); // Ref for the hidden file input element
+  const workspaceRef = useRef(null); // Ref for the BlocklyWorkspace
 
   const start = () => {
     const topBlock = Blockly.getMainWorkspace().getTopBlocks()[0];
@@ -42,14 +45,38 @@ function App() {
     }
   };
 
+  const saveWorkspace = () => {
+    const xmlText = xml;
+    const element = document.createElement('a');
+    const file = new Blob([xmlText], { type: 'text/plain' });
+    element.href = URL.createObjectURL(file);
+    element.download = 'blockly-workspace.xml';
+    document.body.appendChild(element);
+    element.click();
+  }
+
+  const loadWorkspace = (event) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+  
+    reader.onload = (event) => {
+      const xml = Blockly.Xml.textToDom(event.target.result);
+      const workspace = Blockly.getMainWorkspace();
+      Blockly.Xml.clearWorkspaceAndLoadFromXml(xml, workspace);
+    };
+  
+    reader.readAsText(file);
+  }  
+
   return (
     <>
       <Navbar>
           <Navbar.Group align={Alignment.LEFT}>
               <Navbar.Heading>ImageLab</Navbar.Heading>
               <Navbar.Divider />
-              <Button className="bp4-minimal" icon="document-open" text="Open" />
-              <Button className="bp4-minimal" icon="document-share" text="Save" />
+              <Button className="bp4-minimal" icon="document-open" text="Open" onClick={() => fileInputRef.current.click()} />
+              <input type="file" ref={fileInputRef} onChange={loadWorkspace} style={{ display: 'none' }}/>
+              <Button className="bp4-minimal" icon="document-share" text="Save" onClick={saveWorkspace} />
               <Button className="bp4-minimal" icon="lightbulb" />
           </Navbar.Group>
           <Navbar.Group align={Alignment.RIGHT}>
