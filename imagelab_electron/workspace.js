@@ -20,13 +20,14 @@ var workspace = Blockly.inject(blocklyDiv, {
   zoom: {
     controls: true,
     wheel: false,
-    startScale: 0.6,
+    startScale: 0.7,
     maxScale: 2,
     minScale: 0.4,
     scaleSpeed: 1.2,
   },
-  renderer: "zelos",
+  renderer: "zelos"
 });
+
 // enable searching on workspace by using ctrl +f
 const workspaceSearch = new WorkspaceSearch(workspace);
 workspaceSearch.init();
@@ -151,6 +152,18 @@ function executeProcess() {
     console.log(error);
     showDialog("Error Occured", error.message, "error");
   }
+}
+
+/**
+ * This function is responsible for downloading the output image
+ * to the user's local machine
+ */
+function downloadImage() {
+  const preview = document.getElementById("image-preview");
+  var link = document.createElement("a");
+  link.download = "Processed_image.jpg";
+  link.href = preview.toDataURL();
+  link.click();
 }
 
 /**
