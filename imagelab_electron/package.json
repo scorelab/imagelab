@@ -7,7 +7,8 @@
     "electron-reload": "^2.0.0-alpha.1"
   },
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "test": "jest"
   },
   "dependencies": {
     "@blockly/continuous-toolbox": "^1.0.12",
