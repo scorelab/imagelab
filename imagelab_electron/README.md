@@ -102,7 +102,7 @@ If you need to contribute to this project, we are happy to hear that. Before sta
   Ex: If you need to implement the Apply Border operator create a file named "applyborder.js".
 - When implementing the functions use classes as below,
 
-```
+```javascript
 class YourOperator extends OpenCvOperator {
 
     // This is the main contructor of the function
@@ -128,13 +128,13 @@ Before running the implemented function you need to setup few other things as we
 - In /operations.js file define your opeation with the matching type selected from the /imagelab-blocks.js file.
   Ex:
 
-```
+```javascript
 ADD_BORDER:"add_border"
 ```
 
 - Modify the addOperator function inside the /src/controller/main.js file.
 
-```
+```javascript
 case ADD_BORDER:
   this.#appliedOperators.push(
           new ApplyBorder(PROCESS_OPERATIONS.ADD_BORDER, id)
@@ -143,6 +143,58 @@ case ADD_BORDER:
 ```
 
 After procceding above steps you can execute the implemented functions in the application.
+
+## Adding Unit Tests
+
+Unit tests are an essential part of ensuring the correctness and reliability of your image processing operators. This section provides a guide on how to add unit tests to the project.
+
+### Prerequisites
+
+1. **Install Dependencies:** If you haven't already, install the necessary dependencies by running the following command in your project's root directory:
+
+   ```sh
+   npm install --save-dev jest
+   ```
+
+### Getting Started
+
+1. **Create Mocks:** To test image processing operators, create mock implementations for the OpenCv.js dependencies they use. Mock files should be placed in the `tests/unit/opencv-mocks/` directory. For each type of operator, create a mock file following this structure:
+```bash
+    tests/
+    |-- unit/
+    |   |-- opencv-mocks/
+    |       |-- basic.mock.js
+    |       |-- blurring.mock.js
+    |       |-- conversions.mock.js
+    |       |-- drawing.mock.js
+    |       |-- filtering.mock.js
+    |       |-- geometric.mock.js
+    |       |-- thresholding.mock.js
+```
+2. **Write Unit Tests:** In the `tests/unit/ directory`, create test files for each operator. Name your test files using the format `<OperatorName>.test.js`. Here's an example of a generic unit test file:
+    ```javascript
+
+    //tests/unit/ExampleOperator.test.js
+    const ExampleOperator = require('../../src/operators/ExampleOperator');
+    const opencvMock = require('./opencv-mocks/example.mock'); // Adjust the path
+
+    describe('ExampleOperator', () => {
+      afterEach(() => {
+        jest.clearAllMocks();
+      });
+
+      it('should apply example operator', () => {
+        // Your code goes here
+      });
+      // Add more test cases as needed
+    });
+    ```
+
+4. **Run Unit Tests:** Execute your unit tests using the following command:
+    ```bash
+    npm test -- --config=jest.config.js
+    ```
+
 
 ## ⛏️ Built Using <a name = "built_using"></a>
 
