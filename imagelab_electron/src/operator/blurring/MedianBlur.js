@@ -12,7 +12,7 @@ class MedianBlur extends OpenCvOperator {
   setParams(param, value) {
     if (param === "kernelSize") {
       if (value % 2 === 0) {
-        throw new Error("Kernal Size should be an odd number");
+        throw new Error("Kernel Size should be an odd number");
       }
       this.#kernalSize = value;
     }
