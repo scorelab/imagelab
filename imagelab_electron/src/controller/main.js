@@ -237,6 +237,8 @@ class MainController {
       case PROCESS_OPERATIONS.ADAPTIVETHRESHOLDING:
         this.#appliedOperators.push(
           new AdaptiveThreshold(PROCESS_OPERATIONS.ADAPTIVETHRESHOLDING, id)
+        );
+        break;
       case PROCESS_OPERATIONS.SIMPLETHRESHOLDING:
         this.#appliedOperators.push(
           new ApplyThreshold(PROCESS_OPERATIONS.SIMPLETHRESHOLDING, id)
