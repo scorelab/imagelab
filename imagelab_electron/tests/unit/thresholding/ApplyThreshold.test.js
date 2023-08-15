@@ -26,6 +26,4 @@ describe('ApplyThreshold Operator', () => {
       opencvMock.cv2.THRESH_BINARY
     );
   });
-
-  // Add more test cases as needed
 });

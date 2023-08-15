@@ -30,6 +30,4 @@ describe('DrawRectangle Operator', () => {
       3
     );
   });
-
-  // Add more test cases as needed
 });
