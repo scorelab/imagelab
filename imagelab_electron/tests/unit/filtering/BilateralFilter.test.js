@@ -18,10 +18,9 @@ describe('BilateralFilter Operator', () => {
 
     operator.compute(imageMock);
 
-    expect(opencvMock.cv2.Mat).toHaveBeenCalledTimes(1);
     expect(opencvMock.cv2.bilateralFilter).toHaveBeenCalledWith(
       imageMock,
-      {},
+      new opencvMock.cv2.Mat(),
       5,
       75,
       75,

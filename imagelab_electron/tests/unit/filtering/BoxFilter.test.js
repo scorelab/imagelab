@@ -18,7 +18,7 @@ describe('BoxFilter Operator', () => {
       operator.setParams('point_y', -1);
   
       const inputImageMock = {}; // Mock input image
-      const outputImageMock = {}; // Mock output image
+      const outputImageMock = new opencvMock.cv2.Mat(); // Mock output image
   
       const computedImage = operator.compute(inputImageMock);
   
