@@ -72,11 +72,11 @@ git clone https://github.com/scorelab/ImageLab.git
 Open the project in your preferred IDE. It will take a couple of minutes
 to sync with the project related maven dependencies.
 
-Then navigate to the project directory in terminal and type following command
+Then navigate to the project directory ( imagelab_java ) in terminal and type following command
 to build the project.
 
 ```
-mvn clean install
+mvn clean install 
 ```
 
 To skip tests and run the project.
@@ -91,6 +91,23 @@ following command in the terminal.
 ```
 mvn exec:java
 ``` 
+
+In case of "Failed during checkstyle execution" after firing mvm clean install
+Follow :
+
+Modify pom.xml 
+
+```
+mvn clean install --% -Dcheckstyle.skip
+
+```
+and then 
+
+```
+mvn exec:java
+
+```
+
 
 Check the **[project documentation](https://scorelab.org/imagelab/)** for more instructions.
 
@@ -132,6 +149,7 @@ npm install
 ```
 
 Check the **[project documentation](https://scorelab.org/imagelab/)** for more instructions.
+
 
 [<--# Generic Links -->]: #
 [hacktoberfest-link]: https://github.com/scorelab/ImageLab/issues?q=is%3Aissue+is%3Aopen+label%3Ahacktoberfest
