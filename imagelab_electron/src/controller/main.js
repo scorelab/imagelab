@@ -1,3 +1,4 @@
+const { FILTER2D } = require("../../operations");
 const PROCESS_OPERATIONS = require("../../operations");
 const ReadImage = require("../operator/basic/ReadImage");
 const WriteImage = require("../operator/basic/WriteImage");
@@ -16,6 +17,7 @@ const BilateralFilter = require("../operator/filtering/BilateralFilter");
 const BoxFilter = require("../operator/filtering/BoxFilter");
 const Dilation = require("../operator/filtering/Dilation");
 const Erosion = require("../operator/filtering/Erosion");
+const Filter2D = require("../operator/filtering/Filter2D");
 const Morphological = require("../operator/filtering/Morphological");
 const PyramidDown = require("../operator/filtering/PyramidDown");
 const PyramidUp = require("../operator/filtering/PyramidUp");
@@ -227,6 +229,11 @@ class MainController {
       case PROCESS_OPERATIONS.DILATION:
         this.#appliedOperators.push(
           new Dilation(PROCESS_OPERATIONS.DILATION, id)
+        );
+        break;
+      case PROCESS_OPERATIONS.FILTER2D:
+        this.#appliedOperators.push(
+          new Filter2D(PROCESS_OPERATIONS.FILTER2D, id)
         );
         break;
       case PROCESS_OPERATIONS.MORPHOLOGICAL:
