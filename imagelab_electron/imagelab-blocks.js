@@ -996,9 +996,9 @@ Blockly.defineBlocksWithJsonArray([
     helpUrl: "",
   },
 
-  //Sobel Derivatives
+  //Edge Detection
   {
-    type: "sobelderivatives_soblederivate",
+    type: "edgedetection_soblederivate",
     message0: "Apply  %1 sobel derivative with %2 depth",
     args0: [
       {
@@ -1022,11 +1022,11 @@ Blockly.defineBlocksWithJsonArray([
     nextStatement: null,
     colour: 345,
     tooltip:
-      "This operator allows you to detect edges of an image of both horizontal and vertaical direction Moreover it is a first order derivative.",
+      "This operator allows you to detect edges of an image of both horizontal and vertical direction. Moreover it is a first order derivative.",
     helpUrl: "",
   },
   {
-    type: "sobelderivatives_scharrderivate",
+    type: "edgedetection_scharrderivate",
     message0: "Apply  %1 scharr derivative with %2 depth",
     args0: [
       {
@@ -1049,43 +1049,11 @@ Blockly.defineBlocksWithJsonArray([
     nextStatement: null,
     colour: 345,
     tooltip:
-      "This operator allows you to detect edges of an image in both horizontal and vertaical direction. Moreover it is a second order derivative.",
-    helpUrl: "",
-  },
-
-  //Transformation
-  {
-    type: "transformation_distance",
-    message0: "Apply  %1 distance with %2 depth",
-    args0: [
-      {
-        type: "field_dropdown",
-        name: "type",
-        options: [
-          ["DISTC", "DIST_C"],
-          ["DISTL1", "DIST_L1"],
-          ["DISTL2", "DIST_L2"],
-          ["DISTLABEL_PIXEL", "DIST_LABEL_PIXEL"],
-          ["DISTMASK_3", "DIST_MASK_3"],
-        ],
-      },
-      {
-        type: "field_number",
-        name: "ddepth",
-        value: 0,
-        min: -10,
-        max: 10,
-      },
-    ],
-    previousStatement: null,
-    nextStatement: null,
-    colour: 195,
-    tooltip:
-      "Distance Transformation generally takes binary images as inputs. In this operation,the gray level intensities of the points inside the foreground regions are changed to distance their respective distances from the closest 0 value.",
+      "This operator allows you to detect edges of an image in both horizontal and vertical direction. Moreover it is a second order derivative.",
     helpUrl: "",
   },
   {
-    type: "transformation_laplacian",
+    type: "edgedetection_laplacian",
     message0: "Apply laplacian with %1 depth",
     args0: [
       {
@@ -1098,13 +1066,37 @@ Blockly.defineBlocksWithJsonArray([
     ],
     previousStatement: null,
     nextStatement: null,
-    colour: 195,
-    tooltip: 
-    "Laplacian Transformation is also a derivative which is used to find edges in an image.It is a second order derivative mask.Moreover, there are two classifications: Positive Laplacian and Negative Laplacian.Unlike other operators, Laplacian doesn't take out edges in any particular direction, but it takes out edges in inward edges and outward edges.",
-
-    helpUrl: "",
- 
-
+    colour: 345,
+    tooltip:
+      "Laplacian Transformation is also a derivate which used to find edges in an image.It is a second order derivate mask Moreover in this mask two classifications one is Postive Laplacian and Negative Laplacian Unlike other opertors Laplacian didn't take out edges in any particular direction but it takes out edges in inward edges and outward edges.",
+    helpUrl: "",
+  },
+  {
+    type: "edgedetection_cannyedge",
+    message0: "Apply canny edge with %1 aperture size, %2 minThreshold and %3 maxThreshold",
+    args0: [
+      {
+        type: "field_number",
+        name: "aperture",
+        value: 3,
+      },
+      {
+        type: "field_number",
+        name: "minThreshold",
+        value: 50,
+      },
+      {
+        type: "field_number",
+        name: "maxThreshold",
+        value: 100,
+      },
+    ],
+    previousStatement: null,
+    nextStatement: null,
+    colour: 345,
+    tooltip:
+      "Canny edge detection has the ability to accurately detect edges while minimizing noise and false detections.",
+    helpUrl: "",
   },
 ]);
 

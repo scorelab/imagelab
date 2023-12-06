@@ -12,6 +12,10 @@ const DrawEllipse = require("../operator/drawing/DrawEllipse");
 const DrawLine = require("../operator/drawing/DrawLine");
 const DrawRectangle = require("../operator/drawing/DrawRectangle");
 const DrawText = require("../operator/drawing/DrawText");
+const CannyEdge = require("../operator/edgeDetection/CannyEdge");
+const Laplacian = require("../operator/edgeDetection/Laplacian");
+const ScharrDerivative = require("../operator/edgeDetection/ScharrDerivative");
+const SobleDerivative = require("../operator/edgeDetection/SobleDerivative");
 const BilateralFilter = require("../operator/filtering/BilateralFilter");
 const BoxFilter = require("../operator/filtering/BoxFilter");
 const Dilation = require("../operator/filtering/Dilation");
@@ -234,6 +238,24 @@ class MainController {
           new Morphological(PROCESS_OPERATIONS.MORPHOLOGICAL, id)
         );
         break;
+      case PROCESS_OPERATIONS.SOBLEDERIVATE:
+        this.#appliedOperators.push(
+          new SobleDerivative(PROCESS_OPERATIONS.SOBLEDERIVATE, id)
+        );
+        break;
+      case PROCESS_OPERATIONS.SCHARRDERIVATE:
+        this.#appliedOperators.push(
+          new ScharrDerivative(PROCESS_OPERATIONS.SCHARRDERIVATE, id)
+        );
+        break;
+      case PROCESS_OPERATIONS.LAPLACIAN:
+        this.#appliedOperators.push(
+          new Laplacian(PROCESS_OPERATIONS.LAPLACIAN, id)
+        );
+        break;
+      case PROCESS_OPERATIONS.CANNYEDGE:
+        this.#appliedOperators.push(
+          new CannyEdge(PROCESS_OPERATIONS.CannyEdge, id)
       case PROCESS_OPERATIONS.ADAPTIVETHRESHOLDING:
         this.#appliedOperators.push(
           new AdaptiveThreshold(PROCESS_OPERATIONS.ADAPTIVETHRESHOLDING, id)
