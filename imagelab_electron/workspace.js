@@ -1,5 +1,6 @@
 const PROCESS_OPERATIONS = require("./operations");
 const MainController = require("./src/controller/main");
+const WriteImage = require("./src/operator/basic/WriteImage");
 
 var blocklyDiv = document.getElementById("blocklyDiv");
 var toolbox = document.getElementById("toolbox");
@@ -19,13 +20,14 @@ var workspace = Blockly.inject(blocklyDiv, {
   zoom: {
     controls: true,
     wheel: false,
-    startScale: 0.6,
+    startScale: 0.7,
     maxScale: 2,
     minScale: 0.4,
     scaleSpeed: 1.2,
   },
-  renderer: "zelos",
+  renderer: "zelos"
 });
+
 // enable searching on workspace by using ctrl +f
 const workspaceSearch = new WorkspaceSearch(workspace);
 workspaceSearch.init();
@@ -153,6 +155,18 @@ function executeProcess() {
 }
 
 /**
+ * This function is responsible for downloading the output image
+ * to the user's local machine
+ */
+function downloadImage() {
+  const preview = document.getElementById("image-preview");
+  var link = document.createElement("a");
+  link.download = "Processed_image.jpg";
+  link.href = preview.toDataURL();
+  link.click();
+}
+
+/**
  * This function is responsible for setting the location of the output image
  */
 function setDirectory() {
@@ -164,8 +178,35 @@ function setDirectory() {
 }
 
 function resetWorkspace() {
-  workspace.clear();
-  mainController.resetTheWorkpace();
+  //Prompt the user to confirm the action
+  dialog.showMessageBox(null, {
+    title: "Caution!",
+
+    buttons: ["Cancel", "Reset"],
+    type: "warning",
+    message: "Please note that resetting the workspace will result in the loss of all unsaved work.",
+  }).then(result => {
+    if (result.response === 1) {
+      //Reset the workspace
+      workspace.clear();
+      mainController.resetTheWorkpace();
+    }
+  });
+}
+
+/**
+ * This function is responsible for downloading the processed image
+ */
+function downloadImage() {
+  const downloadImage = mainController.getProcessedImage();
+  if(downloadImage != null) {
+    var link = document.createElement("a");
+    link.download = "Processed_image.jpg";
+    link.href = downloadImage;
+    link.click();
+  } else {
+    showDialog("Error", "No processed image found!", "error");
+  }
 }
 
 /**

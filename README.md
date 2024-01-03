@@ -72,11 +72,11 @@ git clone https://github.com/scorelab/ImageLab.git
 Open the project in your preferred IDE. It will take a couple of minutes
 to sync with the project related maven dependencies.
 
-Then navigate to the project directory in terminal and type following command
+Then navigate to the project directory ( imagelab_java ) in terminal and type following command
 to build the project.
 
 ```
-mvn clean install
+mvn clean install 
 ```
 
 To skip tests and run the project.
@@ -91,6 +91,62 @@ following command in the terminal.
 ```
 mvn exec:java
 ``` 
+
+In case of "Failed during checkstyle execution" after firing mvm clean install
+Follow :
+
+Modify pom.xml 
+
+```
+mvn clean install --% -Dcheckstyle.skip
+
+```
+and then 
+
+```
+mvn exec:java
+
+```
+
+
+Check the **[project documentation](https://scorelab.org/imagelab/)** for more instructions.
+
+### Setup Guidelines - Electron App
+
+Clone the repository by pasting following command in your terminal.
+
+```
+git clone https://github.com/scorelab/ImageLab.git
+```
+
+ImageLab uses ElectronJS. so we do some additional steps to get it compatible with our project:
+
+To use Electron, you need to install Node.js from [here](https://nodejs.org/en/download/). (We recommend that you use the latest LTS version available.)
+
+To check that Node.js was installed correctly, type the following commands in your terminal client:
+
+```
+node -v
+npm -v
+```
+
+Above commands should print the versions of Node.js and npm accordingly.
+
+\*Note: Since Electron embeds Node.js into its binary, the version of Node.js running your code is unrelated to the version running on your system.
+
+Then you open your terminal and refer to the directory of [`/imagelab/imagelab_electron`](https://github.com/kaveeshadinamidu/imagelab/tree/master/imagelab_electron) on your machine using `cd` command.
+
+```
+cd imagelab_electron/
+```
+
+Then, you start installing packages used in the project:
+
+You can install all the npm packages once by running
+
+```
+npm install
+```
 
 Check the **[project documentation](https://scorelab.org/imagelab/)** for more instructions.
 
