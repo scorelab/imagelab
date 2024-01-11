@@ -12,6 +12,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "blockly": "^9.3.3",
+    "cross-env": "^7.0.3",
     "electron": "^25.0.1",
     "electron-is-dev": "^2.0.0",
     "jimp": "^0.22.8",
@@ -28,7 +29,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "dev": "concurrently -k \"BROWSER=none yarn start\" \"yarn:electron\"",
+    "dev": "concurrently -k \"cross-env BROWSER=none yarn start\" \"yarn:electron\"",
     "electron": "electron ."
   },
   "eslintConfig": {
