@@ -1,6 +1,5 @@
 import Blockly from "blockly";
-const electron = window.require('electron');
-const ipcRenderer  = electron.ipcRenderer;
+const ipcRenderer = window.ipcRenderer;
 
 function processBlock(block, pipeline) {
     const blockParams = block.inputList.reduce((params, input) => {

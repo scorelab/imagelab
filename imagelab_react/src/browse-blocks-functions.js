@@ -1,6 +1,5 @@
 import Blockly from "blockly";
-const electron = window.require('electron');
-const ipcRenderer  = electron.ipcRenderer;
+const ipcRenderer = window.ipcRenderer;
 
 /*This function is responible for opening file selector window to choose the picture you will do operqations on 
 it works with (read image) block */
