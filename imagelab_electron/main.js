@@ -5,6 +5,9 @@ console.log("main process working");
 const electron = require("electron");
 const path = require("path");
 
+const remoteMain= require('@electron/remote/main');
+remoteMain.initialize();
+
 const { app, BrowserWindow, Menu, shell } = electron;
 
 let splash;
